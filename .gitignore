@@ -62,3 +62,4 @@ buck-out/
 # User
 .vscode
 __generated__/*
+package-lock.json

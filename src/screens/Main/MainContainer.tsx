@@ -25,7 +25,7 @@ function MainContainer(): JSX.Element {
   //   },
   // });
 
-  console.log(data)
+  console.log(data);
 
   const props = {
     loading: false,

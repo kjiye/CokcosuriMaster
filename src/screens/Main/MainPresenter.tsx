@@ -52,7 +52,11 @@ function MainPresenter({loading = false, users, join}: Props): JSX.Element {
       </Title>
 
       {users?.map((v: any, i: number) => {
-        return <Title key={i}>{v.name} {v.phone} {v.company.licenseImage}</Title>;
+        return (
+          <Title key={i}>
+            {v.name} {v.phone} {v.company.licenseImage}
+          </Title>
+        );
       })}
     </Container>
   );
