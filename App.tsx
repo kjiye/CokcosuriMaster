@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import {ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client';
 import AppContainer from './src/AppContainer';
 import {AppTheme} from './src/themes/theme';
