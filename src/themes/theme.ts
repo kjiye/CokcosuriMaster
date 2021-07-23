@@ -2,6 +2,7 @@ import {DefaultTheme} from 'styled-components/native';
 
 export const AppTheme: DefaultTheme = {
   colors: {
+    background: 'white',
     primary: '#eb7203',
     primaryDark: '#e25300',
     primaryLight: '#fc9e48',
@@ -15,7 +16,7 @@ export const AppTheme: DefaultTheme = {
     errorDark: '#e32929',
     errorLight: '#f88282',
     grey: [
-      '#ffffff',
+      'white',
       '#f9f9f9',
       '#f2f2f2',
       '#d7d7d7',
@@ -23,17 +24,22 @@ export const AppTheme: DefaultTheme = {
       '#b4b4b4',
       '#707070',
     ],
+    black: ['black', '#333333'],
   },
   fonts: {
-    mega: 32,
-    giant: 28,
+    massive: 32,
+    huge: 28,
     big: 24,
     large: 18,
     normal: 16,
     small: 14,
+    tiny: 12,
     mini: 12,
   },
   size: {
     padding: 10,
+    margin: 10,
+    borderRadius: 10,
+    gap: 5,
   },
 };

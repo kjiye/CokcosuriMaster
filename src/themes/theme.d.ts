@@ -4,11 +4,13 @@ import {ColorValue} from 'react-native';
 declare module 'styled-components/native' {
   export interface DefaultTheme {
     colors: {
+      backgroud: ColorValue;
       primary: ColorValue;
       secondary: ColorValue;
       accent: ColorValue;
       error: ColorValue;
       grey: ColorValue[];
+      black: ColorValue[];
     };
     fonts: {
       mega: number;
@@ -21,6 +23,8 @@ declare module 'styled-components/native' {
     };
     size: {
       padding: number;
+      margin: number;
+      borderRadius: number;
     };
   }
 }

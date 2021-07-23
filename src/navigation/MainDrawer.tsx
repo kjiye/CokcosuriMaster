@@ -1,4 +1,5 @@
 import MainStack from './MainStack';
+import NoticeScreen from '../screens/Notice';
 import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
@@ -10,7 +11,14 @@ function MainDrawer(): JSX.Element {
       screenOptions={{
         headerShown: true,
       }}>
-      <Drawer.Screen name={'MainStack'} component={MainStack} />
+      <Drawer.Screen
+        name={'MainStack'}
+        options={{
+          headerShown: false,
+        }}
+        component={MainStack}
+      />
+      <Drawer.Screen name={'NoticeScreen'} component={NoticeScreen} />
       {
         // 개인 정보 수정
         // 1:1 문의

@@ -1,100 +1,62 @@
-import {BLACK_1, GRAY_5, PRIMARY_MAIN} from '../../../constants/color';
-import {GAP_MARGIN, MEDIUM, TINY} from '../../../constants/size';
+import styled, {useTheme} from 'styled-components/native';
 import BaseContainer from '../../../components/BaseContainer';
-import CardView from '../../../components/View/CardView';
-import {Dimensions} from 'react-native';
+import ButtonGroup from './ButtonGroup';
 import {ErrorViewInput} from '../../../components/Input';
-import {FullSingleButton} from '../../../components/Button';
+import {GestureResponderEvent} from 'react-native';
 import LogoSvg from '../../../../assets/svg/logo.svg';
+import NoticeCardView from './NoticeCardView';
+import {PrimaryButton} from '../../../components/Button';
 import React from 'react';
-import TitleItem from '../../../components/Item/TitleItem';
-import styled from 'styled-components/native';
+import {useMemo} from 'react';
 
-const {width} = Dimensions.get('screen');
+const TOP_PADDING = 80;
+const HORIZONTAL_PADDING = 55;
+const LOGO_TOP_MARGIN = 50;
+const LOGO_BOTTOM_MARGIN = 40;
 
-const Container = styled.View`
-  padding: 90px 55px 0;
+const Container = styled(BaseContainer)`
+  padding: ${TOP_PADDING}px ${HORIZONTAL_PADDING}px 0;
   align-items: center;
-`;
-
-const NoticeMessage = styled.Text`
-  font-size: ${MEDIUM}px;
-  color: ${BLACK_1};
+  background-color: ${(props: any) => props.theme.colors.background};
 `;
 
 const Logo = styled(LogoSvg)`
-  margin: 50px 0 40px;
+  margin: ${LOGO_TOP_MARGIN}px 0 ${LOGO_BOTTOM_MARGIN}px;
 `;
 
-const ButtonWrapper = styled.View`
-  margin-top: ${MEDIUM}px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-`;
+interface Props {
+  login: (event: GestureResponderEvent) => void;
+}
 
-const Button = styled.TouchableOpacity`
-  padding: 0 ${MEDIUM}px;
-`;
+function LoginPresenter({login}: Props): JSX.Element {
+  const theme: any = useTheme();
 
-const ButtonText = styled.Text`
-  font-size: ${TINY}px;
-  color: ${GRAY_5};
-`;
-
-const ButtonSlash = styled.Text`
-  font-size: ${MEDIUM}px;
-  color: ${PRIMARY_MAIN};
-`;
-
-function LoginPresenter(): JSX.Element {
   return (
-    <BaseContainer style={{}}>
-      <Container>
-        <CardView
-          wrapperStyle={{
-            borderWidth: 1,
-            borderColor: PRIMARY_MAIN,
-          }}>
-          <>
-            <TitleItem
-              wrapperStyle={{paddingBottom: GAP_MARGIN}}
-              mainText={'알림'}
-            />
-            <NoticeMessage>
-              처음 로그인 후에는 자동로그인 됩니다:)
-            </NoticeMessage>
-          </>
-        </CardView>
-        <Logo />
-        <ErrorViewInput
-          placeholder={'휴대폰 번호'}
-          regexResult={false}
-          message={'유효하지 않는 전화번호입니다'}
-        />
-        <ErrorViewInput
-          wrapperStyle={{marginVertical: GAP_MARGIN}}
-          placeholder={'비밀번호(영문/숫자 포함 6자 이상)'}
-          regexResult={false}
-          message={'모든 요소를 포함시켜주세요'}
-          secure={true}
-        />
-        <FullSingleButton
-          btnWidth={width - 55 * 2}
-          name={'Login'}
-          disabled={true}
-        />
-        <ButtonWrapper>
-          <Button>
-            <ButtonText>회원가입</ButtonText>
-          </Button>
-          <ButtonSlash>{'/'}</ButtonSlash>
-          <Button>
-            <ButtonText>비밀번호 찾기</ButtonText>
-          </Button>
-        </ButtonWrapper>
-      </Container>
-    </BaseContainer>
+    <Container button={<PrimaryButton title={'로그인'} onPress={login} />}>
+      <NoticeCardView
+        title={'알림'}
+        content={'처음 로그인 후에는 자동로그인 됩니다:)'}
+      />
+      {useMemo(
+        () => (
+          <Logo />
+        ),
+        [],
+      )}
+      <ErrorViewInput
+        placeholder={'휴대폰 번호'}
+        regexResult={false}
+        message={'유효하지 않는 전화번호입니다'}
+      />
+      <ErrorViewInput
+        style={{marginVertical: theme.size.gap}}
+        placeholder={'비밀번호(영문/숫자 포함 6자 이상)'}
+        regexResult={false}
+        message={'모든 요소를 포함시켜주세요'}
+        secure={true}
+      />
+      <ButtonGroup />
+    </Container>
   );
 }
 
