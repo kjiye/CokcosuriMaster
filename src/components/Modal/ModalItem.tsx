@@ -14,7 +14,7 @@ const OptionName = styled.Text`
   color: ${BLACK_1};
 `;
 
-function ModalItem(): JSX.Element {
+function ModalItem() {
   return (
     <Wrapper>
       <OptionName>기타</OptionName>

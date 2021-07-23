@@ -11,6 +11,7 @@ const Wrapper = styled.View`
 const MainText = styled.Text`
   font-size: ${LARGE}px;
   font-weight: 500;
+  color: ${BLACK_1};
 `;
 
 const FrontText = styled(MainText)``;
@@ -25,7 +26,6 @@ interface Props {
   mainText?: string;
   mainColor?: 'gray';
   desc?: string;
-  // 아래 옵션 객체로 받기
   frontText?: string;
   frontColor?: string;
 }
@@ -40,7 +40,7 @@ function TitleItem({
 }: Props): JSX.Element {
   return (
     <Wrapper style={wrapperStyle as StyleProp<ViewProps>}>
-      <MainText style={{color: mainColor === 'gray' ? GRAY_6 : BLACK_1}}>
+      <MainText style={{color: !!mainColor && mainColor === 'gray' && GRAY_6}}>
         {!!frontText && (
           <FrontText style={{color: frontColor}}>{frontText}</FrontText>
         )}

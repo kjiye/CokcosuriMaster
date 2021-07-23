@@ -1,4 +1,4 @@
-import {INNER_MARGIN} from '../../constants/size';
+import {INNER_MARGIN, MEDIUM, STANDARD} from '../../constants/size';
 import React from 'react';
 import SingleButton from './SingleButton';
 import styled from 'styled-components/native';

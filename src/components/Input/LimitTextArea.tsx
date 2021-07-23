@@ -34,7 +34,7 @@ function LimitTextArea({placeholder, limit, currentCount}: Props): JSX.Element {
         multiline={true}
         numberOfLines={10}
         maxLength={300}
-      />
+        onChangeText={() => {}}></ContentInput>
       <LimitCountText>
         {currentCount} / {limit}
       </LimitCountText>

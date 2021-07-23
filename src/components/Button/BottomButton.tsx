@@ -1,13 +1,15 @@
-import {BIG, MASSIVE, TINY} from '../../constants/size';
+import {BIG, MASSIVE, MINI, TINY} from '../../constants/size';
 import {GRAY_4, PRIMARY_MAIN, WHITE} from '../../constants/color';
 import {Dimensions} from 'react-native';
+import FullSingleButton from './FullSingleButton';
 import React from 'react';
 import styled from 'styled-components/native';
 
 const {width} = Dimensions.get('screen');
 
+// margin:0px ${MASSIVE}px ${MASSIVE}px ${MASSIVE}px;
 const Wrapper = styled.SafeAreaView`
-  margin: 0px ${MASSIVE}px ${MASSIVE}px ${MASSIVE}px;
+  margin: 0px ${MASSIVE}px;
 `;
 
 const Button = styled.TouchableOpacity<{btnDisabled: boolean}>`
@@ -34,9 +36,16 @@ interface Props {
 function BottomButton({name, disabled}: Props): JSX.Element {
   return (
     <Wrapper>
-      <Button btnDisabled={!!disabled} disabled={disabled}>
+      {/* <Button
+        btnDisabled={!!disabled}
+        disabled={disabled}>
         <ButtonText>{name}</ButtonText>
-      </Button>
+      </Button> */}
+      <FullSingleButton
+        btnWidth={width - MASSIVE * 2}
+        name={name}
+        disabled={disabled}
+      />
     </Wrapper>
   );
 }

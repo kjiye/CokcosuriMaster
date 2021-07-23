@@ -1,8 +1,8 @@
 import {Dimensions, StyleProp, ViewProps, ViewStyle} from 'react-native';
 import {GRAY_3, GRAY_5, PRIMARY_LIGHT} from '../../constants/color';
 import React, {useState} from 'react';
+import styled, {css} from 'styled-components/native';
 import {MEDIUM} from '../../constants/size';
-import styled from 'styled-components/native';
 
 const {width} = Dimensions.get('screen');
 

@@ -1,18 +1,17 @@
 import {Dimensions, Platform} from 'react-native';
+import {GRAY_1, GRAY_5} from '../../constants/color';
 import {IMG_HEIGHT, MEDIUM, MINI} from '../../constants/size';
 import ImagePicker, {Image} from 'react-native-image-crop-picker';
 import React, {useState} from 'react';
-import {GRAY_5} from '../../constants/color';
 import PhotoSvg from '../../../assets/svg/ic_photo.svg';
 import styled from 'styled-components/native';
 
 const {width} = Dimensions.get('screen');
 
-// background:${GRAY_1};
 const Selector = styled.TouchableOpacity`
   flex: 1;
   height: ${IMG_HEIGHT}px;
-  background: yellow;
+  background: ${GRAY_1};
   border-radius: ${MINI}px;
 `;
 
@@ -51,7 +50,6 @@ function ImageSelector({desc}: Props): JSX.Element {
       ) : (
         <Selector
           onPress={async () => {
-            // 모듈 테스트용
             const result: Image = await ImagePicker.openPicker({
               width: width,
               height: IMG_HEIGHT,

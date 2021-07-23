@@ -12,3 +12,5 @@ export const STANDARD = 20;
 export const BTN_ICON_SIZE = 20;
 export const IMG_HEIGHT = 235;
 export const BOTTOM_BTN_HEIGHT = 51;
+export const GAP_MARGIN = 5;
+export const BOTTOM_MARGIN = 70;

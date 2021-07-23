@@ -36,7 +36,7 @@ const Title = styled.Text`
   text-align: center;
 `;
 
-function SelectionModal(): JSX.Element {
+function SelectionModal() {
   return (
     <Container>
       <BackDimmer />

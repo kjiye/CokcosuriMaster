@@ -1,5 +1,6 @@
 import BottomButton from './BottomButton';
+import FullSingleButton from './FullSingleButton';
 import SingleButton from './SingleButton';
 import TwoButtonGroup from './TwoButtonGroup';
 
-export {BottomButton, SingleButton, TwoButtonGroup};
+export {SingleButton, TwoButtonGroup, BottomButton, FullSingleButton};

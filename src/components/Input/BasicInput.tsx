@@ -30,7 +30,6 @@ interface Props {
   secure?: boolean;
 }
 
-// Mask, 내부 우측에 요소 표시 옵션 추가하기
 function BasicInput({
   wrapperStyle,
   placeholder = '',

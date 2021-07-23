@@ -1,10 +1,11 @@
 import {GRAY_4, PRIMARY_LIGHT, WHITE} from '../../constants/color';
 import {INNER_MARGIN, MEDIUM} from '../../constants/size';
+import {StyleProp, ViewProps, ViewStyle} from 'react-native';
 import BasicInput from './BasicInput';
 import React from 'react';
 import styled from 'styled-components/native';
 
-const Container = styled.View`
+const Wrapper = styled.View`
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
@@ -27,18 +28,30 @@ const ButtonText = styled.Text`
 `;
 
 interface Props {
+  wrapperStyle?: StyleProp<ViewStyle>;
+  placeholder?: string;
   buttonDisabled?: boolean;
+  buttonName: string;
 }
 
-function ButtonInput({buttonDisabled = false}: Props): JSX.Element {
+function ButtonInput({
+  wrapperStyle,
+  placeholder,
+  buttonDisabled = false,
+  buttonName,
+}: Props): JSX.Element {
   return (
-    <Container>
-      <BasicInput wrapperStyle={{display: 'flex', flex: 1}} />
+    <Wrapper style={wrapperStyle as StyleProp<ViewProps>}>
+      <BasicInput
+        placeholder={placeholder}
+        wrapperStyle={{display: 'flex', flex: 1}}
+      />
       <Button
+        disabled={buttonDisabled}
         style={{backgroundColor: buttonDisabled ? GRAY_4 : PRIMARY_LIGHT}}>
-        <ButtonText>테스트 버튼</ButtonText>
+        <ButtonText>{buttonName}</ButtonText>
       </Button>
-    </Container>
+    </Wrapper>
   );
 }
 
