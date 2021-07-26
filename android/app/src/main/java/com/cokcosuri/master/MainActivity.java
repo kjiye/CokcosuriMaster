@@ -1,4 +1,4 @@
-package com.cokcosurimaster;
+package com.cokcosuri.master;
 
 import com.facebook.react.ReactActivity;
 
