@@ -2,12 +2,13 @@ import LoginStack from './LoginStack';
 import MainDrawer from './MainDrawer';
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
+import {isLoggedInVar} from '../apollo';
+import {useReactiveVar} from '@apollo/client';
 
 const Stack = createStackNavigator();
 
-const isLoggedIn = false;
-
 function RootStack(): JSX.Element {
+  const isLoggedIn = useReactiveVar(isLoggedInVar);
   return (
     <Stack.Navigator
       mode={'modal'}
