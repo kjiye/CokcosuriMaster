@@ -11,7 +11,7 @@ export const GET_USERS = gql`
         name
         company {
           id
-          licenseNum
+          licenseNo
           licenseImage
         }
         workTypes {
