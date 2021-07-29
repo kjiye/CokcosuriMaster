@@ -26,3 +26,4 @@ export const GRAY_6 = '#707070';
 export const BLACK_1 = '#333333';
 
 export const PLACEHOLDER_COLOR = '#B4B4B4';
+export const GRAY_BACKGROUND_COLOR = '#F1F1F1';

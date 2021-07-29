@@ -5,7 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
-const isLoggedIn = false;
+const isLoggedIn = true;
 
 function RootStack(): JSX.Element {
   return (

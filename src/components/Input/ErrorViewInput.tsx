@@ -5,9 +5,15 @@ import React from 'react';
 import {TINY} from '../../constants/size';
 import styled from 'styled-components/native';
 
-const Wrapper = styled.View`
+// const HEIGHT = 62;
+const DEFAULT_HEIGHT = 67;
+const SHORT_HEIGHT = 57;
+
+const Wrapper = styled.View<{isShort: boolean}>`
   width: 100%;
-  height: 60px;
+  ${({isShort}) => `
+    height: ${isShort ? SHORT_HEIGHT : DEFAULT_HEIGHT}px
+  `}
 `;
 
 const Message = styled.Text<{regexResult?: boolean}>`
@@ -16,7 +22,8 @@ const Message = styled.Text<{regexResult?: boolean}>`
 `;
 
 interface Props {
-  wrapperStyle?: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
+  isShort?: boolean;
   placeholder: string;
   secure?: boolean;
   regexResult?: boolean;
@@ -24,20 +31,22 @@ interface Props {
 }
 
 function ErrorViewInput({
-  wrapperStyle,
+  style,
+  isShort = false,
   placeholder,
   secure = false,
   regexResult,
   message,
 }: Props): JSX.Element {
   return (
-    <Wrapper style={wrapperStyle as StyleProp<ViewProps>}>
+    <Wrapper style={style as StyleProp<ViewProps>} isShort={isShort}>
       <BasicInput
-        wrapperStyle={
+        style={
           regexResult === false && {borderWidth: 1, borderColor: ERROR_DARK}
         }
         placeholder={placeholder}
         secure={secure}
+        isShort={isShort}
       />
       {!!message && <Message regexResult={regexResult}>{message}</Message>}
     </Wrapper>

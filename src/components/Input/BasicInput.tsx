@@ -10,34 +10,60 @@ import React, {useState} from 'react';
 import {StyleProp, ViewProps, ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
 
-const Wrapper = styled.View<{focus: boolean}>`
-  padding: ${INNER_MARGIN}px;
+// const Wrapper = styled.View<{focus: boolean}>`
+//   padding:${INNER_MARGIN}px;
+//   border-width:1px;
+//   border-radius:${MINI}px;
+//   background-color:${WHITE};
+//   ${({focus}) =>
+//     `border-color: ${focus ? PRIMARY_LIGHT : GRAY_3}`}
+// `;
+
+// const Input = styled.TextInput`
+//   padding:0;
+//   font-size: ${MEDIUM}px;
+//   color: ${BLACK_1};
+// `;
+
+const DEFAULT_HEIGHT = 50;
+const SHORT_HEIGHT = 40;
+
+const Wrapper = styled.View<{focus: boolean; isShort: boolean}>`
   border-width: 1px;
   border-radius: ${MINI}px;
   background-color: ${WHITE};
   ${({focus}) => `border-color: ${focus ? PRIMARY_LIGHT : GRAY_3}`}
+  ${({isShort}) => `
+    height: ${isShort ? SHORT_HEIGHT : DEFAULT_HEIGHT}px`}
 `;
 
 const Input = styled.TextInput`
-  padding: 0;
+  height: 100%;
+  padding: 0 ${INNER_MARGIN}px;
   font-size: ${MEDIUM}px;
   color: ${BLACK_1};
 `;
 
 interface Props {
-  wrapperStyle?: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
   placeholder?: string;
   secure?: boolean;
+  isShort?: boolean;
 }
 
+// Mask, 내부 우측에 요소 표시 옵션 추가하기
 function BasicInput({
-  wrapperStyle,
+  style,
   placeholder = '',
   secure = false,
+  isShort = false,
 }: Props): JSX.Element {
   const [focus, setFocus] = useState<boolean>(false);
   return (
-    <Wrapper style={wrapperStyle as StyleProp<ViewProps>} focus={focus}>
+    <Wrapper
+      style={style as StyleProp<ViewProps>}
+      focus={focus}
+      isShort={isShort}>
       <Input
         placeholder={placeholder}
         placeholderTextColor={PLACEHOLDER_COLOR}

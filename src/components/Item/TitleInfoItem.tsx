@@ -9,11 +9,10 @@ const {width} = Dimensions.get('screen');
 const INFO_WIDTH: number = (width - (STANDARD * 2 + INNER_MARGIN * 2)) * 0.75;
 
 const Wrapper = styled.View`
-  flex: 1;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 6px 0;
+  padding: 8px 0;
 `;
 
 const TitleView = styled.View`
@@ -22,7 +21,6 @@ const TitleView = styled.View`
 
 const InfoView = styled.View`
   width: ${INFO_WIDTH}px;
-  flex-wrap: wrap-reverse;
 `;
 
 const InfoText = styled.Text`
@@ -33,7 +31,7 @@ const InfoText = styled.Text`
 `;
 
 const InfoSubText = styled(InfoText)`
-  text-align: right;
+  margin-top: 4px;
 `;
 
 interface Props {
@@ -47,7 +45,7 @@ function TitleInfoItem({titleText, infoText, infoSubText}: Props): JSX.Element {
     <Wrapper>
       <TitleView>
         <TitleItem
-          wrapperStyle={{paddingBottom: 0}}
+          style={{paddingBottom: 0}}
           mainText={titleText}
           mainColor={'gray'}
         />

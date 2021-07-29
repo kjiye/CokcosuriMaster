@@ -1,6 +1,6 @@
-import {INNER_MARGIN, TINY} from '../../constants/size';
 import {StyleProp, ViewProps, ViewStyle} from 'react-native';
 import styled, {css} from 'styled-components/native';
+import {INNER_MARGIN} from '../../constants/size';
 import React from 'react';
 import {WHITE} from '../../constants/color';
 
@@ -16,25 +16,26 @@ const Wrapper = styled.View<{hasPadding: boolean; hasShadow: boolean}>`
     hasShadow &&
     css`
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.16);
+      elevation: 2;
     `}
 `;
 
 interface Props {
-  wrapperStyle?: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
   hasPadding?: boolean;
   hasShadow?: boolean;
   children: JSX.Element;
 }
 
 function CardView({
-  wrapperStyle,
+  style,
   hasPadding = true,
   hasShadow = true,
   children,
 }: Props): JSX.Element {
   return (
     <Wrapper
-      style={wrapperStyle as StyleProp<ViewProps>}
+      style={style as StyleProp<ViewProps>}
       hasPadding={hasPadding}
       hasShadow={hasShadow}>
       {children}

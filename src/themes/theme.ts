@@ -41,5 +41,6 @@ export const AppTheme: DefaultTheme = {
     margin: 10,
     borderRadius: 10,
     gap: 5,
+    innerMargin: 12,
   },
 };

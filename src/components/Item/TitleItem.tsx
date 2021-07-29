@@ -22,7 +22,7 @@ const Description = styled.Text`
 `;
 
 interface Props {
-  wrapperStyle?: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
   mainText?: string;
   mainColor?: 'gray';
   desc?: string;
@@ -31,7 +31,7 @@ interface Props {
 }
 
 function TitleItem({
-  wrapperStyle,
+  style,
   mainText,
   mainColor,
   desc,
@@ -39,7 +39,7 @@ function TitleItem({
   frontColor,
 }: Props): JSX.Element {
   return (
-    <Wrapper style={wrapperStyle as StyleProp<ViewProps>}>
+    <Wrapper style={style as StyleProp<ViewProps>}>
       <MainText style={{color: !!mainColor && mainColor === 'gray' && GRAY_6}}>
         {!!frontText && (
           <FrontText style={{color: frontColor}}>{frontText}</FrontText>

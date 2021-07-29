@@ -28,23 +28,23 @@ const ButtonText = styled.Text`
 `;
 
 interface Props {
-  wrapperStyle?: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
   placeholder?: string;
   buttonDisabled?: boolean;
   buttonName: string;
 }
 
 function ButtonInput({
-  wrapperStyle,
+  style,
   placeholder,
   buttonDisabled = false,
   buttonName,
 }: Props): JSX.Element {
   return (
-    <Wrapper style={wrapperStyle as StyleProp<ViewProps>}>
+    <Wrapper style={style as StyleProp<ViewProps>}>
       <BasicInput
         placeholder={placeholder}
-        wrapperStyle={{display: 'flex', flex: 1}}
+        style={{display: 'flex', flex: 1}}
       />
       <Button
         disabled={buttonDisabled}

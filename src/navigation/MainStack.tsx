@@ -3,6 +3,7 @@ import DrawerMenuSvg from '../../assets/svg/ic_back.svg';
 import MainTab from './MainTab';
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
+import WorkDetailScreen from '../../src/screens/Detail/WorkDetail';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/core';
 
@@ -26,6 +27,7 @@ function MainStack(): JSX.Element {
         },
       }}>
       <Stack.Screen name={'MainTab'} component={MainTab} />
+      <Stack.Screen name={'WorkDetail'} component={WorkDetailScreen} />
     </Stack.Navigator>
   );
 }
