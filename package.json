@@ -5,6 +5,7 @@
   "scripts": {
     "android": "npx react-native run-android",
     "ios": "npx react-native run-ios",
+    "pod": "npx pod-install ios",
     "codegen": "npx apollo codegen:generate --target=typescript --outputFlat",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },

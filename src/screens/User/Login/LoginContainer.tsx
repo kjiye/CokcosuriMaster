@@ -1,19 +1,26 @@
 import {Login} from './login.queries';
 import LoginPresenter from './LoginPresenter';
 import React from 'react';
+import {isLoggedInVar} from '../../../apollo';
 import {useMutation} from '@apollo/client';
 
 function LoginContainer(): JSX.Element {
   const [login, {loading}] = useMutation(Login, {
     onError: (error: any) => {
-      console.log('에러 처리');
+      console.log('에러');
+      isLoggedInVar(true);
     },
     onCompleted: (data: any) => {
-      const {
-        loginUser: {success, token, user},
-      } = data;
+      console.log('성공');
+      isLoggedInVar(true);
+      // const {
+      //   loginUser: {success, token, user},
+      // } = data;
 
-      console.log(success, token);
+      // if (success) {
+      //   isLoggedInVar(true);
+      // }
+      // console.log(success, token);
     },
   });
 
