@@ -1,4 +1,13 @@
 export default {
+  ok: '확인',
+  cancel: '취소',
+  Header: {
+    join: '회원가입',
+    find_password: '비밀번호 찾기',
+    alarm: '알림',
+    guide: 'APP 사용법',
+    terms: '이용약관',
+  },
   Title: {
     name: '이름',
     phone: '전화번호',
@@ -28,6 +37,14 @@ export default {
     copy_address: '주소복사',
     accept_work: '작업수락',
   },
+  Alert: {
+    send_temp_password: '등록하신 전화번호로 임시 비밀번호를 전송했습니다',
+  },
+  Image: {
+    first_upload: '첫 번째 사진 올리기',
+    second_upload: '두 번째 사진 올리기',
+    third_upload: '세 번째 사진 올리기',
+  },
   CustomerInfo: {
     name: '이름',
     contact: '전화번호',
@@ -35,5 +52,12 @@ export default {
     visit_time: '방문시간',
     address: '주소',
     part_status: '상품여부',
+  },
+  WorkingBefore: {
+    status: '작업 진행',
+    ending_word: '하시나요?',
+    message:
+      '오늘도 행복한 작업 되시길 바랍니다!\n작업하시기 전 작업 전 사진을 올려주세요',
+    middleTitle: '현재 진행 중인 작업',
   },
 };

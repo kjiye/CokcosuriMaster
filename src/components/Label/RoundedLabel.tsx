@@ -36,7 +36,7 @@ function RoundedLabel({leftText, rightText}: Props): JSX.Element {
       <InfoText>
         {leftText}
         <MiddleBar>{' | '}</MiddleBar>
-        {rightText}
+        <PointText>{rightText}</PointText>
       </InfoText>
     </Wrapper>
   );

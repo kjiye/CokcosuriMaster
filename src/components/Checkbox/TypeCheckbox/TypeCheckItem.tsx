@@ -1,8 +1,8 @@
 import {Dimensions, StyleProp, ViewProps, ViewStyle} from 'react-native';
-import {GRAY_3, GRAY_5, PRIMARY_LIGHT} from '../../constants/color';
+import {GRAY_3, GRAY_5, PRIMARY_LIGHT} from '../../../constants/color';
 import React, {useState} from 'react';
 import styled, {css} from 'styled-components/native';
-import {MEDIUM} from '../../constants/size';
+import {MEDIUM} from '../../../constants/size';
 
 const {width} = Dimensions.get('screen');
 
@@ -27,7 +27,11 @@ interface Props {
   name: string;
 }
 
-function CheckItem({numberPerLine, wrapperStyle, name}: Props): JSX.Element {
+function TypeCheckItem({
+  numberPerLine,
+  wrapperStyle,
+  name,
+}: Props): JSX.Element {
   const [checked, setChecked] = useState<boolean>(false);
   return (
     <CheckView
@@ -44,4 +48,4 @@ function CheckItem({numberPerLine, wrapperStyle, name}: Props): JSX.Element {
   );
 }
 
-export default CheckItem;
+export default TypeCheckItem;

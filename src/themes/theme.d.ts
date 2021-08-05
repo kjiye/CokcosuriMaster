@@ -6,7 +6,11 @@ declare module 'styled-components/native' {
     colors: {
       backgroud: ColorValue;
       primary: ColorValue;
+      primaryDark: ColorValue;
+      primaryLight: ColorValue;
       secondary: ColorValue;
+      secondaryDark: ColorValue;
+      secondaryLight: ColorValue;
       accent: ColorValue;
       error: ColorValue;
       grey: ColorValue[];
@@ -25,6 +29,9 @@ declare module 'styled-components/native' {
       padding: number;
       margin: number;
       borderRadius: number;
+      gap: number;
+      innerMargin: number;
+      standardPadding: number;
     };
   }
 }

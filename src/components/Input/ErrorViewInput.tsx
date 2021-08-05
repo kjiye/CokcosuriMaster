@@ -5,7 +5,6 @@ import React from 'react';
 import {TINY} from '../../constants/size';
 import styled from 'styled-components/native';
 
-// const HEIGHT = 62;
 const DEFAULT_HEIGHT = 67;
 const SHORT_HEIGHT = 57;
 

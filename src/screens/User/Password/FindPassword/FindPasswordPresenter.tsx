@@ -1,19 +1,23 @@
-import {BLACK_1, PRIMARY_MAIN} from '../../../constants/color';
+import {BLACK_1, PRIMARY_MAIN} from '../../../../constants/color';
 import {
   BOTTOM_MARGIN,
   MEDIUM,
   MINI,
   SMALL,
   STANDARD,
-} from '../../../constants/size';
-import {BasicInput, ErrorViewInput} from '../../../components/Input';
-import BaseContainer from '../../../components/BaseContainer';
-import {BottomButton} from '../../../components/Button';
-import {CardView} from '../../../components/View';
+} from '../../../../constants/size';
+import {BasicInput, ErrorViewInput} from '../../../../components/Input';
+import BaseContainer from '../../../../components/BaseContainer';
+import {BottomButton, PrimaryButton} from '../../../../components/Button';
+import {CardView} from '../../../../components/View';
 import React from 'react';
-import {ScrollView} from 'react-native';
-import {TitleItem} from '../../../components/Item';
+import {GestureResponderEvent, ScrollView} from 'react-native';
+import {TitleItem} from '../../../../components/Item';
 import styled from 'styled-components/native';
+
+const Container = styled(BaseContainer)`
+  background: ${(props: any) => props.theme.colors.background};
+`;
 
 const ContentContainer = styled.View`
   flex: 1;
@@ -40,9 +44,13 @@ const InputStyle = {
   flex: 1,
 };
 
-function FindPasswordPresenter(): JSX.Element {
+interface Props {
+  ok: (event: GestureResponderEvent) => void;
+}
+
+function FindPasswordPresenter({ok}: Props): JSX.Element {
   return (
-    <BaseContainer button={<BottomButton name={'확인'} />}>
+    <Container button={<PrimaryButton title={'확인'} onPress={ok} />}>
       <ScrollView>
         <ContentContainer>
           <CardView>
@@ -95,7 +103,7 @@ function FindPasswordPresenter(): JSX.Element {
           </CardView>
         </ContentContainer>
       </ScrollView>
-    </BaseContainer>
+    </Container>
   );
 }
 

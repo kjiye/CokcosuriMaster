@@ -5,9 +5,7 @@ import styled from 'styled-components/native';
 
 const {width} = Dimensions.get('screen');
 
-const SliderFlatList = styled(FlatList)`
-  background: red;
-`;
+const SliderFlatList = styled(FlatList)``;
 
 const SlideView = styled.Image`
   margin-right: ${MEDIUM}px;
@@ -30,7 +28,7 @@ function ImageSlider({imageList}: Props): JSX.Element {
       renderItem={({item, idx}: any) => (
         <SlideView
           resizeMode={'cover'}
-          source={require('../../../assets/image/default.png')}
+          source={require('../../../assets/image/sample.png')}
         />
       )}
     />

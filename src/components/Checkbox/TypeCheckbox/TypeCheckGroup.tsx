@@ -1,5 +1,5 @@
-import {SMALL, TINY} from '../../constants/size';
-import CheckItem from './CheckItem';
+import {SMALL, TINY} from '../../../constants/size';
+import CheckItem from './TypeCheckItem';
 import React from 'react';
 import styled from 'styled-components/native';
 
@@ -22,7 +22,7 @@ interface Props {
   hasAllItem?: boolean;
 }
 
-function CheckGroup({
+function TypeCheckGroup({
   typeList,
   numberPerLine,
   hasAllItem = true,
@@ -61,4 +61,4 @@ function CheckGroup({
   );
 }
 
-export default CheckGroup;
+export default TypeCheckGroup;

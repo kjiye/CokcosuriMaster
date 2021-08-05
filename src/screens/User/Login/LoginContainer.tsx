@@ -3,8 +3,10 @@ import LoginPresenter from './LoginPresenter';
 import React from 'react';
 import {isLoggedInVar} from '../../../apollo';
 import {useMutation} from '@apollo/client';
+import {useNavigation} from '@react-navigation/native';
 
 function LoginContainer(): JSX.Element {
+  const navigation = useNavigation();
   const [login, {loading}] = useMutation(Login, {
     onError: (error: any) => {
       console.log('에러');
@@ -34,6 +36,15 @@ function LoginContainer(): JSX.Element {
           },
         });
       }
+    },
+    tempLogin: () => {
+      navigation.navigate('MainDrawer');
+    },
+    goJoin: () => {
+      navigation.navigate('TermsAgreementScreen');
+    },
+    goFindPassword: () => {
+      navigation.navigate('FindPasswordScreen');
     },
   };
   return <LoginPresenter {...props} />;

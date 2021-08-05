@@ -42,5 +42,6 @@ export const AppTheme: DefaultTheme = {
     borderRadius: 10,
     gap: 5,
     innerMargin: 12,
+    standardPadding: 20,
   },
 };

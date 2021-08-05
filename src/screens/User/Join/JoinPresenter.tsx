@@ -12,12 +12,12 @@ import {
 } from '../../../components/Input';
 import BaseContainer from '../../../components/BaseContainer';
 import {BottomButton} from '../../../components/Button';
-import {CheckGroup} from '../../../components/Checkbox';
 import I18n from '../../../utils/i18nHelpers';
 import {ImageSelector} from '../../../components/Image';
 import React from 'react';
 import {ScrollView} from 'react-native';
 import {TitleItem} from '../../../components/Item';
+import {TypeCheckGroup} from '../../../components/Checkbox/TypeCheckbox';
 import styled from 'styled-components/native';
 
 const ContentContainer = styled.View`
@@ -73,7 +73,7 @@ function JoinPresenter(): JSX.Element {
             mainText={I18n.t('Title.work_type')}
             desc={I18n.t('Title.duplicate_selectable')}
           />
-          <CheckGroup
+          <TypeCheckGroup
             typeList={[{name: '에어컨'}, {name: '전기/조명'}, {name: '욕실'}]}
             numberPerLine={3}
           />

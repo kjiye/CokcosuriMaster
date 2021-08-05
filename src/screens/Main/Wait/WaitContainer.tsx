@@ -1,13 +1,21 @@
-import React from 'react';
+import React, {useLayoutEffect} from 'react';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
 import WaitPresenter from './WaitPresenter';
-import {useNavigation} from '@react-navigation/native';
 
-function WaitContaienr(): JSX.Element {
+function WaitContaienr({route}: any): JSX.Element {
   const navigation = useNavigation();
+  const isFocused = useIsFocused();
+
+  useLayoutEffect(() => {
+    if (isFocused) {
+      const {sideRadiusType} = route.params;
+      sideRadiusType('left');
+    }
+  }, [isFocused]);
 
   const props = {
     goDetail: () => {
-      // navigation.navigate('WorkDetai ');
+      navigation.navigate('WorkDetail');
     },
   };
   return <WaitPresenter {...props} />;

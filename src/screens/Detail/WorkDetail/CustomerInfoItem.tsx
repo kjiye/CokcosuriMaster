@@ -42,7 +42,7 @@ function CustomerInfoItem(): JSX.Element {
           <InnerWrapper>
             <TitleInfoItem
               titleText={I18n.t('CustomerInfo.visit_date')}
-              infoText={'2021.05.30'}
+              infoText={'2021.08.30'}
             />
             <TitleInfoItem
               titleText={I18n.t('CustomerInfo.visit_time')}
@@ -50,12 +50,12 @@ function CustomerInfoItem(): JSX.Element {
             />
             <TitleInfoItem
               titleText={I18n.t('CustomerInfo.address')}
-              infoText={'(03048)서울특별시 종로구 청와대대로 1'}
-              infoSubText={'대통령비서실'}
+              infoText={'(10568) 경기도 고양시 덕양구 권율대로 907 KN빌딩'}
+              infoSubText={'6층'}
             />
             <TitleInfoItem
               titleText={I18n.t('CustomerInfo.part_status')}
-              infoText={'전등 보유'}
+              infoText={'보유'}
             />
           </InnerWrapper>
         </>

@@ -1,5 +1,5 @@
-import BaseContainer from '../../../components/BaseContainer';
 import {FlatList, GestureResponderEvent} from 'react-native';
+import BaseContainer from '../../../components/BaseContainer';
 import {GRAY_BACKGROUND_COLOR} from '../../../constants/color';
 import React from 'react';
 import {STANDARD} from '../../../constants/size';

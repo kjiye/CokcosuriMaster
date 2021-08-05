@@ -18,6 +18,10 @@ const CardView = styled.View`
   elevation: 3;
 `;
 
+const Title = styled(TitleItem)`
+  padding-bottom: 5px;
+`;
+
 const NoticeMessage = styled.Text`
   font-size: ${(props: any) => props.theme.fonts.normal}px;
   color: ${(props: any) => props.theme.colors.black[1]};
@@ -34,7 +38,7 @@ function NoticeCardView({title, content}: Props): JSX.Element {
       {useMemo(
         () => (
           <CardView>
-            <TitleItem mainText={title} />
+            <Title mainText={title} />
             <NoticeMessage>{content}</NoticeMessage>
           </CardView>
         ),

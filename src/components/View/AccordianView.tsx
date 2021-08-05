@@ -22,9 +22,6 @@ interface Props {
   cntChildren: JSX.Element;
 }
 
-// 카테고리 유무 제목과 내용 처리 추가
-// 카테고리 표시 있는 경우에는 제목 카테고리랑 답변 관리자 표시 있음
-// 내용 부분 레이아웃도 약간 다름
 function AccordianView({titleChildren, cntChildren}: Props): JSX.Element {
   const [open, setOpen] = useState<boolean>(false);
   return (

@@ -1,4 +1,5 @@
 import React from 'react';
+import {GestureResponderEvent} from 'react-native';
 import styled from 'styled-components/native';
 
 const ButtonWrapper = styled.View`
@@ -22,14 +23,19 @@ const ButtonSlash = styled.Text`
   color: ${(props: any) => props.theme.colors.primary};
 `;
 
-function ButtonGroup(): JSX.Element {
+interface Props {
+  leftBtnPress: (event: GestureResponderEvent) => void;
+  rightBtnPress: (event: GestureResponderEvent) => void;
+}
+
+function ButtonGroup({leftBtnPress, rightBtnPress}: Props): JSX.Element {
   return (
     <ButtonWrapper>
-      <Button>
+      <Button onPress={leftBtnPress}>
         <ButtonText>회원가입</ButtonText>
       </Button>
       <ButtonSlash>{'/'}</ButtonSlash>
-      <Button>
+      <Button onPress={rightBtnPress}>
         <ButtonText>비밀번호 찾기</ButtonText>
       </Button>
     </ButtonWrapper>
