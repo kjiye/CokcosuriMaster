@@ -6,16 +6,24 @@ import {useMutation} from '@apollo/client';
 
 function JoinContainer(): JSX.Element {
   const [user, setUser] = useState<any>({});
-  const [sendId, setSendId] = useState<string>('');
 
   // useLayoutEffect(() => {}, []);
 
-  const [reqVerificationCode, {loading}] = useMutation(REQ_VERIFICATION_CODE, {
-    onError: (e: any) => {
-      console.log('통신 에러 ', e);
+  const [reqVerificationCode, {loading: reqVerifyLoading}] = useMutation(
+    REQ_VERIFICATION_CODE,
+    {
+      onError: (error: any) => {
+        console.log('통신 에러 ', error);
+      },
+      onCompleted: (data: any) => {
+        console.log('성공 ', data);
+      },
     },
+  );
+
+  const [verifyCode, {loading: verifyCodeLoading}] = useMutation(VERIFY_CODE, {
     onCompleted: (data: any) => {
-      console.log('성공 ', data);
+      console.log(data);
     },
   });
 
@@ -26,9 +34,9 @@ function JoinContainer(): JSX.Element {
         phone: text,
       });
     },
-    reqVerifyBtnDisabled: !checkRegex('phone', user.phone) || loading,
+    reqVerifyBtnDisabled: !checkRegex('phone', user.phone) || reqVerifyLoading,
     reqVerifyBtnPress: () => {
-      if (!loading) {
+      if (!reqVerifyLoading) {
         reqVerificationCode({
           variables: {
             target: '01064173203',
@@ -37,14 +45,9 @@ function JoinContainer(): JSX.Element {
       }
     },
     verifyCodeBtnPress: () => {
-      const [verifyCode, {error, data, loading}] = useMutation(VERIFY_CODE);
-      if (!loading) {
+      if (!verifyCodeLoading) {
         verifyCode({
-          variables: {
-            sendId: sendId,
-            target: user.phone,
-            code: '',
-          },
+          variables: {},
         });
       }
     },

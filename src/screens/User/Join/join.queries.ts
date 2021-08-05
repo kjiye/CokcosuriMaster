@@ -4,7 +4,11 @@ export const GET_WORKTYPE_ALL: DocumentNode = gql`
   query getWorkTypeAll {
     getWorkTypeAll {
       success
-      workCategories
+      workCategories {
+        id
+        code
+        name
+      }
       count
     }
   }
@@ -40,7 +44,6 @@ export const JOIN_MASTER = gql`
         id
         phone
         name
-        post
         push
         used
         createAt

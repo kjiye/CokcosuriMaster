@@ -30,14 +30,15 @@ interface Props {
   onChangePhone: (text: string) => void;
   reqVerifyBtnDisabled: boolean;
   reqVerifyBtnPress: (event: GestureResponderEvent) => void;
+  verifyCodeBtnPress: (event: GestureResponderEvent) => void;
 }
 
 function JoinPresenter({
   onChangePhone,
   reqVerifyBtnDisabled,
   reqVerifyBtnPress,
+  verifyCodeBtnPress,
 }: Props): JSX.Element {
-  console.log('전화번호 ', reqVerifyBtnDisabled);
   return (
     <BaseContainer
       button={<BottomButton name={I18n.t('Button.join')} disabled={true} />}>
@@ -60,6 +61,7 @@ function JoinPresenter({
             style={{marginTop: GAP_MARGIN}}
             placeholder={I18n.t('Placeholder.auth_confirm')}
             buttonName={I18n.t('Button.auth_confirm')}
+            onPress={verifyCodeBtnPress}
           />
           <TitleItem
             style={{marginTop: MEDIUM}}
