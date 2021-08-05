@@ -4,6 +4,8 @@ export default {
   Header: {
     join: '회원가입',
     find_password: '비밀번호 찾기',
+    qna: '1:1 문의',
+    notice: '공지사항',
     alarm: '알림',
     guide: 'APP 사용법',
     terms: '이용약관',
@@ -39,6 +41,9 @@ export default {
   },
   Alert: {
     send_temp_password: '등록하신 전화번호로 임시 비밀번호를 전송했습니다',
+  },
+  Error: {
+    common: '처리 중 문제가 발생했습니다. 잠시 후에 다시 시도해주세요',
   },
   Image: {
     first_upload: '첫 번째 사진 올리기',

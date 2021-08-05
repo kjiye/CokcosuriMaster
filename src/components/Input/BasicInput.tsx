@@ -10,21 +10,6 @@ import React, {useState} from 'react';
 import {StyleProp, ViewProps, ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
 
-// const Wrapper = styled.View<{focus: boolean}>`
-//   padding:${INNER_MARGIN}px;
-//   border-width:1px;
-//   border-radius:${MINI}px;
-//   background-color:${WHITE};
-//   ${({focus}) =>
-//     `border-color: ${focus ? PRIMARY_LIGHT : GRAY_3}`}
-// `;
-
-// const Input = styled.TextInput`
-//   padding:0;
-//   font-size: ${MEDIUM}px;
-//   color: ${BLACK_1};
-// `;
-
 const DEFAULT_HEIGHT = 50;
 const SHORT_HEIGHT = 40;
 
@@ -49,6 +34,7 @@ interface Props {
   placeholder?: string;
   secure?: boolean;
   isShort?: boolean;
+  onChange?: (text: string) => void;
 }
 
 // Mask, 내부 우측에 요소 표시 옵션 추가하기
@@ -57,6 +43,7 @@ function BasicInput({
   placeholder = '',
   secure = false,
   isShort = false,
+  onChange,
 }: Props): JSX.Element {
   const [focus, setFocus] = useState<boolean>(false);
   return (
@@ -74,7 +61,7 @@ function BasicInput({
         onBlur={() => {
           setFocus(false);
         }}
-        onChangeText={() => {}}
+        onChangeText={onChange}
       />
     </Wrapper>
   );

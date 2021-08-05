@@ -3,8 +3,8 @@ import I18n from '../utils/i18nHelpers';
 import JoinScreen from '../screens/User/Join';
 import LoginScreen from '../screens/User/Login';
 import React from 'react';
-import UpdatePasswordScreen from '../screens/User/Password/UpdatePassword';
 import TermsAgreementScreen from '../screens/User/TermsAgreement';
+import UpdatePasswordScreen from '../screens/User/Password/UpdatePassword';
 import {basicHeader} from '../components/Header/HeaderOption';
 import {createStackNavigator} from '@react-navigation/stack';
 

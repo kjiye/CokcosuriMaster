@@ -5,3 +5,9 @@ export interface User {
   createAt: string;
   updateAt: string;
 }
+
+export interface JoinFormInput {
+  phone: string;
+  password: string;
+  name: string;
+}

@@ -10,12 +10,12 @@ import {
   ButtonInput,
   ErrorViewInput,
 } from '../../../components/Input';
+import {GestureResponderEvent, ScrollView} from 'react-native';
 import BaseContainer from '../../../components/BaseContainer';
 import {BottomButton} from '../../../components/Button';
 import I18n from '../../../utils/i18nHelpers';
 import {ImageSelector} from '../../../components/Image';
 import React from 'react';
-import {ScrollView} from 'react-native';
 import {TitleItem} from '../../../components/Item';
 import {TypeCheckGroup} from '../../../components/Checkbox/TypeCheckbox';
 import styled from 'styled-components/native';
@@ -26,7 +26,18 @@ const ContentContainer = styled.View`
   background: white;
 `;
 
-function JoinPresenter(): JSX.Element {
+interface Props {
+  onChangePhone: (text: string) => void;
+  reqVerifyBtnDisabled: boolean;
+  reqVerifyBtnPress: (event: GestureResponderEvent) => void;
+}
+
+function JoinPresenter({
+  onChangePhone,
+  reqVerifyBtnDisabled,
+  reqVerifyBtnPress,
+}: Props): JSX.Element {
+  console.log('전화번호 ', reqVerifyBtnDisabled);
   return (
     <BaseContainer
       button={<BottomButton name={I18n.t('Button.join')} disabled={true} />}>
@@ -41,7 +52,9 @@ function JoinPresenter(): JSX.Element {
           <ButtonInput
             placeholder={I18n.t('Placeholder.phone_ex')}
             buttonName={I18n.t('Button.auth_request')}
-            buttonDisabled={true}
+            buttonDisabled={reqVerifyBtnDisabled}
+            onChange={onChangePhone}
+            onPress={reqVerifyBtnPress}
           />
           <ButtonInput
             style={{marginTop: GAP_MARGIN}}

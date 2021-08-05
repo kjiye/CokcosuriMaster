@@ -1,30 +1,26 @@
 import {gql} from '@apollo/client';
 
-export const GET_USERS = gql`
-  query getUsers {
-    getUsers {
-      success
-      count
-      users {
-        id
-        phone
-        name
-        company {
-          id
-          licenseNo
-          licenseImage
-        }
-        workTypes {
-          id
-          code
-          name
-        }
-        createAt
-        updateAt
-      }
-    }
-  }
-`;
+// export const GET_USERS = gql`
+//   query getMaster {
+//     getMaster {
+//       success
+//       master {
+//         id
+//         phone
+//         name
+//         company {
+//           id
+//           licenseNo
+//           licenseImage {
+//             path
+//           }
+//         }
+//         createAt
+//         updateAt
+//       }
+//     }
+//   }
+// `;
 
 // export const JOIN_USER = gql`
 //   mutation join($data: JoinInput!) {

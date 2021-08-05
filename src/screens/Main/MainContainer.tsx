@@ -1,11 +1,11 @@
-import {GET_USERS} from './main.queries';
+// import {GET_USERS} from './main.queries';
 import {useMutation, useQuery} from '@apollo/client';
 import {Alert} from 'react-native';
 import MainPresenter from './MainPresenter';
 import React from 'react';
 
 function MainContainer(): JSX.Element {
-  const {data} = useQuery(GET_USERS);
+  // const {data} = useQuery(GET_USERS);
 
   // const [joinMutation, {loading}] = useMutation(JOIN_USER, {
   //   onCompleted: (data: any) => {
@@ -25,27 +25,27 @@ function MainContainer(): JSX.Element {
   //   },
   // });
 
-  console.log(data);
+  // console.log(data);
 
-  const props = {
-    loading: false,
-    users: data?.getUsers?.users,
-    join: () => {
-      // if (!loading) {
-      //   joinMutation({
-      //     variables: {
-      //       data: {
-      //         phone: '01041891129',
-      //         password: '1234kkk!',
-      //         name: '신동석',
-      //       },
-      //     },
-      //   });
-      // }
-    },
-  };
+  // const props = {
+  //   loading: false,
+  //   master: data?.getMaster?.master,
+  //   join: () => {
+  //     // if (!loading) {
+  //     //   joinMutation({
+  //     //     variables: {
+  //     //       data: {
+  //     //         phone: '01041891129',
+  //     //         password: '1234kkk!',
+  //     //         name: '신동석',
+  //     //       },
+  //     //     },
+  //     //   });
+  //     // }
+  //   },
+  // };
 
-  return <MainPresenter {...props} />;
+  return <MainPresenter />;
 }
 
 export default MainContainer;

@@ -25,40 +25,42 @@ const TestButtonText = styled.Text`
   color: ${(props: any) => props.theme.colors.grey[2]};
 `;
 
-interface Props {
-  loading: boolean;
-  users?: User[];
-  join?: () => void;
-}
+// interface Props {
+//   loading: boolean;
+//   master?: User[];
+//   join?: () => void;
+// }
 
-function MainPresenter({loading = false, users, join}: Props): JSX.Element {
+// function MainPresenter({loading = false, master, join}: Props): JSX.Element {
+function MainPresenter(): JSX.Element {
   const theme: any = useTheme();
 
   return (
-    <Container
-      button={
-        <TestButtonContainer onPress={join}>
-          <TestButtonText>
-            {loading ? '등록중' : '사용자 등록 테스트'}
-          </TestButtonText>
-        </TestButtonContainer>
-      }>
-      <Title
-        style={{
-          backgroundColor: theme.colors.grey[1],
-          padding: theme.size.padding,
-        }}>
-        GraphqlTest
-      </Title>
+    <></>
+    // <Container
+    //   button={
+    //     <TestButtonContainer onPress={join}>
+    //       <TestButtonText>
+    //         {loading ? '등록중' : '사용자 등록 테스트'}
+    //       </TestButtonText>
+    //     </TestButtonContainer>
+    //   }>
+    //   <Title
+    //     style={{
+    //       backgroundColor: theme.colors.grey[1],
+    //       padding: theme.size.padding,
+    //     }}>
+    //     GraphqlTest
+    //   </Title>
 
-      {users?.map((v: any, i: number) => {
-        return (
-          <Title key={i}>
-            {v.name} {v.phone} {v.company.licenseImage}
-          </Title>
-        );
-      })}
-    </Container>
+    //   {master?.map((v: any, i: number) => {
+    //     return (
+    //       <Title key={i}>
+    //         {v.name} {v.phone} {v.company.licenseImage}
+    //       </Title>
+    //     );
+    //   })}
+    // </Container>
   );
 }
 
