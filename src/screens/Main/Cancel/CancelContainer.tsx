@@ -1,6 +1,6 @@
-import CancelPresenter from './CancelPresenter';
 import React, {useLayoutEffect} from 'react';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
+import CancelPresenter from './CancelPresenter';
 
 function CancelContainer({route}: any): JSX.Element {
   const navigation = useNavigation();
@@ -12,7 +12,13 @@ function CancelContainer({route}: any): JSX.Element {
       sideRadiusType('right');
     }
   }, [isFocused]);
-  return <CancelPresenter />;
+
+  const props = {
+    goDetail: () => {
+      navigation.navigate('WorkDetail', {status: 'cancel'});
+    },
+  };
+  return <CancelPresenter {...props} />;
 }
 
 export default CancelContainer;

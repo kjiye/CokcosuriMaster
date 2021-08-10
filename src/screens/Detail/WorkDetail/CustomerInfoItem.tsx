@@ -1,7 +1,9 @@
 import {CardView} from '../../../components/View';
 import {GRAY_2} from '../../../constants/color';
+import {GestureResponderEvent} from 'react-native';
 import I18n from '../../../utils/i18nHelpers';
 import {INNER_MARGIN} from '../../../constants/size';
+import PhoneSvg from '../../../../assets/svg/ic_phone.svg';
 import React from 'react';
 import {TitleInfoItem} from '../../../components/Item';
 import {TwoButtonGroup} from '../../../components/Button';
@@ -17,7 +19,11 @@ const InnerWrapper = styled.View`
   padding: ${INNER_MARGIN}px;
 `;
 
-function CustomerInfoItem(): JSX.Element {
+interface Props {
+  leftBtnPress: (event: GestureResponderEvent) => void;
+}
+
+function CustomerInfoItem({leftBtnPress}: Props): JSX.Element {
   return (
     <>
       <CardView>
@@ -36,8 +42,10 @@ function CustomerInfoItem(): JSX.Element {
         <>
           <TwoButtonGroup
             leftBtnName={'주소복사'}
+            leftBtnPress={leftBtnPress}
             rightBtnName={'전화'}
             rightPrimaryColored={true}
+            rightIcon={<PhoneSvg />}
           />
           <InnerWrapper>
             <TitleInfoItem

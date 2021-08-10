@@ -9,8 +9,19 @@ const Wrapper = styled.View`
   background: yellow;
 `;
 
+// 임시 레이아웃용 view
+const SampleView = styled.Image`
+  width: 100%;
+  height: ${MAP_HEIGHT}px;
+`;
+
 function MapView(): JSX.Element {
-  return <Wrapper />;
+  return (
+    <SampleView
+      resizeMode={'cover'}
+      source={require('../../../assets/image/map_sample.png')}
+    />
+  );
 }
 
 export default MapView;

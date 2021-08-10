@@ -1,28 +1,25 @@
 import {
-  BIG,
-  BOTTOM_MARGIN,
-  GAP_MARGIN,
-  MEDIUM,
-  STANDARD,
-} from '../../../constants/size';
-import {
   BasicInput,
   ButtonInput,
   ErrorViewInput,
 } from '../../../components/Input';
+import {GAP_MARGIN, MEDIUM} from '../../../constants/size';
 import {GestureResponderEvent, ScrollView} from 'react-native';
 import BaseContainer from '../../../components/BaseContainer';
-import {BottomButton} from '../../../components/Button';
 import I18n from '../../../utils/i18nHelpers';
 import {ImageSelector} from '../../../components/Image';
+import {PrimaryButton} from '../../../components/Button';
 import React from 'react';
 import {TitleItem} from '../../../components/Item';
 import {TypeCheckGroup} from '../../../components/Checkbox/TypeCheckbox';
 import styled from 'styled-components/native';
 
+const BOTTOM_PADDING = 100;
+
 const ContentContainer = styled.View`
   flex: 1;
-  padding: ${BIG}px ${STANDARD}px ${BOTTOM_MARGIN}px;
+  padding: 24px ${(props: any) => props.theme.size.standardPadding}px
+    ${BOTTOM_PADDING}px;
   background: white;
 `;
 
@@ -31,6 +28,7 @@ interface Props {
   reqVerifyBtnDisabled: boolean;
   reqVerifyBtnPress: (event: GestureResponderEvent) => void;
   verifyCodeBtnPress: (event: GestureResponderEvent) => void;
+  join: (event: GestureResponderEvent) => void;
 }
 
 function JoinPresenter({
@@ -38,10 +36,18 @@ function JoinPresenter({
   reqVerifyBtnDisabled,
   reqVerifyBtnPress,
   verifyCodeBtnPress,
+  join,
 }: Props): JSX.Element {
   return (
     <BaseContainer
-      button={<BottomButton name={I18n.t('Button.join')} disabled={true} />}>
+      // button={<BottomButton name={I18n.t('Button.join')} disabled={false} />}>
+      button={
+        <PrimaryButton
+          title={I18n.t('Button.join')}
+          disabled={false}
+          onPress={join}
+        />
+      }>
       <ScrollView>
         <ContentContainer>
           <TitleItem mainText={I18n.t('Title.name')} />
@@ -80,8 +86,8 @@ function JoinPresenter({
           <ErrorViewInput
             placeholder={I18n.t('Placeholder.re_password')}
             secure={true}
-            regexResult={false}
-            message={'입력한 비밀번호와 동일하게 입력해주세요'}
+            // regexResult={true}
+            // message={'입력한 비밀번호와 동일하게 입력해주세요'}
           />
           <TitleItem
             style={{marginTop: GAP_MARGIN, paddingBottom: 0}}
@@ -89,7 +95,18 @@ function JoinPresenter({
             desc={I18n.t('Title.duplicate_selectable')}
           />
           <TypeCheckGroup
-            typeList={[{name: '에어컨'}, {name: '전기/조명'}, {name: '욕실'}]}
+            typeList={[
+              {name: '에어컨'},
+              {name: '전기/조명'},
+              {name: '욕실'},
+              {name: '주방'},
+              {name: '방충망/방범창'},
+              {name: '새시'},
+              {name: '블라인드'},
+              {name: '페인트/방수'},
+              {name: '도어락'},
+              {name: '수리/설치 기타'},
+            ]}
             numberPerLine={3}
           />
           <TitleItem
@@ -98,8 +115,8 @@ function JoinPresenter({
           />
           <ErrorViewInput
             placeholder={I18n.t('Placeholder.license_no')}
-            regexResult={false}
-            message={'유효한 사업자 번호를 입력해주세요'}
+            // regexResult={false}
+            // message={'유효한 사업자 번호를 입력해주세요'}
           />
           <TitleItem
             style={{marginTop: GAP_MARGIN}}

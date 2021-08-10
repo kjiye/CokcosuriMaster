@@ -1,4 +1,11 @@
-import {StyleProp, ViewProps, ViewStyle} from 'react-native';
+import {
+  GestureResponderEvent,
+  StyleProp,
+  ViewProps,
+  ViewStyle,
+} from 'react-native';
+import I18n from '../../../utils/i18nHelpers';
+import {ItemType} from '../../../models/common';
 import React from 'react';
 import TextLineCheckItem from './TextLineCheckItem';
 import styled from 'styled-components/native';
@@ -15,17 +22,45 @@ const Divider = styled.View`
 
 interface Props {
   style?: StyleProp<ViewStyle>;
+  hasAll?: boolean;
+  checkAll?: (event: GestureResponderEvent) => void;
+  itemTypeList: ItemType[];
 }
 
-function TextLineCheckGroup({style}: Props): JSX.Element {
+function TextLineCheckGroup({
+  style,
+  hasAll = true,
+  checkAll,
+  itemTypeList,
+}: Props): JSX.Element {
+  const checkedStatus = itemTypeList.find(v => !v.checked)?.checked;
+  const isCheckedAll =
+    typeof checkedStatus === 'undefined' ? true : checkedStatus;
   return (
     <Wrapper style={style as StyleProp<ViewProps>}>
-      <TextLineCheckItem required={false} text={'서비스 전체 동의'} />
-      <Divider />
-      <TextLineCheckItem text={'개인정보 처리방침'} />
-      <TextLineCheckItem text={'개인정보 제 3자 동의'} />
-      <TextLineCheckItem text={'개인정보 수집이용 동의'} />
-      <TextLineCheckItem text={'COKCOSURI 마스터 이용약관'} />
+      {hasAll && (
+        <>
+          <TextLineCheckItem
+            required={false}
+            text={I18n.t('Terms.all')}
+            onPress={checkAll}
+            checked={isCheckedAll}
+          />
+          <Divider />
+        </>
+      )}
+      {itemTypeList.map((v, i) => {
+        return (
+          <TextLineCheckItem
+            key={i.toString()}
+            text={v.name}
+            content={v.content}
+            textPress={v.textPress}
+            onPress={v.onPress}
+            checked={v.checked}
+          />
+        );
+      })}
     </Wrapper>
   );
 }

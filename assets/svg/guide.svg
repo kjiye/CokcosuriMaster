@@ -57,15 +57,15 @@
     <path id="합치기_183" data-name="합치기 183" d="M13.094,39.131c-1.444-.066-3.286-2.81-3.674-3.413a3.371,3.371,0,0,1-.3-.282L.9,26.731a3.277,3.277,0,0,1,.166-4.673,3.378,3.378,0,0,1,4.731.164l2.947,3.119V3.348a3.348,3.348,0,1,1,6.7,0V15.779a3.348,3.348,0,0,1,6.7,0v0a3.348,3.348,0,1,1,6.7,0,3.348,3.348,0,1,1,6.7,0V30.934h.053v3.53s.063,4.384-2.595,4.384c-2.407,0-15.441.295-19.081.295C13.524,39.141,13.247,39.138,13.094,39.131Z" transform="translate(51.122 137.486) rotate(28)" fill="#fff" stroke="#eb7203" stroke-width="1"/>
     <text id="메인에서_TAP을_통해_확인" data-name="메인에서 TAP을 통해 확인" transform="translate(69 222)" fill="#333" font-size="18" font-family="NotoSansCJKkr-Medium, Noto Sans CJK KR" font-weight="500"><tspan x="0" y="0">메인에서 </tspan><tspan y="0">TAP</tspan><tspan y="0">을 통해 확인</tspan></text>
     <text id="메인에서_내가_할_작업을_확인_" data-name="메인에서 내가 할 작업을 확인 " transform="translate(68 588)" fill="#333" font-size="18" font-family="NotoSansCJKkr-Medium, Noto Sans CJK KR" font-weight="500"><tspan x="0" y="0">메인에서 내가 할 작업을 확인 </tspan></text>
-    <text id="진행하기전_작업진행_끝낼땐_작업완료" data-name="진행하기전 작업진행! 끝낼땐 작업완료" transform="translate(68 818)" fill="#333" font-size="18" font-family="NotoSansCJKkr-Medium, Noto Sans CJK KR" font-weight="500"><tspan x="0" y="0">진행하기전 작업진행! 끝낼땐 작업완료</tspan></text>
-    <text id="대기_:_작업접수_목록_진행_대기_:_내가_진행하고있는_목록_완료_:_작업이_끝난_목록_취소_:_작업을_완료_취소한_목록" data-name="대기 : 작업접수 목록 진행
- 대기 : 내가 진행하고있는 목록
+    <text id="진행하기_전_작업진행_끝낼_땐_작업완료" data-name="진행하기 전 작업진행! 끝낼 땐 작업완료" transform="translate(68 818)" fill="#333" font-size="18" font-family="NotoSansCJKkr-Medium, Noto Sans CJK KR" font-weight="500"><tspan x="0" y="0">진행하기 전 작업진행! 끝낼 땐 작업완료</tspan></text>
+    <text id="대기_:_작업접수_목록_진행_:_내가_진행하고_있는_작업_목록_완료_:_작업이_끝난_목록_취소_:_작업을_완료_취소한_목록" data-name="대기 : 작업접수 목록
+진행 : 내가 진행하고 있는 작업 목록
 완료 : 작업이 끝난 목록 
-취소 : 작업을 완료,취소한 목록" transform="translate(69 246)" fill="#b4b4b4" font-size="14" font-family="NotoSansCJKkr-Regular, Noto Sans CJK KR"><tspan x="0" y="0">대기 : 작업접수 목록 진행</tspan><tspan x="0" y="20" xml:space="preserve"> 대기 : 내가 진행하고있는 목록</tspan><tspan x="0" y="40">완료 : 작업이 끝난 목록 </tspan><tspan x="0" y="60">취소 : 작업을 완료,취소한 목록</tspan></text>
-    <text id="메인화면에서는_간략한_정보를_확인_작업_수락시_대기-_진행으로_이동되고_방문날에_작업시작_" data-name="메인화면에서는 간략한 정보를 확인 작업 수락시
-대기-&gt;진행으로 이동되고, 방문날에 작업시작! " transform="translate(68 612)" fill="#b4b4b4" font-size="14" font-family="NotoSansCJKkr-Regular, Noto Sans CJK KR"><tspan x="0" y="0">메인화면에서는 간략한 정보를 확인 작업 수락시</tspan><tspan x="0" y="20">대기-&gt;진행으로 이동되고, 방문날에 작업시작! </tspan></text>
-    <text id="작업진행전_항상_작업진행을_누르고_작업이_끝난후_작업완료를_눌러주세요" data-name="작업진행전 항상 작업진행을 누르고, 작업이 끝난후
-작업완료를 눌러주세요" transform="translate(68 842)" fill="#b4b4b4" font-size="14" font-family="NotoSansCJKkr-Regular, Noto Sans CJK KR"><tspan x="0" y="0">작업진행전 항상 작업진행을 누르고, 작업이 끝난후</tspan><tspan x="0" y="20">작업완료를 눌러주세요</tspan></text>
+취소 : 작업을 완료, 취소한 목록" transform="translate(69 246)" fill="#b4b4b4" font-size="14" font-family="NotoSansCJKkr-Regular, Noto Sans CJK KR"><tspan x="0" y="0">대기 : 작업접수 목록</tspan><tspan x="0" y="20">진행 : 내가 진행하고 있는 작업 목록</tspan><tspan x="0" y="40">완료 : 작업이 끝난 목록 </tspan><tspan x="0" y="60">취소 : 작업을 완료, 취소한 목록</tspan></text>
+    <text id="메인화면에서는_간략한_정보를_확인._작업_수락_시_대기-_진행으로_이동되고_방문날에_작업_시작_" data-name="메인화면에서는 간략한 정보를 확인. 작업 수락 시
+대기-&gt;진행으로 이동되고, 방문날에 작업 시작! " transform="translate(68 612)" fill="#b4b4b4" font-size="14" font-family="NotoSansCJKkr-Regular, Noto Sans CJK KR"><tspan x="0" y="0">메인화면에서는 간략한 정보를 확인. 작업 수락 시</tspan><tspan x="0" y="20">대기-&gt;진행으로 이동되고, 방문날에 작업 시작! </tspan></text>
+    <text id="작업_진행_전_항상_작업진행을_누르고_작업이_끝난_후_작업완료를_눌러주세요" data-name="작업 진행 전 항상 작업진행을 누르고, 작업이 끝난 후
+작업완료를 눌러주세요" transform="translate(68 842)" fill="#b4b4b4" font-size="14" font-family="NotoSansCJKkr-Regular, Noto Sans CJK KR"><tspan x="0" y="0">작업 진행 전 항상 작업진행을 누르고, 작업이 끝난 후</tspan><tspan x="0" y="20">작업완료를 눌러주세요</tspan></text>
     <g transform="matrix(1, 0, 0, 1, 0, 111)" filter="url(#그룹_4458)">
       <rect id="그룹_4458-2" data-name="그룹 4458" width="264" height="201" transform="translate(75 224)" fill="url(#pattern-3)"/>
     </g>
@@ -89,8 +89,8 @@
       <circle id="ic_swipe_default-3" data-name="ic_swipe_default" cx="13" cy="13" r="13" transform="translate(349 117.23) rotate(180)" fill="#eb7203"/>
       <path id="패스_2498" data-name="패스 2498" d="M-2.313-8.338A2.99,2.99,0,0,1,.276-9.669c1.2,0,2.2.592,2.2,1.756v.148A2.057,2.057,0,0,1,.239-5.509H-1.333v1.59H.313c1.553,0,2.755.518,2.755,2.274v.24C3.068-.2,2.18.777.239.777A5.314,5.314,0,0,1-3.126-.5L-4.032.962A6.741,6.741,0,0,0,.239,2.441C3.511,2.441,4.9.537,4.9-1.423V-1.7A2.986,2.986,0,0,0,2.2-4.769,3.048,3.048,0,0,0,4.288-7.783v-.185c0-2-1.572-3.328-4.031-3.328a4.368,4.368,0,0,0-3.883,2Z" transform="translate(335.362 109.039)" fill="#fff"/>
     </g>
-    <text id="상세화면에서도_확인가능" data-name="상세화면에서도
-확인가능" transform="translate(316 554)" fill="#333" font-size="12" font-family="NotoSansCJKkr-Regular, Noto Sans CJK KR"><tspan x="0" y="0">상세화면에서도</tspan><tspan x="0" y="17">확인가능</tspan></text>
+    <text id="상세화면에서도_확인_가능" data-name="상세화면에서도
+확인 가능" transform="translate(316 554)" fill="#333" font-size="12" font-family="NotoSansCJKkr-Regular, Noto Sans CJK KR"><tspan x="0" y="0">상세화면에서도</tspan><tspan x="0" y="17">확인 가능</tspan></text>
     <g id="home_indicator" data-name="home indicator" transform="translate(0 862)">
       <rect id="사각형_1089" data-name="사각형 1089" width="414" height="34" fill="none"/>
       <rect id="사각형_1085" data-name="사각형 1085" width="129" height="5" rx="2.5" transform="translate(143 15)" fill="#707070"/>
@@ -98,12 +98,12 @@
     <text id="항상_작업_전_작업_후_사진을_등록해주세요_" data-name="항상 작업 전/ 작업 후 사진을 등록해주세요!" transform="translate(67 1184)" fill="#333" font-size="18" font-family="NotoSansCJKkr-Medium, Noto Sans CJK KR" font-weight="500"><tspan x="0" y="0">항상 작업 전/ 작업 후 사진을 등록해주세요!</tspan></text>
     <text id="추가작업_후결제라면_작업_완료_후_꼭_현장결제를_등록해주세요_" data-name="추가작업, 후결제라면 작업 완료 후
 꼭 현장결제를 등록해주세요!" transform="translate(76 1598)" fill="#333" font-size="18" font-family="NotoSansCJKkr-Medium, Noto Sans CJK KR" font-weight="500"><tspan x="0" y="0">추가작업, 후결제라면 작업 완료 후</tspan><tspan x="0" y="26">꼭 현장결제를 등록해주세요!</tspan></text>
-    <text id="작업수락후_작업_전_사진_3개를_등록_작업이_끝난_후_사진_3개를_꼭_등록해주세요_" data-name="작업수락후 작업 전 사진 3개를 등록! 작업이 끝난 후
-사진 3개를 꼭 등록해주세요!" transform="translate(67 1208)" fill="#b4b4b4" font-size="14" font-family="NotoSansCJKkr-Regular, Noto Sans CJK KR"><tspan x="0" y="0">작업수락후 작업 전 사진 3개를 등록! 작업이 끝난 후</tspan><tspan x="0" y="20">사진 3개를 꼭 등록해주세요!</tspan></text>
-    <text id="추가작업이나._후불인_경우_결제_후_결제관련내용을_앱에_적어주세요_단_작업완료후_추가작업_창이_뜬후_나가게되면_다시_돌아올_수_없으니_신중하게_적어주세요_" data-name="추가작업이나. 후불인 경우, 결제 후 결제관련내용을
+    <text id="작업_수락_후_작업_전_사진_3개를_등록_작업이_끝난_후_사진_3개를_꼭_등록해주세요_" data-name="작업 수락 후 작업 전 사진 3개를 등록! 작업이 끝난 후
+사진 3개를 꼭 등록해주세요!" transform="translate(67 1208)" fill="#b4b4b4" font-size="14" font-family="NotoSansCJKkr-Regular, Noto Sans CJK KR"><tspan x="0" y="0">작업 수락 후 작업 전 사진 3개를 등록! 작업이 끝난 후</tspan><tspan x="0" y="20">사진 3개를 꼭 등록해주세요!</tspan></text>
+    <text id="추가작업이나_후불인_경우_결제_후_결제관련_내용을_앱에_적어주세요_단_작업완료_후_추가작업_창이_뜬_후_나가게_되면_다시_돌아올_수_없으니_신중하게_적어주세요_" data-name="추가작업이나 후불인 경우, 결제 후 결제관련 내용을
 앱에 적어주세요!
-*단 작업완료후 추가작업 창이 뜬후 나가게되면 
-다시 돌아올 수 없으니 신중하게 적어주세요!" transform="translate(76 1648)" fill="#b4b4b4" font-size="14" font-family="NotoSansCJKkr-Regular, Noto Sans CJK KR"><tspan x="0" y="0">추가작업이나. 후불인 경우, 결제 후 결제관련내용을</tspan><tspan x="0" y="20">앱에 적어주세요!</tspan><tspan fill="#e32929"><tspan x="0" y="40">*단 작업완료후 추가작업 창이 뜬후 나가게되면 </tspan><tspan x="0" y="60">다시 돌아올 수 없으니 신중하게 적어주세요!</tspan></tspan></text>
+*단 작업완료 후 추가작업 창이 뜬 후 나가게 되면 
+다시 돌아올 수 없으니 신중하게 적어주세요!" transform="translate(76 1648)" fill="#b4b4b4" font-size="14" font-family="NotoSansCJKkr-Regular, Noto Sans CJK KR"><tspan x="0" y="0">추가작업이나 후불인 경우, 결제 후 결제관련 내용을</tspan><tspan x="0" y="20">앱에 적어주세요!</tspan><tspan fill="#e32929"><tspan x="0" y="40">*단 작업완료 후 추가작업 창이 뜬 후 나가게 되면 </tspan><tspan x="0" y="60">다시 돌아올 수 없으니 신중하게 적어주세요!</tspan></tspan></text>
     <circle id="타원_17" data-name="타원 17" cx="12.5" cy="12.5" r="12.5" transform="translate(273.5 1062.5)" fill="#e25300" opacity="0.49"/>
     <path id="합치기_187" data-name="합치기 187" d="M8.743,35.794V13.8L5.8,16.92a3.378,3.378,0,0,1-4.732.163A3.278,3.278,0,0,1,.9,12.41l8.22-8.7a3.362,3.362,0,0,1,.3-.282C9.81,2.819,11.65.076,13.1.01c1.623-.074,17.232.284,19.89.284s2.594,4.385,2.594,4.385v3.53h-.053V23.362a3.348,3.348,0,1,1-6.7,0,3.348,3.348,0,1,1-6.7,0,3.348,3.348,0,1,1-6.7,0V35.794a3.348,3.348,0,0,1-6.7,0Z" transform="translate(320.501 1098.51) rotate(144)" fill="#fff" stroke="#eb7203" stroke-width="1"/>
     <g id="그룹_4460" data-name="그룹 4460" transform="translate(687 2436.486)">
@@ -129,6 +129,6 @@
     <text id="해당_페이지를_벗어나면_다시_적을_수_없어요_현장결제를_하셨다면_꼭_적어주세요." data-name="해당 페이지를 벗어나면
 다시 적을 수 없어요!
 현장결제를 하셨다면
-꼭! 적어주세요." transform="translate(286 1399)" fill="#333" font-size="12" font-family="NotoSansCJKkr-Regular, Noto Sans CJK KR"><tspan x="0" y="0">해당 페이지를 벗어나면</tspan><tspan x="0" y="17">다시 적을 수 없어요!</tspan><tspan x="0" y="34">현장결제를 하셨다면</tspan><tspan x="0" y="51">꼭! 적어주세요.</tspan></text>
+꼭! 적어주세요." transform="translate(275 1399)" fill="#333" font-size="12" font-family="NotoSansCJKkr-Regular, Noto Sans CJK KR"><tspan x="0" y="0">해당 페이지를 벗어나면</tspan><tspan x="0" y="17">다시 적을 수 없어요!</tspan><tspan x="0" y="34">현장결제를 하셨다면</tspan><tspan x="0" y="51">꼭! 적어주세요.</tspan></text>
   </g>
 </svg>

@@ -1,6 +1,6 @@
-import DonePresenter from './DonePresenter';
 import React, {useLayoutEffect} from 'react';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
+import DonePresenter from './DonePresenter';
 
 function DoneContainer({route}: any): JSX.Element {
   const navigation = useNavigation();
@@ -13,7 +13,13 @@ function DoneContainer({route}: any): JSX.Element {
     }
   }, [isFocused]);
 
-  return <DonePresenter />;
+  const props = {
+    goDetail: () => {
+      navigation.navigate('WorkDetail', {status: 'done'});
+    },
+  };
+
+  return <DonePresenter {...props} />;
 }
 
 export default DoneContainer;

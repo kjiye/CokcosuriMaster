@@ -1,6 +1,5 @@
 // import {GET_USERS} from './main.queries';
 import {useMutation, useQuery} from '@apollo/client';
-import {Alert} from 'react-native';
 import MainPresenter from './MainPresenter';
 import React from 'react';
 

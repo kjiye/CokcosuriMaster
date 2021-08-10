@@ -1,9 +1,11 @@
+import {Dimensions, GestureResponderEvent} from 'react-native';
 import {AppTheme} from '../../../themes/theme';
 import BaseContainer from '../../../components/BaseContainer';
-import {Dimensions, GestureResponderEvent} from 'react-native';
+import I18n from '../../../utils/i18nHelpers';
 import LogoSvg from '../../../../assets/svg/logo.svg';
 import {PrimaryButton} from '../../../components/Button';
 import React from 'react';
+import {TermsAgreement} from '../../../models/user';
 import {TextLineCheckGroup} from '../../../components/Checkbox/TextLineCheckbox';
 import styled from 'styled-components/native';
 
@@ -28,16 +30,64 @@ const CheckGroup = styled(TextLineCheckGroup)`
 `;
 
 interface Props {
+  showPolicy: (title: string, content: string) => void;
+  agreements: TermsAgreement;
+  checkAll: (event: GestureResponderEvent) => void;
+  checkPrivacyPolicy: (event: GestureResponderEvent) => void;
+  checkPrivacyThird: (event: GestureResponderEvent) => void;
+  checkPrivacyUsage: (event: GestureResponderEvent) => void;
+  checkCondition: (event: GestureResponderEvent) => void;
   next: (event: GestureResponderEvent) => void;
 }
 
-function TermsAgreementPresenter({next}: Props): JSX.Element {
+function TermsAgreementPresenter({
+  showPolicy,
+  agreements,
+  checkAll,
+  checkPrivacyPolicy,
+  checkPrivacyThird,
+  checkPrivacyUsage,
+  checkCondition,
+  next,
+}: Props): JSX.Element {
   return (
     <Container button={<PrimaryButton title={'다음'} onPress={next} />}>
       <LogoView>
         <LogoSvg />
       </LogoView>
-      <CheckGroup />
+      <CheckGroup
+        checkAll={checkAll}
+        itemTypeList={[
+          {
+            name: I18n.t('Terms.privacy_policy'),
+            content: I18n.t('TempTerms.privacy_policy'),
+            textPress: showPolicy,
+            onPress: checkPrivacyPolicy,
+            checked: agreements.terms_privacy_policy,
+          },
+          {
+            name: I18n.t('Terms.privacy_third'),
+            content: I18n.t('TempTerms.privacy_third'),
+            textPress: showPolicy,
+            onPress: checkPrivacyThird,
+            checked: agreements.terms_privacy_third,
+          },
+          {
+            name: I18n.t('Terms.privacy_usage'),
+            content: I18n.t('TempTerms.privacy_usage'),
+            textPress: showPolicy,
+            onPress: checkPrivacyUsage,
+            checked: agreements.terms_privacy_usage,
+          },
+          {
+            name: I18n.t('Terms.app_condition'),
+            content: I18n.t('TempTerms.app_condition'),
+            textPress: showPolicy,
+            onPress: checkCondition,
+            checked: agreements.terms_condition,
+          },
+        ]}
+      />
     </Container>
   );
 }

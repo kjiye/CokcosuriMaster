@@ -1,7 +1,7 @@
-import {BLACK_1, GRAY_5, GRAY_6} from '../../constants/color';
 import {INNER_MARGIN, LARGE, MEDIUM} from '../../constants/size';
 import {StyleProp, ViewProps, ViewStyle} from 'react-native';
 import {AppTheme} from '../../themes/theme';
+import {GRAY_5} from '../../constants/color';
 import React from 'react';
 import styled from 'styled-components/native';
 
@@ -13,7 +13,7 @@ const Wrapper = styled.View`
 
 const MainText = styled.Text<{mainColor?: string}>`
   font-size: ${LARGE}px;
-  font-weight: 600;
+  font-weight: bold;
   ${({mainColor}) => `
   color : ${
     !!mainColor && mainColor === 'gray' ? colors.grey[6] : colors.black[1]

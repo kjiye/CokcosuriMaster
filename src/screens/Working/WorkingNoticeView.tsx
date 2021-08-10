@@ -25,8 +25,9 @@ const MiddleTitleText = styled(TitleText)`
   margin: ${TITLE_TOP_MARGIN}px 0;
 `;
 
-const PointTitleText = styled(TitleText)`
-  color: ${(props: any) => props.theme.colors.primaryLight};
+const PointTitleText = styled(TitleText)<{color?: string}>`
+  color: ${(props: any) =>
+    props.color ? props.color : props.theme.colors.primaryLight};
 `;
 
 const Message = styled.Text`
@@ -37,13 +38,16 @@ const Message = styled.Text`
 
 interface Props {
   status: string;
+  statusColor?: string;
   endingWord: string;
   message: string;
   middleTitle: string;
 }
 
+// 작업 표시 props 추가
 function WorkingNoticeView({
   status,
+  statusColor,
   endingWord,
   message,
   middleTitle,
@@ -52,7 +56,7 @@ function WorkingNoticeView({
     <Wrapper>
       <>
         <TitleText>
-          <PointTitleText>{status} </PointTitleText>
+          <PointTitleText color={statusColor}>{status} </PointTitleText>
           {endingWord}
         </TitleText>
         <Message>{message}</Message>

@@ -7,13 +7,15 @@ import {
   STANDARD,
 } from '../../../../constants/size';
 import {BasicInput, ErrorViewInput} from '../../../../components/Input';
-import BaseContainer from '../../../../components/BaseContainer';
-import {BottomButton, PrimaryButton} from '../../../../components/Button';
-import {CardView} from '../../../../components/View';
-import React from 'react';
 import {GestureResponderEvent, ScrollView} from 'react-native';
+import BaseContainer from '../../../../components/BaseContainer';
+import {CardView} from '../../../../components/View';
+import {PrimaryButton} from '../../../../components/Button';
+import React from 'react';
 import {TitleItem} from '../../../../components/Item';
 import styled from 'styled-components/native';
+
+const BOTTOM_PADDING = 90;
 
 const Container = styled(BaseContainer)`
   background: ${(props: any) => props.theme.colors.background};
@@ -21,12 +23,15 @@ const Container = styled(BaseContainer)`
 
 const ContentContainer = styled.View`
   flex: 1;
-  padding: ${STANDARD}px ${STANDARD}px ${BOTTOM_MARGIN}px;
+  padding: ${(props: any) => `
+    ${props.theme.size.standardPadding}px ${props.theme.size.standardPadding}px
+    ${BOTTOM_PADDING}px 
+  `};
 `;
 
 const NoticeMessage = styled.Text`
-  font-size: ${SMALL}px;
-  color: ${BLACK_1};
+  font-size: ${(props: any) => props.theme.fonts.small}px;
+  color: ${(props: any) => props.theme.colors.black[1]};
 `;
 
 const RowWrapper = styled.View`
@@ -85,8 +90,8 @@ function FindPasswordPresenter({ok}: Props): JSX.Element {
                   style={InputStyle}
                   isShort={true}
                   placeholder={'휴대폰 번호를 입력해주세요'}
-                  regexResult={false}
-                  message={'유효하지 않는 휴대폰 번호입니다'}
+                  regexResult={true}
+                  // message={'유효하지 않는 휴대폰 번호입니다'}
                 />
               </RowWrapper>
               <RowWrapper>
@@ -95,8 +100,8 @@ function FindPasswordPresenter({ok}: Props): JSX.Element {
                   style={InputStyle}
                   isShort={true}
                   placeholder={'사업자 번호를 입력해주세요'}
-                  regexResult={false}
-                  message={'올바른 사업자 등록번호가 아닙니다'}
+                  regexResult={true}
+                  // message={'올바른 사업자 등록번호가 아닙니다'}
                 />
               </RowWrapper>
             </>

@@ -1,6 +1,11 @@
+import {
+  basicHeader,
+  commonHeaderOption,
+} from '../components/Header/HeaderOption';
 import AlarmScreen from '../screens/Alarm';
 import DrawerMenuView from '../screens/Drawer';
 import GuideScreen from '../screens/Guide/GuidePresenter';
+import I18n from '../utils/i18nHelpers';
 import MainStack from './MainStack';
 import NoticeScreen from '../screens/Notice';
 import QnAScreen from '../screens/QnA/QnATab';
@@ -20,9 +25,7 @@ function MainDrawer(): JSX.Element {
       drawerContent={() => {
         return <DrawerMenuView />;
       }}
-      screenOptions={{
-        headerShown: true,
-      }}>
+      screenOptions={{headerShown: true, headerTitleAlign: 'center'}}>
       <Drawer.Screen
         name={'MainStack'}
         options={{
@@ -30,14 +33,62 @@ function MainDrawer(): JSX.Element {
         }}
         component={MainStack}
       />
-      <Drawer.Screen name={'UpdateUserInfo'} component={UpdatUserInfoScreen} />
-      <Drawer.Screen name={'UpdatePassword'} component={UpdatePasswordScreen} />
-      <Drawer.Screen name={'UpdatePhone'} component={UpdatePhoneScreen} />
-      <Drawer.Screen name={'QnA'} component={QnAScreen} />
-      <Drawer.Screen name={'Alarm'} component={AlarmScreen} />
-      <Drawer.Screen name={'Notice'} component={NoticeScreen} />
-      <Drawer.Screen name={'Guide'} component={GuideScreen} />
-      <Drawer.Screen name={'TermsMenu'} component={TermsMenuScreen} />
+      <Drawer.Screen
+        name={'UpdateUserInfo'}
+        component={UpdatUserInfoScreen}
+        options={basicHeader({
+          title: I18n.t('Header.update_user_info'),
+        })}
+      />
+      <Drawer.Screen
+        name={'UpdatePassword'}
+        component={UpdatePasswordScreen}
+        options={basicHeader({
+          title: I18n.t('Header.update_password'),
+        })}
+      />
+      <Drawer.Screen
+        name={'UpdatePhone'}
+        component={UpdatePhoneScreen}
+        options={basicHeader({
+          title: I18n.t('Header.update_phone'),
+        })}
+      />
+      <Drawer.Screen
+        name={'QnA'}
+        component={QnAScreen}
+        options={basicHeader({
+          title: I18n.t('Header.qna'),
+        })}
+      />
+      <Drawer.Screen
+        name={'Alarm'}
+        component={AlarmScreen}
+        options={basicHeader({
+          title: I18n.t('Header.alarm'),
+        })}
+      />
+      <Drawer.Screen
+        name={'Notice'}
+        component={NoticeScreen}
+        options={basicHeader({
+          title: I18n.t('Header.notice'),
+        })}
+      />
+      <Drawer.Screen
+        name={'Guide'}
+        component={GuideScreen}
+        options={basicHeader({
+          title: I18n.t('Header.guide'),
+        })}
+      />
+      <Drawer.Screen
+        name={'TermsMenu'}
+        component={TermsMenuScreen}
+        options={basicHeader({
+          title: I18n.t('Header.terms'),
+        })}
+      />
       <Drawer.Screen name={'TermsDetail'} component={TermsDetailScreen} />
     </Drawer.Navigator>
   );

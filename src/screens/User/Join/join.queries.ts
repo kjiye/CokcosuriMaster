@@ -1,18 +1,19 @@
 import {DocumentNode, gql} from '@apollo/client';
 
-export const GET_WORKTYPE_ALL: DocumentNode = gql`
-  query getWorkTypeAll {
-    getWorkTypeAll {
-      success
-      workCategories {
-        id
-        code
-        name
-      }
-      count
-    }
-  }
-`;
+// API 변경
+// export const GET_WORKTYPE_ALL: DocumentNode = gql`
+//   query getWorkTypeAll {
+//     getWorkTypeAll {
+//       success
+//       workCategories {
+//         id
+//         code
+//         name
+//       }
+//       count
+//     }
+//   }
+// `;
 
 export const REQ_VERIFICATION_CODE: DocumentNode = gql`
   mutation reqVerificationCode($target: String!) {

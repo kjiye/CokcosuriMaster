@@ -23,9 +23,8 @@ const Container = styled.TouchableOpacity<{disabled?: boolean}>`
   align-items: center;
 `;
 
-// font-size: ${(props: any) => props.theme.size.fonts.mega}px;
 const Title = styled.Text`
-  font-size: ${(props: any) => props.theme.fonts.huge}px;
+  font-size: ${(props: any) => props.theme.fonts.big}px;
   font-weight: bold;
   text-align: center;
   color: ${(props: any) => props.theme.colors.grey[0]};
