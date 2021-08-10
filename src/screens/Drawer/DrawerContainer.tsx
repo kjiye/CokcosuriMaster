@@ -6,28 +6,28 @@ function DrawerContainer(): JSX.Element {
   const navigation = useNavigation();
   const props = {
     goUpdateUserInfo: () => {
-      navigation.navigate('UpdateUserInfoScreen');
+      navigation.navigate('UpdateUserInfo');
     },
     goUpdatePassword: () => {
-      navigation.navigate('UpdatePasswordScreen');
+      navigation.navigate('UpdatePassword');
     },
     goUpdatePhone: () => {
-      navigation.navigate('UpdatePhoneScreen');
+      navigation.navigate('UpdatePhone');
     },
     goQnA: () => {
-      navigation.navigate('QnAScreen');
+      navigation.navigate('QnA');
     },
     goAlarm: () => {
-      navigation.navigate('AlarmScreen');
+      navigation.navigate('Alarm');
     },
     goNotice: () => {
-      navigation.navigate('NoticeScreen');
+      navigation.navigate('Notice');
     },
     goGuide: () => {
-      navigation.navigate('GuideScreen');
+      navigation.navigate('Guide');
     },
     goTerms: () => {
-      navigation.navigate('TermsMenuScreen');
+      navigation.navigate('TermsMenu');
     },
   };
   return <DrawerPresenter {...props} />;

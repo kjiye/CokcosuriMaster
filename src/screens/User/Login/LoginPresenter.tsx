@@ -53,14 +53,14 @@ function LoginPresenter({
       )}
       <ErrorViewInput
         placeholder={'휴대폰 번호'}
-        regexResult={false}
-        message={'유효하지 않는 전화번호입니다'}
+        regexResult={true}
+        // message={'유효하지 않는 전화번호입니다'}
       />
       <ErrorViewInput
         style={{marginVertical: theme.size.gap}}
         placeholder={'비밀번호(영문/숫자 포함 6자 이상)'}
-        regexResult={false}
-        message={'모든 요소를 포함시켜주세요'}
+        regexResult={true}
+        // message={'모든 요소를 포함시켜주세요'}
         secure={true}
       />
       <ButtonGroup leftBtnPress={goJoin} rightBtnPress={goFindPassword} />

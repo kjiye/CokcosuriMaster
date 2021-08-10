@@ -1,5 +1,5 @@
-import {INNER_MARGIN, MEDIUM, STANDARD} from '../../constants/size';
 import {GestureResponderEvent} from 'react-native';
+import {INNER_MARGIN} from '../../constants/size';
 import React from 'react';
 import SingleButton from './SingleButton';
 import styled from 'styled-components/native';
@@ -16,23 +16,27 @@ interface Props {
   leftBtnName: string;
   leftIcon?: JSX.Element;
   leftPrimaryColored?: boolean;
+  leftBtnPress?: (event: GestureResponderEvent) => void;
   rightBtnName: string;
   rightIcon?: JSX.Element;
   rightPrimaryColored?: boolean;
   onLeftPress?: (event: GestureResponderEvent) => void;
   onRightPress?: (event: GestureResponderEvent) => void;
+  rightBtnPress?: (event: GestureResponderEvent) => void;
 }
 
 function TwoButtonGroup({
   leftBtnName,
   leftIcon,
   leftPrimaryColored,
+  // leftBtnPress,
   rightBtnName,
   rightIcon,
   rightPrimaryColored,
   onLeftPress,
   onRightPress,
-}: Props): JSX.Element {
+}: // rightBtnPress,
+Props): JSX.Element {
   return (
     <Wrapper>
       <SingleButton
@@ -40,12 +44,14 @@ function TwoButtonGroup({
         icon={leftIcon}
         primaryColored={leftPrimaryColored}
         onPress={onLeftPress}
+        // onPress={leftBtnPress}
       />
       <SingleButton
         name={rightBtnName}
         icon={rightIcon}
         primaryColored={rightPrimaryColored}
         onPress={onRightPress}
+        // onPress={rightBtnPress}
       />
     </Wrapper>
   );

@@ -1,4 +1,5 @@
 import React, {useMemo} from 'react';
+import {Platform} from 'react-native';
 import {TitleItem} from '../../../components/Item';
 import styled from 'styled-components/native';
 
@@ -14,8 +15,11 @@ const CardView = styled.View`
   border: 1px solid ${(props: any) => props.theme.colors.primary};
   border-radius: ${BORDER_RADIUS}px;
   padding: 6px ${(props: any) => props.theme.size.padding}px;
+  ${Platform.OS === 'ios'
+    ? `
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.16);
-  elevation: 3;
+  `
+    : `elevation: 6;`}
 `;
 
 const Title = styled(TitleItem)`

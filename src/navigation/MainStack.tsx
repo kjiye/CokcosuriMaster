@@ -3,12 +3,15 @@ import {
   commonHeaderOption,
 } from '../components/Header/HeaderOption';
 import {DrawerActions} from '@react-navigation/native';
-import DrawerMenuSvg from '../../assets/svg/ic_back.svg'; // 임시로 넣은 drawer
+import DrawerMenuSvg from '../../assets/svg/ic_back.svg';
+import I18n from '../utils/i18nHelpers';
 import MainTab from './MainTab';
+import PaymentScreen from '../screens/Working/Payment';
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import WorkDetailScreen from '../screens/Detail/WorkDetail';
 import WorkingBeforeScreen from '../screens/Working/WorkingBefore';
+import WorkingDoneScreen from '../screens/Working/WorkingDone';
 import WorkingImpossibleScreen from '../screens/Working/WorkingImpossible';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/core';
@@ -42,7 +45,7 @@ function MainStack(): JSX.Element {
           buttonType: 'drawer',
         })}
       />
-      {/* header 처리 container로 변경 */}
+      {/* header container 에서 처리 */}
       <Stack.Screen
         name={'WorkDetail'}
         component={WorkDetailScreen}
@@ -54,13 +57,13 @@ function MainStack(): JSX.Element {
         name={'WorkingBefore'}
         component={WorkingBeforeScreen}
         options={basicHeader({
-          title: '작업 진행중',
+          title: I18n.t('Header.working'),
           isRight: true,
           buttonType: 'text',
-          buttonText: '작업불가',
+          buttonText: I18n.t('Header.button.working_impossible'),
           buttonTextColor: '#b4b4b4',
           buttonPress: () => {
-            navigation.navigate('WorkingImpossibleScreen');
+            navigation.navigate('WorkingImpossible');
           },
         })}
       />
@@ -68,7 +71,21 @@ function MainStack(): JSX.Element {
         name={'WorkingImpossible'}
         component={WorkingImpossibleScreen}
         options={basicHeader({
-          title: '작업불가',
+          title: I18n.t('Header.working_impossible'),
+        })}
+      />
+      <Stack.Screen
+        name={'WorkingDone'}
+        component={WorkingDoneScreen}
+        options={basicHeader({
+          title: I18n.t('Header.working_done'),
+        })}
+      />
+      <Stack.Screen
+        name={'Payment'}
+        component={PaymentScreen}
+        options={basicHeader({
+          title: I18n.t('Header.payment'),
         })}
       />
     </Stack.Navigator>

@@ -7,21 +7,42 @@ export const callBackAlert = (
   isCancel?: boolean,
   title?: string,
 ): any => {
-  return Alert.alert(title ? title : '', message, [
+  let option: any = [
     {
       text: I18n.t('ok'),
       onPress: () => {
         okPress();
       },
     },
-    isCancel
-      ? {
-          text: I18n.t('cancel'),
-          onPress: () => {
-            return;
-          },
-          style: 'cancel',
-        }
-      : {},
-  ]);
+  ];
+  if (isCancel) {
+    option = [
+      ...option,
+      {
+        text: I18n.t('cancel'),
+        onPress: () => {
+          return;
+        },
+        style: 'cancel',
+      },
+    ];
+  }
+  return Alert.alert(title ? title : '', message, option);
+  // return Alert.alert(title ? title : '', message, [
+  //   {
+  //     text: I18n.t('ok'),
+  //     onPress: () => {
+  //       okPress();
+  //     },
+  //   },
+  //   isCancel
+  //     ? {
+  //         text: I18n.t('cancel'),
+  //         onPress: () => {
+  //           return;
+  //         },
+  //         style: 'cancel',
+  //       }
+  //     : {},
+  // ]);
 };

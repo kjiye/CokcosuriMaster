@@ -1,4 +1,4 @@
-import {StyleProp, ViewProps, ViewStyle} from 'react-native';
+import {Platform, StyleProp, ViewProps, ViewStyle} from 'react-native';
 import styled, {css} from 'styled-components/native';
 import {INNER_MARGIN} from '../../constants/size';
 import React from 'react';
@@ -15,8 +15,11 @@ const Wrapper = styled.View<{hasPadding: boolean; hasShadow: boolean}>`
   ${({hasShadow}) =>
     hasShadow &&
     css`
+      ${Platform.OS === 'ios'
+        ? `
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.16);
-      elevation: 2;
+      `
+        : `elevation: 8;`}
     `}
 `;
 

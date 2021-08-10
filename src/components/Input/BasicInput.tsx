@@ -26,14 +26,17 @@ const Input = styled.TextInput`
   height: 100%;
   padding: 0 ${INNER_MARGIN}px;
   font-size: ${MEDIUM}px;
-  color: ${BLACK_1};
+  color: ${(props: any) =>
+    props.editable ? props.theme.colors.black[1] : props.theme.colors.grey[5]};
 `;
 
 interface Props {
   style?: StyleProp<ViewStyle>;
   placeholder?: string;
+  value?: string;
   secure?: boolean;
   isShort?: boolean;
+  editable?: boolean;
   onChange?: (text: string) => void;
 }
 
@@ -41,8 +44,10 @@ interface Props {
 function BasicInput({
   style,
   placeholder = '',
+  value,
   secure = false,
   isShort = false,
+  editable = true,
   onChange,
 }: Props): JSX.Element {
   const [focus, setFocus] = useState<boolean>(false);
@@ -52,6 +57,7 @@ function BasicInput({
       focus={focus}
       isShort={isShort}>
       <Input
+        editable={editable}
         placeholder={placeholder}
         placeholderTextColor={PLACEHOLDER_COLOR}
         secureTextEntry={secure}
@@ -62,6 +68,7 @@ function BasicInput({
           setFocus(false);
         }}
         onChangeText={onChange}
+        value={value}
       />
     </Wrapper>
   );

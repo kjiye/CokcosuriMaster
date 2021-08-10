@@ -32,23 +32,58 @@ const MidTitleItem = styled(TitleItem)`
 
 interface Props {
   nextPress: (event: GestureResponderEvent) => void;
+  copyAddress: (event: GestureResponderEvent) => void;
+  status: 'wait' | 'working' | 'done' | 'cancel';
 }
 
-function WorkDetailPresenter({nextPress}: Props): JSX.Element {
+function WorkDetailPresenter({
+  nextPress,
+  copyAddress,
+  status,
+}: Props): JSX.Element {
   return (
     <Container
-      button={<PrimaryButton title={'작업 진행'} onPress={nextPress} />}>
+      button={
+        status === 'wait' || status === 'working' ? (
+          <PrimaryButton
+            title={status === 'wait' ? '작업 진행' : '작업 완료'}
+            onPress={nextPress}
+          />
+        ) : (
+          <></>
+        )
+      }>
       <ScrollView>
         <MapView />
         <ContentContainer>
           <TitleItem mainText={I18n.t('Title.customer_info')} />
-          <CustomerInfoItem />
+          <CustomerInfoItem leftBtnPress={copyAddress} />
           <MidTitleItem mainText={I18n.t('Title.customer_message')} />
           <ContentTextView
             value={'조명은 깨지고 전선이 뜯어졌어요. 전등은 보유하고 있습니다.'}
           />
           <MidTitleItem mainText={I18n.t('Title.customer_place')} />
           <ImageSlider imageList={[{}, {}, {}]} />
+          {status === 'done' && (
+            <>
+              <MidTitleItem mainText={'작업 전 사진'} />
+              <ImageSlider imageList={[{}, {}, {}]} />
+              <MidTitleItem mainText={'작업 후 사진'} />
+              <ImageSlider imageList={[{}, {}, {}]} />
+            </>
+          )}
+          {status === 'cancel' && (
+            <>
+              <MidTitleItem mainText={'취소 사유'} />
+              <ContentTextView
+                value={
+                  '현장을 확인해보니 내부 배선 작업까지 들어가는 대규모 공사라 진행하기 어렵습니다 '
+                }
+              />
+              <MidTitleItem mainText={'취소 사진'} />
+              <ImageSlider imageList={[{}, {}, {}]} />
+            </>
+          )}
         </ContentContainer>
       </ScrollView>
     </Container>

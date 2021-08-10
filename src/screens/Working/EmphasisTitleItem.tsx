@@ -10,16 +10,17 @@ const TitleText = styled.Text`
   color: ${(props: any) => props.theme.colors.black[1]};
 `;
 
-const EmphasisText = styled(TitleText)<{color: string}>`
-  color: ${({color}) => color};
+const EmphasisText = styled(TitleText)<{color?: string}>`
+  color: ${(props: any) =>
+    props.color ? props.color : props.theme.colors.black[1]};
 `;
 
 interface Props {
   status: string;
-  color: string;
+  color?: string;
 }
 
-function EmphasisTitleItem({status, color}): JSX.Element {
+function EmphasisTitleItem({status, color}: Props): JSX.Element {
   return (
     <TitleText>
       작업 <EmphasisText color={color}>{status}</EmphasisText> 사진

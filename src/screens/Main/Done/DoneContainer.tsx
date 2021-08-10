@@ -33,6 +33,12 @@ function DoneContainer({
     },
   };
   return <DonePresenter />;
+    goDetail: () => {
+      navigation.navigate('WorkDetail', {status: 'done'});
+    },
+  };
+
+  return <DonePresenter {...props} />;
 }
 
 export default DoneContainer;

@@ -17,7 +17,13 @@ function CancelContainer({
       sideRadiusType('right');
     }
   }, [isFocused]);
-  return <CancelPresenter />;
+
+  const props = {
+    goDetail: () => {
+      navigation.navigate('WorkDetail', {status: 'cancel'});
+    },
+  };
+  return <CancelPresenter {...props} />;
 }
 
 export default CancelContainer;

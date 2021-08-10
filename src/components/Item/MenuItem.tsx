@@ -6,7 +6,7 @@ import {StyleProp} from 'react-native';
 import styled from 'styled-components/native';
 
 const Wrapper = styled.TouchableOpacity`
-  padding: ${MEDIUM}px 0;
+  padding: 16px 0;
 `;
 
 const MenuText = styled.Text`
@@ -18,7 +18,7 @@ const MenuText = styled.Text`
 interface Props {
   style?: StyleProp<ViewStyle>;
   name: string;
-  onPress: (event: GestureResponderEvent) => void;
+  onPress?: (event: GestureResponderEvent) => void;
 }
 
 function MenuItem({style, name, onPress}: Props): JSX.Element {

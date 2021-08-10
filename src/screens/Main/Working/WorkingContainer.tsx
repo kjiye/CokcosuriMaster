@@ -1,6 +1,7 @@
 import React, {useLayoutEffect} from 'react';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 import {GET_WORKS} from '../main.queries';
+import Toast from 'react-native-simple-toast';
 import {WorkState} from '../../../../__generated__/globalTypes';
 import WorkingPresenter from './WorkingPresenter';
 import {useQuery} from '@apollo/client';
@@ -33,7 +34,16 @@ function WorkingContainer({
     },
   };
 
-  return <WorkingPresenter />;
+  const props = {
+    goDetail: () => {
+      navigation.navigate('WorkDetail', {status: 'working'});
+    },
+    copyAddress: () => {
+      Toast.show('주소가 복사되었습니다');
+    },
+  };
+
+  return <WorkingPresenter {...props} />;
 }
 
 export default WorkingContainer;
