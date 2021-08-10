@@ -1,5 +1,5 @@
-import {MEDIUM, SMALL, TINY} from '../../constants/size';
 import {PRIMARY_MAIN, WHITE} from '../../constants/color';
+import {MEDIUM} from '../../constants/size';
 import React from 'react';
 import RoundedLabel from './RoundedLabel';
 import styled from 'styled-components/native';

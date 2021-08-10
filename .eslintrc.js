@@ -25,5 +25,6 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/ban-types': 'warn',
     'no-useless-escape': 'warn',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
   },
 };

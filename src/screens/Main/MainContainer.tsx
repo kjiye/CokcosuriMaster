@@ -1,51 +1,55 @@
-// import {GET_USERS} from './main.queries';
-import {useMutation, useQuery} from '@apollo/client';
-import {Alert} from 'react-native';
+import {GET_WORKS, SET_WORKING} from './main.queries';
+import React, {useEffect} from 'react';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
+import {useLazyQuery, useMutation} from '@apollo/client';
 import MainPresenter from './MainPresenter';
-import React from 'react';
 
-function MainContainer(): JSX.Element {
-  // const {data} = useQuery(GET_USERS);
+function WaitContaienr({
+  route: {
+    params: {state},
+  },
+}: any): JSX.Element {
+  const navigation = useNavigation();
+  const isFocused = useIsFocused();
 
-  // const [joinMutation, {loading}] = useMutation(JOIN_USER, {
-  //   onCompleted: (data: any) => {
-  //     const {
-  //       join: {ok, user, error},
-  //     } = data;
+  const [getWorks, {data, error}] = useLazyQuery(GET_WORKS, {
+    variables: {
+      state,
+    },
+  });
 
-  //     console.log(ok);
-  //     console.log(user);
-  //     console.log(error);
+  const [setWorking] = useMutation(SET_WORKING, {
+    onCompleted: () => {
+      getWorks();
+    },
+  });
 
-  //     if (error) {
-  //       Alert.alert(error.message);
-  //     } else if (user) {
-  //       Alert.alert(user.name);
-  //     }
-  //   },
-  // });
+  useEffect(() => {
+    if (isFocused) {
+      getWorks();
+    }
+  }, [isFocused]);
 
-  // console.log(data);
-
-  // const props = {
-  //   loading: false,
-  //   master: data?.getMaster?.master,
-  //   join: () => {
-  //     // if (!loading) {
-  //     //   joinMutation({
-  //     //     variables: {
-  //     //       data: {
-  //     //         phone: '01041891129',
-  //     //         password: '1234kkk!',
-  //     //         name: '신동석',
-  //     //       },
-  //     //     },
-  //     //   });
-  //     // }
-  //   },
-  // };
-
-  return <MainPresenter />;
+  const props = {
+    works: data?.getWorks?.works || [],
+    goDetail: () => {
+      navigation.navigate('WorkDetail');
+    },
+    onLeftPress: (item: any) => {
+      console.log('주소 복사');
+    },
+    onRightPress: (item: any) => {
+      if (item.state === 'WAIT') {
+        setWorking({
+          variables: {
+            workId: item.id,
+            state: 'RESERVE',
+          },
+        });
+      }
+    },
+  };
+  return <MainPresenter {...props} />;
 }
 
-export default MainContainer;
+export default WaitContaienr;

@@ -1,73 +1,79 @@
-import React, {useState} from 'react';
-import CancelScreen from '../screens/Main/Cancel';
-import DoneScreen from '../screens/Main/Done';
-import {LogBox} from 'react-native';
-import WaitScreen from '../screens/Main/Wait';
-import WorkingScreen from '../screens/Main/Working';
+import {getFocusedRouteNameFromRoute, useRoute} from '@react-navigation/native';
+import MainScreen from '../screens/Main';
+import React from 'react';
+import {WorkState} from '../../__generated__/globalTypes';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import {useTheme} from 'styled-components';
 
-LogBox.ignoreLogs([
-  'Non-serializable values were found in the navigation state',
-]);
+const TAB_RADIUS = 23;
+const TAB_VERTICAL_PADDING = 5;
 
 const Tab = createMaterialTopTabNavigator();
 
 function MainTab(): JSX.Element {
-  const [radiusType, setRadiusType] = useState<'left' | 'right' | undefined>();
-
-  const props = {
-    sideRadiusType: (type: 'left' | 'right' | undefined) => {
-      setRadiusType(type);
-    },
-  };
+  const route: any = useRoute();
+  const theme: any = useTheme();
 
   return (
     <Tab.Navigator
+      initialRouteName={'WaitScreen'}
       tabBarOptions={{
         style: {
-          borderBottomLeftRadius: 23,
-          borderBottomRightRadius: 23,
+          borderBottomLeftRadius: TAB_RADIUS,
+          borderBottomRightRadius: TAB_RADIUS,
         },
         tabStyle: {},
         labelStyle: {
-          paddingVertical: 5,
-          fontSize: 18,
-          fontWeight: '600',
+          paddingVertical: TAB_VERTICAL_PADDING,
+          fontSize: theme.fonts.large,
+          fontWeight: 'bold',
         },
         indicatorStyle: {
-          backgroundColor: '#eb7203',
+          backgroundColor: theme.colors.primary,
           height: '100%',
-          borderBottomLeftRadius:
-            !!radiusType && radiusType === 'left' ? 23 : 0,
-          borderBottomRightRadius:
-            !!radiusType && radiusType === 'right' ? 23 : 0,
+          borderBottomLeftRadius: (() => {
+            const screenName = getFocusedRouteNameFromRoute(route);
+            if (!screenName || screenName === 'WaitScreen') {
+              return TAB_RADIUS;
+            }
+            return 0;
+          })(),
+          borderBottomRightRadius: (() => {
+            const screenName = getFocusedRouteNameFromRoute(route);
+            if (screenName === 'CancelScreen') {
+              return TAB_RADIUS;
+            }
+            return 0;
+          })(),
         },
-        inactiveTintColor: '#b4b4b4',
-        activeTintColor: '#ffffff',
+        inactiveTintColor: theme.colors.grey[5],
+        activeTintColor: theme.colors.grey[0],
       }}>
       <Tab.Screen
         options={{tabBarLabel: '대기'}}
         name={'WaitScreen'}
-        component={WaitScreen}
-        initialParams={{...props}}
+        component={MainScreen}
+        initialParams={{state: [WorkState.WAIT]}}
       />
       <Tab.Screen
         options={{tabBarLabel: '진행'}}
         name={'WorkingScreen'}
-        component={WorkingScreen}
-        initialParams={{...props}}
+        component={MainScreen}
+        initialParams={{
+          state: [WorkState.RESERVE, WorkState.WORKING],
+        }}
       />
       <Tab.Screen
         options={{tabBarLabel: '완료'}}
         name={'DoneScreen'}
-        component={DoneScreen}
-        initialParams={{...props}}
+        component={MainScreen}
+        initialParams={{state: [WorkState.DONE]}}
       />
       <Tab.Screen
         options={{tabBarLabel: '취소'}}
         name={'CancelScreen'}
-        component={CancelScreen}
-        initialParams={{...props}}
+        component={MainScreen}
+        initialParams={{state: [WorkState.CANCEL]}}
       />
     </Tab.Navigator>
   );

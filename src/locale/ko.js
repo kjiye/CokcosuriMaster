@@ -38,6 +38,7 @@ export default {
     join: '회원가입',
     copy_address: '주소복사',
     accept_work: '작업수락',
+    call: '전화',
   },
   Alert: {
     send_temp_password: '등록하신 전화번호로 임시 비밀번호를 전송했습니다',
