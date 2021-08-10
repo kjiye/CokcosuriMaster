@@ -5,11 +5,7 @@ import {GET_WORKS} from '../main.queries';
 import {WorkState} from '../../../../__generated__/globalTypes';
 import {useQuery} from '@apollo/client';
 
-function DoneContainer({
-  route: {
-    params: {sideRadiusType},
-  },
-}: any): JSX.Element {
+function DoneContainer(): JSX.Element {
   const navigation = useNavigation();
   const isFocused = useIsFocused();
 
@@ -19,22 +15,12 @@ function DoneContainer({
     },
   });
 
-  useLayoutEffect(() => {
-    if (isFocused) {
-      sideRadiusType(undefined);
-    }
-  }, [isFocused]);
-
   const props = {
     loading,
     works: data?.getWorks?.works || [],
     goDetail: () => {
-      navigation.navigate('WorkDetail');
-    },
-  };
-  return <DonePresenter />;
-    goDetail: () => {
-      navigation.navigate('WorkDetail', {status: 'done'});
+      // navigation.navigate('WorkDetail', {status: 'done'});
+      // navigation.navigate('WorkDetail');
     },
   };
 

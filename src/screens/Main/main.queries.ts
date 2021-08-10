@@ -47,8 +47,12 @@ export const GET_WORKS = gql`
 `;
 
 export const SET_WORKING = gql`
-  mutation ($workId: Int!, $state: WorkState!) {
-    updateWorkState(workId: $workId, state: $state) {
+  mutation updateWorkState(
+    $workId: Int!
+    $state: WorkState!
+    $files: [Upload!]
+  ) {
+    updateWorkState(workId: $workId, state: $state, files: $files) {
       success
       work {
         id

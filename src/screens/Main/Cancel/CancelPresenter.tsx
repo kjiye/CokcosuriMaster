@@ -29,7 +29,8 @@ function CancelPresenter({goDetail}: Props): JSX.Element {
         data={[{id: 1}]}
         keyExtractor={(_: any, i: number) => i.toString()}
         renderItem={({item, index}: any) => (
-          <WorkList itemPress={goDetail} status={'cancel'} />
+          // <WorkList itemPress={goDetail} status={'cancel'} />
+          <WorkList item={item} itemPress={goDetail} />
         )}
       />
     </Container>

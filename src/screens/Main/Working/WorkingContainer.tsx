@@ -6,11 +6,7 @@ import {WorkState} from '../../../../__generated__/globalTypes';
 import WorkingPresenter from './WorkingPresenter';
 import {useQuery} from '@apollo/client';
 
-function WorkingContainer({
-  route: {
-    params: {sideRadiusType},
-  },
-}: any): JSX.Element {
+function WorkingContainer(): JSX.Element {
   const navigation = useNavigation();
   const isFocused = useIsFocused();
 
@@ -20,23 +16,18 @@ function WorkingContainer({
     },
   });
 
-  useLayoutEffect(() => {
-    if (isFocused) {
-      sideRadiusType(undefined);
-    }
-  }, [isFocused]);
+  // useLayoutEffect(() => {
+  //   if (isFocused) {
+  //     sideRadiusType(undefined);
+  //   }
+  // }, [isFocused]);
 
   const props = {
     loading,
     works: data?.getWorks?.works || [],
     goDetail: () => {
-      navigation.navigate('WorkDetail');
-    },
-  };
-
-  const props = {
-    goDetail: () => {
-      navigation.navigate('WorkDetail', {status: 'working'});
+      // navigation.navigate('WorkDetail', {status: 'working'});
+      // navigation.navigate('WorkDetail');
     },
     copyAddress: () => {
       Toast.show('주소가 복사되었습니다');

@@ -42,7 +42,6 @@ function CustomerInfoItem({leftBtnPress}: Props): JSX.Element {
         <>
           <TwoButtonGroup
             leftBtnName={'주소복사'}
-            leftBtnPress={leftBtnPress}
             rightBtnName={'전화'}
             rightPrimaryColored={true}
             rightIcon={<PhoneSvg />}

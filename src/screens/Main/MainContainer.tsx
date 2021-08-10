@@ -1,9 +1,8 @@
 import {GET_WORKS, SET_WORKING} from './main.queries';
 import React, {useEffect} from 'react';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
-import {useLazyQuery, useMutation} from '@apollo/client';
+import {useLazyQuery, useMutation, useQuery} from '@apollo/client';
 // import {GET_USERS} from './main.queries';
-import {useMutation, useQuery} from '@apollo/client';
 import MainPresenter from './MainPresenter';
 
 function WaitContaienr({

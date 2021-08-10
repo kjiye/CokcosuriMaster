@@ -29,7 +29,8 @@ function DonePresenter({goDetail}: Props): JSX.Element {
         data={[{id: 1}]}
         keyExtractor={(_: any, i: number) => i.toString()}
         renderItem={({item, index}: any) => (
-          <WorkList itemPress={goDetail} status={'done'} />
+          // <WorkList itemPress={goDetail} status={'done'} />
+          <WorkList item={item} itemPress={goDetail} />
         )}
       />
     </Container>

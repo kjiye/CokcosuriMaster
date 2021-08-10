@@ -1,18 +1,13 @@
 import React, {useLayoutEffect} from 'react';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 import {GET_WORKS} from '../main.queries';
-import WaitPresenter from './WaitPresenter';
-import {WorkState} from '../../../../__generated__/globalTypes';
-import {useQuery} from '@apollo/client';
 import Toast from 'react-native-simple-toast';
 import WaitPresenter from './WaitPresenter';
+import {WorkState} from '../../../../__generated__/globalTypes';
 import {callBackAlert} from '../../../utils/alert';
+import {useQuery} from '@apollo/client';
 
-function WaitContaienr({
-  route: {
-    params: {sideRadiusType},
-  },
-}: any): JSX.Element {
+function WaitContaienr(): JSX.Element {
   const navigation = useNavigation();
   const isFocused = useIsFocused();
 
@@ -21,12 +16,6 @@ function WaitContaienr({
       state: [WorkState.WAIT],
     },
   });
-
-  useLayoutEffect(() => {
-    if (isFocused) {
-      sideRadiusType('left');
-    }
-  }, [isFocused]);
 
   const props = {
     loading,
@@ -44,7 +33,7 @@ function WaitContaienr({
       Toast.show('주소가 복사되었습니다');
     },
     goDetail: () => {
-      navigation.navigate('WorkDetail', {status: 'wait'});
+      // navigation.navigate('WorkDetail', {status: 'wait'});
     },
   };
   return <WaitPresenter {...props} />;

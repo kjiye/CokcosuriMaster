@@ -5,7 +5,7 @@ import {WorkState} from '../../../../__generated__/globalTypes';
 
 function CancelContainer({
   route: {
-    params: {loading, works, sideRadiusType, setWorkState},
+    params: {loading, works, setWorkState},
   },
 }: any): JSX.Element {
   const navigation = useNavigation();
@@ -14,7 +14,6 @@ function CancelContainer({
   useLayoutEffect(() => {
     if (isFocused) {
       setWorkState([WorkState.CANCEL]);
-      sideRadiusType('right');
     }
   }, [isFocused]);
 

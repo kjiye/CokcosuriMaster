@@ -15,22 +15,30 @@ const WorkFlatList = styled(FlatList)`
 `;
 
 interface Props {
+  loading: boolean;
+  works: any[];
   goDetail: (event: GestureResponderEvent) => void;
   copyAddress: (event: GestureResponderEvent) => void;
 }
 
-function WorkingPresenter({goDetail, copyAddress}: Props): JSX.Element {
+function WorkingPresenter({
+  loading,
+  works,
+  goDetail,
+  copyAddress,
+}: Props): JSX.Element {
   return (
     <Container>
       <WorkFlatList
         data={[{id: 1}]}
         keyExtractor={(_: any, i: number) => i.toString()}
         renderItem={({item, index}: any) => (
-          <WorkListItem
-            itemPress={goDetail}
-            leftBtnPress={copyAddress}
-            status={'working'}
-          />
+          <WorkListItem item={item} itemPress={goDetail} />
+          // <WorkListItem
+          //   itemPress={goDetail}
+          //   leftBtnPress={copyAddress}
+          //   status={'working'}
+          // />
         )}
       />
     </Container>

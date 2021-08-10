@@ -1,7 +1,3 @@
-import {
-  basicHeader,
-  commonHeaderOption,
-} from '../components/Header/HeaderOption';
 import AlarmScreen from '../screens/Alarm';
 import DrawerMenuView from '../screens/Drawer';
 import GuideScreen from '../screens/Guide/GuidePresenter';
@@ -15,6 +11,7 @@ import TermsMenuScreen from '../screens/Terms/TermsMenu';
 import UpdatUserInfoScreen from '../screens/User/UpdateUserInfo';
 import UpdatePasswordScreen from '../screens/User/Password/UpdatePassword';
 import UpdatePhoneScreen from '../screens/User/UpdatePhone';
+import {basicHeader} from '../components/Header/HeaderOption';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
 const Drawer = createDrawerNavigator();
