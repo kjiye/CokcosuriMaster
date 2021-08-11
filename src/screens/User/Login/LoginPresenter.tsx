@@ -26,21 +26,21 @@ const Logo = styled(LogoSvg)`
 
 interface Props {
   login: (event: GestureResponderEvent) => void;
-  tempLogin: (event: GestureResponderEvent) => void;
+  // tempLogin: (event: GestureResponderEvent) => void;
   goJoin: (event: GestureResponderEvent) => void;
   goFindPassword: (event: GestureResponderEvent) => void;
 }
 
 function LoginPresenter({
   login,
-  tempLogin,
+  // tempLogin,
   goJoin,
   goFindPassword,
 }: Props): JSX.Element {
   const theme: any = useTheme();
 
   return (
-    <Container button={<PrimaryButton title={'로그인'} onPress={tempLogin} />}>
+    <Container button={<PrimaryButton title={'로그인'} onPress={login} />}>
       <NoticeCardView
         title={'알림'}
         content={'처음 로그인 후에는 자동로그인 됩니다:)'}

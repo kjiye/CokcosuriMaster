@@ -1,28 +1,24 @@
+import {removeToken, saveToken} from '../../../apollo';
 import {Login} from './login.queries';
 import LoginPresenter from './LoginPresenter';
 import React from 'react';
-import {isLoggedInVar} from '../../../apollo';
 import {useMutation} from '@apollo/client';
 import {useNavigation} from '@react-navigation/native';
 
 function LoginContainer(): JSX.Element {
   const navigation = useNavigation();
   const [login, {loading}] = useMutation(Login, {
-    onError: (error: any) => {
-      console.log('에러');
-      isLoggedInVar(true);
+    onError: async (error: any) => {
+      await removeToken();
     },
-    onCompleted: (data: any) => {
-      console.log('성공');
-      isLoggedInVar(true);
-      // const {
-      //   loginUser: {success, token, user},
-      // } = data;
+    onCompleted: async (data: any) => {
+      const {
+        loginMaster: {success, token},
+      } = data;
 
-      // if (success) {
-      //   isLoggedInVar(true);
-      // }
-      // console.log(success, token);
+      if (success) {
+        await saveToken(token);
+      }
     },
   });
 
@@ -37,9 +33,9 @@ function LoginContainer(): JSX.Element {
         });
       }
     },
-    tempLogin: () => {
-      navigation.navigate('MainDrawer');
-    },
+    // tempLogin: () => {
+    //   navigation.navigate('MainDrawer');
+    // },
     goJoin: () => {
       navigation.navigate('TermsAgreementScreen');
     },
