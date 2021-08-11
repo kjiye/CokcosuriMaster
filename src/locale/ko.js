@@ -21,6 +21,12 @@ export default {
       working_impossible: '작업불가',
     },
   },
+  Tab: {
+    wait: '대기',
+    working: '진행',
+    done: '완료',
+    cancel: '취소',
+  },
   Title: {
     name: '이름',
     phone: '전화번호',

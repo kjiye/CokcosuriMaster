@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import I18n from '../../../utils/i18nHelpers';
 import {TermsAgreement} from '../../../models/user';
 import TermsAgreementPresenter from './TermsAgreementPresenter';
 import {useNavigation} from '@react-navigation/native';

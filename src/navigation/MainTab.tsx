@@ -1,4 +1,5 @@
 import {getFocusedRouteNameFromRoute, useRoute} from '@react-navigation/native';
+import I18n from '../utils/i18nHelpers';
 import MainScreen from '../screens/Main';
 import React from 'react';
 import {WorkState} from '../../__generated__/globalTypes';
@@ -50,13 +51,13 @@ function MainTab(): JSX.Element {
         activeTintColor: theme.colors.grey[0],
       }}>
       <Tab.Screen
-        options={{tabBarLabel: '대기'}}
+        options={{tabBarLabel: I18n.t('Tab.wait')}}
         name={'WaitScreen'}
         component={MainScreen}
         initialParams={{state: [WorkState.WAIT]}}
       />
       <Tab.Screen
-        options={{tabBarLabel: '진행'}}
+        options={{tabBarLabel: I18n.t('Tab.working')}}
         name={'WorkingScreen'}
         component={MainScreen}
         initialParams={{
@@ -64,13 +65,13 @@ function MainTab(): JSX.Element {
         }}
       />
       <Tab.Screen
-        options={{tabBarLabel: '완료'}}
+        options={{tabBarLabel: I18n.t('Tab.done')}}
         name={'DoneScreen'}
         component={MainScreen}
         initialParams={{state: [WorkState.DONE]}}
       />
       <Tab.Screen
-        options={{tabBarLabel: '취소'}}
+        options={{tabBarLabel: I18n.t('Tab.cancel')}}
         name={'CancelScreen'}
         component={MainScreen}
         initialParams={{state: [WorkState.CANCEL]}}
