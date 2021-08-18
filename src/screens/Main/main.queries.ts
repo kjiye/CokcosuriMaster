@@ -23,7 +23,6 @@ export const GET_WORKS = gql`
         }
         visitDate
         hasParts {
-          id
           code
           name
         }
@@ -33,7 +32,6 @@ export const GET_WORKS = gql`
         }
         state
         workCategory {
-          id
           code
           name
         }

@@ -4,6 +4,10 @@ export const GET_CATEGORIES = gql`
   query getCategories($name: CategoryName) {
     getCategories(name: $name) {
       success
+      categories {
+        code
+        name
+      }
     }
   }
 `;

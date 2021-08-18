@@ -1,6 +1,7 @@
 import {GRAY_4, PRIMARY_LIGHT, WHITE} from '../../constants/color';
 import {
   GestureResponderEvent,
+  KeyboardTypeOptions,
   StyleProp,
   ViewProps,
   ViewStyle,
@@ -35,26 +36,35 @@ const ButtonText = styled.Text`
 interface Props {
   style?: StyleProp<ViewStyle>;
   placeholder?: string;
+  value?: string;
   buttonDisabled?: boolean;
   buttonName: string;
   onChange?: (text: string) => void;
   onPress?: (event: GestureResponderEvent) => void;
+  mask?: any[];
+  keyboardType?: KeyboardTypeOptions;
 }
 
 function ButtonInput({
   style,
   placeholder,
+  value,
   buttonDisabled = false,
   buttonName,
   onChange,
   onPress,
+  mask,
+  keyboardType,
 }: Props): JSX.Element {
   return (
     <Wrapper style={style as StyleProp<ViewProps>}>
       <BasicInput
         placeholder={placeholder}
+        value={value}
         style={{display: 'flex', flex: 1}}
         onChange={onChange}
+        mask={mask}
+        keyboardType={keyboardType}
       />
       <Button
         style={{backgroundColor: buttonDisabled ? GRAY_4 : PRIMARY_LIGHT}}

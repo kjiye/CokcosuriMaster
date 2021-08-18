@@ -1,5 +1,7 @@
 import {SMALL, TINY} from '../../../constants/size';
+import {CategoryType} from '../../../models/common';
 import CheckItem from './TypeCheckItem';
+import I18n from '../../../utils/i18nHelpers';
 import React from 'react';
 import styled from 'styled-components/native';
 
@@ -17,15 +19,21 @@ const ItemAdditonalMargin = {
 };
 
 interface Props {
-  typeList: any[];
+  typeList: CategoryType[];
   numberPerLine: number;
   hasAllItem?: boolean;
+  isAllChecked: boolean;
+  allPress?: (item: CategoryType) => void;
+  itemPress?: (item: CategoryType) => void;
 }
 
 function TypeCheckGroup({
   typeList,
   numberPerLine,
   hasAllItem = true,
+  isAllChecked,
+  allPress,
+  itemPress,
 }: Props): JSX.Element {
   return (
     <Wrapper>
@@ -33,7 +41,9 @@ function TypeCheckGroup({
         <CheckItem
           numberPerLine={numberPerLine}
           wrapperStyle={{...ItemMargin, ...ItemAdditonalMargin}}
-          name={'전체'}
+          value={{name: I18n.t('all')}}
+          onPress={allPress}
+          checked={isAllChecked}
         />
       )}
       {typeList.map((val, idx) => {
@@ -43,7 +53,9 @@ function TypeCheckGroup({
               key={idx}
               numberPerLine={numberPerLine}
               wrapperStyle={ItemMargin}
-              name={val.name}
+              value={val}
+              onPress={itemPress}
+              checked={!!val.active}
             />
           );
         } else {
@@ -52,7 +64,9 @@ function TypeCheckGroup({
               key={idx}
               numberPerLine={numberPerLine}
               wrapperStyle={{...ItemMargin, marginRight: SMALL}}
-              name={val.name}
+              value={val}
+              onPress={itemPress}
+              checked={!!val.active}
             />
           );
         }

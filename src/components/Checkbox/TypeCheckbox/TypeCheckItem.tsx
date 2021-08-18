@@ -1,49 +1,67 @@
 import {Dimensions, StyleProp, ViewProps, ViewStyle} from 'react-native';
-import {GRAY_3, GRAY_5, PRIMARY_LIGHT} from '../../../constants/color';
-import React, {useState} from 'react';
-import styled, {css} from 'styled-components/native';
-import {MEDIUM} from '../../../constants/size';
+import {CategoryType} from '../../../models/common';
+import React from 'react';
+import styled from 'styled-components/native';
 
 const {width} = Dimensions.get('screen');
+const PADDING_TOTAL = 74;
+const ITEM_HEIGHT = 40;
 
 const CheckView = styled.TouchableOpacity<{checked: boolean}>`
-  height: 40px;
+  height: ${ITEM_HEIGHT}px;
   align-items: center;
   justify-content: center;
   border-width: 1px;
   border-radius: 9px;
-  ${({checked}) => `border-color: ${checked ? PRIMARY_LIGHT : GRAY_3}`}
+  ${(props: any) => `
+    border-color: ${
+      props.checked
+        ? props.theme.colors.primaryLight
+        : props.theme.colors.grey[3]
+    }
+  `}
 `;
 
 const TypeText = styled.Text<{checked: boolean}>`
-  font-size: ${MEDIUM}px;
+  font-size: ${(props: any) => props.theme.fonts.normal}px;
   font-weight: 500;
-  ${({checked}) => `color : ${checked ? PRIMARY_LIGHT : GRAY_5}`}
+  ${(props: any) => `
+    color: ${
+      props.checked
+        ? props.theme.colors.primaryLight
+        : props.theme.colors.grey[5]
+    }
+  `}
 `;
 
 interface Props {
   numberPerLine: number;
   wrapperStyle?: StyleProp<ViewStyle>;
-  name: string;
+  value: CategoryType;
+  checked: boolean;
+  onPress?: (item: CategoryType) => void;
 }
 
 function TypeCheckItem({
   numberPerLine,
   wrapperStyle,
-  name,
+  value,
+  checked,
+  onPress,
 }: Props): JSX.Element {
-  const [checked, setChecked] = useState<boolean>(false);
   return (
     <CheckView
       style={[
-        {width: Math.ceil((width - 74) / numberPerLine)},
+        {width: Math.ceil((width - PADDING_TOTAL) / numberPerLine)},
         wrapperStyle as StyleProp<ViewProps>,
       ]}
       checked={checked}
       onPress={() => {
-        setChecked(!checked);
+        if (onPress) {
+          onPress(value);
+        }
       }}>
-      <TypeText checked={checked}>{name}</TypeText>
+      <TypeText checked={checked}>{value.name}</TypeText>
     </CheckView>
   );
 }

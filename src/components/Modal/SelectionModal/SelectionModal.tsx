@@ -4,7 +4,6 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 const {height} = Dimensions.get('screen');
-
 const VIEW_RADIUS = 38;
 
 const Container = styled.View`

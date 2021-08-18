@@ -2,6 +2,7 @@ export default {
   ok: '확인',
   cancel: '취소',
   won: '원',
+  all: '전체',
   Header: {
     join: '회원가입',
     update_user_info: '개인정보 변경',
@@ -60,12 +61,32 @@ export default {
     update_info: '정보수정',
     logout: '로그아웃',
     withdrawal: '회원탈퇴',
+    camera: '카메라',
+    gallery: '갤러리',
   },
   Alert: {
     send_temp_password: '등록하신 전화번호로 임시 비밀번호를 전송했습니다',
+    verify_code: '휴대폰 인증이 완료되었습니다',
+    join: '회원가입이 완료되었습니다',
   },
   Error: {
     common: '처리 중 문제가 발생했습니다. 잠시 후에 다시 시도해주세요',
+    join: '회원가입에 실패했습니다. 관리자에게 문의해주세요',
+    req_verification_code:
+      '인증번호 요청에 실패했습니다. \n문제가 지속될 시 관리자에게 문의해주세요',
+    verify_code: '인증에 실패했습니다. 다시 시도해주세요',
+  },
+  Regex: {
+    success: {
+      password: '유효한 비밀번호입니다',
+      re_password: '입력한 비밀번호와 일치합니다',
+      license_no: '유효한 사업자 번호입니다',
+    },
+    failed: {
+      password: '비밀번호는 영문/숫자 포함 6자 이상입니다',
+      re_password: '입력한 비밀번호와 동일하게 입력해주세요',
+      license_no: '유효한 사업자 번호를 입력해주세요',
+    },
   },
   Image: {
     first_upload: '첫 번째 사진 올리기',

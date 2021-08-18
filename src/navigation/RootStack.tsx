@@ -3,6 +3,7 @@ import LoginStack from './LoginStack';
 import MainDrawer from './MainDrawer';
 import React from 'react';
 import SelectionModal from '../screens/Modal/SelectionModal';
+import UploadOptionModal from '../screens/Modal/UploadOptionModal';
 import {createStackNavigator} from '@react-navigation/stack';
 import {isLoggedInVar} from '../apollo';
 import {useReactiveVar} from '@apollo/client';
@@ -59,6 +60,7 @@ function RootStack(): JSX.Element {
       <Stack.Screen name={'MainDrawer'} component={MainDrawer} />
       <Stack.Screen name={'SelectionModal'} component={SelectionModal} />
       <Stack.Screen name={'ContentViewModal'} component={ContentViewModal} />
+      <Stack.Screen name={'UploadOptionModal'} component={UploadOptionModal} />
     </Stack.Navigator>
   );
 }

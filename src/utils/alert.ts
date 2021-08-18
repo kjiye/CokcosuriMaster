@@ -28,21 +28,4 @@ export const callBackAlert = (
     ];
   }
   return Alert.alert(title ? title : '', message, option);
-  // return Alert.alert(title ? title : '', message, [
-  //   {
-  //     text: I18n.t('ok'),
-  //     onPress: () => {
-  //       okPress();
-  //     },
-  //   },
-  //   isCancel
-  //     ? {
-  //         text: I18n.t('cancel'),
-  //         onPress: () => {
-  //           return;
-  //         },
-  //         style: 'cancel',
-  //       }
-  //     : {},
-  // ]);
 };

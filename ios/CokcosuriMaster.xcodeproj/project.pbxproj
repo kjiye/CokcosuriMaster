@@ -11,9 +11,9 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		53247785A4BE4BC449849D32 /* libPods-CokcosuriMaster.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90E0753B133F7D31304652E9 /* libPods-CokcosuriMaster.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		B8813A5F24745939017997D9 /* libPods-CokcosuriMaster.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BE8C66C7318858DB7F13D24 /* libPods-CokcosuriMaster.a */; };
-		EB962FEF492D8AB46E79DCB2 /* libPods-CokcosuriMaster-CokcosuriMasterTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F908E5A178D4EC018CBD2356 /* libPods-CokcosuriMaster-CokcosuriMasterTests.a */; };
+		FA9D5117D591898C4580DBA2 /* libPods-CokcosuriMaster-CokcosuriMasterTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3004C85D358E0B264D3462DB /* libPods-CokcosuriMaster-CokcosuriMasterTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,13 +37,13 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = CokcosuriMaster/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = CokcosuriMaster/main.m; sourceTree = "<group>"; };
 		2C5BF7954020852FF81A521E /* Pods-CokcosuriMaster.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CokcosuriMaster.debug.xcconfig"; path = "Target Support Files/Pods-CokcosuriMaster/Pods-CokcosuriMaster.debug.xcconfig"; sourceTree = "<group>"; };
+		3004C85D358E0B264D3462DB /* libPods-CokcosuriMaster-CokcosuriMasterTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CokcosuriMaster-CokcosuriMasterTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		336BB6AAD86D539F8FD52888 /* Pods-CokcosuriMaster-CokcosuriMasterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CokcosuriMaster-CokcosuriMasterTests.debug.xcconfig"; path = "Target Support Files/Pods-CokcosuriMaster-CokcosuriMasterTests/Pods-CokcosuriMaster-CokcosuriMasterTests.debug.xcconfig"; sourceTree = "<group>"; };
-		3BE8C66C7318858DB7F13D24 /* libPods-CokcosuriMaster.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CokcosuriMaster.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E5108A199413C9DAD763A15 /* Pods-CokcosuriMaster-CokcosuriMasterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CokcosuriMaster-CokcosuriMasterTests.release.xcconfig"; path = "Target Support Files/Pods-CokcosuriMaster-CokcosuriMasterTests/Pods-CokcosuriMaster-CokcosuriMasterTests.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = CokcosuriMaster/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		81AC60A270715C10EA8ACDD0 /* Pods-CokcosuriMaster.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CokcosuriMaster.release.xcconfig"; path = "Target Support Files/Pods-CokcosuriMaster/Pods-CokcosuriMaster.release.xcconfig"; sourceTree = "<group>"; };
+		90E0753B133F7D31304652E9 /* libPods-CokcosuriMaster.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CokcosuriMaster.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		F908E5A178D4EC018CBD2356 /* libPods-CokcosuriMaster-CokcosuriMasterTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CokcosuriMaster-CokcosuriMasterTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,7 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB962FEF492D8AB46E79DCB2 /* libPods-CokcosuriMaster-CokcosuriMasterTests.a in Frameworks */,
+				FA9D5117D591898C4580DBA2 /* libPods-CokcosuriMaster-CokcosuriMasterTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8813A5F24745939017997D9 /* libPods-CokcosuriMaster.a in Frameworks */,
+				53247785A4BE4BC449849D32 /* libPods-CokcosuriMaster.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,8 +100,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				3BE8C66C7318858DB7F13D24 /* libPods-CokcosuriMaster.a */,
-				F908E5A178D4EC018CBD2356 /* libPods-CokcosuriMaster-CokcosuriMasterTests.a */,
+				90E0753B133F7D31304652E9 /* libPods-CokcosuriMaster.a */,
+				3004C85D358E0B264D3462DB /* libPods-CokcosuriMaster-CokcosuriMasterTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -159,8 +159,8 @@
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				6CC8731F7BDFBC300170AFF1 /* [CP] Embed Pods Frameworks */,
-				042CAB163A30ED9477AD644B /* [CP] Copy Pods Resources */,
+				D6E80AD2964C177567658D41 /* [CP] Copy Pods Resources */,
+				1AD71B97287A56341F9A2E66 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -182,8 +182,8 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				DF65E01B6E4F54ECD963E473 /* [CP] Embed Pods Frameworks */,
-				F8277201DF630EE7B2D430A5 /* [CP] Copy Pods Resources */,
+				92895D50524EB31F16769126 /* [CP] Copy Pods Resources */,
+				0774F3D8D776C8A52C117A32 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -286,24 +286,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		042CAB163A30ED9477AD644B /* [CP] Copy Pods Resources */ = {
+		0774F3D8D776C8A52C117A32 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CokcosuriMaster-CokcosuriMasterTests/Pods-CokcosuriMaster-CokcosuriMasterTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-CokcosuriMaster/Pods-CokcosuriMaster-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CokcosuriMaster-CokcosuriMasterTests/Pods-CokcosuriMaster-CokcosuriMasterTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-CokcosuriMaster/Pods-CokcosuriMaster-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CokcosuriMaster-CokcosuriMasterTests/Pods-CokcosuriMaster-CokcosuriMasterTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CokcosuriMaster/Pods-CokcosuriMaster-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6CC8731F7BDFBC300170AFF1 /* [CP] Embed Pods Frameworks */ = {
+		1AD71B97287A56341F9A2E66 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -318,6 +318,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CokcosuriMaster-CokcosuriMasterTests/Pods-CokcosuriMaster-CokcosuriMasterTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		92895D50524EB31F16769126 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CokcosuriMaster/Pods-CokcosuriMaster-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CokcosuriMaster/Pods-CokcosuriMaster-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CokcosuriMaster/Pods-CokcosuriMaster-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B7FF21BDFC1ECA565AB755E4 /* [CP] Check Pods Manifest.lock */ = {
@@ -342,38 +359,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DF65E01B6E4F54ECD963E473 /* [CP] Embed Pods Frameworks */ = {
+		D6E80AD2964C177567658D41 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CokcosuriMaster/Pods-CokcosuriMaster-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CokcosuriMaster/Pods-CokcosuriMaster-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CokcosuriMaster/Pods-CokcosuriMaster-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F8277201DF630EE7B2D430A5 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CokcosuriMaster/Pods-CokcosuriMaster-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-CokcosuriMaster-CokcosuriMasterTests/Pods-CokcosuriMaster-CokcosuriMasterTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CokcosuriMaster/Pods-CokcosuriMaster-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-CokcosuriMaster-CokcosuriMasterTests/Pods-CokcosuriMaster-CokcosuriMasterTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CokcosuriMaster/Pods-CokcosuriMaster-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CokcosuriMaster-CokcosuriMasterTests/Pods-CokcosuriMaster-CokcosuriMasterTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {

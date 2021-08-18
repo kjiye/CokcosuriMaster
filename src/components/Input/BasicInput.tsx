@@ -1,5 +1,4 @@
 import {
-  BLACK_1,
   GRAY_3,
   PLACEHOLDER_COLOR,
   PRIMARY_LIGHT,
@@ -8,6 +7,8 @@ import {
 import {INNER_MARGIN, MEDIUM, MINI} from '../../constants/size';
 import React, {useState} from 'react';
 import {StyleProp, ViewProps, ViewStyle} from 'react-native';
+import {KeyboardTypeOptions} from 'react-native';
+import MaskInput from 'react-native-mask-input';
 import styled from 'styled-components/native';
 
 const DEFAULT_HEIGHT = 50;
@@ -22,7 +23,7 @@ const Wrapper = styled.View<{focus: boolean; isShort: boolean}>`
     height: ${isShort ? SHORT_HEIGHT : DEFAULT_HEIGHT}px`}
 `;
 
-const Input = styled.TextInput`
+const Input = styled(MaskInput)`
   height: 100%;
   padding: 0 ${INNER_MARGIN}px;
   font-size: ${MEDIUM}px;
@@ -38,9 +39,10 @@ interface Props {
   isShort?: boolean;
   editable?: boolean;
   onChange?: (text: string) => void;
+  mask?: any[];
+  keyboardType?: KeyboardTypeOptions;
 }
 
-// Mask, 내부 우측에 요소 표시 옵션 추가하기
 function BasicInput({
   style,
   placeholder = '',
@@ -49,6 +51,8 @@ function BasicInput({
   isShort = false,
   editable = true,
   onChange,
+  mask,
+  keyboardType,
 }: Props): JSX.Element {
   const [focus, setFocus] = useState<boolean>(false);
   return (
@@ -57,6 +61,7 @@ function BasicInput({
       focus={focus}
       isShort={isShort}>
       <Input
+        keyboardType={keyboardType}
         editable={editable}
         placeholder={placeholder}
         placeholderTextColor={PLACEHOLDER_COLOR}
@@ -67,8 +72,12 @@ function BasicInput({
         onBlur={() => {
           setFocus(false);
         }}
-        onChangeText={onChange}
         value={value}
+        onChangeText={onChange}
+        // onChangeText={(masked: string, unmasked: string) => {
+        //   onChange && onChange(unmasked);
+        // }}
+        mask={mask}
       />
     </Wrapper>
   );

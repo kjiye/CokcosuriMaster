@@ -1,106 +1,66 @@
-import {FlatList, GestureResponderEvent} from 'react-native';
+import styled, {useTheme} from 'styled-components/native';
 import BaseContainer from '../../components/BaseContainer';
-import {GRAY_BACKGROUND_COLOR} from '../../constants/color';
-import I18n from '../../utils/i18nHelpers';
-import PhoneSvg from '../../../assets/svg/ic_phone.svg';
 import React from 'react';
-import {TwoButtonGroup} from '../../components/Button';
-import {WorkListItem} from '../../components/Item';
-import styled from 'styled-components/native';
-import {useCallback} from 'react';
+import {User} from '../../models/user';
 
+// flex: 1;
+// align-items: center;
 const Container = styled(BaseContainer)`
-  background: ${GRAY_BACKGROUND_COLOR};
+  background-color: ${(props: any) => props.theme.colors.primary};
+  align-items: center;
 `;
 
-const ItemSeparator = styled.View`
-  height: 16px;
+const Title = styled.Text`
+  font-size: ${(props: any) => props.theme.fonts.normal}px;
+  color: ${(props: any) => props.theme.colors.secondary};
 `;
 
-interface Props {
-  works: any[];
-  goDetail: (event: GestureResponderEvent) => void;
-  onLeftPress: (item: any) => void;
-  onRightPress: (item: any) => void;
-}
+const TestButtonContainer = styled.TouchableOpacity`
+  background-color: ${(props: any) => props.theme.colors.accent};
+  padding: ${(props: any) => props.theme.size.padding}px;
+`;
 
-function MainPresenter({
-  works,
-  goDetail,
-  onLeftPress,
-  onRightPress,
-}: Props): JSX.Element {
-  const BottomButtons = useCallback((item: any) => {
-    const {state} = item;
-    // const onLeftPress = () => {
-    //   console.log('주소 복사');
-    // };
+const TestButtonText = styled.Text`
+  font-size: ${(props: any) => props.theme.fonts.large}px;
+  color: ${(props: any) => props.theme.colors.grey[2]};
+`;
 
-    // const onRightPress = () => {
-    //   if (state === 'WAIT') {
-    //     console.log('작업 진행');
-    //   } else {
-    //     console.log('전화 ');
-    //   }
-    // };
+// interface Props {
+//   loading: boolean;
+//   master?: User[];
+//   join?: () => void;
+// }
 
-    switch (state) {
-      case 'WAIT':
-        return (
-          <TwoButtonGroup
-            leftBtnName={I18n.t('Button.copy_address')}
-            rightBtnName={I18n.t('Button.accept_work')}
-            rightPrimaryColored={true}
-            onLeftPress={() => {
-              if (onLeftPress) {
-                onLeftPress(item);
-              }
-            }}
-            onRightPress={() => {
-              if (onRightPress) {
-                onRightPress(item);
-              }
-            }}
-          />
-        );
-      case 'RESERVE':
-      case 'WORKING':
-        return (
-          <TwoButtonGroup
-            leftBtnName={I18n.t('Button.copy_address')}
-            rightBtnName={I18n.t('Button.call')}
-            rightPrimaryColored={true}
-            rightIcon={<PhoneSvg width={20} height={20} />}
-            onLeftPress={onLeftPress}
-            onRightPress={onRightPress}
-          />
-        );
-    }
-  }, []);
+// function MainPresenter({loading = false, master, join}: Props): JSX.Element {
+function MainPresenter(): JSX.Element {
+  const theme: any = useTheme();
 
-  if (works.length <= 0) {
-    return <></>;
-  }
   return (
-    <Container>
-      <FlatList
-        data={works}
-        contentContainerStyle={{
-          paddingHorizontal: 20,
-          paddingTop: 20,
-          paddingBottom: 50,
-        }}
-        ItemSeparatorComponent={() => <ItemSeparator />}
-        keyExtractor={(_: any, i: number) => i.toString()}
-        renderItem={({item, index}: any) => (
-          <WorkListItem
-            item={item}
-            bottom={BottomButtons(item)}
-            itemPress={goDetail}
-          />
-        )}
-      />
-    </Container>
+    <></>
+    // <Container
+    //   button={
+    //     <TestButtonContainer onPress={join}>
+    //       <TestButtonText>
+    //         {loading ? '등록중' : '사용자 등록 테스트'}
+    //       </TestButtonText>
+    //     </TestButtonContainer>
+    //   }>
+    //   <Title
+    //     style={{
+    //       backgroundColor: theme.colors.grey[1],
+    //       padding: theme.size.padding,
+    //     }}>
+    //     GraphqlTest
+    //   </Title>
+
+    //   {master?.map((v: any, i: number) => {
+    //     return (
+    //       <Title key={i}>
+    //         {v.name} {v.phone} {v.company.licenseImage}
+    //       </Title>
+    //     );
+    //   })}
+    // </Container>
   );
 }
 
