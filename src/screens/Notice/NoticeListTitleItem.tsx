@@ -1,4 +1,6 @@
 import React from 'react';
+import {dateFormatting} from '../../utils/commonUtils';
+import {getNotices_getNotices_notices} from '../../../__generated__/getNotices';
 import styled from 'styled-components/native';
 
 const TitleText = styled.Text`
@@ -12,11 +14,15 @@ const InfoText = styled.Text`
   color: ${(props: any) => props.theme.colors.grey[5]};
 `;
 
-function NoticeListTitleItem(): JSX.Element {
+interface Props {
+  item: getNotices_getNotices_notices;
+}
+
+function NoticeListTitleItem({item}: Props): JSX.Element {
   return (
     <>
-      <TitleText>시공 관련 업데이트 사항 공지</TitleText>
-      <InfoText>2021.08.01</InfoText>
+      <TitleText>{item.title}</TitleText>
+      <InfoText>{dateFormatting(item.createAt)}</InfoText>
     </>
   );
 }

@@ -32,6 +32,7 @@ const CheckGroup = styled(TextLineCheckGroup)`
 interface Props {
   showPolicy: (title: string, content: string) => void;
   agreements: TermsAgreement;
+  btnDisabled: boolean;
   checkAll: (event: GestureResponderEvent) => void;
   checkPrivacyPolicy: (event: GestureResponderEvent) => void;
   checkPrivacyThird: (event: GestureResponderEvent) => void;
@@ -43,6 +44,7 @@ interface Props {
 function TermsAgreementPresenter({
   showPolicy,
   agreements,
+  btnDisabled,
   checkAll,
   checkPrivacyPolicy,
   checkPrivacyThird,
@@ -51,7 +53,14 @@ function TermsAgreementPresenter({
   next,
 }: Props): JSX.Element {
   return (
-    <Container button={<PrimaryButton title={'다음'} onPress={next} />}>
+    <Container
+      button={
+        <PrimaryButton
+          title={I18n.t('next')}
+          onPress={next}
+          disabled={btnDisabled}
+        />
+      }>
       <LogoView>
         <LogoSvg />
       </LogoView>

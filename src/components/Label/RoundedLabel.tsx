@@ -1,28 +1,27 @@
-import {BLACK_1, GRAY_5, PRIMARY_MAIN, WHITE} from '../../constants/color';
-import {LARGE, MEDIUM, MINI, SMALL} from '../../constants/size';
 import React from 'react';
 import styled from 'styled-components/native';
 
+const BORDER_RADIUS = 10;
+
 const Wrapper = styled.View`
-  width: 100px;
-  padding: 6px 0;
+  padding: 6px 8px;
   align-items: center;
-  border-radius: ${MINI}px;
-  background: ${WHITE};
+  border-radius: ${BORDER_RADIUS}px;
+  background: ${(props: any) => props.theme.colors.background};
 `;
 
 const InfoText = styled.Text`
-  font-size: ${SMALL}px;
-  color: ${BLACK_1};
+  font-size: ${(props: any) => props.theme.fonts.small}px;
+  color: ${(props: any) => props.theme.colors.black[1]};
 `;
 
 const MiddleBar = styled.Text`
-  font-size: ${LARGE}px;
-  color: ${GRAY_5};
+  font-size: ${(props: any) => props.theme.fonts.large}px;
+  color: ${(props: any) => props.theme.colors.grey[5]};
 `;
 
 const PointText = styled(InfoText)`
-  color: ${PRIMARY_MAIN};
+  color: ${(props: any) => props.theme.colors.primary};
 `;
 
 interface Props {

@@ -1,6 +1,7 @@
 import {CardView} from '../../components/View';
 import {MessageBarLabel} from '../../components/Label';
 import React from 'react';
+import {paymentText} from '../../utils/workUtils';
 import styled from 'styled-components/native';
 
 const MESSAGE_LINE_HEIGHT = 20;
@@ -38,15 +39,16 @@ const Message = styled.Text`
 
 interface Props {
   status: string;
+  itemInfo?: any;
   statusColor?: string;
   endingWord: string;
   message: string;
   middleTitle: string;
 }
 
-// 작업 표시 props 추가
 function WorkingNoticeView({
   status,
+  itemInfo,
   statusColor,
   endingWord,
   message,
@@ -64,9 +66,9 @@ function WorkingNoticeView({
           <MiddleTitleText>{middleTitle}</MiddleTitleText>
         </Divider>
         <MessageBarLabel
-          message={'[고양]전등 갈아주세요'}
-          labelLeftText={'후 결제'}
-          labelRightText={'전등'}
+          message={itemInfo?.title}
+          labelLeftText={paymentText(itemInfo?.payment)}
+          labelRightText={itemInfo?.hasParts.name}
           allRadius={true}
         />
       </>

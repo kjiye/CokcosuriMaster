@@ -35,6 +35,9 @@
 			</dict>
 		</dict>
 	</dict>
+	<!-- 네이버 지도 -->
+	<key>NMFClientId</key>
+  <string>m57kig0w2z</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>갤러리 접근권한 허용 요청</string>
 	<key>NSCameraUsageDescription</key>

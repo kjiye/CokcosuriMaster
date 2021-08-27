@@ -1,63 +1,67 @@
-import {
-  GestureResponderEvent,
-  StyleProp,
-  TouchableOpacity,
-  ViewProps,
-  ViewStyle,
-} from 'react-native';
+import {StyleProp, TouchableOpacity, ViewProps, ViewStyle} from 'react-native';
 import {CardView} from '../View';
 import I18n from '../../utils/i18nHelpers';
-import {INNER_MARGIN} from '../../constants/size';
 import MessageBarLabel from '../Label/MessageBarLabel';
 import PhoneSvg from '../../../assets/svg/ic_phone.svg';
 import React from 'react';
 import TitleInfoItem from './TitleInfoItem';
-import dayjs from 'dayjs';
+import {TwoButtonGroup} from '../Button';
+import {dateFormatting} from '../../utils/commonUtils';
+import {getWorks_getWorks_works} from '../../../__generated__/getWorks';
 import styled from 'styled-components/native';
+import {useTheme} from 'styled-components';
 
 const InfoWrapper = styled.View`
-  padding: ${INNER_MARGIN}px ${INNER_MARGIN}px 0px ${INNER_MARGIN}px;
+  ${(props: any) => `
+  padding: ${props.theme.size.innerMargin}px ${props.theme.size.innerMargin}px 0px ${props.theme.size.innerMargin}px`}
 `;
 
 interface Props {
   item: any;
-  bottom?: JSX.Element;
   style?: StyleProp<ViewStyle>;
-  itemPress?: (event: GestureResponderEvent) => void;
-  // leftBtnPress?: (event: GestureResponderEvent) => void;
-  // rightBtnPress?: (event: GestureResponderEvent) => void;
+  itemPress?: (item: getWorks_getWorks_works) => void;
+  leftBtnPress?: (item: getWorks_getWorks_works) => void;
+  rightBtnPress?: (item: getWorks_getWorks_works) => void;
 }
 
-// function WorkListItem({item, bottom, itemPress}: Props): JSX.Element {
 function WorkListItem({
   item,
-  bottom,
   style,
   itemPress,
-}: // leftBtnPress,
-// rightBtnPress,
-Props): JSX.Element {
+  leftBtnPress,
+  rightBtnPress,
+}: Props): JSX.Element {
+  const theme: any = useTheme();
   return (
-    <CardView hasPadding={false} hasShadow={false}>
+    <CardView
+      style={style as StyleProp<ViewProps>}
+      hasPadding={false}
+      hasShadow={false}>
       <>
-        <TouchableOpacity onPress={itemPress}>
+        <TouchableOpacity
+          onPress={() => {
+            if (itemPress) itemPress(item);
+          }}>
           <MessageBarLabel
             message={item.title}
-            labelLeftText={item.payment ? '후 결제' : '선 결제'}
+            labelLeftText={
+              item.payment ? I18n.t('pay_later') : I18n.t('pay_first')
+            }
             labelRightText={item.workCategory.name}
           />
-          <InfoWrapper style={bottom ? {} : {paddingBottom: 12}}>
+          <InfoWrapper
+            style={
+              item.state === 'DONE' || item.state === 'CANCEL'
+                ? {paddingBottom: theme.size.innerMargin}
+                : {}
+            }>
             <TitleInfoItem
               titleText={I18n.t('CustomerInfo.visit_date')}
-              infoText={dayjs(parseInt(item.visitDate, 10)).format(
-                'YYYY.MM.DD',
-              )}
+              infoText={dateFormatting(item.visitDate)}
             />
             <TitleInfoItem
               titleText={I18n.t('CustomerInfo.visit_time')}
-              infoText={dayjs(parseInt(item.visitDate, 10)).format(
-                'A HH시 mm분',
-              )}
+              infoText={dateFormatting(item.visitDate, true)}
             />
             <TitleInfoItem
               titleText={I18n.t('CustomerInfo.address')}
@@ -70,7 +74,34 @@ Props): JSX.Element {
             />
           </InfoWrapper>
         </TouchableOpacity>
-        {/* {bottom} */}
+        {item.state === 'WAIT' ? (
+          <TwoButtonGroup
+            leftBtnName={I18n.t('Button.copy_address')}
+            rightBtnName={I18n.t('Button.accept_work')}
+            rightPrimaryColored={true}
+            leftBtnPress={() => {
+              if (leftBtnPress) leftBtnPress(item);
+            }}
+            rightBtnPress={() => {
+              if (rightBtnPress) rightBtnPress(item);
+            }}
+          />
+        ) : item.state === 'RESERVE' || item.state === 'WORKING' ? (
+          <TwoButtonGroup
+            leftBtnName={I18n.t('Button.copy_address')}
+            rightBtnName={I18n.t('Button.call')}
+            rightIcon={<PhoneSvg />}
+            rightPrimaryColored={true}
+            leftBtnPress={() => {
+              if (leftBtnPress) leftBtnPress(item);
+            }}
+            rightBtnPress={() => {
+              if (rightBtnPress) rightBtnPress(item);
+            }}
+          />
+        ) : (
+          <></>
+        )}
       </>
     </CardView>
   );

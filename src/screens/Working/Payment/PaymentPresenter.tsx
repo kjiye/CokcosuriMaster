@@ -1,5 +1,6 @@
 import AdditionalInputView from './AdditionalInputView';
 import BaseContainer from '../../../components/BaseContainer';
+import {CategoryType} from '../../../models/common';
 import {GestureResponderEvent} from 'react-native';
 import I18n from '../../../utils/i18nHelpers';
 import {LimitTextArea} from '../../../components/Input';
@@ -9,6 +10,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {SelectionView} from '../../../components/View';
 import {TitleItem} from '../../../components/Item';
 import WorkingNoticeView from '../WorkingNoticeView';
+import {getWorkDetail_getWorkDetail_work} from '../../../../__generated__/getWorkDetail';
 import styled from 'styled-components/native';
 
 const VIEW_BETWEEN_GAP = 12;
@@ -34,29 +36,52 @@ const Title = styled(TitleItem)`
 `;
 
 interface Props {
+  item: getWorkDetail_getWorkDetail_work;
+  selectedCategory?: CategoryType;
+  amount: string;
+  reason: string;
+  btnDisabled: boolean;
+  onChangeAmount: (text: string) => void;
+  onChangeReason: (text: string) => void;
   showSelectionModal: (event: GestureResponderEvent) => void;
   okPress: (event: GestureResponderEvent) => void;
 }
 
-function PaymentPresenter({showSelectionModal, okPress}: Props): JSX.Element {
+function PaymentPresenter({
+  item,
+  selectedCategory,
+  amount,
+  reason,
+  btnDisabled,
+  onChangeAmount,
+  onChangeReason,
+  showSelectionModal,
+  okPress,
+}: Props): JSX.Element {
   return (
     <Container
       button={
-        <PrimaryButton title={I18n.t('Button.done')} onPress={okPress} />
+        <PrimaryButton
+          title={I18n.t('Button.done')}
+          onPress={okPress}
+          disabled={btnDisabled}
+        />
       }>
       <ScrollView>
         <ContentContainer>
           <WorkingNoticeView
+            itemInfo={item}
             status={I18n.t('Payment.status')}
             endingWord={I18n.t('Payment.ending_word')}
             message={I18n.t('Payment.message')}
             middleTitle={I18n.t('Payment.work_now')}
           />
-          <AdditionalAmountInput />
+          <AdditionalAmountInput onChange={onChangeAmount} value={amount} />
           <Title mainText={I18n.t('Payment.reason')} />
           <SelectionView
             placeholder={I18n.t('Payment.reason_select')}
             onPress={showSelectionModal}
+            selectedValue={selectedCategory}
           />
           <Title
             mainText={I18n.t('Payment.etc')}
@@ -65,7 +90,9 @@ function PaymentPresenter({showSelectionModal, okPress}: Props): JSX.Element {
           <LimitTextArea
             placeholder={I18n.t('Payment.reason_placeholder')}
             limit={300}
-            currentCount={0}
+            currentCount={reason.length}
+            value={reason}
+            onChange={onChangeReason}
           />
         </ContentContainer>
       </ScrollView>

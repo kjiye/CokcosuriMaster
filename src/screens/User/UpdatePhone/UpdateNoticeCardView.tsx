@@ -34,7 +34,11 @@ const InfoValueText = styled.Text`
   text-align: center;
 `;
 
-function UpdateNoticeCardView(): JSX.Element {
+interface Props {
+  text: string;
+}
+
+function UpdateNoticeCardView({text}: Props): JSX.Element {
   return (
     <CardView>
       <>
@@ -48,7 +52,7 @@ function UpdateNoticeCardView(): JSX.Element {
         <InfoWrapper>
           <TitleItem mainText={'기존 전화번호'} />
           <InfoView>
-            <InfoValueText>010-1234-1234</InfoValueText>
+            <InfoValueText>{text}</InfoValueText>
           </InfoView>
         </InfoWrapper>
       </>

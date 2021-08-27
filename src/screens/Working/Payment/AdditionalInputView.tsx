@@ -1,5 +1,5 @@
-import {CardView} from '../../../components/View';
 import {Dimensions, StyleProp, ViewProps, ViewStyle} from 'react-native';
+import {CardView} from '../../../components/View';
 import I18n from '../../../utils/i18nHelpers';
 import React from 'react';
 import {TitleItem} from '../../../components/Item';
@@ -33,15 +33,25 @@ const UnitText = styled.Text`
 
 interface Props {
   style?: StyleProp<ViewStyle>;
+  onChange?: (text: string) => void;
+  value?: string;
 }
 
-function AdditionalInputView({style}: Props): JSX.Element {
+function AdditionalInputView({
+  style,
+  onChange,
+  value = '',
+}: Props): JSX.Element {
   return (
     <CardView style={style as StyleProp<ViewProps>}>
       <>
-        <TitleItem mainText={'추가금액'} />
+        <TitleItem mainText={I18n.t('WorkingDone.additional_amount')} />
         <InputWrapper>
-          <UnderlineInput />
+          <UnderlineInput
+            onChangeText={onChange}
+            value={value}
+            keyboardType={'number-pad'}
+          />
           <UnitText>{I18n.t('won')}</UnitText>
         </InputWrapper>
       </>

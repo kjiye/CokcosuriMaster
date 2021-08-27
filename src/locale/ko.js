@@ -3,6 +3,12 @@ export default {
   cancel: '취소',
   won: '원',
   all: '전체',
+  pay_first: '선 결제',
+  pay_later: '후 결제',
+  no_data: '작업내역이 없습니다',
+  before: '전',
+  after: '후',
+  next: '다음',
   Header: {
     join: '회원가입',
     update_user_info: '개인정보 변경',
@@ -40,8 +46,16 @@ export default {
     customer_place: '의뢰 장소',
     work_type: '수리종목',
     duplicate_selectable: '중복 선택 가능',
+    before_work_image: '작업 전 사진',
+    after_work_image: '작업 후 사진',
+    cancel_reason: '취소 사유',
+    cancel_image: '취소 사진',
+    login_failed: '로그인 실패',
   },
   Placeholder: {
+    title: '제목을 입력해주세요',
+    qna_category: '문의유형을 선택해주세요',
+    qna_reason: '문의사유를 입력해주세요',
     name: '이름을 입력해주세요',
     phone_ex: '010-1234-1234',
     auth_confirm: '인증번호를 입력해주세요',
@@ -49,8 +63,11 @@ export default {
     re_password: '비밀번호를 다시 입력해주세요',
     license_no: '사업자 번호 10자를 입력해주세요',
     upload_image: '사진 올리기',
+    current_password: '현재 비밀번호를 입력해주세요 ',
   },
   Button: {
+    login: '로그인',
+    find_password: '비밀번호 찾기',
     auth_request: '인증받기',
     auth_confirm: '인증번호 확인',
     join: '회원가입',
@@ -63,26 +80,53 @@ export default {
     withdrawal: '회원탈퇴',
     camera: '카메라',
     gallery: '갤러리',
+    bottom: {
+      wait: '작업수락',
+      reserve: '작업진행',
+      working: '작업완료',
+      update_password: '비밀번호 변경',
+      setting: '설정',
+    },
   },
   Alert: {
+    common: '완료되었습니다.',
     send_temp_password: '등록하신 전화번호로 임시 비밀번호를 전송했습니다',
     verify_code: '휴대폰 인증이 완료되었습니다',
     join: '회원가입이 완료되었습니다',
+    accept: '\n를 수락하시겠습니까?',
+    copy_address: '주소가 복사되었습니다',
+    withdrawal_ask: '정말로 회원탈퇴를 하시겠습니까?',
+    withdrawal_done: '탈퇴가 완료되었습니다',
+    logout_ask: '로그아웃을 하시겠습니까?',
+    update_user_ask: '개인정보를 수정하시겠습니까?',
+    updated: '수정이 완료되었습니다',
+    update_password: '비밀번호가 변경되었습니다',
+    temp_password: '등록하신 휴대전화로 임시 비밀번호를 전송했습니다',
+    update_phone: '전화번호가 변경되었습니다',
+    req_verification_code: '인증번호가 발송되었습니다',
   },
   Error: {
     common: '처리 중 문제가 발생했습니다. 잠시 후에 다시 시도해주세요',
+    login: '등록되지 않은 회원이거나 정보가 일치하지 않습니다',
+    forced_withdrawal:
+      '해당 아이디는 사용할 수 없습니다.\n고객센터에 문의 바랍니다.\n고객센터 : 00-000-000',
     join: '회원가입에 실패했습니다. 관리자에게 문의해주세요',
     req_verification_code:
       '인증번호 요청에 실패했습니다. \n문제가 지속될 시 관리자에게 문의해주세요',
     verify_code: '인증에 실패했습니다. 다시 시도해주세요',
+    find_password: '일치하는 사용자를 찾을 수 없습니다',
+    update_password:
+      '현재 비밀번호가 올바르지 않거나 처리 중 문제가 발생했습니다',
   },
   Regex: {
     success: {
+      phone: '유효한 휴대폰번호 형식입니다',
       password: '유효한 비밀번호입니다',
       re_password: '입력한 비밀번호와 일치합니다',
       license_no: '유효한 사업자 번호입니다',
     },
     failed: {
+      phone: '유효하지 않는 전화번호입니다',
       password: '비밀번호는 영문/숫자 포함 6자 이상입니다',
       re_password: '입력한 비밀번호와 동일하게 입력해주세요',
       license_no: '유효한 사업자 번호를 입력해주세요',
@@ -93,6 +137,25 @@ export default {
     second_upload: '두 번째 사진 올리기',
     third_upload: '세 번째 사진 올리기',
   },
+  Permission: {
+    notice: '앱 사용을 위해\n아래의 권한을 허용해주세요:)',
+    photo: '사진',
+    camera: '카메라',
+    alarm: '알림',
+    optional_permission: '선택 접근 권한',
+    explain: {
+      photo: '사용자가 소유하고 있는 사업자 등록증\n파일 첨부 시 사용됩니다.',
+      camera: '사업자 등록증. 작업 전, 작업 후의 사진\n등록 시 사용됩니다.',
+      alarm: '앱 푸시 알림 등록 및 수신 시 사용됩니다.',
+    },
+    bottom_explain: `* 선택 접근 권한
+    - 마스터님이 편리하게 앱을 사용할 수 있게 해주며
+    비허용 시에도 코코수리마스터 서비스의 이용이 가능합니다.`,
+    status: {
+      unavailable: '현재 기기에서는 사용불가합니다',
+      blocked: '휴대폰 설정 > 애플리케이션 > 코코수리에서 권한을 허용해주세요',
+    },
+  },
   CustomerInfo: {
     name: '이름',
     contact: '전화번호',
@@ -102,6 +165,7 @@ export default {
     part_status: '상품여부',
   },
   WorkingBefore: {
+    before_ask: '진행 선택 시 변경 불가합니다.\n작업을 진행하시겠습니까?',
     status: '작업 진행',
     ending_word: '하시나요?',
     message:
@@ -127,6 +191,7 @@ export default {
     payment: '현장결제',
     payment_ask: '가 있으신가요?',
     payment_desc: '현장결제를 먼저 등록하시고\n사진을 등록해주세요.',
+    additional_amount: '추가금액',
   },
   Payment: {
     status: '현장 결제',
@@ -139,6 +204,7 @@ export default {
     etc: '비고',
     etc_desc: '기타는 사유를 입력해주세요',
     reason_placeholder: '사유를 입력해주세요',
+    update_done: '현장결제 정보가 등록되었습니다',
   },
   Terms: {
     required: '[필수]',
@@ -148,6 +214,34 @@ export default {
     privacy_usage: '개인정보 수집 이용 동의',
     app_condition: '코코수리 마스터 이용약관',
   },
+  Login: {
+    notice: '알림',
+    notice_message: '처음 로그인 후에는 자동로그인 됩니다:)',
+    phone: '휴대폰 번호',
+    password: '비밀번호(영문/숫자 포함 6자 이상)',
+  },
+  QnA: {
+    reason: '문의사유',
+    title: '제목',
+    reason_content: '문의사유 입력',
+    reg_done: '문의가 접수되었습니다.\n답변이 등록되면 알려드리겠습니다',
+    no_data: '등록된 문의내역이 없습니다',
+    waiting: '진행중',
+    reply_done: '답변완료',
+    admin: '관리자',
+  },
+  Notice: {
+    no_data: '공지사항이 없습니다',
+  },
+  Password: {
+    password: '현재 비밀번호',
+    new_password: '새 비밀번호',
+    re_password: '새 비밀번호 확인',
+  },
+  WarnNetwork: {
+    message: '네트워크 연결상태를 확인한 후 다시 시도해주세요',
+  },
+  // 레이아웃용 임시 사용
   TempTerms: {
     privacy_policy: `코코수리 마스터은(는) 이용자들의 개인정보보호를 매우 중요시하며, 이용자가 회사의 서비스를 이용함과 동시에 온라인상에서 회사에 제공한 개인정보가 보호 받을 수 있도록 최선을 다하고있습니다. 이에 코코수리(주)는 통신비밀보호법, 전기통신사업법, 정보통신망 이용촉진 및 정보보호 등에 관한 법률 등 정보통신서비스제공자가 준수하여야 할 관련 법규상의 개인정보보호 규정 및 정보통신부가 제정한 개인정보보호지침을 준수하고 있습니다. 코코수리(주)는 개인정보 처리방침을 통하여 이용자들이 제공하는 개인정보가 어떠한 용도와 방식으로 이용되고 있으며 개인정보보호를 위해 어떠한 조치가 취해지고 있는지 알려 드립니다.
 

@@ -22,21 +22,29 @@ interface Props {
   placeholder: string;
   limit: number;
   currentCount: number;
+  value?: string;
+  onChange?: (text: string) => void;
 }
 
-function LimitTextArea({placeholder, limit, currentCount}: Props): JSX.Element {
+function LimitTextArea({
+  placeholder,
+  limit,
+  currentCount,
+  value,
+  onChange,
+}: Props): JSX.Element {
   return (
     <>
       <ContentInput
+        value={value}
         placeholder={placeholder}
         placeholderTextColor={GRAY_5}
         textAlignVertical={'top'}
         multiline={true}
         numberOfLines={10}
         maxLength={300}
-        onChangeText={() => {
-          console.log('aa');
-        }}></ContentInput>
+        onChangeText={onChange}
+      />
       <LimitCountText>
         {currentCount} / {limit}
       </LimitCountText>

@@ -5,6 +5,7 @@ declare module 'styled-components/native' {
   export interface DefaultTheme {
     colors: {
       backgroud: ColorValue;
+      grey_background: ColorValue;
       primary: ColorValue;
       primaryDark: ColorValue;
       primaryLight: ColorValue;
@@ -12,17 +13,22 @@ declare module 'styled-components/native' {
       secondaryDark: ColorValue;
       secondaryLight: ColorValue;
       accent: ColorValue;
+      accentDark: ColorValue;
+      accentLight: ColorValue;
       error: ColorValue;
+      errorDark: ColorValue;
+      errorLight: ColorValue;
       grey: ColorValue[];
       black: ColorValue[];
     };
     fonts: {
-      mega: number;
-      giant: number;
+      massive: number;
+      huge: number;
       big: number;
       large: number;
       normal: number;
       small: number;
+      tiny: number;
       mini: number;
     };
     size: {
@@ -32,6 +38,7 @@ declare module 'styled-components/native' {
       gap: number;
       innerMargin: number;
       standardPadding: number;
+      bottomPadding: number;
     };
   }
 }

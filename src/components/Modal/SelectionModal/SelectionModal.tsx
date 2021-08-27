@@ -1,4 +1,5 @@
-import {Dimensions, GestureResponderEvent} from 'react-native';
+import {Dimensions, FlatList, GestureResponderEvent} from 'react-native';
+import {CategoryType} from '../../../models/common';
 import ModalItem from './ModalItem';
 import React from 'react';
 import styled from 'styled-components/native';
@@ -39,17 +40,27 @@ interface Props {
   title: string;
   typeList: any[];
   close: (event: GestureResponderEvent) => void;
+  onSelect: (selected: CategoryType) => void;
 }
 
-function SelectionModal({title, typeList, close}: Props): JSX.Element {
+function SelectionModal({
+  title,
+  typeList,
+  close,
+  onSelect,
+}: Props): JSX.Element {
   return (
     <Container>
       <BackDimmer onPress={close} />
       <ModalView>
         <Title>{title}</Title>
-        {typeList.map((v, i) => {
-          return <ModalItem key={i.toString()} name={v.name} />;
-        })}
+        <FlatList
+          data={typeList}
+          keyExtractor={(_: any, i: number) => i.toString()}
+          renderItem={({item, index}: any) => (
+            <ModalItem key={index.toString()} data={item} onPress={onSelect} />
+          )}
+        />
       </ModalView>
     </Container>
   );

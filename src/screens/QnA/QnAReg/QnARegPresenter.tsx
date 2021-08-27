@@ -1,6 +1,8 @@
 import {BasicInput, LimitTextArea} from '../../../components/Input';
 import BaseContainer from '../../../components/BaseContainer';
+import {CategoryType} from '../../../models/common';
 import {GestureResponderEvent} from 'react-native';
+import I18n from '../../../utils/i18nHelpers';
 import {PrimaryButton} from '../../../components/Button';
 import React from 'react';
 import RequiredTitleItem from './RequiredTitleItem';
@@ -25,27 +27,56 @@ const Title = styled(RequiredTitleItem)`
 `;
 
 interface Props {
+  title: string;
+  content: string;
+  selectedCategory?: CategoryType;
+  onChangeTitle: (text: string) => void;
+  onChangeContent: (text: string) => void;
   showSelectionModal: (event: GestureResponderEvent) => void;
-  ok: (event: GestureResponderEvent) => void;
+  btnDisabled: boolean;
+  okPress: (event: GestureResponderEvent) => void;
 }
 
-function QnARegPresenter({showSelectionModal, ok}: Props): JSX.Element {
+function QnARegPresenter({
+  title,
+  content,
+  selectedCategory,
+  onChangeTitle,
+  onChangeContent,
+  showSelectionModal,
+  btnDisabled,
+  okPress,
+}: Props): JSX.Element {
   return (
-    <Container button={<PrimaryButton title={'확인'} onPress={ok} />}>
+    <Container
+      button={
+        <PrimaryButton
+          title={I18n.t('ok')}
+          onPress={okPress}
+          disabled={btnDisabled}
+        />
+      }>
       <ScrollView>
         <ContentContainer>
-          <Title title={'제목'} />
-          <BasicInput placeholder={'제목을 입력해주세요'} />
-          <Title title={'문의사유'} />
-          <SelectionView
-            placeholder={'문의 유형을 선택해주세요'}
-            onPress={showSelectionModal}
+          <Title title={I18n.t('QnA.title')} />
+          <BasicInput
+            placeholder={I18n.t('Placeholder.title')}
+            value={title}
+            onChange={onChangeTitle}
           />
-          <Title title={'문의사유 입력'} />
+          <Title title={I18n.t('QnA.reason')} />
+          <SelectionView
+            placeholder={I18n.t('Placeholder.qna_category')}
+            onPress={showSelectionModal}
+            selectedValue={selectedCategory}
+          />
+          <Title title={I18n.t('QnA.reason_content')} />
           <LimitTextArea
-            placeholder={'문의사유를 입력해주세요'}
+            placeholder={I18n.t('Placeholder.qna_reason')}
             limit={300}
-            currentCount={0}
+            currentCount={content.length}
+            value={content}
+            onChange={onChangeContent}
           />
         </ContentContainer>
       </ScrollView>

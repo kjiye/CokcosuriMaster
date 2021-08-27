@@ -1,5 +1,6 @@
-import React from 'react';
 import {GestureResponderEvent} from 'react-native';
+import I18n from '../../../utils/i18nHelpers';
+import React from 'react';
 import styled from 'styled-components/native';
 
 const ButtonWrapper = styled.View`
@@ -32,11 +33,11 @@ function ButtonGroup({leftBtnPress, rightBtnPress}: Props): JSX.Element {
   return (
     <ButtonWrapper>
       <Button onPress={leftBtnPress}>
-        <ButtonText>회원가입</ButtonText>
+        <ButtonText>{I18n.t('Button.join')}</ButtonText>
       </Button>
       <ButtonSlash>{'/'}</ButtonSlash>
       <Button onPress={rightBtnPress}>
-        <ButtonText>비밀번호 찾기</ButtonText>
+        <ButtonText>{I18n.t('Button.find_password')}</ButtonText>
       </Button>
     </ButtonWrapper>
   );

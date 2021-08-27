@@ -22,7 +22,11 @@ function MainDrawer(): JSX.Element {
       drawerContent={() => {
         return <DrawerMenuView />;
       }}
-      screenOptions={{headerShown: true, headerTitleAlign: 'center'}}>
+      screenOptions={{
+        headerShown: true,
+        unmountOnBlur: true,
+        headerTitleAlign: 'center',
+      }}>
       <Drawer.Screen
         name={'MainStack'}
         options={{

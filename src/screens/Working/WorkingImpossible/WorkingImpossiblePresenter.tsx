@@ -1,3 +1,4 @@
+import {GestureResponderEvent, ScrollView} from 'react-native';
 import {AppTheme} from '../../../themes/theme';
 import BaseContainer from '../../../components/BaseContainer';
 import I18n from 'i18n-js';
@@ -5,10 +6,12 @@ import {ImageSelector} from '../../../components/Image';
 import {LimitTextArea} from '../../../components/Input';
 import {PrimaryButton} from '../../../components/Button';
 import React from 'react';
-import {GestureResponderEvent, ScrollView} from 'react-native';
 import {TitleItem} from '../../../components/Item';
 import WorkingNoticeView from '../WorkingNoticeView';
+import {getWorkDetail_getWorkDetail_work} from '../../../../__generated__/getWorkDetail';
 import styled from 'styled-components/native';
+import {onChange} from 'react-native-reanimated';
+import {Image} from 'react-native-image-crop-picker';
 
 const {colors}: any = AppTheme;
 
@@ -33,15 +36,37 @@ const marginTop = {
 };
 
 interface Props {
+  item: getWorkDetail_getWorkDetail_work;
+  reason: string;
+  imageTotal: number;
+  onChangeReason: (text: string) => void;
+  addImage: (image: Image) => void;
+  deleteImage: (index: number) => void;
   okPress: (event: GestureResponderEvent) => void;
 }
 
-function WorkingImpossiblePresenter({okPress}: Props): JSX.Element {
+function WorkingImpossiblePresenter({
+  item,
+  reason,
+  imageTotal,
+  onChangeReason,
+  addImage,
+  deleteImage,
+  okPress,
+}: Props): JSX.Element {
   return (
-    <Container button={<PrimaryButton title={'완료'} onPress={okPress} />}>
+    <Container
+      button={
+        <PrimaryButton
+          title={I18n.t('ok')}
+          onPress={okPress}
+          disabled={!(imageTotal > 2 && reason.length > 0)}
+        />
+      }>
       <ScrollView>
         <ContentContainer>
           <WorkingNoticeView
+            itemInfo={item}
             status={I18n.t('WorkingImpossible.status')}
             statusColor={colors.errorDark}
             endingWord={I18n.t('WorkingImpossible.ending_word')}
@@ -50,19 +75,35 @@ function WorkingImpossiblePresenter({okPress}: Props): JSX.Element {
           />
           <Title mainText={I18n.t('WorkingImpossible.reason')} />
           <LimitTextArea
+            value={reason}
             placeholder={I18n.t('WorkingImpossible.reason_placeholder')}
             limit={300}
-            currentCount={0}
+            currentCount={reason.length}
+            onChange={onChangeReason}
           />
           <Title mainText={I18n.t('WorkingImpossible.image')} />
-          <ImageSelector desc={I18n.t('Image.first_upload')} />
+          <ImageSelector
+            desc={I18n.t('Image.first_upload')}
+            onAdd={addImage}
+            onDelete={() => {
+              deleteImage(0);
+            }}
+          />
           <ImageSelector
             style={{...marginTop}}
             desc={I18n.t('Image.second_upload')}
+            onAdd={addImage}
+            onDelete={() => {
+              deleteImage(0);
+            }}
           />
           <ImageSelector
             style={{...marginTop}}
             desc={I18n.t('Image.third_upload')}
+            onAdd={addImage}
+            onDelete={() => {
+              deleteImage(0);
+            }}
           />
         </ContentContainer>
       </ScrollView>

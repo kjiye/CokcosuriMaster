@@ -1,17 +1,19 @@
 import {
   Dimensions,
-  GestureResponderEvent,
   Platform,
   StyleProp,
   View,
   ViewProps,
   ViewStyle,
 } from 'react-native';
+import {ImageData, ImageSelectorOption} from '../../models/common';
 import ImagePicker, {Image} from 'react-native-image-crop-picker';
 import React, {useCallback, useEffect, useState} from 'react';
 import DeleteSvg from '../../../assets/svg/ic_delete_img.svg';
-import {ImageSelectorOption} from '../../models/common';
+import I18n from '../../utils/i18nHelpers';
 import PhotoSvg from '../../../assets/svg/ic_photo.svg';
+import {callBackAlert} from '../../utils/alert';
+import {setImageUrl} from '../../utils/commonUtils';
 import styled from 'styled-components/native';
 
 const {width} = Dimensions.get('screen');
@@ -38,9 +40,6 @@ const Description = styled.Text`
 `;
 
 const ImageView = styled.Image`
-  flex: 1;
-  height: ${IMG_HEIGHT}px;
-  background: red;
   border-radius: ${VIEW_RADIUS}px;
 `;
 
@@ -54,6 +53,8 @@ const DeleteButton = styled.TouchableOpacity`
 
 interface Props {
   style?: StyleProp<ViewStyle>;
+  currentImage?: ImageData | Image;
+  currentDelete?: () => void;
   desc: string;
   useOption?: boolean;
   showOption?: () => void;
@@ -64,6 +65,8 @@ interface Props {
 
 function ImageSelector({
   style,
+  currentImage,
+  currentDelete,
   desc,
   useOption = false,
   showOption,
@@ -72,7 +75,6 @@ function ImageSelector({
   onDelete,
 }: Props): JSX.Element {
   const [image, setImage] = useState<Image | undefined>();
-
   const picker = useCallback(async () => {
     try {
       const result: Image = await ImagePicker.openPicker({
@@ -83,6 +85,11 @@ function ImageSelector({
       setImage(result);
       onAdd(result);
     } catch (e) {
+      if (!e.code.includes('CANCELLED')) {
+        callBackAlert(I18n.t('Permission.status.blocked'), () => {
+          return;
+        });
+      }
       return;
     }
   }, []);
@@ -97,12 +104,13 @@ function ImageSelector({
       setImage(result);
       onAdd(result);
     } catch (e) {
+      // console.log(e.code);
       return;
     }
   }, []);
 
   useEffect(() => {
-    if (option && !image) {
+    if (option && !image && !currentImage) {
       switch (option) {
         case 'picker':
           picker();
@@ -112,13 +120,29 @@ function ImageSelector({
           break;
       }
     }
-  }, [option, image]);
+  }, [option, image, currentImage]);
 
   return (
     <View style={style as StyleProp<ViewProps>}>
-      {image ? (
+      {currentImage ? (
         <>
           <ImageView
+            style={{width: '100%', height: IMG_HEIGHT}}
+            resizeMode={'cover'}
+            source={setImageUrl(currentImage.path)}
+          />
+          <DeleteButton
+            onPress={() => {
+              currentDelete && currentDelete();
+            }}>
+            <DeleteSvg />
+          </DeleteButton>
+        </>
+      ) : image ? (
+        <>
+          <ImageView
+            style={{width: '100%', height: IMG_HEIGHT}}
+            resizeMode={'cover'}
             source={{uri: Platform.OS === 'ios' ? image.sourceURL : image.path}}
           />
           <DeleteButton
@@ -132,7 +156,12 @@ function ImageSelector({
       ) : (
         <Selector
           onPress={() => {
-            useOption && showOption && showOption();
+            if (useOption && showOption) {
+              showOption();
+            } else {
+              // picker();
+              camera();
+            }
           }}>
           <NoImageView>
             <PhotoSvg />

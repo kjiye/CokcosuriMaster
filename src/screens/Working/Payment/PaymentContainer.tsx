@@ -1,27 +1,106 @@
+import {
+  CategoryName,
+  PaymentState,
+} from '../../../../__generated__/globalTypes';
+import {GET_PAYMENT_CATEGORIES, SET_PAYMENT} from './payment.queries';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
+import {useMutation, useQuery} from '@apollo/client';
+import {CategoryType} from '../../../models/common';
+import I18n from '../../../utils/i18nHelpers';
 import PaymentPresenter from './PaymentPresenter';
-import React from 'react';
 import {callBackAlert} from '../../../utils/alert';
 import {useNavigation} from '@react-navigation/native';
+import {updatePaymentVariables} from '../../../../__generated__/updatePayment';
 
-function PaymentContainer(): JSX.Element {
+function PaymentContainer({route}: any): JSX.Element {
   const navigation = useNavigation();
+
+  const [selectedCategory, setSelectedCategory] = useState<CategoryType>();
+  const [amount, setAmount] = useState<string>('');
+  const [reason, setReason] = useState<string>('');
+
+  const {data} = useQuery(GET_PAYMENT_CATEGORIES, {
+    variables: {
+      name: CategoryName.PAY_REASON,
+    },
+  });
+
+  const [updatePayment] = useMutation(SET_PAYMENT, {
+    onError: (error: any) => {
+      callBackAlert(I18n.t('Error.common'), () => {
+        return;
+      });
+    },
+    onCompleted: () => {
+      callBackAlert(I18n.t('Payment.update_done'), () => {
+        navigation.goBack();
+      });
+    },
+  });
+
+  useEffect(() => {
+    if (!route.params?.selected && route.params?.workItem) {
+      const {workItem} = route.params;
+      if (workItem?.payment?.state === PaymentState.DONE) {
+        const {payment} = workItem;
+        setAmount(payment.price.toString());
+        setReason(payment.desc);
+      }
+    } else {
+      const {selected} = route.params;
+      setSelectedCategory(selected);
+    }
+  }, [route.params]);
+
   const props = {
+    item: route.params.workItem,
+    selectedCategory,
+    amount,
+    reason,
+    btnDisabled: !(selectedCategory && amount),
+    onChangeAmount: (text: string) => {
+      setAmount(text);
+    },
+    onChangeReason: (text: string) => {
+      setReason(text);
+    },
     showSelectionModal: () => {
       navigation.navigate('SelectionModal', {
-        title: '현장결제',
-        typeList: [
-          {name: '후불 결제'},
-          {name: '자재부족으로 인한 추가자재 구입'},
-          {name: '추가인력 투입'},
-          {name: '추가 작업 발생 (작업 위치에 새 작업 진행)'},
-          {name: '추가 작업 발생 (작업 위치 외 새로운 시공작업 진행)'},
-        ],
+        title: I18n.t('WorkingDone.payment'),
+        typeList: data?.getCategories?.categories,
+        path: 'Payment',
       });
     },
     okPress: () => {
-      callBackAlert('현장결제 정보가 등록되었습니다', () => {
-        navigation.goBack();
-      });
+      if (
+        selectedCategory &&
+        selectedCategory.code === 'B006' &&
+        reason.trim().length <= 0
+      ) {
+        callBackAlert(I18n.t('Payment.etc_desc'), () => {
+          return;
+        });
+      } else {
+        const {workItem} = route.params;
+        let params: any = {
+          workId: workItem.id,
+          data: {
+            price: parseInt(amount),
+            reason: selectedCategory,
+            desc: reason,
+            state: PaymentState.DONE,
+          },
+        };
+        if (workItem.payment) {
+          params = {
+            ...params,
+            paymentId: workItem.payment.id,
+          };
+        }
+        updatePayment({
+          variables: params,
+        });
+      }
     },
   };
   return <PaymentPresenter {...props} />;

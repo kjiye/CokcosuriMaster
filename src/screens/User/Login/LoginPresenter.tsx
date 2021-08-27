@@ -3,7 +3,10 @@ import BaseContainer from '../../../components/BaseContainer';
 import ButtonGroup from './ButtonGroup';
 import {ErrorViewInput} from '../../../components/Input';
 import {GestureResponderEvent} from 'react-native';
+import I18n from '../../../utils/i18nHelpers';
+import {LoginRegex} from '../../../models/user';
 import LogoSvg from '../../../../assets/svg/logo.svg';
+import {MaskInputPhone} from '../../../models/common';
 import NoticeCardView from './NoticeCardView';
 import {PrimaryButton} from '../../../components/Button';
 import React from 'react';
@@ -25,25 +28,42 @@ const Logo = styled(LogoSvg)`
 `;
 
 interface Props {
+  id: string;
+  password: string;
+  regexResult: LoginRegex;
+  loginBtnDisabled: boolean;
+  onChangeId: (text: string) => void;
+  onChangePassword: (text: string) => void;
   login: (event: GestureResponderEvent) => void;
-  tempLogin: (event: GestureResponderEvent) => void;
   goJoin: (event: GestureResponderEvent) => void;
   goFindPassword: (event: GestureResponderEvent) => void;
 }
 
 function LoginPresenter({
+  id,
+  password,
+  regexResult,
+  loginBtnDisabled,
+  onChangeId,
+  onChangePassword,
   login,
-  tempLogin,
   goJoin,
   goFindPassword,
 }: Props): JSX.Element {
   const theme: any = useTheme();
 
   return (
-    <Container button={<PrimaryButton title={'로그인'} onPress={tempLogin} />}>
+    <Container
+      button={
+        <PrimaryButton
+          title={I18n.t('Button.login')}
+          onPress={login}
+          disabled={loginBtnDisabled}
+        />
+      }>
       <NoticeCardView
-        title={'알림'}
-        content={'처음 로그인 후에는 자동로그인 됩니다:)'}
+        title={I18n.t('Login.notice')}
+        content={I18n.t('Login.notice_message')}
       />
       {useMemo(
         () => (
@@ -52,16 +72,22 @@ function LoginPresenter({
         [],
       )}
       <ErrorViewInput
-        placeholder={'휴대폰 번호'}
-        regexResult={true}
-        // message={'유효하지 않는 전화번호입니다'}
+        placeholder={I18n.t('Login.phone')}
+        value={id}
+        regexResult={regexResult?.phone}
+        message={!regexResult?.phone ? I18n.t('Regex.failed.phone') : ''}
+        onChange={onChangeId}
+        keyboardType={'number-pad'}
+        mask={MaskInputPhone}
       />
       <ErrorViewInput
         style={{marginVertical: theme.size.gap}}
-        placeholder={'비밀번호(영문/숫자 포함 6자 이상)'}
-        regexResult={true}
-        // message={'모든 요소를 포함시켜주세요'}
+        placeholder={I18n.t('Login.password')}
+        value={password}
+        regexResult={regexResult?.password}
+        message={!regexResult?.password ? I18n.t('Regex.failed.password') : ''}
         secure={true}
+        onChange={onChangePassword}
       />
       <ButtonGroup leftBtnPress={goJoin} rightBtnPress={goFindPassword} />
     </Container>

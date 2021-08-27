@@ -45,6 +45,7 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+    // NaverMapSdk.getInstance(this).setClient(new NaverMapSdk.NaverCloudPlatformClient("m57kig0w2z"));
   }
 
   /**

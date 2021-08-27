@@ -1,12 +1,13 @@
 import {CardView} from '../../../components/View';
 import {GRAY_2} from '../../../constants/color';
-import {GestureResponderEvent} from 'react-native';
 import I18n from '../../../utils/i18nHelpers';
 import {INNER_MARGIN} from '../../../constants/size';
 import PhoneSvg from '../../../../assets/svg/ic_phone.svg';
 import React from 'react';
 import {TitleInfoItem} from '../../../components/Item';
 import {TwoButtonGroup} from '../../../components/Button';
+import {dateFormatting} from '../../../utils/commonUtils';
+import {getWorkDetail_getWorkDetail_work} from '../../../../__generated__/getWorkDetail';
 import styled from 'styled-components/native';
 
 const SeperatedSection = styled(CardView)`
@@ -20,49 +21,64 @@ const InnerWrapper = styled.View`
 `;
 
 interface Props {
-  leftBtnPress: (event: GestureResponderEvent) => void;
+  item: getWorkDetail_getWorkDetail_work;
+  leftBtnPress: (text: string) => void;
+  rightBtnPress: (text: string) => void;
 }
 
-function CustomerInfoItem({leftBtnPress}: Props): JSX.Element {
+function CustomerInfoItem({
+  item,
+  leftBtnPress,
+  rightBtnPress,
+}: Props): JSX.Element {
   return (
     <>
       <CardView>
         <>
           <TitleInfoItem
             titleText={I18n.t('CustomerInfo.name')}
-            infoText={'홍길동'}
+            infoText={item.customer.name}
           />
           <TitleInfoItem
             titleText={I18n.t('CustomerInfo.contact')}
-            infoText={'010-1234-1234'}
+            infoText={item.customer.phone}
           />
         </>
       </CardView>
       <SeperatedSection hasPadding={false}>
         <>
           <TwoButtonGroup
-            leftBtnName={'주소복사'}
-            rightBtnName={'전화'}
+            leftBtnName={I18n.t('Button.copy_address')}
+            rightBtnName={I18n.t('Button.call')}
             rightPrimaryColored={true}
             rightIcon={<PhoneSvg />}
+            leftBtnPress={() => {
+              const {
+                address: {postalCode, roadAddress, detail},
+              }: any = item.customer;
+              leftBtnPress(`(${postalCode}) ${roadAddress} ${detail}`);
+            }}
+            rightBtnPress={() => {
+              rightBtnPress(item.customer.phone);
+            }}
           />
           <InnerWrapper>
             <TitleInfoItem
               titleText={I18n.t('CustomerInfo.visit_date')}
-              infoText={'2021.08.30'}
+              infoText={dateFormatting(item.visitDate)}
             />
             <TitleInfoItem
               titleText={I18n.t('CustomerInfo.visit_time')}
-              infoText={'오전 11시'}
+              infoText={dateFormatting(item.visitDate, true)}
             />
             <TitleInfoItem
               titleText={I18n.t('CustomerInfo.address')}
-              infoText={'(10568) 경기도 고양시 덕양구 권율대로 907 KN빌딩'}
-              infoSubText={'6층'}
+              infoText={`(${item.customer.address?.postalCode}) ${item.customer.address?.roadAddress}`}
+              infoSubText={item.customer.address?.detail}
             />
             <TitleInfoItem
               titleText={I18n.t('CustomerInfo.part_status')}
-              infoText={'보유'}
+              infoText={item.hasParts.name}
             />
           </InnerWrapper>
         </>

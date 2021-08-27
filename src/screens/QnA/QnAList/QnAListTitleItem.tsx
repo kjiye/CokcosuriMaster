@@ -1,4 +1,7 @@
+import I18n from '../../../utils/i18nHelpers';
 import React from 'react';
+import {dateFormatting} from '../../../utils/commonUtils';
+import {getQnA_getQnA_qnas} from '../../../../__generated__/getQnA';
 import styled from 'styled-components/native';
 
 const INFO_VIEW_WIDTH = 85;
@@ -28,16 +31,28 @@ const InfoText = styled.Text`
   color: ${(props: any) => props.theme.colors.grey[5]};
 `;
 
-function QnAListTitleItem(): JSX.Element {
+const ReplyDone = styled(InfoText)`
+  color: ${(props: any) => props.theme.colors.accent};
+`;
+
+interface Props {
+  item: getQnA_getQnA_qnas;
+}
+
+function QnAListTitleItem({item}: Props): JSX.Element {
   return (
     <>
       <TitleWrapper>
-        <CategoryText>기타문의</CategoryText>
-        <TitleText>아이디/비밀번호를 다 바꿀 수 없나요?</TitleText>
+        <CategoryText>{item.category?.name}</CategoryText>
+        <TitleText>{item.title}</TitleText>
       </TitleWrapper>
       <InfoWrapper>
-        <InfoText>2021.08.01</InfoText>
-        <InfoText>진행중</InfoText>
+        <InfoText>{dateFormatting(item.createAt)}</InfoText>
+        {item?.reply && item.reply.length > 0 ? (
+          <ReplyDone>{I18n.t('QnA.reply_done')}</ReplyDone>
+        ) : (
+          <InfoText>{I18n.t('QnA.waiting')}</InfoText>
+        )}
       </InfoWrapper>
     </>
   );

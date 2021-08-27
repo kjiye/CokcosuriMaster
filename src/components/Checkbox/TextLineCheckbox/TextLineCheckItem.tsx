@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
 import CheckActiveSvg from '../../../../assets/svg/ic_check_active.svg';
 import CheckInactiveSvg from '../../../../assets/svg/ic_check_inactive.svg';
 import {GestureResponderEvent} from 'react-native';
 import I18n from '../../../utils/i18nHelpers';
+import React from 'react';
 import styled from 'styled-components/native';
 
 const INNER_PADDING = 10;

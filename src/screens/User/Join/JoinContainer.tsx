@@ -4,6 +4,7 @@ import {
   VerifyInput,
 } from '../../../../__generated__/globalTypes';
 import {CategoryType, ImageSelectorOption} from '../../../models/common';
+import {CommonActions, useNavigation} from '@react-navigation/native';
 import {
   GET_CATEGORIES,
   JOIN_MASTER,
@@ -12,40 +13,31 @@ import {
 } from './join.queries';
 import {JoinFormInput, JoinRegex} from '../../../models/user';
 import React, {useEffect, useLayoutEffect, useState} from 'react';
+import {checkRegex, uploadImageFormatting} from '../../../utils/commonUtils';
 import {useLazyQuery, useMutation} from '@apollo/client';
 import I18n from '../../../utils/i18nHelpers';
 import {Image} from 'react-native-image-crop-picker';
 import JoinPresenter from './JoinPresenter';
-import {Platform} from 'react-native';
-import {ReactNativeFile} from 'apollo-upload-client';
 import {callBackAlert} from '../../../utils/alert';
-import {checkRegex} from '../../../utils/commonUtils';
-import {useNavigation} from '@react-navigation/native';
+import { inventActionModal } from '../../../utils/modalUtils';
 
 function JoinContainer({route}: any): JSX.Element {
   const navigation = useNavigation();
-  // 입력한 회원정보 객체
   const [user, setUser] = useState<JoinFormInput>({});
-  // 인증요청 후 받은 정보 + 입력한 인증번호 객체
-  const [verifyInfo, setVerifyInfo] = useState<VerifyInput>();
-  // 인증 여부
-  const [verified, setVerified] = useState<boolean>(false);
-  // 수리종목
+  const [verifyInfo, setVerifyInfo] = useState<VerifyInput>();  // 인증요청 후 받은 정보 + 입력한 인증번호 객체
+  const [verified, setVerified] = useState<boolean>(false);     // 인증 여부
   const [workTypeList, setWorkTypeList] = useState<CategoryType[]>([]);
-  // 수리종목 전체 버튼
   const [workTypeAll, setWorkTypeAll] = useState<boolean>(false);
-  // 선택한 이미지 옵션
   const [imageOption, setImageOption] = useState<ImageSelectorOption>();
-  // 사업자 등록증 이미지
   const [licenseImage, setLicenseImage] = useState<Image>();
-  // 유효성 검사 결과
   const [regexResult, setRegexResult] = useState<JoinRegex>({});
 
   const [getCategories] = useLazyQuery(GET_CATEGORIES, {
     onCompleted: (data: any) => {
       if (workTypeList.length <= 0) {
+        const {categories} = data?.getCategories;
         setWorkTypeList(
-          data?.getCategories.categories.map((v: CategoryType) => {
+          categories.map((v: CategoryType) => {
             v = {...v, active: false};
             return v;
           }),
@@ -58,49 +50,38 @@ function JoinContainer({route}: any): JSX.Element {
     REQ_VERIFICATION_CODE,
     {
       onError: () => {
-        callBackAlert(
-          I18n.t('Error.common'),
-          () => {
-            return;
-          },
-          false,
-        );
+        callBackAlert(I18n.t('Error.common'), () => {
+          return;
+        });
       },
       onCompleted: (data: any) => {
-        if (data?.reqVerificationCode?.success) {
-          const {sendId} = data.reqVerificationCode;
-          if (user?.phone) {
-            setVerifyInfo({
-              sendId: sendId,
-              target: user.phone.replace(/-/gi, ''),
-              code: '',
+        callBackAlert(I18n.t('Alert.req_verification_code'), () => {
+          if (data?.reqVerificationCode?.success) {
+            const {sendId} = data.reqVerificationCode;
+            if (user?.phone) {
+              setVerifyInfo({
+                sendId: sendId,
+                target: user.phone.replace(/-/gi, ''),
+                code: '',
+              });
+            }
+          } else {
+            callBackAlert(I18n.t('Error.req_verification_code'), () => {
+              return;
             });
           }
-        } else {
-          callBackAlert(
-            I18n.t('Error.req_verification_code'),
-            () => {
-              return;
-            },
-            false,
-          );
-        }
+        });
       },
     },
   );
 
   const [verifyCode, {loading: verifyCodeLoading}] = useMutation(VERIFY_CODE, {
     onError: () => {
-      callBackAlert(
-        I18n.t('Error.common'),
-        () => {
-          return;
-        },
-        false,
-      );
+      callBackAlert(I18n.t('Error.common'), () => {
+        return;
+      });
     },
     onCompleted: (data: any) => {
-      console.log(data);
       const message = data?.verifyCode?.success
         ? I18n.t('Alert.verify_code')
         : I18n.t('Error.verif_code');
@@ -117,34 +98,27 @@ function JoinContainer({route}: any): JSX.Element {
   });
 
   const [join, {loading: joinLoading}] = useMutation(JOIN_MASTER, {
-    onError: (error: any) => {
-      console.log('회원가입 에러 ', error);
-      callBackAlert(
-        I18n.t('Error.join'),
-        () => {
-          return;
-        },
-        false,
-      );
+    onError: () => {
+      inventActionModal(navigation, {isShow: false});
+      callBackAlert(I18n.t('Error.join'), () => {
+        return;
+      });
     },
     onCompleted: (data: any) => {
-      // {joinMaster: {success: true}};
+      inventActionModal(navigation, {isShow: false});
       if (data?.joinMaster?.success) {
-        callBackAlert(
-          I18n.t('Alert.join'),
-          () => {
-            navigation.navigate('LoginScreen');
-          },
-          false,
-        );
+        callBackAlert(I18n.t('Alert.join'), () => {
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [{name: 'LoginStack'}],
+            }),
+          );
+        });
       } else {
-        callBackAlert(
-          I18n.t('Error.join'),
-          () => {
-            return;
-          },
-          false,
-        );
+        callBackAlert(I18n.t('Error.join'), () => {
+          return;
+        });
       }
     },
   });
@@ -179,7 +153,7 @@ function JoinContainer({route}: any): JSX.Element {
     reqVerifyBtnDisabled:
       !checkRegex('phone', user?.phone || '') || reqVerifyLoading,
     reqVerifyBtnPress: () => {
-      if (!reqVerifyLoading && user?.phone) {
+      if (user?.phone) {
         reqVerificationCode({
           variables: {
             target: user.phone.replace(/-/gi, ''),
@@ -254,7 +228,8 @@ function JoinContainer({route}: any): JSX.Element {
       if (text.length > 0) {
         setRegexResult({
           ...regexResult,
-          licenseNo: !checkRegex('licenseNo', text),
+          // licenseNo: !checkRegex('licenseNo', text),
+          licenseNo: text.length === 12,
         });
       } else {
         setRegexResult({...regexResult, licenseNo: undefined});
@@ -282,7 +257,8 @@ function JoinContainer({route}: any): JSX.Element {
     ),
     join: () => {
       delete user.rePassword;
-      if (!joinLoading) {
+      if (!joinLoading && licenseImage) {
+        inventActionModal(navigation, {isShow: true});
         join({
           variables: {
             data: {
@@ -298,14 +274,7 @@ function JoinContainer({route}: any): JSX.Element {
               licenseNo: user?.licenseNo && user.licenseNo.replace(/-/gi, ''),
             },
             sendId: verifyInfo?.sendId,
-            file: new ReactNativeFile({
-              uri:
-                Platform.OS === 'ios'
-                  ? licenseImage?.sourceURL
-                  : licenseImage?.path,
-              name: licenseImage?.filename,
-              type: licenseImage?.mime,
-            }),
+            file: uploadImageFormatting(licenseImage),
           },
         });
       }

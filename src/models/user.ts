@@ -1,4 +1,6 @@
 import {CategoryInput} from '../../__generated__/globalTypes';
+import {Image} from 'react-native-image-crop-picker';
+import {CategoryType, ImageData} from './common';
 
 export interface User {
   id: number;
@@ -30,4 +32,29 @@ export interface JoinRegex {
   password?: boolean;
   rePassword?: boolean;
   licenseNo?: boolean;
+}
+
+export interface LoginRegex {
+  phone?: boolean;
+  password?: boolean;
+}
+
+export interface PasswordRegex {
+  password?: boolean;
+  newPassword?: boolean;
+  rePassword?: boolean;
+  phone?: boolean;
+  licenseNo?: boolean;
+}
+
+export interface CompanyInfo {
+  licenseImage?: ImageData | Image;
+  licenseNo: string;
+}
+
+export interface UpdateUser {
+  name: string;
+  phone: string;
+  workCategories: CategoryType[];
+  company: CompanyInfo;
 }

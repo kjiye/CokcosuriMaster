@@ -1,10 +1,11 @@
+import {CategoryType} from '../../../models/common';
 import React from 'react';
 import styled from 'styled-components/native';
 
 const VERTICAL_PADDING = 16;
 const HORIZON_PADDING = 12;
 
-const Wrapper = styled.View`
+const Wrapper = styled.TouchableOpacity`
   padding: ${VERTICAL_PADDING}px ${HORIZON_PADDING}px;
   border-bottom-width: 1px;
   border-color: ${(props: any) => props.theme.colors.grey[3]};
@@ -16,13 +17,19 @@ const OptionName = styled.Text`
 `;
 
 interface Props {
-  name: string;
+  data: CategoryType;
+  onPress?: (selected: CategoryType) => void;
 }
 
-function ModalItem({name}: Props): JSX.Element {
+function ModalItem({data, onPress}: Props): JSX.Element {
   return (
-    <Wrapper>
-      <OptionName>{name}</OptionName>
+    <Wrapper
+      onPress={() => {
+        if (onPress) {
+          onPress(data);
+        }
+      }}>
+      <OptionName>{data.name}</OptionName>
     </Wrapper>
   );
 }

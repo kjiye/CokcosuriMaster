@@ -1,28 +1,42 @@
-import {AccordianView} from '../../components/View';
+import {AccordianView, NoDataView} from '../../components/View';
 import BaseContainer from '../../components/BaseContainer';
 import {FlatList} from 'react-native';
+import I18n from '../../utils/i18nHelpers';
+import LoadingView from '../../components/View/LoadingView';
 import NoticeListContentItem from './NoticeListContentItem';
 import NoticeListTitleItem from './NoticeListTitleItem';
 import React from 'react';
+import {getNotices_getNotices_notices} from '../../../__generated__/getNotices';
 import styled from 'styled-components/native';
 
 const Container = styled(BaseContainer)`
   background: ${(props: any) => props.theme.colors.background};
 `;
 
-function NoticePresenter(): JSX.Element {
+interface Props {
+  loading: boolean;
+  list: getNotices_getNotices_notices[];
+}
+
+function NoticePresenter({loading, list}: Props): JSX.Element {
   return (
     <Container>
-      <FlatList
-        data={[{id: 1}]}
-        keyExtractor={(_: any, i: number) => i.toString()}
-        renderItem={({item, index}: any) => (
-          <AccordianView
-            titleChildren={<NoticeListTitleItem />}
-            cntChildren={<NoticeListContentItem />}
-          />
-        )}
-      />
+      {loading ? (
+        <LoadingView />
+      ) : list.length > 0 ? (
+        <FlatList
+          data={list}
+          keyExtractor={(_: any, i: number) => i.toString()}
+          renderItem={({item}: any) => (
+            <AccordianView
+              titleChildren={<NoticeListTitleItem item={item} />}
+              cntChildren={<NoticeListContentItem content={item.content} />}
+            />
+          )}
+        />
+      ) : (
+        <NoDataView message={I18n.t('Notice.no_data')} />
+      )}
     </Container>
   );
 }

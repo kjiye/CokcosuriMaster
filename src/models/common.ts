@@ -39,7 +39,17 @@ export interface CategoryType {
   active?: boolean;
 }
 
-// 추후 삭제
+export interface Coords {
+  lat?: string;
+  lon?: string;
+}
+
+export interface ImageData {
+  id: number;
+  path: string;
+}
+
+// 임시 사용
 export interface ItemType {
   name: string;
   content: string;

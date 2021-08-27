@@ -7,8 +7,12 @@ const ContentText = styled.Text`
   line-height: 19px;
 `;
 
-function NoticeListContentItem(): JSX.Element {
-  return <ContentText>공지 내용</ContentText>;
+interface Props {
+  content: string;
+}
+
+function NoticeListContentItem({content}: Props): JSX.Element {
+  return <ContentText>{content}</ContentText>;
 }
 
 export default NoticeListContentItem;

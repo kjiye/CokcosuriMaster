@@ -11,6 +11,7 @@ export const GET_WORKS = gql`
         customer {
           id
           name
+          phone
           address {
             postalCode
             roadAddress

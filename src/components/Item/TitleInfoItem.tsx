@@ -37,7 +37,7 @@ const InfoSubText = styled(InfoText)`
 interface Props {
   titleText: string;
   infoText: string;
-  infoSubText?: string;
+  infoSubText?: string | null;
 }
 
 function TitleInfoItem({titleText, infoText, infoSubText}: Props): JSX.Element {

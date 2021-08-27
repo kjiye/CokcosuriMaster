@@ -1,40 +1,221 @@
-import React from 'react';
+import {CategoryType, ImageSelectorOption} from '../../../models/common';
+import {
+  GET_CATEGORIES,
+  GET_USER,
+  SET_MASTER_INFO,
+} from './updateUserInfo.queries';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
+import {useLazyQuery, useMutation} from '@apollo/client';
+import {CategoryName} from '../../../../__generated__/globalTypes';
+import I18n from '../../../utils/i18nHelpers';
+import {Image} from 'react-native-image-crop-picker';
+import {UpdateUser} from '../../../models/user';
 import UpdateUserInfoPresenter from './UpdateUserInfoPresenter';
 import {callBackAlert} from '../../../utils/alert';
+import {getUserAppId} from '../../../utils/storageUtils';
+import {removeToken} from '../../../apollo';
+import {uploadImageFormatting} from '../../../utils/commonUtils';
 import {useNavigation} from '@react-navigation/native';
 
-function UpdateUserInfoContainer(): JSX.Element {
+function UpdateUserInfoContainer({route}: any): JSX.Element {
   const navigation = useNavigation();
+
+  const [loading, setLoading] = useState<boolean>(true);
+  const [user, setUser] = useState<UpdateUser>();
+  const [workTypeAll, setWorkTypeAll] = useState<boolean>(false);
+  const [imageOption, setImageOption] = useState<ImageSelectorOption>();
+  const [replaceImage, setReplaceImage] = useState<Image>(); // 여기 이미지 있을 시에만 파일 보냄
+
+  const [getWorkTypeCategories] = useLazyQuery(GET_CATEGORIES, {
+    onCompleted: (data: any) => {
+      if (user) {
+        const {categories} = data?.getCategories;
+        setUser({
+          ...user,
+          workCategories: categories.map((v: CategoryType) => {
+            v = {...v, active: false};
+            user.workCategories.map(val => {
+              if (val.code === v.code) {
+                v = {...v, active: true};
+              }
+            });
+            return v;
+          }),
+        });
+      }
+    },
+  });
+
+  const [getMaster] = useLazyQuery(GET_USER, {
+    onCompleted: (data: any) => {
+      const {
+        getMaster: {success, master},
+      } = data;
+      if (success) {
+        setUser(master);
+      }
+      getWorkTypeCategories({
+        variables: {
+          name: CategoryName.WORK_TYPE,
+        },
+      });
+      setLoading(false);
+    },
+  });
+
+  const [updateMasterInfo] = useMutation(SET_MASTER_INFO, {
+    onError: (error: any) => {
+      callBackAlert(I18n.t('Error.common'), () => {
+        return;
+      });
+    },
+    onCompleted: () => {
+      callBackAlert('정보 수정이 완료되었습니다', async () => {
+        navigation.goBack();
+      });
+    },
+  });
+
+  useLayoutEffect(() => {
+    const initData = async () => {
+      getMaster({
+        variables: {
+          phone: await getUserAppId(),
+        },
+      });
+    };
+    initData();
+  }, []);
+
+  useEffect(() => {
+    if (route.params?.imageOption) {
+      const {imageOption} = route.params;
+      setImageOption(imageOption);
+      navigation.setParams({
+        imageOption: undefined,
+      });
+    }
+  }, [route.params]);
+
   const props = {
+    loading,
+    user,
+    workTypeAll,
+    btnDisabled: !(
+      user?.name &&
+      user?.workCategories.filter(v => v.active)?.length > 0 &&
+      user.company.licenseNo &&
+      (user?.company?.licenseImage || replaceImage)
+    ),
+    onChangeName: (text: string) => {
+      if (user) {
+        setUser({
+          ...user,
+          name: text,
+        });
+      }
+    },
+    onChangeWorkType: (item: CategoryType) => {
+      if (user) {
+        setUser({
+          ...user,
+          workCategories: user.workCategories.map(v => {
+            if (v.code === item.code) {
+              v.active = !v.active;
+            }
+            return v;
+          }),
+        });
+        if (!item.code) {
+          let current = true;
+          user.workCategories.map(v => {
+            if (!v.active) {
+              current = false;
+            }
+          });
+          setUser({
+            ...user,
+            workCategories: user.workCategories.map(v => {
+              v.active = !current;
+              return v;
+            }),
+          });
+          setWorkTypeAll(!current);
+        }
+      }
+    },
+    onChangeLicenseNo: (text: string) => {
+      if (user) {
+        setUser({
+          ...user,
+          company: {
+            ...user.company,
+            licenseNo: text,
+          },
+        });
+      }
+    },
+    imageOption,
+    showImageOption: () => {
+      navigation.navigate('UploadOptionModal', {path: 'UpdateUserInfo'});
+    },
+    currentImageDelete: () => {
+      if (user) {
+        setUser({
+          ...user,
+          company: {
+            ...user.company,
+            licenseImage: undefined,
+          },
+        });
+        setImageOption(undefined);
+      }
+    },
+    addImage: (image: Image) => {
+      setReplaceImage(image);
+    },
+    deleteImage: () => {
+      setReplaceImage(undefined);
+      setImageOption(undefined);
+    },
     logout: () => {
       callBackAlert(
-        '로그아웃을 하시겠습니까?',
-        () => {
-          navigation.navigate('LoginScreen');
+        I18n.t('Alert.logout_ask'),
+        async () => {
+          await removeToken();
         },
         true,
       );
     },
     withdrawal: () => {
+      // 회원탈퇴
+    },
+    updatePress: () => {
       callBackAlert(
-        '정말로 회원탈퇴를 하시겠습니까?',
+        I18n.t('Alert.update_user_ask'),
         () => {
-          callBackAlert('탈퇴가 완료됐습니다', () => {
-            navigation.navigate('LoginScreen');
+          let params: any = {
+            data: {
+              name: user?.name,
+              workCategories: user?.workCategories
+                .filter(v => v.active)
+                .map(v => {
+                  return {code: v.code, name: v.name};
+                }),
+              licenseNo: user?.company.licenseNo.replace(/-/gi, ''),
+            },
+          };
+          if (replaceImage) {
+            params = {
+              ...params,
+              file: uploadImageFormatting(replaceImage),
+            };
+          }
+          updateMasterInfo({
+            variables: params,
           });
         },
         true,
-      );
-    },
-    update: () => {
-      callBackAlert(
-        '개인정보를 수정하시겠습니까?',
-        () => {
-          callBackAlert('수정이 완료됐습니다', () => {
-            navigation.goBack();
-          });
-        },
-        false,
       );
     },
   };

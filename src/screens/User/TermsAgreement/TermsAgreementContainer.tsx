@@ -19,6 +19,12 @@ function TermsAgreementContainer(): JSX.Element {
       });
     },
     agreements,
+    btnDisabled: !(
+      agreements.terms_privacy_policy &&
+      agreements.terms_privacy_third &&
+      agreements.terms_privacy_usage &&
+      agreements.terms_condition
+    ),
     checkAll: () => {
       if (
         !agreements.terms_privacy_policy ||

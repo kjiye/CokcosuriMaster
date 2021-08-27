@@ -1,4 +1,3 @@
-import React, {useEffect} from 'react';
 import {
   basicHeader,
   commonHeaderOption,
@@ -7,7 +6,7 @@ import FindPasswordScreen from '../screens/User/Password/FindPassword';
 import I18n from '../utils/i18nHelpers';
 import JoinScreen from '../screens/User/Join';
 import LoginScreen from '../screens/User/Login';
-import SplashScreen from 'react-native-splash-screen';
+import React from 'react';
 import TermsAgreementScreen from '../screens/User/TermsAgreement';
 import UpdatePasswordScreen from '../screens/User/Password/UpdatePassword';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -15,11 +14,6 @@ import {createStackNavigator} from '@react-navigation/stack';
 const Stack = createStackNavigator();
 
 function LoginStack(): JSX.Element {
-  // 레이아웃 전달용 임시 처리
-  useEffect(() => {
-    SplashScreen.hide();
-  }, []);
-
   return (
     <Stack.Navigator screenOptions={{...commonHeaderOption}}>
       <Stack.Screen

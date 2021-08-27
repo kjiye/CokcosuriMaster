@@ -1,5 +1,8 @@
 import React from 'react';
+import {InteractionManager} from 'react-native';
 import styled from 'styled-components/native';
+import {getQnA_getQnA_qnas} from '../../../../__generated__/getQnA';
+import I18n from '../../../utils/i18nHelpers';
 
 const ContentText = styled.Text`
   font-size: ${(props: any) => props.theme.fonts.small}px;
@@ -7,11 +10,40 @@ const ContentText = styled.Text`
   line-height: 19px;
 `;
 
-function QnAListContentItem(): JSX.Element {
+const ReplyView = styled.View`
+  margin-top: 12px;
+  padding-left: ${(props: any) => props.theme.size.standardPadding}px;
+`;
+
+const AdminNameWrapper = styled.View`
+  padding-bottom: 8px;
+  border-bottom-width: 1px;
+  border-color: ${(props: any) => props.theme.colors.grey[3]};
+`;
+
+const AdminName = styled.Text`
+  margin-top: ${(props: any) => props.theme.size.margin}px;
+  font-size: ${(props: any) => props.theme.fonts.normal}px;
+  color: ${(props: any) => props.theme.colors.primary};
+`;
+
+interface Props {
+  item: getQnA_getQnA_qnas;
+}
+
+function QnAListContentItem({item}: Props): JSX.Element {
   return (
-    <ContentText>
-      혹시 계정정보를 아이디, 비번 모두 바꾸는 것도 가능할까요?
-    </ContentText>
+    <>
+      <ContentText>{item.content}</ContentText>
+      {item.reply && item.reply.length > 0 && (
+        <ReplyView>
+          <AdminNameWrapper>
+            <AdminName>{I18n.t('QnA.admin')}</AdminName>
+          </AdminNameWrapper>
+          <ContentText>{item.reply[0]?.content}</ContentText>
+        </ReplyView>
+      )}
+    </>
   );
 }
 

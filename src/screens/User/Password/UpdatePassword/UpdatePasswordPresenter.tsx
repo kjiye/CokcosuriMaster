@@ -1,6 +1,8 @@
 import {BasicInput, ErrorViewInput} from '../../../../components/Input';
 import BaseContainer from '../../../../components/BaseContainer';
 import {GestureResponderEvent} from 'react-native';
+import I18n from '../../../../utils/i18nHelpers';
+import {PasswordRegex} from '../../../../models/user';
 import {PrimaryButton} from '../../../../components/Button';
 import React from 'react';
 import {TitleItem} from '../../../../components/Item';
@@ -28,21 +30,72 @@ const Divider = styled.View`
 `;
 
 interface Props {
-  update: (event: GestureResponderEvent) => void;
+  password: string;
+  newPassword: string;
+  rePassword: string;
+  regexResult: PasswordRegex;
+  btnDisabled: boolean;
+  onChangePassword: (text: string) => void;
+  onChangeNewPassword: (text: string) => void;
+  onChangeRePassword: (text: string) => void;
+  updatePress: (event: GestureResponderEvent) => void;
 }
 
-function UpdatePasswordPresenter({update}: Props): JSX.Element {
+function UpdatePasswordPresenter({
+  password,
+  newPassword,
+  rePassword,
+  regexResult,
+  btnDisabled,
+  onChangePassword,
+  onChangeNewPassword,
+  onChangeRePassword,
+  updatePress,
+}: Props): JSX.Element {
   return (
     <Container
-      button={<PrimaryButton title={'비밀번호 변경'} onPress={update} />}>
+      button={
+        <PrimaryButton
+          title={I18n.t('Button.bottom.update_password')}
+          onPress={updatePress}
+          disabled={btnDisabled}
+        />
+      }>
       <UpdateNoticeCardView />
-      <Title mainText={'현재 비밀번호'} />
-      <BasicInput placeholder={'현재 비밀번호를 입력해주세요'} secure={true} />
+      <Title mainText={I18n.t('Password.password')} />
+      <BasicInput
+        placeholder={I18n.t('Placeholder.current_password')}
+        secure={true}
+        value={password}
+        onChange={onChangePassword}
+      />
       <Divider />
-      <Title mainText={'새 비밀번호'} />
-      <ErrorViewInput placeholder={'영문/숫자 6자 이상 입력해주세요'} />
-      <TitleItem mainText={'새 비밀번호 확인'} />
-      <ErrorViewInput placeholder={'비밀번호를 다시 입력해주세요'} />
+      <Title mainText={I18n.t('Password.new_password')} />
+      <ErrorViewInput
+        secure={true}
+        placeholder={I18n.t('Placeholder.password')}
+        value={newPassword}
+        onChange={onChangeNewPassword}
+        regexResult={regexResult?.password}
+        message={
+          regexResult?.password
+            ? I18n.t('Regex.success.password')
+            : I18n.t('Regex.failed.password')
+        }
+      />
+      <TitleItem mainText={I18n.t('Password.re_password')} />
+      <ErrorViewInput
+        secure={true}
+        placeholder={I18n.t('Placeholder.re_password')}
+        value={rePassword}
+        onChange={onChangeRePassword}
+        regexResult={regexResult?.rePassword}
+        message={
+          regexResult?.rePassword
+            ? I18n.t('Regex.success.re_password')
+            : I18n.t('Regex.failed.re_password')
+        }
+      />
     </Container>
   );
 }

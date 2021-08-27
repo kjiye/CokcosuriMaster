@@ -1,26 +1,56 @@
+import NaverMapView, {Marker} from 'react-native-nmap';
+import {Coord} from 'react-native-nmap';
+import {ImageSourcePropType} from 'react-native';
 import React from 'react';
 import styled from 'styled-components/native';
 
-const MAP_HEIGHT = 330;
+const MARKER_WIDTH = 55;
+const MARKER_HEIGHT = 67;
 
-// 추후 NaverMapView 상속
-const Wrapper = styled.View`
-  height: ${MAP_HEIGHT}px;
-  background: yellow;
+const Wrapper = styled.View<{height: number}>`
+  flex: 1;
+  height: ${(props: any) => props.height}px;
+  background: ${(props: any) => props.theme.colors.grey_background};
 `;
 
-// 임시 레이아웃용 view
-const SampleView = styled.Image`
-  width: 100%;
-  height: ${MAP_HEIGHT}px;
+const NMapView = styled(NaverMapView)`
+  flex: 1;
+  height: 100%;
 `;
 
-function MapView(): JSX.Element {
+interface Props {
+  coords: Coord;
+  zoom?: number;
+  markerImage: ImageSourcePropType;
+  mapViewHeight: number;
+  markerPress?: () => void;
+}
+
+function MapView({
+  coords,
+  zoom = 17,
+  markerImage,
+  mapViewHeight,
+  markerPress,
+}: Props): JSX.Element {
   return (
-    <SampleView
-      resizeMode={'cover'}
-      source={require('../../../assets/image/map_sample.png')}
-    />
+      <Wrapper height={mapViewHeight}>
+        <NMapView 
+          center={{...coords, zoom: zoom}} 
+          useTextureView={true}
+          // onInitialized={(e:any) => {console.log(e)}}
+          >
+          <Marker
+            coordinate={coords}
+            width={MARKER_WIDTH}
+            height={MARKER_HEIGHT}
+            onClick={() => {
+              if (markerPress) markerPress();
+            }}
+            image={markerImage}
+          />
+        </NMapView>
+    </Wrapper>
   );
 }
 

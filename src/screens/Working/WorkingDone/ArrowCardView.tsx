@@ -1,22 +1,25 @@
 import {
   GestureResponderEvent,
   StyleProp,
-  View,
   ViewProps,
   ViewStyle,
 } from 'react-native';
 import {CardView} from '../../../components/View';
+import {Dimensions} from 'react-native';
 import React from 'react';
 import RightArrowSvg from '../../../../assets/svg/ic_right_arrow.svg';
 import styled from 'styled-components/native';
 
 const MESSAGE_LINE_HEIGHT = 20;
+const {width} = Dimensions.get('screen');
 
 const ButtonWrapper = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 `;
+
+const TitleWrapper = styled.View``;
 
 const TitleText = styled.Text`
   font-size: ${(props: any) => props.theme.fonts.large}px;
@@ -30,6 +33,7 @@ const PointTitleText = styled(TitleText)<{color?: string}>`
 `;
 
 const Message = styled.Text`
+  width: ${width - 100}px;
   margin-top: 4px;
   font-size: ${(props: any) => props.theme.fonts.small}px;
   color: ${(props: any) => props.theme.colors.black[1]};
@@ -42,7 +46,6 @@ interface Props {
   pointedText: string;
   sideText: string;
   desc: string;
-  hasDescTitle?: boolean;
 }
 
 function ArrowCardView({
@@ -55,13 +58,13 @@ function ArrowCardView({
   return (
     <CardView style={style as StyleProp<ViewProps>}>
       <ButtonWrapper onPress={onPress}>
-        <View>
+        <TitleWrapper>
           <TitleText>
             <PointTitleText>{pointedText}</PointTitleText>
             {sideText}
           </TitleText>
           <Message>{desc}</Message>
-        </View>
+        </TitleWrapper>
         <RightArrowSvg />
       </ButtonWrapper>
     </CardView>

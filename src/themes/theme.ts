@@ -3,6 +3,7 @@ import {DefaultTheme} from 'styled-components/native';
 export const AppTheme: DefaultTheme = {
   colors: {
     background: 'white',
+    grey_background: '#f1f1f1',
     primary: '#eb7203',
     primaryDark: '#e25300',
     primaryLight: '#fc9e48',
@@ -34,7 +35,7 @@ export const AppTheme: DefaultTheme = {
     normal: 16,
     small: 14,
     tiny: 12,
-    mini: 12,
+    mini: 10,
   },
   size: {
     padding: 10,
@@ -43,5 +44,6 @@ export const AppTheme: DefaultTheme = {
     gap: 5,
     innerMargin: 12,
     standardPadding: 20,
+    bottomPadding: 100,
   },
 };

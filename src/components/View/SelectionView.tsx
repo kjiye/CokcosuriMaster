@@ -17,6 +17,7 @@ const Wrapper = styled.TouchableOpacity<{selected: boolean}>`
   ${({selected}) => `
     border-color: ${selected ? PRIMARY_LIGHT : GRAY_3};
   `}
+  background: ${(props: any) => props.theme.colors.background};
 `;
 
 const SelectionText = styled.Text<{selected: boolean}>`
@@ -41,7 +42,7 @@ function SelectionView({
   return (
     <Wrapper onPress={onPress} selected={!!selectedValue}>
       <SelectionText selected={!!selectedValue}>
-        {selectedValue ? selectedValue : placeholder}
+        {selectedValue ? selectedValue.name : placeholder}
       </SelectionText>
       {selectedValue ? <DownActiveSvg /> : <DownInactiveSvg />}
     </Wrapper>

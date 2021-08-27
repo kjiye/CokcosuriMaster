@@ -1,5 +1,6 @@
 import {MenuAccordianItem, MenuItem} from '../../components/Item';
 import {GestureResponderEvent} from 'react-native';
+import LoadingView from '../../components/View/LoadingView';
 import React from 'react';
 import styled from 'styled-components/native';
 
@@ -25,6 +26,7 @@ const ScrollContainer = styled.ScrollView`
 `;
 
 const ProfileView = styled.View`
+  min-height: 35px;
   padding-bottom: 8px;
   border-bottom-width: 1px;
   border-color: ${(props: any) => props.theme.colors.primary};
@@ -60,6 +62,8 @@ const BottomInfoText = styled.Text`
 `;
 
 interface Props {
+  isLoading: boolean;
+  userName: string;
   goUpdateUserInfo: (event: GestureResponderEvent) => void;
   goUpdatePassword: (event: GestureResponderEvent) => void;
   goUpdatePhone: (event: GestureResponderEvent) => void;
@@ -71,6 +75,8 @@ interface Props {
 }
 
 function DrawerPresenter({
+  isLoading,
+  userName,
   goUpdateUserInfo,
   goUpdatePassword,
   goUpdatePhone,
@@ -85,7 +91,11 @@ function DrawerPresenter({
       <SafeAreaContainer>
         <ContentContainer>
           <ProfileView>
-            <ProfileText>홍길동</ProfileText>
+            {isLoading ? (
+              <LoadingView size={'small'} />
+            ) : (
+              <ProfileText>{userName}</ProfileText>
+            )}
           </ProfileView>
           <ScrollContainer>
             <AccordianMenu

@@ -1,18 +1,23 @@
 import ContentViewModal from '../screens/Modal/ContentViewModal';
+import InventActionModal from '../screens/Modal/InventActionModal';
 import LoginStack from './LoginStack';
 import MainDrawer from './MainDrawer';
-import React from 'react';
+import PermissionModal from '../screens/Permission';
+import React, { useEffect, useState } from 'react';
 import SelectionModal from '../screens/Modal/SelectionModal';
 import UploadOptionModal from '../screens/Modal/UploadOptionModal';
 import {createStackNavigator} from '@react-navigation/stack';
-import {isLoggedInVar} from '../apollo';
+import {tokenVar} from '../apollo';
 import {useReactiveVar} from '@apollo/client';
+import {useNetInfo} from '@react-native-community/netinfo';
+import WarnNetworkScreen from '../screens/WarnNetwork';
 
 const Stack = createStackNavigator();
 
 function RootStack(): JSX.Element {
-  // const isLoggedIn = useReactiveVar(isLoggedInVar);
-  const isLoggedIn = false;
+  const netInfo = useNetInfo();
+  const isLoggedIn = !!useReactiveVar(tokenVar);
+
   return (
     <Stack.Navigator
       mode={'modal'}
@@ -44,23 +49,19 @@ function RootStack(): JSX.Element {
           };
         },
       }}>
-      {/* <Stack.Screen name={'MainStack'} component={MainStack} /> */}
-      {/* 아래 임시 주석처리 */}
-      {/* {isLoggedIn ? (
-        <Stack.Screen name={'MainDrawer'} component={MainDrawer} />
-      ) : (
-        // <Stack.Screen name={'LoginScreen'} component={LoginScreen} />
-        <Stack.Screen name={'LoginStack'} component={LoginStack} />
-        // 약관 동의
-        // 회원 가입
-      )} */}
-      {/* <Stack.Screen name={'PricacyDetail'} component={LoginScreen} /> // 약관 상세 팝업 스타일로 */}
-      {/* <Stack.Screen name={'asdfasdf'} component={LoginScreen} /> // 개인정보보호 상세 */}
-      <Stack.Screen name={'LoginStack'} component={LoginStack} />
-      <Stack.Screen name={'MainDrawer'} component={MainDrawer} />
+      {netInfo.isConnected ? (
+        isLoggedIn ? (
+          <Stack.Screen name={'MainDrawer'} component={MainDrawer} />
+        ) : (
+          <Stack.Screen name={'LoginStack'} component={LoginStack} />
+        )) : (
+          <Stack.Screen name={'WarnNetworkScreen'} component={WarnNetworkScreen}/>
+      )}
+      <Stack.Screen name={'PermissionModal'} component={PermissionModal} />
       <Stack.Screen name={'SelectionModal'} component={SelectionModal} />
       <Stack.Screen name={'ContentViewModal'} component={ContentViewModal} />
       <Stack.Screen name={'UploadOptionModal'} component={UploadOptionModal} />
+      <Stack.Screen name={'InventActionModal'} component={InventActionModal} />
     </Stack.Navigator>
   );
 }
