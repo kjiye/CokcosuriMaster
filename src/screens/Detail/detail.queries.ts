@@ -26,6 +26,15 @@ export const GET_WORK_DETAIL = gql`
           name
         }
         content
+        address {
+          postalCode
+          roadAddress
+          detail
+          coordinate {
+            lat
+            lon
+          }
+        }
         requestImage {
           id
           path

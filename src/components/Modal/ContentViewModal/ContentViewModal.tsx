@@ -50,6 +50,7 @@ const ContentWrapper = styled.ScrollView`
 `;
 
 const ContentText = styled.Text`
+  margin-bottom: 50px;
   font-size: ${(props: any) => props.theme.fonts.small}px;
   color: ${(props: any) => props.theme.colors.black[1]};
 `;

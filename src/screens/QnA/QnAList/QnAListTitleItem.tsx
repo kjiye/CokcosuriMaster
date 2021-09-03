@@ -48,7 +48,7 @@ function QnAListTitleItem({item}: Props): JSX.Element {
       </TitleWrapper>
       <InfoWrapper>
         <InfoText>{dateFormatting(item.createAt)}</InfoText>
-        {item?.reply && item.reply.length > 0 ? (
+        {item.reply.length > 0 ? (
           <ReplyDone>{I18n.t('QnA.reply_done')}</ReplyDone>
         ) : (
           <InfoText>{I18n.t('QnA.waiting')}</InfoText>

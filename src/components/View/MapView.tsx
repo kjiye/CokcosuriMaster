@@ -34,22 +34,22 @@ function MapView({
   markerPress,
 }: Props): JSX.Element {
   return (
-      <Wrapper height={mapViewHeight}>
-        <NMapView 
-          center={{...coords, zoom: zoom}} 
-          useTextureView={true}
-          // onInitialized={(e:any) => {console.log(e)}}
-          >
-          <Marker
-            coordinate={coords}
-            width={MARKER_WIDTH}
-            height={MARKER_HEIGHT}
-            onClick={() => {
-              if (markerPress) markerPress();
-            }}
-            image={markerImage}
-          />
-        </NMapView>
+    <Wrapper height={mapViewHeight}>
+      <NMapView
+        center={{...coords, zoom: zoom}}
+        useTextureView={true}
+        // onInitialized={(e:any) => {console.log(e)}}
+      >
+        <Marker
+          coordinate={coords}
+          width={MARKER_WIDTH}
+          height={MARKER_HEIGHT}
+          onClick={() => {
+            if (markerPress) markerPress();
+          }}
+          image={markerImage}
+        />
+      </NMapView>
     </Wrapper>
   );
 }

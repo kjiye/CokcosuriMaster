@@ -6,7 +6,8 @@ import {RegexType} from '../models/common';
 import dayjs from 'dayjs';
 import {getWorkDetail_getWorkDetail_work_customer_address_coordinate} from '../../__generated__/getWorkDetail';
 
-export const SERVER_URL = 'http://211.110.229.85:4000/graphql';
+// export const SERVER_URL = 'http://211.110.229.85:4000/graphql';
+export const SERVER_URL = 'http://localhost:4000/graphql';
 export const IMG_URL = SERVER_URL.slice(0, SERVER_URL.lastIndexOf('/'));
 
 const regexPattern = (type: RegexType) => {

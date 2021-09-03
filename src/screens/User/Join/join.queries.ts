@@ -33,7 +33,7 @@ export const VERIFY_CODE = gql`
 export const JOIN_MASTER = gql`
   mutation joinMaster(
     $data: JoinMasterInput!
-    $sendId: String!
+    $sendId: String
     $file: Upload!
   ) {
     joinMaster(data: $data, sendId: $sendId, file: $file) {

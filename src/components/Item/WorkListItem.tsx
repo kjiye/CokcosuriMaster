@@ -65,8 +65,8 @@ function WorkListItem({
             />
             <TitleInfoItem
               titleText={I18n.t('CustomerInfo.address')}
-              infoText={`(${item.customer.address.postalCode}) ${item.customer.address.roadAddress}`}
-              infoSubText={item.customer.address.detail}
+              infoText={`(${item.address.postalCode}) ${item.address.roadAddress}`}
+              infoSubText={item.address.detail}
             />
             <TitleInfoItem
               titleText={I18n.t('CustomerInfo.part_status')}

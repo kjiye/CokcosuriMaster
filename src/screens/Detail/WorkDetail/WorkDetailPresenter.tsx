@@ -98,9 +98,9 @@ function WorkDetailPresenter({
         )
       }>
       <ScrollView>
-        {work.customer.address?.coordinate && (
+        {work.address?.coordinate && (
           <MapView
-            coords={coordsFormatting(work.customer.address.coordinate)}
+            coords={coordsFormatting(work.address.coordinate)}
             markerImage={require('../../../../assets/image/map_marker.png')}
             mapViewHeight={MAP_HEIGHT}
           />

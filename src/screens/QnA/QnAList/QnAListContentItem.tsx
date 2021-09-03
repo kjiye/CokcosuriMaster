@@ -40,7 +40,9 @@ function QnAListContentItem({item}: Props): JSX.Element {
           <AdminNameWrapper>
             <AdminName>{I18n.t('QnA.admin')}</AdminName>
           </AdminNameWrapper>
-          <ContentText>{item.reply[0]?.content}</ContentText>
+          <ContentText>
+            {item.reply[item.reply.length - 1]?.content}
+          </ContentText>
         </ReplyView>
       )}
     </>

@@ -41,10 +41,13 @@ function PaymentContainer({route}: any): JSX.Element {
   useEffect(() => {
     if (!route.params?.selected && route.params?.workItem) {
       const {workItem} = route.params;
-      if (workItem?.payment?.state === PaymentState.DONE) {
-        const {payment} = workItem;
-        setAmount(payment.price.toString());
-        setReason(payment.desc);
+      if (workItem?.payment) {
+        const {
+          payment: {desc, price, reason},
+        } = workItem;
+        if (desc) setReason(desc);
+        if (price) setAmount(price.toString());
+        if (reason) setSelectedCategory(reason);
       }
     } else {
       const {selected} = route.params;

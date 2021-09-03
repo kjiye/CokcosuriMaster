@@ -19,13 +19,13 @@ import I18n from '../../../utils/i18nHelpers';
 import {Image} from 'react-native-image-crop-picker';
 import JoinPresenter from './JoinPresenter';
 import {callBackAlert} from '../../../utils/alert';
-import { inventActionModal } from '../../../utils/modalUtils';
+import {inventActionModal} from '../../../utils/modalUtils';
 
 function JoinContainer({route}: any): JSX.Element {
   const navigation = useNavigation();
   const [user, setUser] = useState<JoinFormInput>({});
-  const [verifyInfo, setVerifyInfo] = useState<VerifyInput>();  // 인증요청 후 받은 정보 + 입력한 인증번호 객체
-  const [verified, setVerified] = useState<boolean>(false);     // 인증 여부
+  const [verifyInfo, setVerifyInfo] = useState<VerifyInput>(); // 인증요청 후 받은 정보 + 입력한 인증번호 객체
+  const [verified, setVerified] = useState<boolean>(false); // 인증 여부
   const [workTypeList, setWorkTypeList] = useState<CategoryType[]>([]);
   const [workTypeAll, setWorkTypeAll] = useState<boolean>(false);
   const [imageOption, setImageOption] = useState<ImageSelectorOption>();

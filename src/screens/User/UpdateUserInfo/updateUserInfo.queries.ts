@@ -44,3 +44,11 @@ export const SET_MASTER_INFO = gql`
     }
   }
 `;
+
+export const WITHDRAWAL = gql`
+  mutation withdraw {
+    withdraw {
+      success
+    }
+  }
+`;

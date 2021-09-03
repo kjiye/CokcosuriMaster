@@ -3,7 +3,7 @@ import InventActionModal from '../screens/Modal/InventActionModal';
 import LoginStack from './LoginStack';
 import MainDrawer from './MainDrawer';
 import PermissionModal from '../screens/Permission';
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import SelectionModal from '../screens/Modal/SelectionModal';
 import UploadOptionModal from '../screens/Modal/UploadOptionModal';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -54,8 +54,12 @@ function RootStack(): JSX.Element {
           <Stack.Screen name={'MainDrawer'} component={MainDrawer} />
         ) : (
           <Stack.Screen name={'LoginStack'} component={LoginStack} />
-        )) : (
-          <Stack.Screen name={'WarnNetworkScreen'} component={WarnNetworkScreen}/>
+        )
+      ) : (
+        <Stack.Screen
+          name={'WarnNetworkScreen'}
+          component={WarnNetworkScreen}
+        />
       )}
       <Stack.Screen name={'PermissionModal'} component={PermissionModal} />
       <Stack.Screen name={'SelectionModal'} component={SelectionModal} />

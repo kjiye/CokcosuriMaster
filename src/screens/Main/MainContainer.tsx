@@ -54,7 +54,7 @@ function MainContainer({
     leftBtnPress: async (item: getWorks_getWorks_works) => {
       const {
         address: {postalCode, roadAddress, detail},
-      }: any = item.customer;
+      }: any = item;
       Clipboard.setString(`(${postalCode}) ${roadAddress} ${detail}`);
       await Clipboard.getString();
       Toast.show(I18n.t('Alert.copy_address'));

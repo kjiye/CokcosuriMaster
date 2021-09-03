@@ -3,6 +3,7 @@ import {
   GET_CATEGORIES,
   GET_USER,
   SET_MASTER_INFO,
+  WITHDRAWAL,
 } from './updateUserInfo.queries';
 import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {useLazyQuery, useMutation} from '@apollo/client';
@@ -24,6 +25,7 @@ function UpdateUserInfoContainer({route}: any): JSX.Element {
   const [user, setUser] = useState<UpdateUser>();
   const [workTypeAll, setWorkTypeAll] = useState<boolean>(false);
   const [imageOption, setImageOption] = useState<ImageSelectorOption>();
+  const [isChangeLicense, setIsChangeLicense] = useState<boolean>(false);
   const [replaceImage, setReplaceImage] = useState<Image>(); // 여기 이미지 있을 시에만 파일 보냄
 
   const [getWorkTypeCategories] = useLazyQuery(GET_CATEGORIES, {
@@ -72,6 +74,19 @@ function UpdateUserInfoContainer({route}: any): JSX.Element {
     onCompleted: () => {
       callBackAlert('정보 수정이 완료되었습니다', async () => {
         navigation.goBack();
+      });
+    },
+  });
+
+  const [withdraw] = useMutation(WITHDRAWAL, {
+    onError: (error: any) => {
+      callBackAlert(I18n.t('Error.common'), () => {
+        return;
+      });
+    },
+    onCompleted: async () => {
+      callBackAlert('회원탈퇴가 완료되었습니다', async () => {
+        await removeToken();
       });
     },
   });
@@ -154,6 +169,7 @@ function UpdateUserInfoContainer({route}: any): JSX.Element {
           },
         });
       }
+      setIsChangeLicense(true);
     },
     imageOption,
     showImageOption: () => {
@@ -188,7 +204,13 @@ function UpdateUserInfoContainer({route}: any): JSX.Element {
       );
     },
     withdrawal: () => {
-      // 회원탈퇴
+      callBackAlert(
+        '정말 회원탈퇴를 하시겠습니까?',
+        () => {
+          withdraw();
+        },
+        true,
+      );
     },
     updatePress: () => {
       callBackAlert(
@@ -202,12 +224,22 @@ function UpdateUserInfoContainer({route}: any): JSX.Element {
                 .map(v => {
                   return {code: v.code, name: v.name};
                 }),
-              licenseNo: user?.company.licenseNo.replace(/-/gi, ''),
             },
           };
+          if (isChangeLicense) {
+            params = {
+              data: {
+                ...params.data,
+                licenseNo: user?.company.licenseNo.replace(/-/gi, ''),
+              },
+            };
+          }
           if (replaceImage) {
             params = {
-              ...params,
+              data: {
+                ...params.data,
+                licenseNo: user?.company.licenseNo.replace(/-/gi, ''),
+              },
               file: uploadImageFormatting(replaceImage),
             };
           }
