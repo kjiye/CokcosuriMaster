@@ -68,7 +68,11 @@ function MainPresenter({
           }
         />
       ) : (
-        <NoDataView message={I18n.t('no_data')} />
+        <NoDataView
+          message={I18n.t('no_data')}
+          usingRefresh={true}
+          onRefreshing={onRefreshing}
+        />
       )}
     </Container>
   );

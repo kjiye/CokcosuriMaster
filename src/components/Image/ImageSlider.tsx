@@ -12,7 +12,7 @@ const IMG_HEIGHT = 235;
 
 const SliderWrapper = styled(Swiper)`
   height: ${IMG_HEIGHT}px;
-  background: ${(props: any) => props.theme.colors.background};
+  background: ${(props: any) => props.theme.colors.grey[2]};
 `;
 
 const Slide = styled.Image`
@@ -43,6 +43,7 @@ function ImageSlider({imageList}: Props): JSX.Element {
         return (
           <Slide
             key={i.toString()}
+            resizeMethod={'resize'}
             resizeMode={'cover'}
             source={setImageUrl(v.path)}
           />

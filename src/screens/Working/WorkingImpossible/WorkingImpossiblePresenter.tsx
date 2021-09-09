@@ -1,8 +1,9 @@
 import {GestureResponderEvent, ScrollView} from 'react-native';
 import {AppTheme} from '../../../themes/theme';
-import BaseContainer from '../../../components/BaseContainer';
 import I18n from 'i18n-js';
+import {Image} from 'react-native-image-crop-picker';
 import {ImageSelector} from '../../../components/Image';
+import KeyboardBaseContainer from '../../../components/KeyboardBaseContainer';
 import {LimitTextArea} from '../../../components/Input';
 import {PrimaryButton} from '../../../components/Button';
 import React from 'react';
@@ -10,15 +11,13 @@ import {TitleItem} from '../../../components/Item';
 import WorkingNoticeView from '../WorkingNoticeView';
 import {getWorkDetail_getWorkDetail_work} from '../../../../__generated__/getWorkDetail';
 import styled from 'styled-components/native';
-import {onChange} from 'react-native-reanimated';
-import {Image} from 'react-native-image-crop-picker';
 
 const {colors}: any = AppTheme;
 
 const IMG_MARGIN_TOP = 12;
 const BOTTOM_PADDING = 100;
 
-const Container = styled(BaseContainer)`
+const Container = styled(KeyboardBaseContainer)`
   background: ${(props: any) => props.theme.colors.background};
 `;
 

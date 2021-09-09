@@ -54,7 +54,7 @@ function WorkingImpossibleContainer({route}: any): JSX.Element {
         variables: {
           workId: route.params.workItem.id,
           state: WorkState.CANCEL,
-          cancelReaseon: reason,
+          cancelReason: reason,
           files: fileArr,
         },
       });

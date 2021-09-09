@@ -10,6 +10,7 @@ import {GestureResponderEvent} from 'react-native';
 import I18n from '../../../utils/i18nHelpers';
 import {Image} from 'react-native-image-crop-picker';
 import {ImageSelector} from '../../../components/Image';
+import KeyboardBaseContainer from '../../../components/KeyboardBaseContainer';
 import LoadingView from '../../../components/View/LoadingView';
 import {PrimaryButton} from '../../../components/Button';
 import React from 'react';
@@ -24,7 +25,7 @@ const CONTAINER_TOP_PADDING = 24;
 const BOTTOM_PADDING = 100;
 const COMPONENT_GAP = 16;
 
-const Container = styled(BaseContainer)`
+const Container = styled(KeyboardBaseContainer)`
   flex: 1;
   background: ${(props: any) => props.theme.colors.background};
 `;
@@ -119,6 +120,7 @@ function UpdateUserInfoPresenter({
             value={user?.company.licenseNo}
             onChange={onChangeLicenseNo}
             mask={MaskInputLicenseNo}
+            keyboardType={'number-pad'}
           />
           <Title mainText={I18n.t('Title.license_image')} />
           <ImageSelector
@@ -130,6 +132,7 @@ function UpdateUserInfoPresenter({
             option={imageOption}
             onAdd={addImage}
             onDelete={deleteImage}
+            isCropped={false}
           />
           <ButtonWrapper>
             <TinyHiddenButton name={I18n.t('Button.logout')} onPress={logout} />

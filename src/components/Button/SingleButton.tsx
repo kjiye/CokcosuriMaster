@@ -1,4 +1,9 @@
-import {Dimensions, GestureResponderEvent} from 'react-native';
+import {
+  Dimensions,
+  GestureResponderEvent,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 import {GRAY_3, GRAY_6, PRIMARY_LIGHT, WHITE} from '../../constants/color';
 import {INNER_MARGIN, LARGE, MINI, SMALL, STANDARD} from '../../constants/size';
 import React from 'react';
@@ -35,6 +40,7 @@ const ButtonText = styled.Text<{colored: boolean}>`
 `;
 
 interface Props {
+  style?: StyleProp<ViewStyle>;
   name: string;
   icon?: JSX.Element;
   primaryColored?: boolean;
@@ -42,13 +48,14 @@ interface Props {
 }
 
 function SingleButton({
+  style,
   name,
   icon,
   primaryColored = false,
   onPress,
 }: Props): JSX.Element {
   return (
-    <Button colored={primaryColored} onPress={onPress}>
+    <Button style={style} colored={primaryColored} onPress={onPress}>
       {icon ? (
         <IconWrapper>
           {icon}

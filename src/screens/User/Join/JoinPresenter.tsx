@@ -12,10 +12,10 @@ import {
 import {GAP_MARGIN, MEDIUM} from '../../../constants/size';
 import {GestureResponderEvent, ScrollView} from 'react-native';
 import {JoinFormInput, JoinRegex} from '../../../models/user';
-import BaseContainer from '../../../components/BaseContainer';
 import I18n from '../../../utils/i18nHelpers';
 import {Image} from 'react-native-image-crop-picker';
 import {ImageSelector} from '../../../components/Image';
+import KeyboardBaseContainer from '../../../components/KeyboardBaseContainer';
 import {PrimaryButton} from '../../../components/Button';
 import React from 'react';
 import {TitleItem} from '../../../components/Item';
@@ -26,7 +26,7 @@ import styled from 'styled-components/native';
 const TOP_PADDING = 24;
 const BOTTOM_PADDING = 100;
 
-const Container = styled(BaseContainer)`
+const Container = styled(KeyboardBaseContainer)`
   background: ${(props: any) => props.theme.colors.background};
 `;
 
@@ -42,6 +42,9 @@ interface Props {
   regexResult: JoinRegex;
   workTypeList: CategoryType[];
   workTypeAll: boolean;
+  timerMs: number;
+  playTimer: boolean;
+  onTimerStop: (ms: number) => void;
   onChangeName: (text: string) => void;
   onChangePhone: (text: string) => void;
   reqVerifyBtnDisabled: boolean;
@@ -67,6 +70,9 @@ function JoinPresenter({
   regexResult,
   workTypeList,
   workTypeAll,
+  timerMs,
+  playTimer,
+  onTimerStop,
   onChangeName,
   onChangePhone,
   reqVerifyBtnDisabled,
@@ -124,6 +130,11 @@ function JoinPresenter({
             buttonDisabled={verifyCodeBtnDisabled}
             onPress={verifyCodeBtnPress}
             onChange={onChangeVerificationCode}
+            keyboardType={'number-pad'}
+            millisecond={timerMs}
+            usingTimer={true}
+            playTimer={playTimer}
+            timerStop={onTimerStop}
           />
           <TitleItem
             style={{marginTop: MEDIUM}}
@@ -197,6 +208,7 @@ function JoinPresenter({
             option={imageOption}
             onAdd={addImage}
             onDelete={deleteImage}
+            isCropped={false}
           />
         </ContentContainer>
       </ScrollView>

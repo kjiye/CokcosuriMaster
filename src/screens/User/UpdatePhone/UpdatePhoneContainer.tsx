@@ -16,6 +16,8 @@ function UpdatePhoneContainer(): JSX.Element {
   const [requested, setRequested] = useState<boolean>(false);
   const [verifyInfo, setVerifyInfo] = useState<VerifyInput>();
   const [verified, setVerified] = useState<boolean>(false);
+  const [timerMs, setTimerMs] = useState<number>(5 * 60 * 1000);
+  const [playTimer, setPlayTimer] = useState<boolean>(false);
 
   const [reqVerificationCode] = useMutation(REQ_VERIFICATION_CODE, {
     onError: () => {
@@ -24,9 +26,14 @@ function UpdatePhoneContainer(): JSX.Element {
       });
     },
     onCompleted: (data: any) => {
-      if (data?.reqVerificationCode?.success) {
+      const {
+        reqVerificationCode: {success},
+      } = data;
+      if (success) {
         callBackAlert(I18n.t('Alert.req_verification_code'), () => {
           setRequested(true);
+          setPlayTimer(true);
+          setTimerMs(5 * 60 * 1000);
           const {sendId} = data.reqVerificationCode;
           setVerifyInfo({
             sendId: sendId,
@@ -44,23 +51,27 @@ function UpdatePhoneContainer(): JSX.Element {
 
   const [verifyCode] = useMutation(VERIFY_CODE, {
     onError: () => {
-      callBackAlert(I18n.t('Error.common'), () => {
+      callBackAlert(I18n.t('Error.verify_code'), () => {
+        if (verifyInfo?.sendId && verifyInfo?.target) {
+          setVerifyInfo({
+            ...verifyInfo,
+            code: '',
+          });
+        }
         return;
       });
     },
     onCompleted: (data: any) => {
-      const message = data?.verifyCode?.success
-        ? I18n.t('Alert.verify_code')
-        : I18n.t('Error.verif_code');
-      const result = data?.verifyCode?.success ? true : false;
-      setVerified(result);
-      callBackAlert(
-        message,
-        () => {
+      const {
+        verifyCode: {success},
+      } = data;
+
+      if (success) {
+        setVerified(true);
+        callBackAlert(I18n.t('Alert.verify_code'), () => {
           return;
-        },
-        result,
-      );
+        });
+      }
     },
   });
 
@@ -91,10 +102,21 @@ function UpdatePhoneContainer(): JSX.Element {
     phone,
     requested,
     reqVerifyBtnDisabled: !checkRegex('phone', phone),
-    verifyCodeBtnDisabled: !(verifyInfo?.code && verifyInfo.code.length > 0),
+    verifyCodeBtnDisabled: !(
+      verifyInfo?.code &&
+      verifyInfo.code.length > 0 &&
+      playTimer
+    ),
     updateBtnDisabled: !verified,
+    timerMs,
+    playTimer,
+    onTimerStop: (ms: number) => {
+      setPlayTimer(false);
+    },
     onChangePhone: (text: string) => {
       setPhone(text);
+      setVerifyInfo(undefined);
+      setTimerMs(5 * 60 * 1000);
     },
     onChangeVerificationCode: (text: string) => {
       if (verifyInfo?.sendId && verifyInfo?.target) {

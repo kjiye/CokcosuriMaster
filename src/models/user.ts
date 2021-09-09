@@ -1,6 +1,6 @@
+import {CategoryType, ImageData} from './common';
 import {CategoryInput} from '../../__generated__/globalTypes';
 import {Image} from 'react-native-image-crop-picker';
-import {CategoryType, ImageData} from './common';
 
 export interface User {
   id: number;

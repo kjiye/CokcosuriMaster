@@ -39,8 +39,14 @@ const Description = styled.Text`
   color: ${(props: any) => props.theme.colors.grey[5]};
 `;
 
-const ImageView = styled.Image`
+const ImageView = styled.Image<{isCropped: boolean}>`
   border-radius: ${VIEW_RADIUS}px;
+  background: ${(props: any) => props.theme.colors.grey[1]};
+  width: 100%;
+  height: ${(props: any) =>
+    props.isCropped
+      ? IMG_HEIGHT
+      : (width - props.theme.size.standardPadding * 2) * 1.4}px;
 `;
 
 const DeleteButton = styled.TouchableOpacity`
@@ -61,6 +67,7 @@ interface Props {
   option?: ImageSelectorOption;
   onAdd: (image: Image) => void;
   onDelete: () => void;
+  isCropped?: boolean;
 }
 
 function ImageSelector({
@@ -73,6 +80,7 @@ function ImageSelector({
   option,
   onAdd,
   onDelete,
+  isCropped = true,
 }: Props): JSX.Element {
   const [image, setImage] = useState<Image | undefined>();
   const picker = useCallback(async () => {
@@ -104,7 +112,6 @@ function ImageSelector({
       setImage(result);
       onAdd(result);
     } catch (e) {
-      // console.log(e.code);
       return;
     }
   }, []);
@@ -127,8 +134,9 @@ function ImageSelector({
       {currentImage ? (
         <>
           <ImageView
-            style={{width: '100%', height: IMG_HEIGHT}}
-            resizeMode={'cover'}
+            isCropped={isCropped}
+            resizeMethod={'resize'}
+            resizeMode={isCropped ? 'cover' : 'center'}
             source={setImageUrl(currentImage.path)}
           />
           <DeleteButton
@@ -141,8 +149,9 @@ function ImageSelector({
       ) : image ? (
         <>
           <ImageView
-            style={{width: '100%', height: IMG_HEIGHT}}
-            resizeMode={'cover'}
+            isCropped={isCropped}
+            resizeMethod={'resize'}
+            resizeMode={isCropped ? 'cover' : 'center'}
             source={{uri: Platform.OS === 'ios' ? image.sourceURL : image.path}}
           />
           <DeleteButton

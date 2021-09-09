@@ -31,6 +31,8 @@ function JoinContainer({route}: any): JSX.Element {
   const [imageOption, setImageOption] = useState<ImageSelectorOption>();
   const [licenseImage, setLicenseImage] = useState<Image>();
   const [regexResult, setRegexResult] = useState<JoinRegex>({});
+  const [timerMs, setTimerMs] = useState<number>(5 * 60 * 1000);
+  const [playTimer, setPlayTimer] = useState<boolean>(false);
 
   const [getCategories] = useLazyQuery(GET_CATEGORIES, {
     onCompleted: (data: any) => {
@@ -55,8 +57,13 @@ function JoinContainer({route}: any): JSX.Element {
         });
       },
       onCompleted: (data: any) => {
-        callBackAlert(I18n.t('Alert.req_verification_code'), () => {
-          if (data?.reqVerificationCode?.success) {
+        const {
+          reqVerificationCode: {success},
+        } = data;
+        if (success) {
+          callBackAlert(I18n.t('Alert.req_verification_code'), () => {
+            setPlayTimer(true);
+            setTimerMs(5 * 60 * 1000);
             const {sendId} = data.reqVerificationCode;
             if (user?.phone) {
               setVerifyInfo({
@@ -65,35 +72,40 @@ function JoinContainer({route}: any): JSX.Element {
                 code: '',
               });
             }
-          } else {
-            callBackAlert(I18n.t('Error.req_verification_code'), () => {
-              return;
-            });
-          }
-        });
+          });
+        } else {
+          callBackAlert(I18n.t('Error.req_verification_code'), () => {
+            return;
+          });
+        }
       },
     },
   );
 
   const [verifyCode, {loading: verifyCodeLoading}] = useMutation(VERIFY_CODE, {
     onError: () => {
-      callBackAlert(I18n.t('Error.common'), () => {
+      callBackAlert(I18n.t('Error.verify_code'), () => {
+        if (verifyInfo?.sendId && verifyInfo?.target) {
+          setVerifyInfo({
+            ...verifyInfo,
+            code: '',
+          });
+        }
         return;
       });
     },
     onCompleted: (data: any) => {
-      const message = data?.verifyCode?.success
-        ? I18n.t('Alert.verify_code')
-        : I18n.t('Error.verif_code');
-      const result = data?.verifyCode?.success ? true : false;
-      setVerified(result);
-      callBackAlert(
-        message,
-        () => {
+      const {
+        verifyCode: {success},
+      } = data;
+
+      if (success) {
+        setVerified(true);
+        callBackAlert(I18n.t('Alert.verify_code'), () => {
+          setPlayTimer(false);
           return;
-        },
-        result,
-      );
+        });
+      }
     },
   });
 
@@ -144,11 +156,18 @@ function JoinContainer({route}: any): JSX.Element {
     regexResult,
     workTypeList,
     workTypeAll,
+    timerMs,
+    playTimer,
+    onTimerStop: (ms: number) => {
+      setPlayTimer(false);
+    },
     onChangeName: (text: string) => {
       setUser({...user, name: text});
     },
     onChangePhone: (text: string) => {
       setUser({...user, phone: text});
+      setVerifyInfo(undefined);
+      setTimerMs(5 * 60 * 1000);
     },
     reqVerifyBtnDisabled:
       !checkRegex('phone', user?.phone || '') || reqVerifyLoading,
@@ -166,7 +185,11 @@ function JoinContainer({route}: any): JSX.Element {
         setVerifyInfo({...verifyInfo, code: text});
       }
     },
-    verifyCodeBtnDisabled: !(verifyInfo?.code && verifyInfo.code.length > 0),
+    verifyCodeBtnDisabled: !(
+      verifyInfo?.code &&
+      verifyInfo.code.length > 0 &&
+      playTimer
+    ),
     verifyCodeBtnPress: () => {
       if (!verifyCodeLoading) {
         verifyCode({

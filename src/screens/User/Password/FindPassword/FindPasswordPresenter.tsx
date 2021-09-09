@@ -2,9 +2,9 @@ import {BasicInput, ErrorViewInput} from '../../../../components/Input';
 import {GestureResponderEvent, ScrollView} from 'react-native';
 import {MaskInputLicenseNo, MaskInputPhone} from '../../../../models/common';
 import styled, {useTheme} from 'styled-components/native';
-import BaseContainer from '../../../../components/BaseContainer';
 import {CardView} from '../../../../components/View';
 import I18n from '../../../../utils/i18nHelpers';
+import KeyboardBaseContainer from '../../../../components/KeyboardBaseContainer';
 import {PasswordRegex} from '../../../../models/user';
 import {PrimaryButton} from '../../../../components/Button';
 import React from 'react';
@@ -12,7 +12,7 @@ import {TitleItem} from '../../../../components/Item';
 
 const BOTTOM_PADDING = 90;
 
-const Container = styled(BaseContainer)`
+const Container = styled(KeyboardBaseContainer)`
   background: ${(props: any) => props.theme.colors.background};
 `;
 
@@ -121,6 +121,7 @@ function FindPasswordPresenter({
                       : I18n.t('Regex.failed.phone')
                   }
                   mask={MaskInputPhone}
+                  keyboardType={'number-pad'}
                   onChange={onChangePhone}
                 />
               </RowWrapper>
@@ -138,6 +139,7 @@ function FindPasswordPresenter({
                       : I18n.t('Regex.failed.license_no')
                   }
                   mask={MaskInputLicenseNo}
+                  keyboardType={'number-pad'}
                   onChange={onChangeLicenseNo}
                 />
               </RowWrapper>

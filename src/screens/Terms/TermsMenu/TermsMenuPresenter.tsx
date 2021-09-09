@@ -1,9 +1,9 @@
 import BaseContainer from '../../../components/BaseContainer';
+import {GestureResponderEvent} from 'react-native';
 import I18n from '../../../utils/i18nHelpers';
 import {MenuItem} from '../../../components/Item';
 import React from 'react';
 import styled from 'styled-components/native';
-import {GestureResponderEvent} from 'react-native';
 
 const Container = styled(BaseContainer)`
   background: ${(props: any) => props.theme.colors.background};

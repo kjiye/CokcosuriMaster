@@ -36,7 +36,7 @@
     "react-native-loading-dots": "^1.2.0",
     "react-native-localize": "^2.1.1",
     "react-native-mask-input": "^1.0.3",
-    "react-native-nmap": "0.0.56",
+    "react-native-nmap": "0.0.59",
     "react-native-permissions": "^3.0.5",
     "react-native-reanimated": "^2.2.0",
     "react-native-safe-area-context": "^3.2.0",

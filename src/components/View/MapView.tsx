@@ -36,7 +36,7 @@ function MapView({
   return (
     <Wrapper height={mapViewHeight}>
       <NMapView
-        center={{...coords, zoom: zoom}}
+        center={{...coords, zoom: zoom, tilt: 0}}
         useTextureView={true}
         // onInitialized={(e:any) => {console.log(e)}}
       >

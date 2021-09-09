@@ -1,13 +1,13 @@
 import {AccordianView, NoDataView} from '../../../components/View';
+import {FlatList, RefreshControl} from 'react-native';
+import styled, {useTheme} from 'styled-components/native';
 import BaseContainer from '../../../components/BaseContainer';
-import {FlatList} from 'react-native';
 import I18n from '../../../utils/i18nHelpers';
 import LoadingView from '../../../components/View/LoadingView';
 import QnAListContentItem from './QnAListContentItem';
 import QnAListTitleItem from './QnAListTitleItem';
 import React from 'react';
 import {getQnA_getQnA_qnas} from '../../../../__generated__/getQnA';
-import styled from 'styled-components/native';
 
 const Container = styled(BaseContainer)`
   background: ${(props: any) => props.theme.colors.background};
@@ -15,10 +15,18 @@ const Container = styled(BaseContainer)`
 
 interface Props {
   loading: boolean;
+  isRefreshing: boolean;
   list: getQnA_getQnA_qnas[];
+  onRefreshing: () => void;
 }
 
-function QnAListPresenter({loading, list}: Props): JSX.Element {
+function QnAListPresenter({
+  loading,
+  isRefreshing,
+  list,
+  onRefreshing,
+}: Props): JSX.Element {
+  const theme: any = useTheme();
   return (
     <Container>
       {loading ? (
@@ -33,6 +41,14 @@ function QnAListPresenter({loading, list}: Props): JSX.Element {
               cntChildren={<QnAListContentItem item={item} />}
             />
           )}
+          refreshControl={
+            <RefreshControl
+              refreshing={isRefreshing}
+              onRefresh={onRefreshing}
+              colors={[theme.colors.primary]}
+              tintColor={theme.colors.primary}
+            />
+          }
         />
       ) : (
         <NoDataView message={I18n.t('QnA.no_data')} />

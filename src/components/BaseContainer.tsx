@@ -9,6 +9,7 @@ const Container = styled.View`
 `;
 
 const ButtonContainer = styled.View`
+  flex: 1;
   width: 100%;
   position: absolute;
   align-items: center;
@@ -25,7 +26,6 @@ interface Props {
 function BaseContainer({children, style, button}: Props): JSX.Element {
   const [bottomSpace, setBottomSpace] = useState<number>(0);
   useEffect(() => {
-    // 이부분 훅으로 만들기
     let space = getBottomSpace();
     if (space <= 0) {
       space = 34;

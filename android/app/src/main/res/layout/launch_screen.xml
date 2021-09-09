@@ -9,6 +9,7 @@
         android:layout_height="match_parent"
         android:background="@color/splashprimary"
         android:contentDescription="Splashscreen"
-        android:scaleType="fitCenter"
+        android:scaleType="fitStart"
+        android:paddingTop="90dp"
         android:src="@drawable/splashscreen" />
 </RelativeLayout>

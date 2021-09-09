@@ -44,36 +44,6 @@ interface Props {
   call: (phone: string) => void;
 }
 
-const a = {
-  afterImage: [],
-  beforeImage: [
-    {id: 9, path: '/images/94BapzIzDQANyjPzsw8L.jpg'},
-    {id: 10, path: '/images/b101CiGhk6OY89UCZGWa.jpg'},
-    {id: 11, path: '/images/HAlm95Qhycd4jUfuSd4Y.jpg'},
-  ],
-  cancelImage: [],
-  cancelReason: null,
-  content: '실평수 45평형 단독주택 옥상에 방수페인트 처리 하고싶어요 ',
-  customer: {
-    address: {
-      coordinate: [Object],
-      detail: '202동 707호',
-      postalCode: '16507',
-      roadAddress: '경기도 수원시 영통구 센트럴타운로 85',
-    },
-    name: '홍길동',
-    phone: '01064173203',
-  },
-  hasParts: {code: 'D002', name: '미보유'},
-  id: 1,
-  payment: {id: 1, price: 320000},
-  requestImage: [{id: 1, path: '/images/JUWY63Td4AAO0DKAreJG.jpg'}],
-  state: 'CANCEL',
-  title: '옥상 바닥 방수페인트 처리 요청합니다',
-  visitDate: '1630800000000',
-  workCategory: {code: 'A008', name: '페인트/방수'},
-};
-
 function WorkDetailPresenter({
   loading,
   work,

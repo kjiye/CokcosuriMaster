@@ -1,8 +1,8 @@
 import {BasicInput, LimitTextArea} from '../../../components/Input';
-import BaseContainer from '../../../components/BaseContainer';
 import {CategoryType} from '../../../models/common';
 import {GestureResponderEvent} from 'react-native';
 import I18n from '../../../utils/i18nHelpers';
+import KeyboardBaseContainer from '../../../components/KeyboardBaseContainer';
 import {PrimaryButton} from '../../../components/Button';
 import React from 'react';
 import RequiredTitleItem from './RequiredTitleItem';
@@ -12,14 +12,15 @@ import styled from 'styled-components/native';
 
 const COMPONENT_GAP = 16;
 
-const Container = styled(BaseContainer)`
-  flex: 1;
+const Container = styled(KeyboardBaseContainer)`
   background: ${(props: any) => props.theme.colors.background};
 `;
 
 const ContentContainer = styled.View`
   flex: 1;
-  padding: 0 ${(props: any) => props.theme.size.standardPadding}px;
+  ${(props: any) => `
+  padding: 0px ${props.theme.size.standardPadding}px ${props.theme.size.bottomPadding}px
+  `}
 `;
 
 const Title = styled(RequiredTitleItem)`

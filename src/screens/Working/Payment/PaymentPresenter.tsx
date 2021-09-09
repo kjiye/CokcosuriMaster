@@ -1,8 +1,8 @@
 import AdditionalInputView from './AdditionalInputView';
-import BaseContainer from '../../../components/BaseContainer';
 import {CategoryType} from '../../../models/common';
 import {GestureResponderEvent} from 'react-native';
 import I18n from '../../../utils/i18nHelpers';
+import KeyboardBaseContainer from '../../../components/KeyboardBaseContainer';
 import {LimitTextArea} from '../../../components/Input';
 import {PrimaryButton} from '../../../components/Button';
 import React from 'react';
@@ -16,7 +16,7 @@ import styled from 'styled-components/native';
 const VIEW_BETWEEN_GAP = 12;
 const CONTAINER_BOTTOM_PADDING = 90;
 
-const Container = styled(BaseContainer)`
+const Container = styled(KeyboardBaseContainer)`
   background: ${(props: any) => props.theme.colors.background};
 `;
 

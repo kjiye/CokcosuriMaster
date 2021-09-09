@@ -5,6 +5,9 @@ import styled from 'styled-components/native';
 
 const Container = styled(BaseContainer)`
   background: ${(props: any) => props.theme.colors.background};
+`;
+
+const ContentContainer = styled.View`
   padding: ${(props: any) => props.theme.size.standardPadding}px;
 `;
 
@@ -16,7 +19,9 @@ function GuidePresenter(): JSX.Element {
   return (
     <Container>
       <ScrollView>
-        <ImageView source={require('../../../assets/image/guide.png')} />
+        <ContentContainer>
+          <ImageView source={require('../../../assets/image/app_guide.png')} />
+        </ContentContainer>
       </ScrollView>
     </Container>
   );

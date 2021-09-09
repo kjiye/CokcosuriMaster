@@ -1,22 +1,27 @@
-import BaseContainer from '../../../components/BaseContainer';
+import {GestureResponderEvent, ScrollView} from 'react-native';
 import {ButtonInput} from '../../../components/Input';
-import {GestureResponderEvent} from 'react-native';
 import I18n from '../../../utils/i18nHelpers';
+import KeyboardBaseContainer from '../../../components/KeyboardBaseContainer';
+import {MaskInputPhone} from '../../../models/common';
 import {PrimaryButton} from '../../../components/Button';
 import React from 'react';
 import {TitleItem} from '../../../components/Item';
 import UpdateNoticeCardView from './UpdateNoticeCardView';
-import styled from 'styled-components/native';
-import {MaskInputPhone} from '../../../models/common';
 import {VerifyInput} from '../../../../__generated__/globalTypes';
+import styled from 'styled-components/native';
 
 const CONTAINER_TOP_PADDING = 24;
+const BOTTOM_PADDING = 100;
 const COMPONENT_GAP = 16;
 
-const Container = styled(BaseContainer)`
-  padding: ${CONTAINER_TOP_PADDING}px
-    ${(props: any) => props.theme.size.standardPadding}px;
+const Container = styled(KeyboardBaseContainer)`
   background: ${(props: any) => props.theme.colors.background};
+`;
+
+const ContentContainer = styled.View`
+  flex: 1;
+  padding: ${CONTAINER_TOP_PADDING}px
+    ${(props: any) => props.theme.size.standardPadding}px ${BOTTOM_PADDING}px;
 `;
 
 const Title = styled(TitleItem)`
@@ -35,6 +40,9 @@ interface Props {
   reqVerifyBtnDisabled: boolean;
   verifyCodeBtnDisabled: boolean;
   updateBtnDisabled: boolean;
+  timerMs: number;
+  playTimer: boolean;
+  onTimerStop: (ms: number) => void;
   onChangePhone: (text: string) => void;
   onChangeVerificationCode: (text: string) => void;
   reqVerifyBtnPress: (event: GestureResponderEvent) => void;
@@ -50,6 +58,9 @@ function UpdatePhonePresenter({
   reqVerifyBtnDisabled,
   verifyCodeBtnDisabled,
   updateBtnDisabled,
+  timerMs,
+  playTimer,
+  onTimerStop,
   onChangePhone,
   onChangeVerificationCode,
   reqVerifyBtnPress,
@@ -60,31 +71,42 @@ function UpdatePhonePresenter({
     <Container
       button={
         <PrimaryButton
-          title={'전화번호 변경'}
+          title={I18n.t('Button.bottom.update_phone')}
           onPress={updatePress}
           disabled={updateBtnDisabled}
         />
       }>
-      <UpdateNoticeCardView text={currentPhone} />
-      <Title mainText={'전화번호'} />
-      <ButtonInput
-        buttonDisabled={reqVerifyBtnDisabled}
-        placeholder={I18n.t('Placeholder.phone_ex')}
-        value={phone}
-        buttonName={'인증받기'}
-        onChange={onChangePhone}
-        onPress={reqVerifyBtnPress}
-        mask={MaskInputPhone}
-      />
-      {requested && (
-        <AdditionalButtonInput
-          buttonDisabled={verifyCodeBtnDisabled}
-          value={verifyInfo?.code || ''}
-          buttonName={'인증번호 확인'}
-          onChange={onChangeVerificationCode}
-          onPress={verifyCodeBtnPress}
-        />
-      )}
+      <ScrollView>
+        <ContentContainer>
+          <UpdateNoticeCardView text={currentPhone} />
+          <Title mainText={I18n.t('Title.phone')} />
+          <ButtonInput
+            buttonDisabled={reqVerifyBtnDisabled}
+            placeholder={I18n.t('Placeholder.phone_ex')}
+            value={phone}
+            buttonName={I18n.t('Button.auth_request')}
+            onChange={onChangePhone}
+            onPress={reqVerifyBtnPress}
+            mask={MaskInputPhone}
+            keyboardType={'number-pad'}
+          />
+          {requested && (
+            <AdditionalButtonInput
+              buttonDisabled={verifyCodeBtnDisabled}
+              placeholder={I18n.t('Placeholder.auth_confirm')}
+              value={verifyInfo?.code || ''}
+              buttonName={I18n.t('Button.auth_confirm')}
+              onChange={onChangeVerificationCode}
+              onPress={verifyCodeBtnPress}
+              keyboardType={'number-pad'}
+              millisecond={timerMs}
+              usingTimer={true}
+              playTimer={playTimer}
+              timerStop={onTimerStop}
+            />
+          )}
+        </ContentContainer>
+      </ScrollView>
     </Container>
   );
 }
