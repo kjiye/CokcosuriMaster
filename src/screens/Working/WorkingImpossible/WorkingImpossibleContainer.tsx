@@ -49,15 +49,21 @@ function WorkingImpossibleContainer({route}: any): JSX.Element {
       });
     },
     okPress: () => {
-      const fileArr = images.map(file => uploadImageFormatting(file));
-      updateWorkingImpossible({
-        variables: {
-          workId: route.params.workItem.id,
-          state: WorkState.CANCEL,
-          cancelReason: reason,
-          files: fileArr,
+      callBackAlert(
+        '작업불가 처리하시겠습니까?',
+        () => {
+          const fileArr = images.map(file => uploadImageFormatting(file));
+          updateWorkingImpossible({
+            variables: {
+              workId: route.params.workItem.id,
+              state: WorkState.CANCEL,
+              cancelReason: reason,
+              files: fileArr,
+            },
+          });
         },
-      });
+        true,
+      );
     },
   };
   return <WorkingImpossiblePresenter {...props} />;

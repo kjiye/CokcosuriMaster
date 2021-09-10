@@ -110,7 +110,7 @@ function JoinContainer({route}: any): JSX.Element {
   });
 
   const [join, {loading: joinLoading}] = useMutation(JOIN_MASTER, {
-    onError: () => {
+    onError: (error: any) => {
       inventActionModal(navigation, {isShow: false});
       callBackAlert(I18n.t('Error.join'), () => {
         return;
@@ -222,14 +222,7 @@ function JoinContainer({route}: any): JSX.Element {
       }
     },
     onSelectedWorkType: (item: CategoryInput) => {
-      setWorkTypeList(
-        workTypeList.map(v => {
-          if (v.code === item.code) {
-            v.active = !v.active;
-          }
-          return v;
-        }),
-      );
+      // 전체 버튼 처리
       if (!item.code) {
         let current = true;
         workTypeList.map(v => {
@@ -244,6 +237,18 @@ function JoinContainer({route}: any): JSX.Element {
           }),
         );
         setWorkTypeAll(!current);
+      } else {
+        setWorkTypeList(
+          workTypeList.map(v => {
+            if (v.code === item.code) {
+              v.active = !v.active;
+            }
+            return v;
+          }),
+        );
+        if (workTypeAll) {
+          setWorkTypeAll(!workTypeAll);
+        }
       }
     },
     onChangeLicenseNo: (text: string) => {

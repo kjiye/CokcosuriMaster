@@ -69,6 +69,7 @@ function UpdatePhoneContainer(): JSX.Element {
       if (success) {
         setVerified(true);
         callBackAlert(I18n.t('Alert.verify_code'), () => {
+          setPlayTimer(false);
           return;
         });
       }

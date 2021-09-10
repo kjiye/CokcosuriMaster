@@ -5,7 +5,7 @@ import {
   MaskInputPhone,
 } from '../../../models/common';
 import BaseContainer from '../../../components/BaseContainer';
-import {BasicInput} from '../../../components/Input';
+import {BasicInput, ErrorViewInput} from '../../../components/Input';
 import {GestureResponderEvent} from 'react-native';
 import I18n from '../../../utils/i18nHelpers';
 import {Image} from 'react-native-image-crop-picker';
@@ -52,6 +52,7 @@ interface Props {
   user?: UpdateUser;
   workTypeAll: boolean;
   btnDisabled: boolean;
+  regexResult?: boolean;
   onChangeName: (text: string) => void;
   onChangeWorkType: (item: CategoryType) => void;
   onChangeLicenseNo: (text: string) => void;
@@ -70,6 +71,7 @@ function UpdateUserInfoPresenter({
   user,
   workTypeAll,
   btnDisabled,
+  regexResult,
   onChangeName,
   onChangeWorkType,
   onChangeLicenseNo,
@@ -116,8 +118,21 @@ function UpdateUserInfoPresenter({
             itemPress={onChangeWorkType}
           />
           <Title mainText={I18n.t('Title.license_no')} />
-          <BasicInput
+          {/* <BasicInput
             value={user?.company.licenseNo}
+            onChange={onChangeLicenseNo}
+            mask={MaskInputLicenseNo}
+            keyboardType={'number-pad'}
+          /> */}
+          <ErrorViewInput
+            placeholder={I18n.t('Placeholder.license_no')}
+            value={user?.company.licenseNo}
+            regexResult={regexResult}
+            message={
+              regexResult
+                ? I18n.t('Regex.success.license_no')
+                : I18n.t('Regex.failed.license_no')
+            }
             onChange={onChangeLicenseNo}
             mask={MaskInputLicenseNo}
             keyboardType={'number-pad'}

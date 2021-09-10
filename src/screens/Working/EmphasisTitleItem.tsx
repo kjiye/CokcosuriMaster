@@ -15,6 +15,11 @@ const EmphasisText = styled(TitleText)<{color?: string}>`
     props.color ? props.color : props.theme.colors.black[1]};
 `;
 
+const SubText = styled.Text`
+  font-size: ${(props: any) => props.theme.fonts.normal}px;
+  color: ${(props: any) => props.theme.colors.grey[5]};
+`;
+
 interface Props {
   status: string;
   color?: string;
@@ -24,6 +29,7 @@ function EmphasisTitleItem({status, color}: Props): JSX.Element {
   return (
     <TitleText>
       작업 <EmphasisText color={color}>{status}</EmphasisText> 사진
+      <SubText> (3장 필수)</SubText>
     </TitleText>
   );
 }

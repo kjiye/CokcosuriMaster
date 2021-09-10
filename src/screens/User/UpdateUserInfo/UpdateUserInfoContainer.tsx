@@ -27,6 +27,7 @@ function UpdateUserInfoContainer({route}: any): JSX.Element {
   const [imageOption, setImageOption] = useState<ImageSelectorOption>();
   const [isChangeLicense, setIsChangeLicense] = useState<boolean>(false);
   const [replaceImage, setReplaceImage] = useState<Image>(); // 여기 이미지 있을 시에만 파일 보냄
+  const [regexResult, setRegexResult] = useState<boolean>();
 
   const [getWorkTypeCategories] = useLazyQuery(GET_CATEGORIES, {
     onCompleted: (data: any) => {
@@ -67,7 +68,9 @@ function UpdateUserInfoContainer({route}: any): JSX.Element {
 
   const [updateMasterInfo] = useMutation(SET_MASTER_INFO, {
     onError: (error: any) => {
-      callBackAlert(I18n.t('Error.common'), () => {
+      const {message} = error;
+      const alertMsg = message ? message : I18n.t('Error.common');
+      callBackAlert(alertMsg, () => {
         return;
       });
     },
@@ -122,6 +125,7 @@ function UpdateUserInfoContainer({route}: any): JSX.Element {
       user.company.licenseNo &&
       (user?.company?.licenseImage || replaceImage)
     ),
+    regexResult,
     onChangeName: (text: string) => {
       if (user) {
         setUser({
@@ -170,6 +174,15 @@ function UpdateUserInfoContainer({route}: any): JSX.Element {
         });
       }
       setIsChangeLicense(true);
+      if (text.length > 0) {
+        if (text.length === 12) {
+          setRegexResult(true);
+        } else {
+          setRegexResult(false);
+        }
+      } else {
+        setRegexResult(undefined);
+      }
     },
     imageOption,
     showImageOption: () => {

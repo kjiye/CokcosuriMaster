@@ -46,6 +46,7 @@ function WorkingDoneContainer({route}: any): JSX.Element {
     loading,
     item: data?.getWorkDetail?.work,
     total: images.length,
+    images,
     goPayment: () => {
       navigation.navigate('Payment', {workItem: data?.getWorkDetail?.work});
     },

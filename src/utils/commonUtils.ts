@@ -6,8 +6,8 @@ import {RegexType} from '../models/common';
 import dayjs from 'dayjs';
 import {getWorkDetail_getWorkDetail_work_customer_address_coordinate} from '../../__generated__/getWorkDetail';
 
-// export const SERVER_URL = 'http://211.110.229.85:4000/graphql';
-export const SERVER_URL = 'http://192.168.1.249:4000/graphql';
+export const SERVER_URL = 'http://211.110.229.85:4000/graphql';
+// export const SERVER_URL = 'http://192.168.1.249:4000/graphql';
 // export const SERVER_URL = 'http://localhost:4000/graphql';
 // export const SERVER_URL = 'http://192.168.1.245:4000/graphql';
 // export const SERVER_URL = 'http://10.80.102.81:4000/graphql';
@@ -18,8 +18,8 @@ const regexPattern = (type: RegexType) => {
     case 'email':
       return /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
     case 'password':
-      // return /^[A-za-z0-9]{6,12}$/;
-      return /^[A-za-z0-9]{6,}$/;
+      // return /^[A-za-z0-9+]{6,}$/;
+      return /^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$/;
     case 'phone':
       return /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{3,4}$/;
     case 'licenseNo':

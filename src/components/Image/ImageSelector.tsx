@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {ImageData, ImageSelectorOption} from '../../models/common';
 import ImagePicker, {Image} from 'react-native-image-crop-picker';
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useLayoutEffect, useState} from 'react';
 import DeleteSvg from '../../../assets/svg/ic_delete_img.svg';
 import I18n from '../../utils/i18nHelpers';
 import PhotoSvg from '../../../assets/svg/ic_photo.svg';
@@ -68,6 +68,7 @@ interface Props {
   onAdd: (image: Image) => void;
   onDelete: () => void;
   isCropped?: boolean;
+  pendingImage?: Image;
 }
 
 function ImageSelector({
@@ -81,6 +82,7 @@ function ImageSelector({
   onAdd,
   onDelete,
   isCropped = true,
+  pendingImage,
 }: Props): JSX.Element {
   const [image, setImage] = useState<Image | undefined>();
   const picker = useCallback(async () => {
@@ -93,12 +95,13 @@ function ImageSelector({
       setImage(result);
       onAdd(result);
     } catch (e) {
-      if (!e.code.includes('CANCELLED')) {
+      if (e.code.includes('PERMISSION')) {
         callBackAlert(I18n.t('Permission.status.blocked'), () => {
           return;
         });
+      } else {
+        return;
       }
-      return;
     }
   }, []);
 
@@ -129,6 +132,10 @@ function ImageSelector({
     }
   }, [option, image, currentImage]);
 
+  useEffect(() => {
+    setImage(pendingImage);
+  }, [pendingImage]);
+
   return (
     <View style={style as StyleProp<ViewProps>}>
       {currentImage ? (
@@ -136,7 +143,7 @@ function ImageSelector({
           <ImageView
             isCropped={isCropped}
             resizeMethod={'resize'}
-            resizeMode={isCropped ? 'cover' : 'center'}
+            resizeMode={isCropped ? 'cover' : 'contain'}
             source={setImageUrl(currentImage.path)}
           />
           <DeleteButton
@@ -151,8 +158,10 @@ function ImageSelector({
           <ImageView
             isCropped={isCropped}
             resizeMethod={'resize'}
-            resizeMode={isCropped ? 'cover' : 'center'}
-            source={{uri: Platform.OS === 'ios' ? image.sourceURL : image.path}}
+            resizeMode={isCropped ? 'cover' : 'contain'}
+            source={{
+              uri: Platform.OS === 'ios' ? image.sourceURL : image.path,
+            }}
           />
           <DeleteButton
             onPress={() => {

@@ -1,23 +1,20 @@
+import styled, {useTheme} from 'styled-components/native';
 import {CardView} from '../../../components/View';
-import {GRAY_2} from '../../../constants/color';
 import I18n from '../../../utils/i18nHelpers';
-import {INNER_MARGIN} from '../../../constants/size';
 import PhoneSvg from '../../../../assets/svg/ic_phone.svg';
 import React from 'react';
 import {TitleInfoItem} from '../../../components/Item';
 import {TwoButtonGroup} from '../../../components/Button';
+import {WorkState} from '../../../../__generated__/globalTypes';
 import {dateFormatting} from '../../../utils/commonUtils';
 import {getWorkDetail_getWorkDetail_work} from '../../../../__generated__/getWorkDetail';
-import styled from 'styled-components/native';
 
 const SeperatedSection = styled(CardView)`
-  margin-top: ${INNER_MARGIN}px;
+  margin-top: ${(props: any) => props.theme.size.innerMargin}px;
 `;
 
 const InnerWrapper = styled.View`
-  border-top-width: 3px;
-  border-color: ${GRAY_2};
-  padding: ${INNER_MARGIN}px;
+  padding: ${(props: any) => props.theme.size.innerMargin}px;
 `;
 
 interface Props {
@@ -31,6 +28,7 @@ function CustomerInfoItem({
   leftBtnPress,
   rightBtnPress,
 }: Props): JSX.Element {
+  const theme: any = useTheme();
   return (
     <>
       <CardView>
@@ -47,21 +45,24 @@ function CustomerInfoItem({
       </CardView>
       <SeperatedSection hasPadding={false}>
         <>
-          <TwoButtonGroup
-            leftBtnName={I18n.t('Button.copy_address')}
-            rightBtnName={I18n.t('Button.call')}
-            rightPrimaryColored={true}
-            rightIcon={<PhoneSvg />}
-            leftBtnPress={() => {
-              const {
-                address: {postalCode, roadAddress, detail},
-              }: any = item;
-              leftBtnPress(`(${postalCode}) ${roadAddress} ${detail}`);
-            }}
-            rightBtnPress={() => {
-              rightBtnPress(item.customer.phone);
-            }}
-          />
+          {item.state !== WorkState.DONE && (
+            <TwoButtonGroup
+              style={{borderBottomWidth: 3, borderColor: theme.colors.grey[2]}}
+              leftBtnName={I18n.t('Button.copy_address')}
+              rightBtnName={I18n.t('Button.call')}
+              rightPrimaryColored={true}
+              rightIcon={<PhoneSvg />}
+              leftBtnPress={() => {
+                const {
+                  address: {postalCode, roadAddress, detail},
+                }: any = item;
+                leftBtnPress(`(${postalCode}) ${roadAddress} ${detail}`);
+              }}
+              rightBtnPress={() => {
+                rightBtnPress(item.customer.phone);
+              }}
+            />
+          )}
           <InnerWrapper>
             <TitleInfoItem
               titleText={I18n.t('CustomerInfo.visit_date')}

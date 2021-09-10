@@ -7,7 +7,6 @@ import I18n from '../../../utils/i18nHelpers';
 import {Image} from 'react-native-image-crop-picker';
 import {ImageSelector} from '../../../components/Image';
 import LoadingView from '../../../components/View/LoadingView';
-import {PaymentState} from '../../../../__generated__/globalTypes';
 import {PrimaryButton} from '../../../components/Button';
 import React from 'react';
 import WorkingNoticeView from '../WorkingNoticeView';
@@ -42,31 +41,18 @@ interface Props {
   loading: boolean;
   item: getWorkDoneDetail_getWorkDetail_work;
   total: number;
+  images: Image[];
   goPayment: (event: GestureResponderEvent) => void;
   addImage: (image: Image) => void;
   deleteImage: (index: number) => void;
   okPress: (event: GestureResponderEvent) => void;
 }
 
-const a = {
-  hasParts: {code: 'D002', name: '미보유'},
-  id: 1,
-  payment: {
-    desc: null,
-    id: 1,
-    price: 320000,
-    reason: {code: 'B001', name: '후불결제'},
-    state: 'WAIT',
-  },
-  state: 'WORKING',
-  title: '옥상 바닥 방수페인트 처리 요청합니다',
-  workCategory: {code: 'A008', name: '페인트/방수'},
-};
-
 function WorkingDonePresenter({
   loading,
   item,
   total,
+  images,
   goPayment,
   addImage,
   deleteImage,
@@ -115,6 +101,7 @@ function WorkingDonePresenter({
               color={colors.secondaryLight}
             />
             <ImageSelector
+              pendingImage={images[0]}
               desc={I18n.t('Image.first_upload')}
               onAdd={addImage}
               onDelete={() => {
@@ -122,6 +109,7 @@ function WorkingDonePresenter({
               }}
             />
             <NextImageSelector
+              pendingImage={images[1]}
               desc={I18n.t('Image.second_upload')}
               onAdd={addImage}
               onDelete={() => {
@@ -129,6 +117,7 @@ function WorkingDonePresenter({
               }}
             />
             <NextImageSelector
+              pendingImage={images[2]}
               desc={I18n.t('Image.third_upload')}
               onAdd={addImage}
               onDelete={() => {

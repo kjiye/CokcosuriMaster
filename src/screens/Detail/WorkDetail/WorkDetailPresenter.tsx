@@ -86,6 +86,12 @@ function WorkDetailPresenter({
           <ContentTextView value={work.content || ''} />
           <MidTitleItem mainText={I18n.t('Title.customer_place')} />
           <ImageSlider imageList={work.requestImage || []} />
+          {work.state === WorkState.WORKING && (
+            <>
+              <MidTitleItem mainText={I18n.t('Title.before_work_image')} />
+              <ImageSlider imageList={work.beforeImage || []} />
+            </>
+          )}
           {work.state === WorkState.DONE && (
             <>
               <MidTitleItem mainText={I18n.t('Title.before_work_image')} />

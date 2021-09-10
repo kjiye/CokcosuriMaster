@@ -59,7 +59,7 @@ export default {
     name: '이름을 입력해주세요',
     phone_ex: '010-1234-1234',
     auth_confirm: '인증번호 입력',
-    password: '영문/숫자 6자 이상 입력해주세요',
+    password: '영문/숫자 포함 6자 이상 입력해주세요',
     re_password: '비밀번호를 다시 입력해주세요',
     license_no: '사업자 번호 10자를 입력해주세요',
     upload_image: '사진 올리기',

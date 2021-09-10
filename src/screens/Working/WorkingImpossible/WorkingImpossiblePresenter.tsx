@@ -80,7 +80,10 @@ function WorkingImpossiblePresenter({
             currentCount={reason.length}
             onChange={onChangeReason}
           />
-          <Title mainText={I18n.t('WorkingImpossible.image')} />
+          <Title
+            mainText={I18n.t('WorkingImpossible.image')}
+            desc={'3장 필수'}
+          />
           <ImageSelector
             desc={I18n.t('Image.first_upload')}
             onAdd={addImage}

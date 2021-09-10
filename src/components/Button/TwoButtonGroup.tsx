@@ -1,4 +1,4 @@
-import {GestureResponderEvent} from 'react-native';
+import {GestureResponderEvent, StyleProp, ViewStyle} from 'react-native';
 import {INNER_MARGIN} from '../../constants/size';
 import React from 'react';
 import SingleButton from './SingleButton';
@@ -13,6 +13,7 @@ const Wrapper = styled.View`
 `;
 
 interface Props {
+  style?: StyleProp<ViewStyle>;
   leftBtnName: string;
   leftIcon?: JSX.Element;
   leftPrimaryColored?: boolean;
@@ -24,6 +25,7 @@ interface Props {
 }
 
 function TwoButtonGroup({
+  style,
   leftBtnName,
   leftIcon,
   leftPrimaryColored,
@@ -34,7 +36,7 @@ function TwoButtonGroup({
   rightBtnPress,
 }: Props): JSX.Element {
   return (
-    <Wrapper>
+    <Wrapper style={style}>
       <SingleButton
         name={leftBtnName}
         icon={leftIcon}
