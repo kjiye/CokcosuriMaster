@@ -26,6 +26,8 @@ export default {
     payment: '현장결제',
     button: {
       working_impossible: '작업불가',
+      delete_alarm: '알림삭제',
+      view_list: '목록보기',
     },
   },
   Tab: {
@@ -88,6 +90,7 @@ export default {
       update_password: '비밀번호 변경',
       setting: '설정',
       update_phone: '전화번호 변경',
+      delete_all: '전체 삭제',
     },
   },
   Alert: {
@@ -243,7 +246,10 @@ export default {
   WarnNetwork: {
     message: '네트워크 연결상태를 확인한 후 다시 시도해주세요',
   },
-  // 레이아웃용 임시 사용
+  Alarm: {
+    no_data: '알림 내역이 없습니다',
+    no_delete_data: '삭제할 내역이 없습니다',
+  },
   TempTerms: {
     privacy_policy: `개인정보처리방침
 

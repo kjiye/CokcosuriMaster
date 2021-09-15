@@ -18,7 +18,7 @@ const ImageView = styled.Image`
 function GuidePresenter(): JSX.Element {
   return (
     <Container>
-      <ScrollView>
+      <ScrollView scrollIndicatorInsets={{right: 0.1}}>
         <ContentContainer>
           <ImageView source={require('../../../assets/image/app_guide.png')} />
         </ContentContainer>

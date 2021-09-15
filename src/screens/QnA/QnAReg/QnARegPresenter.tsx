@@ -57,7 +57,7 @@ function QnARegPresenter({
           disabled={btnDisabled}
         />
       }>
-      <ScrollView>
+      <ScrollView scrollIndicatorInsets={{right: 0.1}}>
         <ContentContainer>
           <Title title={I18n.t('QnA.title')} />
           <BasicInput

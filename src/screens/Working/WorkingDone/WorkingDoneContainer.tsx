@@ -13,6 +13,10 @@ function WorkingDoneContainer({route}: any): JSX.Element {
   const navigation = useNavigation();
   const [images, setImages] = useState<Image[]>([]);
 
+  const [firstImage, setFirstImage] = useState<Image>();
+  const [secondImage, setSecondImage] = useState<Image>();
+  const [thirdImage, setThirdImage] = useState<Image>();
+
   const {loading, data, refetch} = useQuery(GET_WORK_DONE_DETAIL, {
     variables: {
       workId: route.params.workItem.id,
@@ -45,13 +49,35 @@ function WorkingDoneContainer({route}: any): JSX.Element {
   const props = {
     loading,
     item: data?.getWorkDetail?.work,
-    total: images.length,
+    // total: images.length,
+    btnDisabled: !(firstImage && secondImage && thirdImage),
     images,
+    firstImage,
+    secondImage,
+    thirdImage,
     goPayment: () => {
       navigation.navigate('Payment', {workItem: data?.getWorkDetail?.work});
     },
-    addImage: (image: Image) => {
-      setImages(s => [...s, image]);
+    // addImage: (image: Image) => {
+    //   setImages(s => [...s, image]);
+    // },
+    addFirstImage: (image: Image) => {
+      setFirstImage(image);
+    },
+    addSecondImage: (image: Image) => {
+      setSecondImage(image);
+    },
+    addThirdImage: (image: Image) => {
+      setThirdImage(image);
+    },
+    deleteFirstImage: () => {
+      setFirstImage(undefined);
+    },
+    deleteSecondImage: () => {
+      setSecondImage(undefined);
+    },
+    deleteThirdImage: () => {
+      setThirdImage(undefined);
     },
     deleteImage: (index: number) => {
       setImages(s => {
@@ -61,7 +87,12 @@ function WorkingDoneContainer({route}: any): JSX.Element {
       });
     },
     okPress: () => {
-      const fileArr = images.map(file => uploadImageFormatting(file));
+      const imageArr: any[] = [
+        {...firstImage},
+        {...secondImage},
+        {...thirdImage},
+      ];
+      const fileArr = imageArr.map(file => uploadImageFormatting(file));
       updateWorkingDone({
         variables: {
           workId: data.getWorkDetail.work.id,

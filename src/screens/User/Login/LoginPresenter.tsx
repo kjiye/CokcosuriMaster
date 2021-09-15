@@ -66,7 +66,7 @@ function LoginPresenter({
           disabled={loginBtnDisabled}
         />
       }>
-      <ScrollView>
+      <ScrollView scrollIndicatorInsets={{right: 0.1}}>
         <ContentContainer>
           <NoticeCardView
             title={I18n.t('Login.notice')}

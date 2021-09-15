@@ -62,13 +62,7 @@ function MainDrawer(): JSX.Element {
           title: I18n.t('Header.qna'),
         })}
       />
-      <Drawer.Screen
-        name={'Alarm'}
-        component={AlarmScreen}
-        options={basicHeader({
-          title: I18n.t('Header.alarm'),
-        })}
-      />
+      <Drawer.Screen name={'Alarm'} component={AlarmScreen} />
       <Drawer.Screen
         name={'Notice'}
         component={NoticeScreen}

@@ -60,6 +60,7 @@ interface Props {
   imageOption?: ImageSelectorOption;
   addImage: (image: Image) => void;
   deleteImage: () => void;
+  resetImageOption: () => void;
   joinBtnDisabled: boolean;
   join: (event: GestureResponderEvent) => void;
 }
@@ -88,6 +89,7 @@ function JoinPresenter({
   imageOption,
   addImage,
   deleteImage,
+  resetImageOption,
   joinBtnDisabled,
   join,
 }: Props): JSX.Element {
@@ -100,7 +102,7 @@ function JoinPresenter({
           onPress={join}
         />
       }>
-      <ScrollView>
+      <ScrollView scrollIndicatorInsets={{right: 0.1}}>
         <ContentContainer>
           <TitleItem mainText={I18n.t('Title.name')} />
           <BasicInput
@@ -209,6 +211,7 @@ function JoinPresenter({
             onAdd={addImage}
             onDelete={deleteImage}
             isCropped={false}
+            resetImageOption={resetImageOption}
           />
         </ContentContainer>
       </ScrollView>

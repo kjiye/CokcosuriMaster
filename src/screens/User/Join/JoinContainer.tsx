@@ -14,7 +14,7 @@ import {
 import {JoinFormInput, JoinRegex} from '../../../models/user';
 import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {checkRegex, uploadImageFormatting} from '../../../utils/commonUtils';
-import {useLazyQuery, useMutation} from '@apollo/client';
+import {useLazyQuery, useMutation, useQuery} from '@apollo/client';
 import I18n from '../../../utils/i18nHelpers';
 import {Image} from 'react-native-image-crop-picker';
 import JoinPresenter from './JoinPresenter';
@@ -34,7 +34,24 @@ function JoinContainer({route}: any): JSX.Element {
   const [timerMs, setTimerMs] = useState<number>(5 * 60 * 1000);
   const [playTimer, setPlayTimer] = useState<boolean>(false);
 
-  const [getCategories] = useLazyQuery(GET_CATEGORIES, {
+  // const [getCategories] = useLazyQuery(GET_CATEGORIES, {
+  //   onCompleted: (data: any) => {
+  //     if (workTypeList.length <= 0) {
+  //       const {categories} = data?.getCategories;
+  //       setWorkTypeList(
+  //         categories.map((v: CategoryType) => {
+  //           v = {...v, active: false};
+  //           return v;
+  //         }),
+  //       );
+  //     }
+  //   },
+  // });
+
+  const {loading} = useQuery(GET_CATEGORIES, {
+    variables: {
+      name: CategoryName.WORK_TYPE,
+    },
     onCompleted: (data: any) => {
       if (workTypeList.length <= 0) {
         const {categories} = data?.getCategories;
@@ -44,6 +61,8 @@ function JoinContainer({route}: any): JSX.Element {
             return v;
           }),
         );
+      } else {
+        return;
       }
     },
   });
@@ -135,13 +154,14 @@ function JoinContainer({route}: any): JSX.Element {
     },
   });
 
-  useLayoutEffect(() => {
-    getCategories({
-      variables: {
-        name: CategoryName.WORK_TYPE,
-      },
-    });
-  }, []);
+  // useLayoutEffect(() => {
+  //   console.log('=======================');
+  //   getCategories({
+  //     variables: {
+  //       name: CategoryName.WORK_TYPE,
+  //     },
+  //   });
+  // }, []);
 
   useEffect(() => {
     if (route.params?.imageOption) {
@@ -222,7 +242,6 @@ function JoinContainer({route}: any): JSX.Element {
       }
     },
     onSelectedWorkType: (item: CategoryInput) => {
-      // 전체 버튼 처리
       if (!item.code) {
         let current = true;
         workTypeList.map(v => {
@@ -274,6 +293,9 @@ function JoinContainer({route}: any): JSX.Element {
       setLicenseImage(undefined);
       setImageOption(undefined);
     },
+    resetImageOption: () => {
+      setImageOption(undefined);
+    },
     joinBtnDisabled: !(
       regexResult.password &&
       regexResult.rePassword &&
@@ -284,21 +306,30 @@ function JoinContainer({route}: any): JSX.Element {
       workTypeList.length > 0
     ),
     join: () => {
-      delete user.rePassword;
       if (!joinLoading && licenseImage) {
+        // delete user.rePassword;
         inventActionModal(navigation, {isShow: true});
+        const formWorkTypeList = workTypeList.map(v => {
+          if (v.active) {
+            return {
+              code: v.code,
+              name: v.name,
+            };
+          }
+        });
         join({
           variables: {
             data: {
               phone: user?.phone && user.phone.replace(/-/gi, ''),
               password: user.password,
               name: user.name,
-              workCategories: workTypeList.filter(v => {
-                if (v.active) {
-                  delete v.active;
-                  return v;
-                }
-              }),
+              // workCategories: workTypeList.filter(v => {
+              //   if (v.active) {
+              //     delete v.active;
+              //     return v;
+              //   }
+              // }),
+              workCategories: formWorkTypeList.filter(v => v !== undefined),
               licenseNo: user?.licenseNo && user.licenseNo.replace(/-/gi, ''),
             },
             sendId: verifyInfo?.sendId,

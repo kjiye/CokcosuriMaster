@@ -79,10 +79,10 @@ function PermissionView({btnPress}: Props): JSX.Element {
           title={I18n.t('Permission.camera')}
           explain={I18n.t('Permission.explain.camera')}
         />
-        {/* <PermissionItem
+        <PermissionItem
           title={I18n.t('Permission.alarm')}
           explain={I18n.t('Permission.explain.alarm')}
-        /> */}
+        />
       </ContentContainer>
       <ButtonSection>
         <ExplainText>{I18n.t('Permission.bottom_explain')}</ExplainText>

@@ -67,7 +67,7 @@ function PaymentPresenter({
           disabled={btnDisabled}
         />
       }>
-      <ScrollView>
+      <ScrollView scrollIndicatorInsets={{right: 0.1}}>
         <ContentContainer>
           <WorkingNoticeView
             itemInfo={item}

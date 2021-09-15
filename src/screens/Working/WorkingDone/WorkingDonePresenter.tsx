@@ -40,10 +40,20 @@ const NextImageSelector = styled(ImageSelector)`
 interface Props {
   loading: boolean;
   item: getWorkDoneDetail_getWorkDetail_work;
-  total: number;
+  // total: number;
+  btnDisabled: boolean;
   images: Image[];
+  firstImage?: Image;
+  secondImage?: Image;
+  thirdImage?: Image;
   goPayment: (event: GestureResponderEvent) => void;
-  addImage: (image: Image) => void;
+  // addImage: (image: Image) => void;
+  addFirstImage: (image: Image) => void;
+  addSecondImage: (image: Image) => void;
+  addThirdImage: (image: Image) => void;
+  deleteFirstImage: () => void;
+  deleteSecondImage: () => void;
+  deleteThirdImage: () => void;
   deleteImage: (index: number) => void;
   okPress: (event: GestureResponderEvent) => void;
 }
@@ -51,10 +61,20 @@ interface Props {
 function WorkingDonePresenter({
   loading,
   item,
-  total,
+  // total,
+  btnDisabled,
   images,
+  firstImage,
+  secondImage,
+  thirdImage,
   goPayment,
-  addImage,
+  // addImage,
+  addFirstImage,
+  addSecondImage,
+  addThirdImage,
+  deleteFirstImage,
+  deleteSecondImage,
+  deleteThirdImage,
   deleteImage,
   okPress,
 }: Props): JSX.Element {
@@ -64,13 +84,14 @@ function WorkingDonePresenter({
         <PrimaryButton
           title={I18n.t('Button.done')}
           onPress={okPress}
-          disabled={total < 3}
+          // disabled={total < 3}
+          disabled={btnDisabled}
         />
       }>
       {loading ? (
         <LoadingView />
       ) : (
-        <ScrollView>
+        <ScrollView scrollIndicatorInsets={{right: 0.1}}>
           <ContentContainer>
             <WorkingNoticeView
               itemInfo={item}
@@ -101,28 +122,37 @@ function WorkingDonePresenter({
               color={colors.secondaryLight}
             />
             <ImageSelector
-              pendingImage={images[0]}
+              // pendingImage={images[0]}
+              pendingImage={firstImage}
               desc={I18n.t('Image.first_upload')}
-              onAdd={addImage}
-              onDelete={() => {
-                deleteImage(0);
-              }}
+              // onAdd={addImage}
+              onAdd={addFirstImage}
+              // onDelete={() => {
+              //   deleteImage(0);
+              // }}
+              onDelete={deleteFirstImage}
             />
             <NextImageSelector
-              pendingImage={images[1]}
+              // pendingImage={images[1]}
+              pendingImage={secondImage}
               desc={I18n.t('Image.second_upload')}
-              onAdd={addImage}
-              onDelete={() => {
-                deleteImage(1);
-              }}
+              // onAdd={addImage}
+              onAdd={addSecondImage}
+              // onDelete={() => {
+              //   deleteImage(1);
+              // }}
+              onDelete={deleteSecondImage}
             />
             <NextImageSelector
-              pendingImage={images[2]}
+              // pendingImage={images[2]}
+              pendingImage={thirdImage}
               desc={I18n.t('Image.third_upload')}
-              onAdd={addImage}
-              onDelete={() => {
-                deleteImage(2);
-              }}
+              // onAdd={addImage}
+              onAdd={addThirdImage}
+              // onDelete={() => {
+              //   deleteImage(2);
+              // }}
+              onDelete={deleteThirdImage}
             />
           </ContentContainer>
         </ScrollView>

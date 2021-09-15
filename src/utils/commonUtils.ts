@@ -6,8 +6,8 @@ import {RegexType} from '../models/common';
 import dayjs from 'dayjs';
 import {getWorkDetail_getWorkDetail_work_customer_address_coordinate} from '../../__generated__/getWorkDetail';
 
-export const SERVER_URL = 'http://211.110.229.85:4000/graphql';
-// export const SERVER_URL = 'http://192.168.1.249:4000/graphql';
+// export const SERVER_URL = 'http://211.110.229.85:4000/graphql';
+export const SERVER_URL = 'http://192.168.1.249:4000/graphql';
 // export const SERVER_URL = 'http://localhost:4000/graphql';
 // export const SERVER_URL = 'http://192.168.1.245:4000/graphql';
 // export const SERVER_URL = 'http://10.80.102.81:4000/graphql';
@@ -53,7 +53,8 @@ export const coordsFormatting = (
 
 export const uploadImageFormatting = (image: Image) => {
   return new ReactNativeFile({
-    uri: (Platform.OS === 'ios' ? image.sourceURL : image.path) || '',
+    // uri: (Platform.OS === 'ios' ? image.sourceURL : image.path) || '',
+    uri: image?.sourceURL ? image.sourceURL : image.path,
     name: image?.filename
       ? image.filename
       : image.path.substring(image.path.lastIndexOf('/') + 1),

@@ -76,7 +76,7 @@ function UpdatePhonePresenter({
           disabled={updateBtnDisabled}
         />
       }>
-      <ScrollView>
+      <ScrollView scrollIndicatorInsets={{right: 0.1}}>
         <ContentContainer>
           <UpdateNoticeCardView text={currentPhone} />
           <Title mainText={I18n.t('Title.phone')} />

@@ -69,3 +69,11 @@ export const SET_WORKING = gql`
     }
   }
 `;
+
+export const REG_PUSH_TOKEN = gql`
+  mutation regPushToken($deviceType: DeviceType, $deviceToken: String) {
+    regPushToken(deviceType: $deviceType, deviceToken: $deviceToken) {
+      success
+    }
+  }
+`;

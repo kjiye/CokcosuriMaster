@@ -25,6 +25,7 @@ function NoticePresenter({loading, list}: Props): JSX.Element {
         <LoadingView />
       ) : list.length > 0 ? (
         <FlatList
+          scrollIndicatorInsets={{right: 0.1}}
           data={list}
           keyExtractor={(_: any, i: number) => i.toString()}
           renderItem={({item}: any) => (

@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {ImageData, ImageSelectorOption} from '../../models/common';
 import ImagePicker, {Image} from 'react-native-image-crop-picker';
-import React, {useCallback, useEffect, useLayoutEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import DeleteSvg from '../../../assets/svg/ic_delete_img.svg';
 import I18n from '../../utils/i18nHelpers';
 import PhotoSvg from '../../../assets/svg/ic_photo.svg';
@@ -69,6 +69,7 @@ interface Props {
   onDelete: () => void;
   isCropped?: boolean;
   pendingImage?: Image;
+  resetImageOption?: () => void;
 }
 
 function ImageSelector({
@@ -83,6 +84,7 @@ function ImageSelector({
   onDelete,
   isCropped = true,
   pendingImage,
+  resetImageOption,
 }: Props): JSX.Element {
   const [image, setImage] = useState<Image | undefined>();
   const picker = useCallback(async () => {
@@ -94,8 +96,11 @@ function ImageSelector({
       });
       setImage(result);
       onAdd(result);
-    } catch (e) {
-      if (e.code.includes('PERMISSION')) {
+    } catch (e: any) {
+      if (resetImageOption) {
+        resetImageOption();
+      }
+      if (e?.code.includes('PERMISSION')) {
         callBackAlert(I18n.t('Permission.status.blocked'), () => {
           return;
         });
@@ -115,6 +120,9 @@ function ImageSelector({
       setImage(result);
       onAdd(result);
     } catch (e) {
+      if (resetImageOption) {
+        resetImageOption();
+      }
       return;
     }
   }, []);
@@ -160,7 +168,8 @@ function ImageSelector({
             resizeMethod={'resize'}
             resizeMode={isCropped ? 'cover' : 'contain'}
             source={{
-              uri: Platform.OS === 'ios' ? image.sourceURL : image.path,
+              // uri: Platform.OS === 'ios' ? image.sourceURL : image.path,
+              uri: image.path,
             }}
           />
           <DeleteButton

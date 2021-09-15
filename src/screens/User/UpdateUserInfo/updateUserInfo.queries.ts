@@ -52,3 +52,11 @@ export const WITHDRAWAL = gql`
     }
   }
 `;
+
+export const LOGOUT = gql`
+  mutation logoutMaster {
+    logoutMaster {
+      success
+    }
+  }
+`;

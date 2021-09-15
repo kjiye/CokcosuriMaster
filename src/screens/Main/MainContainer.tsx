@@ -1,5 +1,5 @@
-import {GET_WORKS, SET_WORKING} from './main.queries';
-import React, {useCallback, useState} from 'react';
+import {GET_WORKS, REG_PUSH_TOKEN, SET_WORKING} from './main.queries';
+import React, {useCallback, useLayoutEffect, useState} from 'react';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {useMutation, useQuery} from '@apollo/client';
 import Clipboard from '@react-native-community/clipboard';
@@ -10,6 +10,7 @@ import Toast from 'react-native-simple-toast';
 import {WorkState} from '../../../__generated__/globalTypes';
 import {callBackAlert} from '../../utils/alert';
 import {getWorks_getWorks_works} from '../../../__generated__/getWorks';
+
 import {paymentText} from '../../utils/workUtils';
 
 function MainContainer({
@@ -18,8 +19,19 @@ function MainContainer({
   },
 }: any): JSX.Element {
   const navigation = useNavigation();
-
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
+
+  // 사용 시 라우팅 분기 작업 필요
+  // useEffect(() => {
+  //   const backAction: any = () => {
+  //     BackHandler.exitApp();
+  //   };
+  //   const backHandler = BackHandler.addEventListener(
+  //     'hardwareBackPress',
+  //     backAction,
+  //   );
+  //   return () => backHandler.remove();
+  // }, []);
 
   const {loading, data, error, refetch} = useQuery(GET_WORKS, {
     variables: {
@@ -28,8 +40,17 @@ function MainContainer({
   });
 
   const [setWorking] = useMutation(SET_WORKING, {
+    onError: (error: any) => {
+      if (error.message) {
+        callBackAlert(error.message, () => {
+          refetch();
+        });
+      }
+    },
     onCompleted: () => {
-      refetch();
+      callBackAlert(I18n.t('Alert.common'), () => {
+        refetch();
+      });
     },
   });
 

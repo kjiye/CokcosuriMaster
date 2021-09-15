@@ -1,11 +1,11 @@
 import {GET_QNA_CATEGORIES, REG_QNA} from '../qna.queries';
-import {categoryVar, removeCategory} from '../../../apollo';
 import {useMutation, useQuery, useReactiveVar} from '@apollo/client';
 import {CategoryName} from '../../../../__generated__/globalTypes';
 import I18n from '../../../utils/i18nHelpers';
 import QnARegPresenter from './QnARegPresenter';
 import React from 'react';
 import {callBackAlert} from '../../../utils/alert';
+import {categoryVar} from '../../../apollo';
 import {useNavigation} from '@react-navigation/native';
 import {useState} from 'react';
 

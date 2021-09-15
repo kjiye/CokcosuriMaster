@@ -1,8 +1,7 @@
-import React, {useEffect} from 'react';
 import {getFocusedRouteNameFromRoute, useRoute} from '@react-navigation/native';
-import {BackHandler} from 'react-native';
 import I18n from '../utils/i18nHelpers';
 import MainScreen from '../screens/Main';
+import React from 'react';
 import {WorkState} from '../../__generated__/globalTypes';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {useTheme} from 'styled-components';
@@ -15,17 +14,6 @@ const Tab = createMaterialTopTabNavigator();
 function MainTab(): JSX.Element {
   const route: any = useRoute();
   const theme: any = useTheme();
-
-  useEffect(() => {
-    const backAction: any = () => {
-      BackHandler.exitApp();
-    };
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      backAction,
-    );
-    return () => backHandler.remove();
-  }, []);
 
   return (
     <Tab.Navigator

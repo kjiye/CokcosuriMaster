@@ -207,6 +207,9 @@ function UpdateUserInfoContainer({route}: any): JSX.Element {
       setReplaceImage(undefined);
       setImageOption(undefined);
     },
+    resetImageOption: () => {
+      setImageOption(undefined);
+    },
     logout: () => {
       callBackAlert(
         I18n.t('Alert.logout_ask'),

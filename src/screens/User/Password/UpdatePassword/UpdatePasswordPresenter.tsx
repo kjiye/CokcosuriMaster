@@ -66,7 +66,7 @@ function UpdatePasswordPresenter({
           disabled={btnDisabled}
         />
       }>
-      <ScrollView>
+      <ScrollView scrollIndicatorInsets={{right: 0.1}}>
         <ContentContainer>
           <UpdateNoticeCardView />
           <Title mainText={I18n.t('Password.password')} />

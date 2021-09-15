@@ -61,6 +61,7 @@ interface Props {
   currentImageDelete: () => void;
   addImage: (image: Image) => void;
   deleteImage: () => void;
+  resetImageOption: () => void;
   logout: (event: GestureResponderEvent) => void;
   withdrawal: (event: GestureResponderEvent) => void;
   updatePress: (event: GestureResponderEvent) => void;
@@ -80,6 +81,7 @@ function UpdateUserInfoPresenter({
   showImageOption,
   addImage,
   deleteImage,
+  resetImageOption,
   logout,
   withdrawal,
   updatePress,
@@ -95,7 +97,7 @@ function UpdateUserInfoPresenter({
           disabled={btnDisabled}
         />
       }>
-      <ScrollView>
+      <ScrollView scrollIndicatorInsets={{right: 0.1}}>
         <ContentContainer>
           <TitleItem mainText={I18n.t('Title.name')} />
           <BasicInput value={user?.name} onChange={onChangeName} />
@@ -147,6 +149,7 @@ function UpdateUserInfoPresenter({
             option={imageOption}
             onAdd={addImage}
             onDelete={deleteImage}
+            resetImageOption={resetImageOption}
             isCropped={false}
           />
           <ButtonWrapper>

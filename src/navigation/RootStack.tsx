@@ -3,14 +3,14 @@ import InventActionModal from '../screens/Modal/InventActionModal';
 import LoginStack from './LoginStack';
 import MainDrawer from './MainDrawer';
 import PermissionModal from '../screens/Permission';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import SelectionModal from '../screens/Modal/SelectionModal';
 import UploadOptionModal from '../screens/Modal/UploadOptionModal';
+import WarnNetworkScreen from '../screens/WarnNetwork';
 import {createStackNavigator} from '@react-navigation/stack';
 import {tokenVar} from '../apollo';
-import {useReactiveVar} from '@apollo/client';
 import {useNetInfo} from '@react-native-community/netinfo';
-import WarnNetworkScreen from '../screens/WarnNetwork';
+import {useReactiveVar} from '@apollo/client';
 
 const Stack = createStackNavigator();
 

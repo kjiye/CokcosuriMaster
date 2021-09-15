@@ -1,4 +1,4 @@
-package com.cokcosuri.master;
+package com.cokcosuri.masterapp;
 
 import android.os.Bundle;
 import org.devio.rn.splashscreen.SplashScreen;

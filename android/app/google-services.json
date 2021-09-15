@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "279799436220",
+    "project_id": "cokcosuri-f235e",
+    "storage_bucket": "cokcosuri-f235e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:279799436220:android:68f45bc96a05ba95ea91b9",
+        "android_client_info": {
+          "package_name": "com.cokcosuri.masterapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "279799436220-0ctduv50qpu59se17ko2mnjsfi3opg1a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJzUh9QTtq74jRHDE702S1trFuacKRQmI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "279799436220-0ctduv50qpu59se17ko2mnjsfi3opg1a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "279799436220-f8l2mn3cfqeg5m5b6knuudes6sfcjcmq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.cokcosuri.masterapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
+

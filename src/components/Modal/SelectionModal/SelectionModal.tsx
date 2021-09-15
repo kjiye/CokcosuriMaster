@@ -55,6 +55,7 @@ function SelectionModal({
       <ModalView>
         <Title>{title}</Title>
         <FlatList
+          scrollIndicatorInsets={{right: 0.1}}
           data={typeList}
           keyExtractor={(_: any, i: number) => i.toString()}
           renderItem={({item, index}: any) => (

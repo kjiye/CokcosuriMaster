@@ -67,7 +67,7 @@ function WorkDetailPresenter({
           <></>
         )
       }>
-      <ScrollView>
+      <ScrollView scrollIndicatorInsets={{right: 0.1}}>
         {work.address?.coordinate && (
           <MapView
             coords={coordsFormatting(work.address.coordinate)}

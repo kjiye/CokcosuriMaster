@@ -13,6 +13,10 @@ const Container = styled(BaseContainer)`
   background: ${(props: any) => props.theme.colors.background};
 `;
 
+const ListContainer = styled.View`
+  padding-bottom: ${(props: any) => props.theme.size.bottomPadding}px;
+`;
+
 interface Props {
   loading: boolean;
   isRefreshing: boolean;
@@ -32,24 +36,27 @@ function QnAListPresenter({
       {loading ? (
         <LoadingView />
       ) : list.length > 0 ? (
-        <FlatList
-          data={list}
-          keyExtractor={(_: any, i: number) => i.toString()}
-          renderItem={({item}: any) => (
-            <AccordianView
-              titleChildren={<QnAListTitleItem item={item} />}
-              cntChildren={<QnAListContentItem item={item} />}
-            />
-          )}
-          refreshControl={
-            <RefreshControl
-              refreshing={isRefreshing}
-              onRefresh={onRefreshing}
-              colors={[theme.colors.primary]}
-              tintColor={theme.colors.primary}
-            />
-          }
-        />
+        <ListContainer>
+          <FlatList
+            scrollIndicatorInsets={{right: 0.1}}
+            data={list}
+            keyExtractor={(_: any, i: number) => i.toString()}
+            renderItem={({item}: any) => (
+              <AccordianView
+                titleChildren={<QnAListTitleItem item={item} />}
+                cntChildren={<QnAListContentItem item={item} />}
+              />
+            )}
+            refreshControl={
+              <RefreshControl
+                refreshing={isRefreshing}
+                onRefresh={onRefreshing}
+                colors={[theme.colors.primary]}
+                tintColor={theme.colors.primary}
+              />
+            }
+          />
+        </ListContainer>
       ) : (
         <NoDataView message={I18n.t('QnA.no_data')} />
       )}

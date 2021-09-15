@@ -10,6 +10,7 @@ import {dateFormatting} from '../../utils/commonUtils';
 import {getWorks_getWorks_works} from '../../../__generated__/getWorks';
 import styled from 'styled-components/native';
 import {useTheme} from 'styled-components';
+import {WorkState} from '../../../__generated__/globalTypes';
 
 const InfoWrapper = styled.View`
   ${(props: any) => `
@@ -51,7 +52,7 @@ function WorkListItem({
           />
           <InfoWrapper
             style={
-              item.state === 'DONE' || item.state === 'CANCEL'
+              item.state === WorkState.DONE || item.state === WorkState.CANCEL
                 ? {paddingBottom: theme.size.innerMargin}
                 : {}
             }>
@@ -74,7 +75,7 @@ function WorkListItem({
             />
           </InfoWrapper>
         </TouchableOpacity>
-        {item.state === 'WAIT' ? (
+        {item.state === WorkState.WAIT ? (
           <TwoButtonGroup
             leftBtnName={I18n.t('Button.copy_address')}
             rightBtnName={I18n.t('Button.accept_work')}
@@ -86,7 +87,8 @@ function WorkListItem({
               if (rightBtnPress) rightBtnPress(item);
             }}
           />
-        ) : item.state === 'RESERVE' || item.state === 'WORKING' ? (
+        ) : item.state === WorkState.RESERVE ||
+          item.state === WorkState.WORKING ? (
           <TwoButtonGroup
             leftBtnName={I18n.t('Button.copy_address')}
             rightBtnName={I18n.t('Button.call')}

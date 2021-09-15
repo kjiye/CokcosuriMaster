@@ -62,7 +62,7 @@ function WorkingImpossiblePresenter({
           disabled={!(imageTotal > 2 && reason.length > 0)}
         />
       }>
-      <ScrollView>
+      <ScrollView scrollIndicatorInsets={{right: 0.1}}>
         <ContentContainer>
           <WorkingNoticeView
             itemInfo={item}

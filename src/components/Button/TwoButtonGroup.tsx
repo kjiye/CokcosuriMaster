@@ -6,7 +6,6 @@ import styled from 'styled-components/native';
 
 const Wrapper = styled.View`
   padding: ${INNER_MARGIN}px;
-  flex: 1;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;

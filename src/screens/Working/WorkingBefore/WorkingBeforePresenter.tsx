@@ -51,7 +51,7 @@ function WorkingBeforePresenter({
           onPress={okPress}
         />
       }>
-      <ScrollView>
+      <ScrollView scrollIndicatorInsets={{right: 0.1}}>
         <ContentContainer>
           <WorkingNoticeView
             itemInfo={item}
