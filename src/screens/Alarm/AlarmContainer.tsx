@@ -1,7 +1,7 @@
+import {DELETE_ALARM, GET_ALARM} from './alarm.queries';
 import React, {useState} from 'react';
 import {useMutation, useQuery} from '@apollo/client';
 import AlarmPresenter from './AlarmPresenter';
-import {DELETE_ALARM, GET_ALARM} from './alarm.queries';
 import I18n from '../../utils/i18nHelpers';
 import {basicHeader} from '../../components/Header/HeaderOption';
 import {callBackAlert} from '../../utils/alert';
@@ -57,7 +57,6 @@ function AlarmContainer(): JSX.Element {
       setIsRefreshing(false);
     },
     onDelete: (requestId: string) => {
-      // console.log(requestId);
       deleteAlarm({
         variables: {
           alarmIds: [requestId],
