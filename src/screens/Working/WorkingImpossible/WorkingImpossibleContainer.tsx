@@ -5,6 +5,7 @@ import {SET_WORKING_CANCEL} from './workingImpossible.queries';
 import {WorkState} from '../../../../__generated__/globalTypes';
 import WorkingImpossiblePresenter from './WorkingImpossiblePresenter';
 import {callBackAlert} from '../../../utils/alert';
+import {inventActionModal} from '../../../utils/modalUtils';
 import {uploadImageFormatting} from '../../../utils/commonUtils';
 import {useMutation} from '@apollo/client';
 import {useNavigation} from '@react-navigation/native';
@@ -16,11 +17,13 @@ function WorkingImpossibleContainer({route}: any): JSX.Element {
 
   const [updateWorkingImpossible] = useMutation(SET_WORKING_CANCEL, {
     onError: (error: any) => {
+      inventActionModal(navigation, {isShow: false});
       callBackAlert(I18n.t('Error.common'), () => {
         return;
       });
     },
     onCompleted: () => {
+      inventActionModal(navigation, {isShow: false});
       callBackAlert(
         I18n.t('Alert.common'),
         () => {
@@ -52,6 +55,7 @@ function WorkingImpossibleContainer({route}: any): JSX.Element {
       callBackAlert(
         '작업불가 처리하시겠습니까?',
         () => {
+          inventActionModal(navigation, {isShow: true});
           const fileArr = images.map(file => uploadImageFormatting(file));
           updateWorkingImpossible({
             variables: {

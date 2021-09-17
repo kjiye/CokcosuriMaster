@@ -10,6 +10,7 @@ import {callBackAlert} from '../../../utils/alert';
 import {uploadImageFormatting} from '../../../utils/commonUtils';
 import {useMutation} from '@apollo/client';
 import {useTheme} from 'styled-components/native';
+import {inventActionModal} from '../../../utils/modalUtils';
 
 function WorkingBeforeContainer({route}: any): JSX.Element {
   const navigation = useNavigation();
@@ -38,11 +39,13 @@ function WorkingBeforeContainer({route}: any): JSX.Element {
 
   const [updateWorkingBefore, {loading}] = useMutation(SET_WORKING_BEFORE, {
     onError: (error: any) => {
+      inventActionModal(navigation, {isShow: false});
       callBackAlert(I18n.t('Error.common'), () => {
         return;
       });
     },
     onCompleted: (data: any) => {
+      inventActionModal(navigation, {isShow: false});
       callBackAlert(
         I18n.t('Alert.common'),
         () => {
@@ -67,6 +70,7 @@ function WorkingBeforeContainer({route}: any): JSX.Element {
       });
     },
     okPress: () => {
+      inventActionModal(navigation, {isShow: true});
       const fileArr = images.map(file => uploadImageFormatting(file));
       if (!loading) {
         updateWorkingBefore({

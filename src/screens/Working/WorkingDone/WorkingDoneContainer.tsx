@@ -7,6 +7,7 @@ import {Image} from 'react-native-image-crop-picker';
 import {WorkState} from '../../../../__generated__/globalTypes';
 import WorkingDonePresenter from './WorkingDonePresenter';
 import {callBackAlert} from '../../../utils/alert';
+import {inventActionModal} from '../../../utils/modalUtils';
 import {uploadImageFormatting} from '../../../utils/commonUtils';
 
 function WorkingDoneContainer({route}: any): JSX.Element {
@@ -25,11 +26,13 @@ function WorkingDoneContainer({route}: any): JSX.Element {
 
   const [updateWorkingDone] = useMutation(SET_WORKING_DONE, {
     onError: (error: any) => {
+      inventActionModal(navigation, {isShow: false});
       callBackAlert(I18n.t('Error.common'), () => {
         return;
       });
     },
     onCompleted: (data: any) => {
+      inventActionModal(navigation, {isShow: false});
       callBackAlert(
         I18n.t('Alert.common'),
         () => {
@@ -87,6 +90,7 @@ function WorkingDoneContainer({route}: any): JSX.Element {
       });
     },
     okPress: () => {
+      inventActionModal(navigation, {isShow: true});
       const imageArr: any[] = [
         {...firstImage},
         {...secondImage},
