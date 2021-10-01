@@ -3,6 +3,7 @@ import {
   basicHeader,
   commonHeaderOption,
 } from '../components/Header/HeaderOption';
+import {sendPushTokenVar, tokenVar} from '../apollo';
 import {useMutation, useReactiveVar} from '@apollo/client';
 import HeaderButton from '../components/Header/HeaderButton';
 import I18n from '../utils/i18nHelpers';
@@ -16,13 +17,22 @@ import WorkingDoneScreen from '../screens/Working/WorkingDone';
 import WorkingImpossibleScreen from '../screens/Working/WorkingImpossible';
 import {createStackNavigator} from '@react-navigation/stack';
 import messaging from '@react-native-firebase/messaging';
-import {tokenVar} from '../apollo';
 
 const Stack = createStackNavigator();
 
 function MainStack(): JSX.Element {
   const isLoggedIn = !!useReactiveVar(tokenVar);
-  const [regPushToken] = useMutation(REG_PUSH_TOKEN);
+  const isSendedPushToken = useReactiveVar(sendPushTokenVar);
+
+  const [regPushToken] = useMutation(REG_PUSH_TOKEN, {
+    onError: () => {
+      sendPushTokenVar(true);
+      return;
+    },
+    onCompleted: () => {
+      sendPushTokenVar(true);
+    },
+  });
 
   const sendToken = useCallback(async () => {
     const pushToken = await messaging().getToken();
@@ -38,11 +48,13 @@ function MainStack(): JSX.Element {
     const checkAlarmPermission = async () => {
       const currentStatus = await messaging().hasPermission();
       if (currentStatus === 1) {
-        sendToken();
+        if (!isSendedPushToken) {
+          return sendToken();
+        }
       } else if (currentStatus === -1) {
         const requestStatus = await messaging().requestPermission();
         if (requestStatus === 1) {
-          sendToken();
+          return sendToken();
         }
       }
     };

@@ -6,6 +6,7 @@ import styled from 'styled-components/native';
 const {height} = Dimensions.get('screen');
 
 const VIEW_RADIUS = 38;
+const ICON_SIZE = 44;
 
 const Container = styled.View`
   flex: 1;
@@ -40,9 +41,13 @@ const Title = styled.Text`
   font-weight: bold;
 `;
 
-const CloseButton = styled.TouchableOpacity`
+const ButtonWrapper = styled.View`
   flex-direction: row;
   justify-content: flex-end;
+`;
+
+const CloseButton = styled.TouchableOpacity`
+  width: ${ICON_SIZE}px;
 `;
 
 const ContentWrapper = styled.ScrollView`
@@ -67,9 +72,11 @@ function ContentViewModal({title, content, close}: Props): JSX.Element {
       <BackDimmer onPress={close} />
       <ModalView>
         <TitleWrapper>
-          <CloseButton onPress={close}>
-            <CloseSvg />
-          </CloseButton>
+          <ButtonWrapper>
+            <CloseButton onPress={close}>
+              <CloseSvg />
+            </CloseButton>
+          </ButtonWrapper>
           <Title>{title}</Title>
         </TitleWrapper>
         <ContentWrapper>

@@ -12,6 +12,7 @@ import {setContext} from '@apollo/client/link/context';
 export const tokenVar = makeVar<string | null>(null);
 export const userVar = makeVar<any>(null);
 export const categoryVar = makeVar<any>(null);
+export const sendPushTokenVar = makeVar<boolean>(false);
 
 export const saveToken = async (token: string, phone: string) => {
   await setToken(token);

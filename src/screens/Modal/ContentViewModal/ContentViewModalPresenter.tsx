@@ -1,7 +1,6 @@
 import ContentViewModal from '../../../components/Modal/ContentViewModal/ContentViewModal';
 import {GestureResponderEvent} from 'react-native';
 import React from 'react';
-import styled from 'styled-components/native';
 
 interface Props {
   title: string;

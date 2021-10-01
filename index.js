@@ -22,7 +22,7 @@ PushNotification.createChannel(
     importance: Importance.HIGH, // (optional) default: Importance.HIGH. Int value of the Android notification importance
     vibrate: true, // (optional) default: true. Creates the default vibration patten if true.
   },
-  created => console.log(`createChannel returned '${created}'`), // (optional) callback returns whether the channel was created, false means it already existed.
+  // created => console.log(`createChannel returned '${created}'`), // (optional) callback returns whether the channel was created, false means it already existed.
 );
 
 // Must be outside of any component LifeCycle (such as `componentDidMount`).
@@ -49,6 +49,7 @@ messaging().setBackgroundMessageHandler(async remoteMessage => {
       });
     }
   } else {
+    // 객체 접근 변경
     if (remoteMessage?.data?.content) {
       PushNotification.localNotification({
         title: '코코수리 마스터',

@@ -35,11 +35,7 @@ function MapView({
 }: Props): JSX.Element {
   return (
     <Wrapper height={mapViewHeight}>
-      <NMapView
-        center={{...coords, zoom: zoom, tilt: 0}}
-        useTextureView={true}
-        // onInitialized={(e:any) => {console.log(e)}}
-      >
+      <NMapView center={{...coords, zoom: zoom, tilt: 0}} useTextureView={true}>
         <Marker
           coordinate={coords}
           width={MARKER_WIDTH}

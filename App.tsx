@@ -13,6 +13,7 @@ function App(): JSX.Element {
   useEffect(() => {
     const unsubscribe = messaging().onMessage(async remoteMessage => {
       if (Platform.OS === 'ios') {
+        // 객체 접근 변경
         if (remoteMessage?.data?.content) {
           PushNotification.localNotification({
             title: '코코수리 마스터',

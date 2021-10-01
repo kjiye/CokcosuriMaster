@@ -1,11 +1,13 @@
 import {Dimensions, FlatList, GestureResponderEvent} from 'react-native';
 import {CategoryType} from '../../../models/common';
+import CloseSvg from '../../../../assets/svg/ic_close.svg';
 import ModalItem from './ModalItem';
 import React from 'react';
 import styled from 'styled-components/native';
 
 const {height} = Dimensions.get('screen');
 const VIEW_RADIUS = 38;
+const ICON_SIZE = 44;
 
 const Container = styled.View`
   flex: 1;
@@ -30,10 +32,19 @@ const ModalView = styled.View`
 `;
 
 const Title = styled.Text`
-  margin: ${(props: any) => props.theme.fonts.large}px;
+  margin-bottom: ${(props: any) => props.theme.fonts.large}px;
   font-size: ${(props: any) => props.theme.fonts.big}px;
   font-weight: bold;
   text-align: center;
+`;
+
+const TitleWrapper = styled.View`
+  flex-direction: row;
+  justify-content: flex-end;
+`;
+
+const CloseButton = styled.TouchableOpacity`
+  width: ${ICON_SIZE}px;
 `;
 
 interface Props {
@@ -53,6 +64,11 @@ function SelectionModal({
     <Container>
       <BackDimmer onPress={close} />
       <ModalView>
+        <TitleWrapper>
+          <CloseButton onPress={close}>
+            <CloseSvg width={ICON_SIZE} />
+          </CloseButton>
+        </TitleWrapper>
         <Title>{title}</Title>
         <FlatList
           scrollIndicatorInsets={{right: 0.1}}

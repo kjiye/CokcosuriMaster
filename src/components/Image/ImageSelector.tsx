@@ -19,6 +19,7 @@ import styled from 'styled-components/native';
 const {width} = Dimensions.get('screen');
 const IMG_HEIGHT = 235;
 const VIEW_RADIUS = 10;
+const IMG_COMPRESS_WIDTH = 1024;
 
 const Selector = styled.TouchableOpacity`
   height: ${IMG_HEIGHT}px;
@@ -93,6 +94,7 @@ function ImageSelector({
         width: width,
         height: IMG_HEIGHT,
         mediaType: 'photo',
+        compressImageMaxWidth: IMG_COMPRESS_WIDTH,
       });
       setImage(result);
       onAdd(result);
@@ -116,6 +118,7 @@ function ImageSelector({
         width: width,
         height: IMG_HEIGHT,
         mediaType: 'photo',
+        compressImageMaxWidth: IMG_COMPRESS_WIDTH,
       });
       setImage(result);
       onAdd(result);

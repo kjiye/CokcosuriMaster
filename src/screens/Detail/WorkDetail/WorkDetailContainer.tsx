@@ -55,7 +55,7 @@ function WorkDetailContainer({route}: any): JSX.Element {
           callBackAlert(
             `${item.title} / ${item.workCategory.name} / ${
               item.payment ? I18n.t('pay_later') : I18n.t('pay_first')
-            } ${I18n.t('Alert.accept')}`,
+            }${I18n.t('Alert.accept')}`,
             () => {
               setWorking({
                 variables: {

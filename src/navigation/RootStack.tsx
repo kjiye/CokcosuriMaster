@@ -5,6 +5,7 @@ import MainDrawer from './MainDrawer';
 import PermissionModal from '../screens/Permission';
 import React from 'react';
 import SelectionModal from '../screens/Modal/SelectionModal';
+import {StatusBar} from 'react-native';
 import UploadOptionModal from '../screens/Modal/UploadOptionModal';
 import WarnNetworkScreen from '../screens/WarnNetwork';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -19,54 +20,68 @@ function RootStack(): JSX.Element {
   const isLoggedIn = !!useReactiveVar(tokenVar);
 
   return (
-    <Stack.Navigator
-      mode={'modal'}
-      headerMode={'none'}
-      screenOptions={{
-        // gestureEnabled: true,
-        cardStyle: {backgroundColor: 'transparent'},
-        // cardOverlayEnabled: true,
-        cardStyleInterpolator: ({current: {progress}}: any) => {
-          return {
-            cardStyle: {
-              // transform: [
-              //   {
-              //     translateY: progress.interpolate({
-              //       inputRange: [0, 1],
-              //       outputRange: [height, 0],
-              //       extrapolate: 'clamp',
-              //     }),
-              //   },
-              // ],
-            },
-            overlayStyle: {
-              opacity: progress.interpolate({
-                inputRange: [0, 0],
-                outputRange: [0, 0.4],
-                extrapolate: 'clamp',
-              }),
-            },
-          };
-        },
-      }}>
-      {netInfo.isConnected ? (
-        isLoggedIn ? (
-          <Stack.Screen name={'MainDrawer'} component={MainDrawer} />
+    <>
+      <StatusBar
+        animated={true}
+        barStyle={'dark-content'}
+        translucent={true}
+        backgroundColor={'white'}
+      />
+      <Stack.Navigator
+        mode={'modal'}
+        headerMode={'none'}
+        screenOptions={{
+          // gestureEnabled: true,
+          cardStyle: {backgroundColor: 'transparent'},
+          // cardOverlayEnabled: true,
+          cardStyleInterpolator: ({current: {progress}}: any) => {
+            return {
+              cardStyle: {
+                // transform: [
+                //   {
+                //     translateY: progress.interpolate({
+                //       inputRange: [0, 1],
+                //       outputRange: [height, 0],
+                //       extrapolate: 'clamp',
+                //     }),
+                //   },
+                // ],
+              },
+              overlayStyle: {
+                opacity: progress.interpolate({
+                  inputRange: [0, 0],
+                  outputRange: [0, 0.4],
+                  extrapolate: 'clamp',
+                }),
+              },
+            };
+          },
+        }}>
+        {netInfo.isConnected ? (
+          isLoggedIn ? (
+            <Stack.Screen name={'MainDrawer'} component={MainDrawer} />
+          ) : (
+            <Stack.Screen name={'LoginStack'} component={LoginStack} />
+          )
         ) : (
-          <Stack.Screen name={'LoginStack'} component={LoginStack} />
-        )
-      ) : (
+          <Stack.Screen
+            name={'WarnNetworkScreen'}
+            component={WarnNetworkScreen}
+          />
+        )}
+        <Stack.Screen name={'PermissionModal'} component={PermissionModal} />
+        <Stack.Screen name={'SelectionModal'} component={SelectionModal} />
+        <Stack.Screen name={'ContentViewModal'} component={ContentViewModal} />
         <Stack.Screen
-          name={'WarnNetworkScreen'}
-          component={WarnNetworkScreen}
+          name={'UploadOptionModal'}
+          component={UploadOptionModal}
         />
-      )}
-      <Stack.Screen name={'PermissionModal'} component={PermissionModal} />
-      <Stack.Screen name={'SelectionModal'} component={SelectionModal} />
-      <Stack.Screen name={'ContentViewModal'} component={ContentViewModal} />
-      <Stack.Screen name={'UploadOptionModal'} component={UploadOptionModal} />
-      <Stack.Screen name={'InventActionModal'} component={InventActionModal} />
-    </Stack.Navigator>
+        <Stack.Screen
+          name={'InventActionModal'}
+          component={InventActionModal}
+        />
+      </Stack.Navigator>
+    </>
   );
 }
 export default RootStack;

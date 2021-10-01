@@ -84,7 +84,7 @@ function MainContainer({
       if (item.state === WorkState.WAIT) {
         const message = `${item.title} / ${
           item.workCategory.name
-        } / ${paymentText(item.payment)} ${I18n.t('Alert.accept')}`;
+        } / ${paymentText(item.payment)}${I18n.t('Alert.accept')}`;
         callBackAlert(
           message,
           () => {
