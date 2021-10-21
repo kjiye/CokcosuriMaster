@@ -49,7 +49,6 @@ messaging().setBackgroundMessageHandler(async remoteMessage => {
       });
     }
   } else {
-    // 객체 접근 변경
     if (remoteMessage?.data?.content) {
       PushNotification.localNotification({
         title: '코코수리 마스터',

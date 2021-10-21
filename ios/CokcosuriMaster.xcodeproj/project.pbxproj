@@ -526,7 +526,7 @@
 				CODE_SIGN_ENTITLEMENTS = CokcosuriMaster/CokcosuriMaster.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = S9XNB6CJA9;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = CokcosuriMaster/Info.plist;
@@ -556,9 +556,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CokcosuriMaster/CokcosuriMaster.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = S9XNB6CJA9;
 				INFOPLIST_FILE = CokcosuriMaster/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -573,7 +573,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cokcosuri.masterapp;
 				PRODUCT_NAME = CokcosuriMaster;
-				PROVISIONING_PROFILE_SPECIFIER = CokcosuriMasterDevProvisioning;
+				PROVISIONING_PROFILE_SPECIFIER = CokcosuriMasterProvisioningProfile;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
