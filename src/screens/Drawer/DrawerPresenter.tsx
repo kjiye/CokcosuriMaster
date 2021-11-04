@@ -1,5 +1,6 @@
 import {MenuAccordianItem, MenuItem} from '../../components/Item';
 import {GestureResponderEvent} from 'react-native';
+import I18n from '../../utils/i18nHelpers';
 import LoadingView from '../../components/View/LoadingView';
 import React from 'react';
 import styled from 'styled-components/native';
@@ -67,6 +68,7 @@ interface Props {
   goUpdateUserInfo: (event: GestureResponderEvent) => void;
   goUpdatePassword: (event: GestureResponderEvent) => void;
   goUpdatePhone: (event: GestureResponderEvent) => void;
+  goCalendar: (event: GestureResponderEvent) => void;
   goQnA: (event: GestureResponderEvent) => void;
   goAlarm: (event: GestureResponderEvent) => void;
   goNotice: (event: GestureResponderEvent) => void;
@@ -80,6 +82,7 @@ function DrawerPresenter({
   goUpdateUserInfo,
   goUpdatePassword,
   goUpdatePhone,
+  goCalendar,
   goQnA,
   goAlarm,
   goNotice,
@@ -99,25 +102,35 @@ function DrawerPresenter({
           </ProfileView>
           <ScrollContainer>
             <AccordianMenu
-              name={'회원정보 수정'}
+              name={I18n.t('Drawer.menu.update_user')}
               subMenuList={[
                 {
-                  name: '개인정보 변경',
+                  name: I18n.t('Drawer.menu.update_user_info'),
                   onPress: goUpdateUserInfo,
                 },
-                {name: '비밀번호 변경', onPress: goUpdatePassword},
-                {name: '전화번호 변경', onPress: goUpdatePhone},
+                {
+                  name: I18n.t('Drawer.menu.update_password'),
+                  onPress: goUpdatePassword,
+                },
+                {
+                  name: I18n.t('Drawer.menu.update_phone'),
+                  onPress: goUpdatePhone,
+                },
               ]}
             />
-            <DividedMenu name={'1:1 문의하기'} onPress={goQnA} />
-            <MenuItem name={'알림'} onPress={goAlarm} />
-            <MenuItem name={'공지사항'} onPress={goNotice} />
-            <MenuItem name={'APP 사용법'} onPress={goGuide} />
-            <MenuItem name={'이용약관'} onPress={goTerms} />
+            <DividedMenu
+              name={I18n.t('Drawer.menu.calendar')}
+              onPress={goCalendar}
+            />
+            <MenuItem name={I18n.t('Drawer.menu.qna')} onPress={goQnA} />
+            <MenuItem name={I18n.t('Drawer.menu.alarm')} onPress={goAlarm} />
+            <MenuItem name={I18n.t('Drawer.menu.notice')} onPress={goNotice} />
+            <MenuItem name={I18n.t('Drawer.menu.guide')} onPress={goGuide} />
+            <MenuItem name={I18n.t('Drawer.menu.terms')} onPress={goTerms} />
           </ScrollContainer>
           <BottomInfoView>
-            <BottomInfoText>고객센터</BottomInfoText>
-            <BottomInfoText>1899-1692</BottomInfoText>
+            <BottomInfoText>{I18n.t('Drawer.cs_center')}</BottomInfoText>
+            <BottomInfoText>{I18n.t('Drawer.cs_number')}</BottomInfoText>
           </BottomInfoView>
         </ContentContainer>
       </SafeAreaContainer>

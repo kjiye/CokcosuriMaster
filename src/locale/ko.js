@@ -123,6 +123,22 @@ export default {
     area_select_first: '지역을 먼저 선택해주세요',
     no_stores: '해당 지역에 등록된 지점이 없습니다',
   },
+  Drawer: {
+    menu: {
+      update_user: '회원정보 수정',
+      update_user_info: '개인정보 변경',
+      update_password: '비밀번호 변경',
+      update_phone: '전화번호 변경',
+      calendar: '캘린더',
+      qna: '1:1 문의하기',
+      alarm: '알림',
+      notice: '공지사항',
+      guide: 'APP 사용법',
+      terms: '이용약관',
+    },
+    cs_center: '고객센터',
+    cs_number: '1899-1692',
+  },
   Error: {
     common: '처리 중 문제가 발생했습니다. 잠시 후에 다시 시도해주세요',
     login: '등록되지 않은 회원이거나 정보가 일치하지 않습니다',

@@ -49,6 +49,9 @@ function DrawerContainer(): JSX.Element {
     goUpdatePhone: () => {
       navigation.navigate('UpdatePhone');
     },
+    goCalendar: () => {
+      navigation.navigate('CalendarStack');
+    },
     goQnA: () => {
       navigation.navigate('QnA');
     },
