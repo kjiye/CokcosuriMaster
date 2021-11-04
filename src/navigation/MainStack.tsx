@@ -11,7 +11,7 @@ import MainTab from './MainTab';
 import PaymentScreen from '../screens/Working/Payment';
 import {Platform} from 'react-native';
 import {REG_PUSH_TOKEN} from '../screens/Main/main.queries';
-import WorkDetailScreen from '../screens/Detail/WorkDetail';
+import WorkDetailScreen from '../screens/WorkDetail';
 import WorkingBeforeScreen from '../screens/Working/WorkingBefore';
 import WorkingDoneScreen from '../screens/Working/WorkingDone';
 import WorkingImpossibleScreen from '../screens/Working/WorkingImpossible';

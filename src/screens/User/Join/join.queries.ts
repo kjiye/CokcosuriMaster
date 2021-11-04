@@ -12,6 +12,23 @@ export const GET_CATEGORIES = gql`
   }
 `;
 
+export const GET_STORES = gql`
+  query getStores($search: StoreSearchInput) {
+    getStores(search: $search) {
+      success
+      stores {
+        id
+        area {
+          code
+          name
+        }
+        name
+      }
+      count
+    }
+  }
+`;
+
 export const REQ_VERIFICATION_CODE = gql`
   mutation reqVerificationCode($target: String!) {
     reqVerificationCode(target: $target) {

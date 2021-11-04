@@ -1,11 +1,4 @@
-import {
-  Dimensions,
-  Platform,
-  StyleProp,
-  View,
-  ViewProps,
-  ViewStyle,
-} from 'react-native';
+import {Dimensions, StyleProp, View, ViewProps, ViewStyle} from 'react-native';
 import {ImageData, ImageSelectorOption} from '../../models/common';
 import ImagePicker, {Image} from 'react-native-image-crop-picker';
 import React, {useCallback, useEffect, useState} from 'react';
@@ -189,8 +182,8 @@ function ImageSelector({
             if (useOption && showOption) {
               showOption();
             } else {
-              // picker();
               camera();
+              // picker();
             }
           }}>
           <NoImageView>

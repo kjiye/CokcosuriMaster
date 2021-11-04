@@ -1,16 +1,16 @@
 import {useMutation, useQuery} from '@apollo/client';
 import Clipboard from '@react-native-community/clipboard';
-import {GET_WORK_DETAIL} from '../detail.queries';
-import I18n from '../../../utils/i18nHelpers';
+import {GET_WORK_DETAIL} from './detail.queries';
+import I18n from '../../utils/i18nHelpers';
 import {Linking} from 'react-native';
 import React from 'react';
-import {SET_WORKING} from '../../Main/main.queries';
+import {SET_WORKING} from '../Main/main.queries';
 import Toast from 'react-native-simple-toast';
 import WorkDetailPresenter from './WorkDetailPresenter';
-import {WorkState} from '../../../../__generated__/globalTypes';
-import {basicHeader} from '../../../components/Header/HeaderOption';
-import {callBackAlert} from '../../../utils/alert';
-import {getWorkDetail_getWorkDetail_work} from '../../../../__generated__/getWorkDetail';
+import {WorkState} from '../../../__generated__/globalTypes';
+import {basicHeader} from '../../components/Header/HeaderOption';
+import {callBackAlert} from '../../utils/alert';
+import {getWorkDetail_getWorkDetail_work} from '../../../__generated__/getWorkDetail';
 import {useNavigation} from '@react-navigation/native';
 
 function WorkDetailContainer({route}: any): JSX.Element {

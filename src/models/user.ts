@@ -2,6 +2,8 @@ import {CategoryType, ImageData} from './common';
 import {CategoryInput} from '../../__generated__/globalTypes';
 import {Image} from 'react-native-image-crop-picker';
 
+export type UserSelectionModalType = 'area' | 'store';
+
 export interface User {
   id: number;
   phone: string;
@@ -10,8 +12,6 @@ export interface User {
   updateAt: string;
 }
 
-// 배열로 변경처리
-// 카멜타입으로 변경처리
 export interface TermsAgreement {
   terms_privacy_policy: boolean;
   terms_privacy_third: boolean;
@@ -26,6 +26,7 @@ export interface JoinFormInput {
   rePassword?: string;
   workCategories?: (CategoryInput | null)[] | null;
   licenseNo?: string;
+  storeId?: number;
 }
 
 export interface JoinRegex {
@@ -57,4 +58,13 @@ export interface UpdateUser {
   phone: string;
   workCategories: CategoryType[];
   company: CompanyInfo;
+  store: Store;
+  storeId: number;
+  area: CategoryType[];
+}
+
+export interface Store {
+  id?: number;
+  name?: string;
+  area?: CategoryType;
 }

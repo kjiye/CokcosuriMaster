@@ -1,13 +1,13 @@
 import styled, {useTheme} from 'styled-components/native';
-import {CardView} from '../../../components/View';
-import I18n from '../../../utils/i18nHelpers';
-import PhoneSvg from '../../../../assets/svg/ic_phone.svg';
+import {CardView} from '../../components/View';
+import I18n from '../../utils/i18nHelpers';
+import PhoneSvg from '../../../assets/svg/ic_phone.svg';
 import React from 'react';
-import {TitleInfoItem} from '../../../components/Item';
-import {TwoButtonGroup} from '../../../components/Button';
-import {WorkState} from '../../../../__generated__/globalTypes';
-import {dateFormatting} from '../../../utils/commonUtils';
-import {getWorkDetail_getWorkDetail_work} from '../../../../__generated__/getWorkDetail';
+import {TitleInfoItem} from '../../components/Item';
+import {TwoButtonGroup} from '../../components/Button';
+import {WorkState} from '../../../__generated__/globalTypes';
+import {dateFormatting} from '../../utils/commonUtils';
+import {getWorkDetail_getWorkDetail_work} from '../../../__generated__/getWorkDetail';
 
 const SeperatedSection = styled(CardView)`
   margin-top: ${(props: any) => props.theme.size.innerMargin}px;

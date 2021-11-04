@@ -11,7 +11,7 @@ const Wrapper = styled.TouchableOpacity`
   border-color: ${(props: any) => props.theme.colors.grey[3]};
 `;
 
-const OptionName = styled.Text`
+const TypeName = styled.Text`
   font-size: ${(props: any) => props.theme.fonts.normal}px;
   color: ${(props: any) => props.theme.colors.black[1]};
 `;
@@ -29,7 +29,7 @@ function ModalItem({data, onPress}: Props): JSX.Element {
           onPress(data);
         }
       }}>
-      <OptionName>{data.name}</OptionName>
+      <TypeName>{data.name}</TypeName>
     </Wrapper>
   );
 }

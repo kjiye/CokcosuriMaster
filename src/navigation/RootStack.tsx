@@ -1,13 +1,16 @@
 import ContentViewModal from '../screens/Modal/ContentViewModal';
+import I18n from '../utils/i18nHelpers';
 import InventActionModal from '../screens/Modal/InventActionModal';
 import LoginStack from './LoginStack';
 import MainDrawer from './MainDrawer';
 import PermissionModal from '../screens/Permission';
 import React from 'react';
+import SelectionFullScreenModal from '../screens/Modal/SelectionFullScreenModal';
 import SelectionModal from '../screens/Modal/SelectionModal';
 import {StatusBar} from 'react-native';
 import UploadOptionModal from '../screens/Modal/UploadOptionModal';
 import WarnNetworkScreen from '../screens/WarnNetwork';
+import {basicHeader} from '../components/Header/HeaderOption';
 import {createStackNavigator} from '@react-navigation/stack';
 import {tokenVar} from '../apollo';
 import {useNetInfo} from '@react-native-community/netinfo';
@@ -29,7 +32,7 @@ function RootStack(): JSX.Element {
       />
       <Stack.Navigator
         mode={'modal'}
-        headerMode={'none'}
+        // headerMode={'none'}
         screenOptions={{
           // gestureEnabled: true,
           cardStyle: {backgroundColor: 'transparent'},
@@ -59,26 +62,73 @@ function RootStack(): JSX.Element {
         }}>
         {netInfo.isConnected ? (
           isLoggedIn ? (
-            <Stack.Screen name={'MainDrawer'} component={MainDrawer} />
+            <Stack.Screen
+              name={'MainDrawer'}
+              component={MainDrawer}
+              options={{
+                headerShown: false,
+              }}
+            />
           ) : (
-            <Stack.Screen name={'LoginStack'} component={LoginStack} />
+            <Stack.Screen
+              name={'LoginStack'}
+              component={LoginStack}
+              options={{
+                headerShown: false,
+              }}
+            />
           )
         ) : (
           <Stack.Screen
             name={'WarnNetworkScreen'}
             component={WarnNetworkScreen}
+            options={{
+              headerShown: false,
+            }}
           />
         )}
-        <Stack.Screen name={'PermissionModal'} component={PermissionModal} />
-        <Stack.Screen name={'SelectionModal'} component={SelectionModal} />
-        <Stack.Screen name={'ContentViewModal'} component={ContentViewModal} />
+        <Stack.Screen
+          name={'PermissionModal'}
+          component={PermissionModal}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={'SelectionModal'}
+          component={SelectionModal}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={'SelectionFullScreenModal'}
+          component={SelectionFullScreenModal}
+          options={basicHeader({
+            title: I18n.t('Header.select_store'),
+            isBack: true,
+          })}
+        />
+        <Stack.Screen
+          name={'ContentViewModal'}
+          component={ContentViewModal}
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen
           name={'UploadOptionModal'}
           component={UploadOptionModal}
+          options={{
+            headerShown: false,
+          }}
         />
         <Stack.Screen
           name={'InventActionModal'}
           component={InventActionModal}
+          options={{
+            headerShown: false,
+          }}
         />
       </Stack.Navigator>
     </>

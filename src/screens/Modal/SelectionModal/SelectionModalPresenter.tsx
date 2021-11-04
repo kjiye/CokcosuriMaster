@@ -5,7 +5,7 @@ import {SelectionModal} from '../../../components/Modal/SelectionModal';
 
 interface Props {
   title: string;
-  typeList: any[];
+  typeList: CategoryType[];
   close: (event: GestureResponderEvent) => void;
   onSelect: (selected: CategoryType) => void;
 }

@@ -8,6 +8,7 @@ import styled from 'styled-components/native';
 const {height} = Dimensions.get('screen');
 const VIEW_RADIUS = 38;
 const ICON_SIZE = 44;
+const MODAL_VIEW_PADDING = 20;
 
 const Container = styled.View`
   flex: 1;
@@ -17,13 +18,14 @@ const Container = styled.View`
 const BackDimmer = styled.TouchableOpacity`
   flex: 1;
   background: ${(props: any) => props.theme.colors.grey[6]};
-  opacity: 0.5;
+  opacity: 0.4;
 `;
 
 const ModalView = styled.View`
   position: absolute;
   bottom: 0;
-  padding: 0 ${(props: any) => props.theme.size.standardPadding}px;
+  padding: 0px ${MODAL_VIEW_PADDING}px ${MODAL_VIEW_PADDING}px
+    ${MODAL_VIEW_PADDING}px;
   width: 100%;
   height: ${height * 0.55}px;
   background: ${(props: any) => props.theme.colors.grey[0]};
@@ -49,7 +51,7 @@ const CloseButton = styled.TouchableOpacity`
 
 interface Props {
   title: string;
-  typeList: any[];
+  typeList: CategoryType[];
   close: (event: GestureResponderEvent) => void;
   onSelect: (selected: CategoryType) => void;
 }

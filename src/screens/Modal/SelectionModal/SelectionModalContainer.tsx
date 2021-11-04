@@ -12,7 +12,13 @@ function SelectionModalContainer({route}: any): JSX.Element {
       navigation.goBack();
     },
     onSelect: (selected: CategoryType) => {
-      navigation.navigate(route.params.path, {selected});
+      let data = {};
+      data = {selected};
+      if (route.params?.selectionType) {
+        const {selectionType} = route.params;
+        data = {...data, selectionType};
+      }
+      navigation.navigate(route.params.path, data);
     },
   };
   return <SelectionModalPresenter {...props} />;

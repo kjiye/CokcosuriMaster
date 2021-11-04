@@ -2,11 +2,10 @@ import {Platform, StyleProp, ViewProps, ViewStyle} from 'react-native';
 import styled, {css} from 'styled-components/native';
 import {INNER_MARGIN} from '../../constants/size';
 import React from 'react';
-import {WHITE} from '../../constants/color';
 
 const Wrapper = styled.View<{hasPadding: boolean; hasShadow: boolean}>`
-  background-color: ${WHITE};
-  border-radius: 10px;
+  background-color: ${(props: any) => props.theme.colors.background};
+  border-radius: ${(props: any) => props.theme.size.borderRadius}px;
   ${({hasPadding}) =>
     hasPadding &&
     css`

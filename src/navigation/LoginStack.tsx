@@ -13,7 +13,6 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
-// status bar 추가
 function LoginStack(): JSX.Element {
   return (
     <Stack.Navigator screenOptions={{...commonHeaderOption}}>

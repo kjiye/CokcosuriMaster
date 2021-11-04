@@ -1,11 +1,10 @@
+import {BasicInput, ErrorViewInput} from '../../../components/Input';
 import {
   CategoryType,
   ImageSelectorOption,
   MaskInputLicenseNo,
   MaskInputPhone,
 } from '../../../models/common';
-import BaseContainer from '../../../components/BaseContainer';
-import {BasicInput, ErrorViewInput} from '../../../components/Input';
 import {GestureResponderEvent} from 'react-native';
 import I18n from '../../../utils/i18nHelpers';
 import {Image} from 'react-native-image-crop-picker';
@@ -15,6 +14,7 @@ import LoadingView from '../../../components/View/LoadingView';
 import {PrimaryButton} from '../../../components/Button';
 import React from 'react';
 import {ScrollView} from 'react-native-gesture-handler';
+import {SelectionView} from '../../../components/View';
 import {TinyHiddenButton} from '../../../components/Button';
 import {TitleItem} from '../../../components/Item';
 import {TypeCheckGroup} from '../../../components/Checkbox/TypeCheckbox';
@@ -36,8 +36,12 @@ const ContentContainer = styled.View`
     ${(props: any) => props.theme.size.standardPadding}px ${BOTTOM_PADDING}px;
 `;
 
-const Title = styled(TitleItem)`
+const BasicGapTitleItem = styled(TitleItem)`
   margin-top: ${COMPONENT_GAP}px;
+`;
+
+const RemoveBottomTitleItem = styled(BasicGapTitleItem)`
+  padding-bottom: 0;
 `;
 
 const ButtonWrapper = styled.View`
@@ -54,6 +58,7 @@ interface Props {
   btnDisabled: boolean;
   regexResult?: boolean;
   onChangeName: (text: string) => void;
+  showSelectionModal: (type: 'area' | 'store') => void;
   onChangeWorkType: (item: CategoryType) => void;
   onChangeLicenseNo: (text: string) => void;
   imageOption?: ImageSelectorOption;
@@ -74,6 +79,7 @@ function UpdateUserInfoPresenter({
   btnDisabled,
   regexResult,
   onChangeName,
+  showSelectionModal,
   onChangeWorkType,
   onChangeLicenseNo,
   imageOption,
@@ -101,14 +107,29 @@ function UpdateUserInfoPresenter({
         <ContentContainer>
           <TitleItem mainText={I18n.t('Title.name')} />
           <BasicInput value={user?.name} onChange={onChangeName} />
-          <Title mainText={I18n.t('Title.phone')} />
+          <BasicGapTitleItem mainText={I18n.t('Title.phone')} />
           <BasicInput
             value={user?.phone}
             editable={false}
             mask={MaskInputPhone}
           />
-          <Title
-            style={{paddingBottom: 0}}
+          <BasicGapTitleItem mainText={I18n.t('Title.area')} />
+          <SelectionView
+            placeholder={I18n.t('Placeholder.area')}
+            selectedValue={user?.area[0]}
+            onPress={() => {
+              showSelectionModal('area');
+            }}
+          />
+          <BasicGapTitleItem mainText={I18n.t('Title.store')} />
+          <SelectionView
+            placeholder={I18n.t('Placeholder.store')}
+            selectedValue={user?.store}
+            onPress={() => {
+              showSelectionModal('store');
+            }}
+          />
+          <RemoveBottomTitleItem
             mainText={I18n.t('Title.work_type')}
             desc={I18n.t('Title.duplicate_selectable')}
           />
@@ -119,13 +140,7 @@ function UpdateUserInfoPresenter({
             allPress={onChangeWorkType}
             itemPress={onChangeWorkType}
           />
-          <Title mainText={I18n.t('Title.license_no')} />
-          {/* <BasicInput
-            value={user?.company.licenseNo}
-            onChange={onChangeLicenseNo}
-            mask={MaskInputLicenseNo}
-            keyboardType={'number-pad'}
-          /> */}
+          <BasicGapTitleItem mainText={I18n.t('Title.license_no')} />
           <ErrorViewInput
             placeholder={I18n.t('Placeholder.license_no')}
             value={user?.company.licenseNo}
@@ -139,7 +154,7 @@ function UpdateUserInfoPresenter({
             mask={MaskInputLicenseNo}
             keyboardType={'number-pad'}
           />
-          <Title mainText={I18n.t('Title.license_image')} />
+          <BasicGapTitleItem mainText={I18n.t('Title.license_image')} />
           <ImageSelector
             currentImage={user?.company?.licenseImage}
             currentDelete={currentImageDelete}

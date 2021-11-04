@@ -20,6 +20,18 @@ export const GET_USER = gql`
           code
           name
         }
+        area {
+          code
+          name
+        }
+        store {
+          id
+          area {
+            code
+            name
+          }
+          name
+        }
       }
     }
   }
@@ -33,6 +45,23 @@ export const GET_CATEGORIES = gql`
         code
         name
       }
+    }
+  }
+`;
+
+export const GET_STORES = gql`
+  query getStoreList($search: StoreSearchInput) {
+    getStores(search: $search) {
+      success
+      stores {
+        id
+        area {
+          code
+          name
+        }
+        name
+      }
+      count
     }
   }
 `;

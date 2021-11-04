@@ -1,8 +1,8 @@
 import {BLACK_1, GRAY_3, GRAY_5, PRIMARY_LIGHT} from '../../constants/color';
+import {GestureResponderEvent, StyleProp, ViewStyle} from 'react-native';
 import {INNER_MARGIN, MEDIUM, MINI} from '../../constants/size';
 import DownActiveSvg from '../../../assets/svg/ic_down_active.svg';
 import DownInactiveSvg from '../../../assets/svg/ic_down_inactive.svg';
-import {GestureResponderEvent} from 'react-native';
 import React from 'react';
 import styled from 'styled-components/native';
 
@@ -29,18 +29,20 @@ const SelectionText = styled.Text<{selected: boolean}>`
 `;
 
 interface Props {
+  style?: StyleProp<ViewStyle>;
   placeholder: string;
   selectedValue?: any;
   onPress?: (event: GestureResponderEvent) => void;
 }
 
 function SelectionView({
+  style,
   placeholder,
   selectedValue,
   onPress,
 }: Props): JSX.Element {
   return (
-    <Wrapper onPress={onPress} selected={!!selectedValue}>
+    <Wrapper style={style} onPress={onPress} selected={!!selectedValue}>
       <SelectionText selected={!!selectedValue}>
         {selectedValue ? selectedValue.name : placeholder}
       </SelectionText>

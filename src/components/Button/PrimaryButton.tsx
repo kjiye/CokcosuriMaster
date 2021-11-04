@@ -23,6 +23,11 @@ const Container = styled.TouchableOpacity<{disabled?: boolean}>`
   align-items: center;
 `;
 
+const Icon = styled.View`
+  position: absolute;
+  left: 20px;
+`;
+
 const Title = styled.Text`
   font-size: ${(props: any) => props.theme.fonts.big}px;
   font-weight: bold;
@@ -34,6 +39,7 @@ interface Props {
   style?: StyleProp<ViewStyle>;
   title: string;
   disabled?: boolean;
+  icon?: JSX.Element;
   onPress?: (event: GestureResponderEvent) => void;
 }
 
@@ -41,6 +47,7 @@ function PrimaryButton({
   style,
   title,
   disabled = false,
+  icon,
   onPress,
 }: Props): JSX.Element {
   return (
@@ -52,6 +59,7 @@ function PrimaryButton({
           onPress(event);
         }
       }}>
+      {icon && <Icon>{icon}</Icon>}
       <Title numberOfLines={1}>{title}</Title>
     </Container>
   );

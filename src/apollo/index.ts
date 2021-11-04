@@ -13,6 +13,7 @@ export const tokenVar = makeVar<string | null>(null);
 export const userVar = makeVar<any>(null);
 export const categoryVar = makeVar<any>(null);
 export const sendPushTokenVar = makeVar<boolean>(false);
+export const lastStayMainTab = makeVar<string>('WaitScreen');
 
 export const saveToken = async (token: string, phone: string) => {
   await setToken(token);

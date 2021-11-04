@@ -46,7 +46,6 @@ function TitleItem({
 }: Props): JSX.Element {
   return (
     <Wrapper style={style as StyleProp<ViewProps>}>
-      {/* <MainText style={{color: !!mainColor && mainColor === 'gray' && GRAY_6}}> */}
       <MainText mainColor={mainColor}>
         {!!frontText && (
           <FrontText style={{color: frontColor}}>{frontText}</FrontText>

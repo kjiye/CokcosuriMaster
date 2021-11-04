@@ -9,15 +9,15 @@ import {
   MaskInputLicenseNo,
   MaskInputPhone,
 } from '../../../models/common';
-import {GAP_MARGIN, MEDIUM} from '../../../constants/size';
 import {GestureResponderEvent, ScrollView} from 'react-native';
-import {JoinFormInput, JoinRegex} from '../../../models/user';
+import {JoinFormInput, JoinRegex, Stores} from '../../../models/user';
 import I18n from '../../../utils/i18nHelpers';
 import {Image} from 'react-native-image-crop-picker';
 import {ImageSelector} from '../../../components/Image';
 import KeyboardBaseContainer from '../../../components/KeyboardBaseContainer';
 import {PrimaryButton} from '../../../components/Button';
 import React from 'react';
+import {SelectionView} from '../../../components/View';
 import {TitleItem} from '../../../components/Item';
 import {TypeCheckGroup} from '../../../components/Checkbox/TypeCheckbox';
 import {VerifyInput} from '../../../../__generated__/globalTypes';
@@ -25,6 +25,7 @@ import styled from 'styled-components/native';
 
 const TOP_PADDING = 24;
 const BOTTOM_PADDING = 100;
+const WIDE_GAP = 16;
 
 const Container = styled(KeyboardBaseContainer)`
   background: ${(props: any) => props.theme.colors.background};
@@ -36,6 +37,22 @@ const ContentContainer = styled.View`
     ${(props: any) => props.theme.size.standardPadding}px ${BOTTOM_PADDING}px;
 `;
 
+const WideGapTitleItem = styled(TitleItem)`
+  margin-top: ${WIDE_GAP}px;
+`;
+
+const BasicGapTitleItem = styled(TitleItem)`
+  margin-top: ${(props: any) => props.theme.size.gap}px;
+`;
+
+const RemoveBottomTitleItem = styled(WideGapTitleItem)`
+  padding-bottom: 0;
+`;
+
+const UnderButtonInput = styled(ButtonInput)`
+  margin-top: ${(props: any) => props.theme.size.gap}px;
+`;
+
 interface Props {
   user: JoinFormInput;
   verifyInfo?: VerifyInput;
@@ -44,6 +61,8 @@ interface Props {
   workTypeAll: boolean;
   timerMs: number;
   playTimer: boolean;
+  area?: CategoryType;
+  store?: CategoryType;
   onTimerStop: (ms: number) => void;
   onChangeName: (text: string) => void;
   onChangePhone: (text: string) => void;
@@ -54,6 +73,7 @@ interface Props {
   verifyCodeBtnPress: (event: GestureResponderEvent) => void;
   onChangePassword: (text: string) => void;
   onChangeRePassword: (text: string) => void;
+  showSelectionModal: (type: 'area' | 'store') => void;
   onSelectedWorkType: (item: CategoryType) => void;
   onChangeLicenseNo: (text: string) => void;
   showImageOption: () => void;
@@ -73,6 +93,8 @@ function JoinPresenter({
   workTypeAll,
   timerMs,
   playTimer,
+  area,
+  store,
   onTimerStop,
   onChangeName,
   onChangePhone,
@@ -83,6 +105,7 @@ function JoinPresenter({
   verifyCodeBtnPress,
   onChangePassword,
   onChangeRePassword,
+  showSelectionModal,
   onSelectedWorkType,
   onChangeLicenseNo,
   showImageOption,
@@ -110,10 +133,7 @@ function JoinPresenter({
             value={user?.name}
             onChange={onChangeName}
           />
-          <TitleItem
-            style={{marginTop: MEDIUM}}
-            mainText={I18n.t('Title.phone')}
-          />
+          <WideGapTitleItem mainText={I18n.t('Title.phone')} />
           <ButtonInput
             placeholder={I18n.t('Placeholder.phone_ex')}
             value={user?.phone}
@@ -124,8 +144,7 @@ function JoinPresenter({
             mask={MaskInputPhone}
             keyboardType={'number-pad'}
           />
-          <ButtonInput
-            style={{marginTop: GAP_MARGIN}}
+          <UnderButtonInput
             placeholder={I18n.t('Placeholder.auth_confirm')}
             value={verifyInfo?.code}
             buttonName={I18n.t('Button.auth_confirm')}
@@ -138,10 +157,7 @@ function JoinPresenter({
             playTimer={playTimer}
             timerStop={onTimerStop}
           />
-          <TitleItem
-            style={{marginTop: MEDIUM}}
-            mainText={I18n.t('Title.password')}
-          />
+          <WideGapTitleItem mainText={I18n.t('Title.password')} />
           <ErrorViewInput
             placeholder={I18n.t('Placeholder.password')}
             value={user.password}
@@ -154,10 +170,7 @@ function JoinPresenter({
             }
             onChange={onChangePassword}
           />
-          <TitleItem
-            style={{marginTop: GAP_MARGIN}}
-            mainText={I18n.t('Title.re_password')}
-          />
+          <BasicGapTitleItem mainText={I18n.t('Title.re_password')} />
           <ErrorViewInput
             placeholder={I18n.t('Placeholder.re_password')}
             value={user?.rePassword}
@@ -170,8 +183,23 @@ function JoinPresenter({
             }
             onChange={onChangeRePassword}
           />
-          <TitleItem
-            style={{marginTop: GAP_MARGIN, paddingBottom: 0}}
+          <BasicGapTitleItem mainText={I18n.t('Title.area')} />
+          <SelectionView
+            placeholder={I18n.t('Placeholder.area')}
+            selectedValue={area}
+            onPress={() => {
+              showSelectionModal('area');
+            }}
+          />
+          <WideGapTitleItem mainText={I18n.t('Title.store')} />
+          <SelectionView
+            placeholder={I18n.t('Placeholder.area')}
+            selectedValue={store}
+            onPress={() => {
+              showSelectionModal('store');
+            }}
+          />
+          <RemoveBottomTitleItem
             mainText={I18n.t('Title.work_type')}
             desc={I18n.t('Title.duplicate_selectable')}
           />
@@ -182,10 +210,7 @@ function JoinPresenter({
             allPress={onSelectedWorkType}
             itemPress={onSelectedWorkType}
           />
-          <TitleItem
-            style={{marginTop: MEDIUM}}
-            mainText={I18n.t('Title.license_no')}
-          />
+          <WideGapTitleItem mainText={I18n.t('Title.license_no')} />
           <ErrorViewInput
             placeholder={I18n.t('Placeholder.license_no')}
             value={user.licenseNo}
@@ -199,10 +224,7 @@ function JoinPresenter({
             mask={MaskInputLicenseNo}
             keyboardType={'number-pad'}
           />
-          <TitleItem
-            style={{marginTop: GAP_MARGIN}}
-            mainText={I18n.t('Title.license_image')}
-          />
+          <BasicGapTitleItem mainText={I18n.t('Title.license_image')} />
           <ImageSelector
             desc={I18n.t('Placeholder.upload_image')}
             useOption={true}

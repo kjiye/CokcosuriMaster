@@ -74,9 +74,6 @@ function BasicInput({
         }}
         value={value}
         onChangeText={onChange}
-        // onChangeText={(masked: string, unmasked: string) => {
-        //   onChange && onChange(unmasked);
-        // }}
         mask={mask}
       />
     </Wrapper>

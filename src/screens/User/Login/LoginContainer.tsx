@@ -22,9 +22,12 @@ function LoginContainer(): JSX.Element {
     onError: async (error: any) => {
       inventActionModal(navigation, {isShow: false});
       await removeToken();
-      // 강제 탈퇴처리 회원에 대한 문구 세분화 추가
+      const message =
+        error?.message && error.message.includes('해당 아이디')
+          ? I18n.t('Error.forced_withdrawal')
+          : I18n.t('Error.login');
       callBackAlert(
-        I18n.t('Error.login'),
+        message,
         () => {
           setId('');
           setPassword('');

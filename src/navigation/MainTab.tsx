@@ -1,9 +1,12 @@
 import {getFocusedRouteNameFromRoute, useRoute} from '@react-navigation/native';
+import CalendarStack from './CalendarStack';
 import I18n from '../utils/i18nHelpers';
 import MainScreen from '../screens/Main';
 import React from 'react';
 import {WorkState} from '../../__generated__/globalTypes';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import {lastStayMainTab} from '../apollo';
+import {useReactiveVar} from '@apollo/client';
 import {useTheme} from 'styled-components';
 
 const TAB_RADIUS = 23;
@@ -14,14 +17,23 @@ const Tab = createMaterialTopTabNavigator();
 function MainTab(): JSX.Element {
   const route: any = useRoute();
   const theme: any = useTheme();
+  const initialRoute = useReactiveVar(lastStayMainTab);
 
   return (
     <Tab.Navigator
-      initialRouteName={'WaitScreen'}
+      initialRouteName={initialRoute}
       tabBarOptions={{
         style: {
           borderBottomLeftRadius: TAB_RADIUS,
           borderBottomRightRadius: TAB_RADIUS,
+          // iOS만 적용 (Android는 그림자 기본 설정)
+          shadowColor: theme.colors.black[0],
+          shadowOffset: {
+            width: 0,
+            height: 1,
+          },
+          shadowOpacity: 0.16,
+          shadowRadius: 4,
         },
         tabStyle: {},
         labelStyle: {
@@ -34,14 +46,14 @@ function MainTab(): JSX.Element {
           height: '100%',
           borderBottomLeftRadius: (() => {
             const screenName = getFocusedRouteNameFromRoute(route);
-            if (!screenName || screenName === 'WaitScreen') {
+            if (screenName === 'WaitScreen') {
               return TAB_RADIUS;
             }
             return 0;
           })(),
           borderBottomRightRadius: (() => {
             const screenName = getFocusedRouteNameFromRoute(route);
-            if (screenName === 'CancelScreen') {
+            if (screenName === 'CalendarStack') {
               return TAB_RADIUS;
             }
             return 0;
@@ -75,6 +87,11 @@ function MainTab(): JSX.Element {
         name={'CancelScreen'}
         component={MainScreen}
         initialParams={{state: [WorkState.CANCEL]}}
+      />
+      <Tab.Screen
+        options={{tabBarLabel: I18n.t('Tab.calendar')}}
+        name={'CalendarStack'}
+        component={CalendarStack}
       />
     </Tab.Navigator>
   );

@@ -1,4 +1,3 @@
-import {GRAY_4, PRIMARY_LIGHT, WHITE} from '../../constants/color';
 import {
   GestureResponderEvent,
   KeyboardTypeOptions,
@@ -6,19 +5,16 @@ import {
   ViewProps,
   ViewStyle,
 } from 'react-native';
-import {INNER_MARGIN, MEDIUM} from '../../constants/size';
+import styled, {useTheme} from 'styled-components/native';
 import BasicInput from './BasicInput';
 import React from 'react';
 import TimerInput from './TimerInput';
-import styled from 'styled-components/native';
 
 const Wrapper = styled.View`
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
 `;
-
-// padding: ${INNER_MARGIN}px 0;
 
 const Button = styled.TouchableOpacity`
   margin-left: 7px;
@@ -27,13 +23,13 @@ const Button = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   border-radius: 9px;
-  background-color: ${PRIMARY_LIGHT};
+  background-color: ${(props: any) => props.theme.colors.primaryLight};
 `;
 
 const ButtonText = styled.Text`
-  font-size: ${MEDIUM}px;
+  font-size: ${(props: any) => props.theme.fonts.normal}px;
   font-weight: bold;
-  color: ${WHITE};
+  color: ${(props: any) => props.theme.colors.grey[0]};
   text-align: center;
 `;
 
@@ -53,8 +49,6 @@ interface Props {
   timerStop?: (ms: number) => void;
 }
 
-// usingTimer 옵션 추가
-
 function ButtonInput({
   style,
   placeholder,
@@ -70,6 +64,7 @@ function ButtonInput({
   playTimer = false,
   timerStop,
 }: Props): JSX.Element {
+  const theme: any = useTheme();
   return (
     <Wrapper style={style as StyleProp<ViewProps>}>
       {usingTimer ? (
@@ -95,7 +90,11 @@ function ButtonInput({
       )}
 
       <Button
-        style={{backgroundColor: buttonDisabled ? GRAY_4 : PRIMARY_LIGHT}}
+        style={{
+          backgroundColor: buttonDisabled
+            ? theme.colors.grey[4]
+            : theme.colors.primaryLight,
+        }}
         disabled={buttonDisabled}
         onPress={onPress}>
         <ButtonText>{buttonName}</ButtonText>

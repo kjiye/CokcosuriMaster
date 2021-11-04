@@ -6,11 +6,12 @@ import {
   WITHDRAWAL,
 } from './updateUserInfo.queries';
 import React, {useEffect, useLayoutEffect, useState} from 'react';
-import {useLazyQuery, useMutation} from '@apollo/client';
+import {UpdateUser, UserSelectionModalType} from '../../../models/user';
+import {useLazyQuery, useMutation, useQuery} from '@apollo/client';
 import {CategoryName} from '../../../../__generated__/globalTypes';
+import {GET_STORES} from '../Join/join.queries';
 import I18n from '../../../utils/i18nHelpers';
 import {Image} from 'react-native-image-crop-picker';
-import {UpdateUser} from '../../../models/user';
 import UpdateUserInfoPresenter from './UpdateUserInfoPresenter';
 import {callBackAlert} from '../../../utils/alert';
 import {getUserAppId} from '../../../utils/storageUtils';
@@ -26,8 +27,10 @@ function UpdateUserInfoContainer({route}: any): JSX.Element {
   const [workTypeAll, setWorkTypeAll] = useState<boolean>(false);
   const [imageOption, setImageOption] = useState<ImageSelectorOption>();
   const [isChangeLicense, setIsChangeLicense] = useState<boolean>(false);
-  const [replaceImage, setReplaceImage] = useState<Image>(); // 여기 이미지 있을 시에만 파일 보냄
+  const [replaceImage, setReplaceImage] = useState<Image>(); // 이미지 있을 때만 파일 보냄
   const [regexResult, setRegexResult] = useState<boolean>();
+  const [areaList, setAreaList] = useState<CategoryType[]>([]);
+  const [storeList, setStoreList] = useState<CategoryType[]>([]);
 
   const [getWorkTypeCategories] = useLazyQuery(GET_CATEGORIES, {
     onCompleted: (data: any) => {
@@ -49,14 +52,32 @@ function UpdateUserInfoContainer({route}: any): JSX.Element {
     },
   });
 
+  const {loading: storeLoading} = useQuery(GET_STORES, {
+    onError: () => {
+      setStoreList([]);
+    },
+    onCompleted: (data: any) => {
+      const {success, stores} = data.getStores;
+      if (success) setStoreList(stores);
+    },
+  });
+
+  const {loading: areaLoading} = useQuery(GET_CATEGORIES, {
+    variables: {
+      name: CategoryName.AREA,
+    },
+    onCompleted: (data: any) => {
+      const {success, categories} = data?.getCategories;
+      if (success) setAreaList(categories);
+    },
+  });
+
   const [getMaster] = useLazyQuery(GET_USER, {
     onCompleted: (data: any) => {
       const {
         getMaster: {success, master},
       } = data;
-      if (success) {
-        setUser(master);
-      }
+      if (success) setUser(master);
       getWorkTypeCategories({
         variables: {
           name: CategoryName.WORK_TYPE,
@@ -75,7 +96,7 @@ function UpdateUserInfoContainer({route}: any): JSX.Element {
       });
     },
     onCompleted: () => {
-      callBackAlert('정보 수정이 완료되었습니다', async () => {
+      callBackAlert(I18n.t('Alert.update_user_info'), async () => {
         navigation.goBack();
       });
     },
@@ -88,7 +109,7 @@ function UpdateUserInfoContainer({route}: any): JSX.Element {
       });
     },
     onCompleted: async () => {
-      callBackAlert('회원탈퇴가 완료되었습니다', async () => {
+      callBackAlert(I18n.t('Alert.withdrawal_done'), async () => {
         await removeToken();
       });
     },
@@ -113,6 +134,31 @@ function UpdateUserInfoContainer({route}: any): JSX.Element {
         imageOption: undefined,
       });
     }
+    if (route.params?.selectionType) {
+      const {selected, selectionType} = route.params;
+      switch (selectionType) {
+        case 'area':
+          if (user) {
+            setUser({
+              ...user,
+              area: [selected],
+            });
+          }
+          break;
+        case 'store':
+          if (user) {
+            setUser({
+              ...user,
+              store: {
+                id: selected.id,
+                name: selected.name,
+              },
+              storeId: selected.id,
+            });
+          }
+          break;
+      }
+    }
   }, [route.params]);
 
   const props = {
@@ -123,7 +169,10 @@ function UpdateUserInfoContainer({route}: any): JSX.Element {
       user?.name &&
       user?.workCategories.filter(v => v.active)?.length > 0 &&
       user.company.licenseNo &&
-      (user?.company?.licenseImage || replaceImage)
+      regexResult !== false &&
+      (user?.company?.licenseImage || replaceImage) &&
+      user?.store &&
+      user?.area
     ),
     regexResult,
     onChangeName: (text: string) => {
@@ -134,17 +183,27 @@ function UpdateUserInfoContainer({route}: any): JSX.Element {
         });
       }
     },
+    showSelectionModal: (type: UserSelectionModalType) => {
+      if (type === 'area') {
+        if (!areaLoading) {
+          navigation.navigate('SelectionModal', {
+            selectionType: type,
+            title: I18n.t('Title.area'),
+            typeList: areaList,
+            path: 'UpdateUserInfo',
+          });
+        }
+      } else {
+        navigation.navigate('SelectionFullScreenModal', {
+          selectionType: type,
+          headerTitle: I18n.t('Header.select_store'),
+          typeList: storeList,
+          path: 'UpdateUserInfo',
+        });
+      }
+    },
     onChangeWorkType: (item: CategoryType) => {
       if (user) {
-        setUser({
-          ...user,
-          workCategories: user.workCategories.map(v => {
-            if (v.code === item.code) {
-              v.active = !v.active;
-            }
-            return v;
-          }),
-        });
         if (!item.code) {
           let current = true;
           user.workCategories.map(v => {
@@ -160,6 +219,28 @@ function UpdateUserInfoContainer({route}: any): JSX.Element {
             }),
           });
           setWorkTypeAll(!current);
+        } else {
+          const selectedWorkTypes = user.workCategories.map(v => {
+            if (v.code === item.code) {
+              v.active = !v.active;
+            }
+            return v;
+          });
+          const activeCheckArr = selectedWorkTypes.filter(
+            v => !!v.active && v.active === true,
+          );
+          switch (activeCheckArr.length) {
+            case 0:
+              setWorkTypeAll(false);
+              break;
+            case selectedWorkTypes.length:
+              setWorkTypeAll(true);
+              break;
+          }
+          setUser({
+            ...user,
+            workCategories: selectedWorkTypes,
+          });
         }
       }
     },
@@ -221,7 +302,7 @@ function UpdateUserInfoContainer({route}: any): JSX.Element {
     },
     withdrawal: () => {
       callBackAlert(
-        '정말 회원탈퇴를 하시겠습니까?',
+        I18n.t('Alert.withdrawal_ask'),
         () => {
           withdraw();
         },
@@ -235,6 +316,8 @@ function UpdateUserInfoContainer({route}: any): JSX.Element {
           let params: any = {
             data: {
               name: user?.name,
+              area: [user?.area[0]],
+              storeId: user?.store?.id,
               workCategories: user?.workCategories
                 .filter(v => v.active)
                 .map(v => {

@@ -1,19 +1,19 @@
-import {AppTheme} from '../../../themes/theme';
-import BaseContainer from '../../../components/BaseContainer';
-import {ContentTextView} from '../../../components/View';
+import {AppTheme} from '../../themes/theme';
+import BaseContainer from '../../components/BaseContainer';
+import {ContentTextView} from '../../components/View';
 import CustomerInfoItem from './CustomerInfoItem';
-import I18n from '../../../utils/i18nHelpers';
-import {ImageSlider} from '../../../components/Image';
-import LoadingView from '../../../components/View/LoadingView';
-import MapView from '../../../components/View/MapView';
-import {PrimaryButton} from '../../../components/Button';
+import I18n from '../../utils/i18nHelpers';
+import {ImageSlider} from '../../components/Image';
+import LoadingView from '../../components/View/LoadingView';
+import MapView from '../../components/View/MapView';
+import {PrimaryButton} from '../../components/Button';
 import React from 'react';
 import {ScrollView} from 'react-native';
-import {TitleItem} from '../../../components/Item';
-import {WorkState} from '../../../../__generated__/globalTypes';
-import {coordsFormatting} from '../../../utils/commonUtils';
-import {getWorkDetail_getWorkDetail_work} from '../../../../__generated__/getWorkDetail';
-import {stateBottomButtonName} from '../../../utils/workUtils';
+import {TitleItem} from '../../components/Item';
+import {WorkState} from '../../../__generated__/globalTypes';
+import {coordsFormatting} from '../../utils/commonUtils';
+import {getWorkDetail_getWorkDetail_work} from '../../../__generated__/getWorkDetail';
+import {stateBottomButtonName} from '../../utils/workUtils';
 import styled from 'styled-components/native';
 
 const {size}: any = AppTheme;
@@ -71,7 +71,7 @@ function WorkDetailPresenter({
         {work.address?.coordinate && (
           <MapView
             coords={coordsFormatting(work.address.coordinate)}
-            markerImage={require('../../../../assets/image/map_marker.png')}
+            markerImage={require('../../../assets/image/map_marker.png')}
             mapViewHeight={MAP_HEIGHT}
           />
         )}

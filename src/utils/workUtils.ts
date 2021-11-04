@@ -14,6 +14,19 @@ export const stateBottomButtonName = (state: WorkState) => {
   }
 };
 
+export const scheduleStateName = (state: WorkState) => {
+  switch (state) {
+    case 'RESERVE':
+      return I18n.t('Schedule.reserve');
+    case 'DONE':
+      return I18n.t('Schedule.done');
+    case 'CANCEL':
+      return I18n.t('Schedule.cancel');
+    default:
+      return '';
+  }
+};
+
 export const paymentText = (payment?: any) => {
   return payment && payment !== null
     ? I18n.t('pay_later')

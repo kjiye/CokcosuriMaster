@@ -10,6 +10,7 @@ export const Login: DocumentNode = gql`
         id
         phone
         name
+        state
       }
     }
   }

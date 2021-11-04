@@ -9,6 +9,8 @@ export default {
   before: '전',
   after: '후',
   next: '다음',
+  month: '월',
+  hour: '시',
   Header: {
     join: '회원가입',
     update_user_info: '개인정보 변경',
@@ -24,6 +26,7 @@ export default {
     working_impossible: '작업불가',
     working_done: '작업완료',
     payment: '현장결제',
+    select_store: '지점 선택',
     button: {
       working_impossible: '작업불가',
       delete_alarm: '알림삭제',
@@ -35,6 +38,7 @@ export default {
     working: '진행',
     done: '완료',
     cancel: '취소',
+    calendar: '캘린더',
   },
   Title: {
     name: '이름',
@@ -53,6 +57,8 @@ export default {
     cancel_reason: '취소 사유',
     cancel_image: '취소 사진',
     login_failed: '로그인 실패',
+    area: '지역',
+    store: '지점',
   },
   Placeholder: {
     title: '제목을 입력해주세요',
@@ -65,7 +71,9 @@ export default {
     re_password: '비밀번호를 다시 입력해주세요',
     license_no: '사업자 번호 10자를 입력해주세요',
     upload_image: '사진 올리기',
-    current_password: '현재 비밀번호를 입력해주세요 ',
+    current_password: '현재 비밀번호를 입력해주세요',
+    area: '지역을 선택해주세요',
+    store: '지점을 선택해주세요',
   },
   Button: {
     login: '로그인',
@@ -91,6 +99,7 @@ export default {
       setting: '설정',
       update_phone: '전화번호 변경',
       delete_all: '전체 삭제',
+      go_calendar: '캘린더 가기',
     },
   },
   Alert: {
@@ -100,8 +109,8 @@ export default {
     join: '회원가입이 완료되었습니다',
     accept: '를 수락하시겠습니까?',
     copy_address: '주소가 복사되었습니다',
-    withdrawal_ask: '정말로 회원탈퇴를 하시겠습니까?',
-    withdrawal_done: '탈퇴가 완료되었습니다',
+    withdrawal_ask: '정말 회원탈퇴를 하시겠습니까?',
+    withdrawal_done: '회원탈퇴가 완료되었습니다',
     logout_ask: '로그아웃을 하시겠습니까?',
     update_user_ask: '개인정보를 수정하시겠습니까?',
     updated: '수정이 완료되었습니다',
@@ -110,12 +119,15 @@ export default {
     update_phone:
       '전화번호가 변경되었습니다\n새로 등록한 번호로 다시 로그인 해주세요',
     req_verification_code: '인증번호가 발송되었습니다',
+    update_user_info: '정보 수정이 완료되었습니다',
+    area_select_first: '지역을 먼저 선택해주세요',
+    no_stores: '해당 지역에 등록된 지점이 없습니다',
   },
   Error: {
     common: '처리 중 문제가 발생했습니다. 잠시 후에 다시 시도해주세요',
     login: '등록되지 않은 회원이거나 정보가 일치하지 않습니다',
     forced_withdrawal:
-      '해당 아이디는 사용할 수 없습니다.\n고객센터에 문의 바랍니다.\n고객센터 : 00-000-000',
+      '해당 아이디는 사용할 수 없습니다.\n고객센터에 문의 바랍니다.\n고객센터 : 1899-1692',
     join: '회원가입에 실패했습니다. 관리자에게 문의해주세요',
     req_verification_code:
       '인증번호 요청에 실패했습니다. \n문제가 지속될 시 관리자에게 문의해주세요',
@@ -246,9 +258,18 @@ export default {
   WarnNetwork: {
     message: '네트워크 연결상태를 확인한 후 다시 시도해주세요',
   },
+  Schedule: {
+    reserve: '작업 전',
+    done: '완료',
+    cancel: '취소',
+    no_data: '작업 일정이 없습니다',
+  },
   Alarm: {
     no_data: '알림 내역이 없습니다',
     no_delete_data: '삭제할 내역이 없습니다',
+  },
+  Store: {
+    no_data: '등록된 지점이 없습니다',
   },
   TempTerms: {
     privacy_policy: `개인정보처리방침

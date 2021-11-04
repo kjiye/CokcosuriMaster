@@ -1,6 +1,4 @@
-import {BLACK_1} from '../../constants/color';
 import I18n from '../../utils/i18nHelpers';
-import {LARGE} from '../../constants/size';
 import React from 'react';
 import {SingleButton} from '../Button';
 import styled from 'styled-components/native';
@@ -13,10 +11,10 @@ const Wrapper = styled.View`
 
 const Message = styled.Text`
   text-align: center;
-  font-size: ${LARGE}px;
+  font-size: ${(props: any) => props.theme.fonts.large}px;
   font-weight: bold;
   line-height: 28px;
-  color: ${BLACK_1};
+  color: ${(props: any) => props.theme.colors.black[1]};
 `;
 
 const RefreshButton = styled(SingleButton)`

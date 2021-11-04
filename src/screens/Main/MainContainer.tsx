@@ -1,6 +1,10 @@
-import {GET_WORKS, REG_PUSH_TOKEN, SET_WORKING} from './main.queries';
-import React, {useCallback, useLayoutEffect, useState} from 'react';
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import {GET_WORKS, SET_WORKING} from './main.queries';
+import React, {useCallback, useState} from 'react';
+import {
+  useFocusEffect,
+  useNavigation,
+  useNavigationState,
+} from '@react-navigation/native';
 import {useMutation, useQuery} from '@apollo/client';
 import Clipboard from '@react-native-community/clipboard';
 import I18n from '../../utils/i18nHelpers';
@@ -10,7 +14,7 @@ import Toast from 'react-native-simple-toast';
 import {WorkState} from '../../../__generated__/globalTypes';
 import {callBackAlert} from '../../utils/alert';
 import {getWorks_getWorks_works} from '../../../__generated__/getWorks';
-
+import {lastStayMainTab} from '../../apollo';
 import {paymentText} from '../../utils/workUtils';
 
 function MainContainer({
@@ -21,7 +25,9 @@ function MainContainer({
   const navigation = useNavigation();
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
 
-  // 사용 시 라우팅 분기 작업 필요
+  const routes = useNavigationState(state => state);
+
+  // 탭에서 뒤로가기 누를 시 종료 처리 (사용 시 라우팅 분기 작업 필요)
   // useEffect(() => {
   //   const backAction: any = () => {
   //     BackHandler.exitApp();
@@ -33,7 +39,7 @@ function MainContainer({
   //   return () => backHandler.remove();
   // }, []);
 
-  const {loading, data, error, refetch} = useQuery(GET_WORKS, {
+  const {loading, data, refetch} = useQuery(GET_WORKS, {
     variables: {
       state,
     },
@@ -56,8 +62,10 @@ function MainContainer({
 
   useFocusEffect(
     useCallback(() => {
+      const currentRoute = routes.routeNames[routes.index];
+      lastStayMainTab(currentRoute);
       refetch();
-    }, []),
+    }, [routes]),
   );
 
   const props = {

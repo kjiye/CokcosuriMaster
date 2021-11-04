@@ -1,5 +1,5 @@
-import React from 'react';
 import {GestureResponderEvent} from 'react-native';
+import React from 'react';
 import styled from 'styled-components/native';
 
 const LEFT_PADDING = 25;

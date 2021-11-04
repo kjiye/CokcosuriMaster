@@ -6,11 +6,11 @@ import PhoneSvg from '../../../assets/svg/ic_phone.svg';
 import React from 'react';
 import TitleInfoItem from './TitleInfoItem';
 import {TwoButtonGroup} from '../Button';
+import {WorkState} from '../../../__generated__/globalTypes';
 import {dateFormatting} from '../../utils/commonUtils';
 import {getWorks_getWorks_works} from '../../../__generated__/getWorks';
 import styled from 'styled-components/native';
 import {useTheme} from 'styled-components';
-import {WorkState} from '../../../__generated__/globalTypes';
 
 const InfoWrapper = styled.View`
   ${(props: any) => `
