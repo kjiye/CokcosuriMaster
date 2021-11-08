@@ -19,7 +19,7 @@ const TextButton = styled.TouchableOpacity`
 
 const Text = styled.Text`
   font-size: ${(props: any) => props.theme.fonts.normal}px;
-  color: ${(props: any) => props.theme.colors.grey[4]};
+  color: ${(props: any) => props.theme.colors.grey[5]};
 `;
 
 const CheckButton = styled.TouchableOpacity`

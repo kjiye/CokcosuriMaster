@@ -1,4 +1,5 @@
 import 'dayjs/locale/ko';
+import {BASIC_DATE_FORMAT, getWeekArray} from '../../../utils/commonUtils';
 import {CalendarWorkCount, CalendarWorkState} from '../../../models/work';
 import React, {useCallback, useState} from 'react';
 import {useFocusEffect, useNavigation} from '@react-navigation/core';
@@ -6,7 +7,6 @@ import {APIDateFormatMonth} from '../../../models/common';
 import CalendarMainPresenter from './CalendarMainPresenter';
 import {GET_WORK_COUNT} from '../calendar.queries';
 import dayjs from 'dayjs';
-import {getWeekArray} from '../../../utils/commonUtils';
 import {lastStayMainTab} from '../../../apollo';
 import {useLazyQuery} from '@apollo/client';
 dayjs.locale('ko');
@@ -57,7 +57,9 @@ function CalendarMainContainer(): JSX.Element {
         .map(v => {
           let obj;
           works.map(value => {
-            const workDate = value.year + '-' + value.month + '-' + value.day;
+            const workDate = dayjs(
+              value.year + '-' + value.month + '-' + value.day,
+            ).format(BASIC_DATE_FORMAT);
             if (v === workDate) {
               obj = value;
               return;
@@ -66,6 +68,7 @@ function CalendarMainContainer(): JSX.Element {
           return obj;
         })
         .filter(v => v !== undefined);
+
       navigation.navigate('CalendarDetail', {
         selectedDate,
         weekArray,

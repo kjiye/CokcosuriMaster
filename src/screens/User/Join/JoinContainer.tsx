@@ -107,17 +107,17 @@ function JoinContainer({route}: any): JSX.Element {
           reqVerificationCode: {success},
         } = data;
         if (success) {
+          const {sendId} = data.reqVerificationCode;
+          if (user?.phone) {
+            setVerifyInfo({
+              sendId: sendId,
+              target: user.phone.replace(/-/gi, ''),
+              code: '',
+            });
+          }
           callBackAlert(I18n.t('Alert.req_verification_code'), () => {
             setPlayTimer(true);
             setTimerMs(5 * 60 * 1000);
-            const {sendId} = data.reqVerificationCode;
-            if (user?.phone) {
-              setVerifyInfo({
-                sendId: sendId,
-                target: user.phone.replace(/-/gi, ''),
-                code: '',
-              });
-            }
           });
         } else {
           callBackAlert(I18n.t('Error.req_verification_code'), () => {
@@ -219,11 +219,12 @@ function JoinContainer({route}: any): JSX.Element {
       setUser({...user, phone: text});
       setVerifyInfo(undefined);
       setVerified(false);
-      setTimerMs(5 * 60 * 1000);
+      // setTimerMs(5 * 60 * 1000);
     },
     reqVerifyBtnDisabled:
       !checkRegex('phone', user?.phone || '') || reqVerifyLoading,
     reqVerifyBtnPress: () => {
+      setPlayTimer(false);
       if (user?.phone) {
         reqVerificationCode({
           variables: {

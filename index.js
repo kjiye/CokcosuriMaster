@@ -22,7 +22,7 @@ PushNotification.createChannel(
     importance: Importance.HIGH, // (optional) default: Importance.HIGH. Int value of the Android notification importance
     vibrate: true, // (optional) default: true. Creates the default vibration patten if true.
   },
-  // created => console.log(`createChannel returned '${created}'`), // (optional) callback returns whether the channel was created, false means it already existed.
+  created => console.log(`createChannel returned '${created}'`), // (optional) callback returns whether the channel was created, false means it already existed.
 );
 
 // Must be outside of any component LifeCycle (such as `componentDidMount`).

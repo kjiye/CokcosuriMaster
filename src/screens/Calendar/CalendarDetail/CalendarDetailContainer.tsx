@@ -4,10 +4,10 @@ import React, {useCallback, useState} from 'react';
 import {useFocusEffect, useNavigation} from '@react-navigation/core';
 import CalendarDetailPresenter from './CalendarDetailPresenter';
 import {GET_DATE_WORKS} from '../calendar.queries';
+import {WorkState} from '../../../../__generated__/globalTypes';
 import dayjs from 'dayjs';
 import {getWorks_getWorks_works} from '../../../../__generated__/getWorks';
 import {useLazyQuery} from '@apollo/client';
-import {WorkState} from '../../../../__generated__/globalTypes';
 dayjs.locale('ko');
 
 function CalendarDetailContainer({
@@ -41,10 +41,21 @@ function CalendarDetailContainer({
         array.map((v: any, i: number) => {
           if (i > 0) {
             if (array[i - 1].visitDate === v.visitDate) {
-              result[i - 1] = {
-                time: v.visitDate,
-                data: [...result[i - 1].data, v],
-              };
+              if (result[i - 1]) {
+                result[i - 1] = {
+                  time: v.visitDate,
+                  data: [...result[i - 1].data, v],
+                };
+              } else {
+                result.map((val, idx) => {
+                  if (val.time === v.visitDate) {
+                    result[idx] = {
+                      ...result[idx],
+                      data: [...result[idx].data, v],
+                    };
+                  }
+                });
+              }
             } else {
               result = [
                 ...result,
@@ -75,11 +86,12 @@ function CalendarDetailContainer({
     useCallback(() => {
       getDateWorks({
         variables: {
-          visitDate: selectedDate.replace(/-/gi, '/'),
+          // visitDate: selectedDate.replace(/-/gi, '/'),
+          visitDate: activeDate.replace(/-/gi, '/'),
           state: CalendarWorkState,
         },
       });
-    }, []),
+    }, [activeDate]),
   );
 
   const props = {

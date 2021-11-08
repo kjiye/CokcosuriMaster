@@ -1,8 +1,11 @@
+import 'dayjs/locale/ko';
 import {CalendarWorkCount} from '../../models/work';
 import {GestureResponderEvent} from 'react-native';
 import React from 'react';
 import {StatusDotItem} from '../../components/Item';
+import dayjs from 'dayjs';
 import styled from 'styled-components/native';
+dayjs.locale('ko');
 
 const DAY_COMPONENT_HEIGHT = 70;
 const DAY_TEXT_HEIGHT = 45;
@@ -87,7 +90,7 @@ function DayItem({
       {works &&
         works.length > 0 &&
         works.map((v, i) => {
-          if (v.day === parseInt(day, 10)) {
+          if (v.day === parseInt(day, 10) && !disabled) {
             return (
               <DotPosition key={i.toString()}>
                 <DotWrapper>

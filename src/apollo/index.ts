@@ -25,6 +25,7 @@ export const removeToken = async () => {
   await setToken();
   tokenVar(null);
   userVar(null);
+  lastStayMainTab('WaitScreen');
   await setUserAppId();
 };
 

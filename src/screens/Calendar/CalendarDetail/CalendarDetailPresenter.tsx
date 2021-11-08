@@ -52,6 +52,10 @@ const NoDataText = styled.Text`
   color: ${(props: any) => props.theme.colors.black[1]};
 `;
 
+const ScrollInnerWrapper = styled.View`
+  padding-bottom: ${(props: any) => props.theme.size.bottomPadding}px;
+`;
+
 interface Props {
   weekArray: string[];
   workArray: CalendarWorkCount[];
@@ -106,16 +110,18 @@ function CalendarDetailPresenter({
       </CalendarWrapper>
       <ScheduleWrapper>
         {schedules.length > 0 ? (
-          <ScrollView>
-            {schedules.map((v: ScheduleData, i: number) => {
-              return (
-                <ScheduleItem
-                  key={i.toString()}
-                  value={v}
-                  goDetail={goDetail}
-                />
-              );
-            })}
+          <ScrollView scrollIndicatorInsets={{right: 0.1}}>
+            <ScrollInnerWrapper>
+              {schedules.map((v: ScheduleData, i: number) => {
+                return (
+                  <ScheduleItem
+                    key={i.toString()}
+                    value={v}
+                    goDetail={goDetail}
+                  />
+                );
+              })}
+            </ScrollInnerWrapper>
           </ScrollView>
         ) : (
           <NoDataText>{I18n.t('Schedule.no_data')}</NoDataText>

@@ -114,7 +114,8 @@ export default {
     logout_ask: '로그아웃을 하시겠습니까?',
     update_user_ask: '개인정보를 수정하시겠습니까?',
     updated: '수정이 완료되었습니다',
-    update_password: '비밀번호가 변경되었습니다',
+    update_password:
+      '비밀번호가 변경되었습니다\n새로운 비밀번호로 다시 로그인해주세요',
     temp_password: '등록하신 휴대전화로 임시 비밀번호를 전송했습니다',
     update_phone:
       '전화번호가 변경되었습니다\n새로 등록한 번호로 다시 로그인 해주세요',

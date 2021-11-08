@@ -30,16 +30,16 @@ function UpdatePhoneContainer(): JSX.Element {
         reqVerificationCode: {success},
       } = data;
       if (success) {
+        const {sendId} = data.reqVerificationCode;
+        setVerifyInfo({
+          sendId: sendId,
+          target: phone.replace(/-/gi, ''),
+          code: '',
+        });
         callBackAlert(I18n.t('Alert.req_verification_code'), () => {
           setRequested(true);
           setPlayTimer(true);
           setTimerMs(5 * 60 * 1000);
-          const {sendId} = data.reqVerificationCode;
-          setVerifyInfo({
-            sendId: sendId,
-            target: phone.replace(/-/gi, ''),
-            code: '',
-          });
         });
       } else {
         callBackAlert(I18n.t('Error.req_verification_code'), () => {
@@ -117,7 +117,8 @@ function UpdatePhoneContainer(): JSX.Element {
     onChangePhone: (text: string) => {
       setPhone(text);
       setVerifyInfo(undefined);
-      setTimerMs(5 * 60 * 1000);
+      setVerified(false);
+      // setTimerMs(5 * 60 * 1000);
     },
     onChangeVerificationCode: (text: string) => {
       if (verifyInfo?.sendId && verifyInfo?.target) {
@@ -128,6 +129,13 @@ function UpdatePhoneContainer(): JSX.Element {
       }
     },
     reqVerifyBtnPress: () => {
+      setPlayTimer(false);
+      if (verifyInfo?.sendId && verifyInfo?.target) {
+        setVerifyInfo({
+          ...verifyInfo,
+          code: '',
+        });
+      }
       reqVerificationCode({
         variables: {
           target: phone.replace(/-/gi, ''),

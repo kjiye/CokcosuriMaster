@@ -6,12 +6,14 @@ import {RegexType} from '../models/common';
 import dayjs from 'dayjs';
 import {getWorkDetail_getWorkDetail_work_customer_address_coordinate} from '../../__generated__/getWorkDetail';
 
-// export const SERVER_URL = 'http://211.110.229.85:4000/graphql';
+export const SERVER_URL = 'http://211.110.229.85:4000/graphql';
 // export const SERVER_URL = 'http://192.168.1.249:4000/graphql';
-export const SERVER_URL = 'http://localhost:4000/graphql';
+// export const SERVER_URL = 'http://localhost:4000/graphql';
 // export const SERVER_URL = 'http://192.168.1.245:4000/graphql';
 // export const SERVER_URL = 'http://10.80.102.81:4000/graphql';
 export const IMG_URL = SERVER_URL.slice(0, SERVER_URL.lastIndexOf('/'));
+
+export const BASIC_DATE_FORMAT = 'YYYY-MM-DD';
 
 const regexPattern = (type: RegexType) => {
   switch (type) {
@@ -56,18 +58,17 @@ export const calendarDayIndex = () => {
 };
 
 export const getWeekArray = (date: string) => {
-  const format = 'YYYY-MM-DD';
   const locale = 'ko';
   const standardDate = dayjs(date).locale('ko');
   const startOfDay = dayjs(standardDate)
     .startOf('week')
     .locale(locale)
-    .format(format);
+    .format(BASIC_DATE_FORMAT);
   let weekArr = [startOfDay];
   for (let i = 0; i < 6; i++) {
     weekArr = [
       ...weekArr,
-      dayjs(weekArr[i]).add(1, 'day').locale(locale).format(format),
+      dayjs(weekArr[i]).add(1, 'day').locale(locale).format(BASIC_DATE_FORMAT),
     ];
   }
   return weekArr;

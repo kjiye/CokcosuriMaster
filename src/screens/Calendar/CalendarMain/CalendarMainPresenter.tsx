@@ -2,6 +2,7 @@ import 'dayjs/locale/ko';
 import {Calendar, LocaleConfig} from 'react-native-calendars';
 import {DayNames, DayNamesShort, MonthNames} from '../../../models/common';
 import styled, {useTheme} from 'styled-components/native';
+import {BASIC_DATE_FORMAT} from '../../../utils/commonUtils';
 import BaseContainer from '../../../components/BaseContainer';
 import {CalendarWorkCount} from '../../../models/work';
 import {DateData} from 'react-native-calendars/src/types';
@@ -11,12 +12,10 @@ import NextArrowSvg from '../../../../assets/svg/ic_next_arrow_gray.svg';
 import PrevArrowSvg from '../../../../assets/svg/ic_prev_arrow_gray.svg';
 import React from 'react';
 import {ScrollView} from 'react-native';
-import {calendarDayIndex} from '../../../utils/commonUtils';
 import dayjs from 'dayjs';
 dayjs.locale('ko');
 
 const HEADER_MARGIN = 15;
-const DATE_FORMAT = 'YYYY-MM-DD';
 
 const Container = styled(BaseContainer)`
   background: ${(props: any) => props.theme.colors.background};
@@ -54,7 +53,7 @@ function CalendarMainPresenter({
   const theme: any = useTheme();
   return (
     <Container>
-      <ScrollView>
+      <ScrollView scrollIndicatorInsets={{right: 0.1}}>
         <WorkCalendar
           onVisibleMonthsChange={(months: DateData[]) => {
             onMonthChange(months[0].year + '/' + months[0].month);
@@ -69,12 +68,12 @@ function CalendarMainPresenter({
                 fontWeight: 'bold',
                 color: theme.colors.grey[5],
               },
-              [`dayTextAtIndex${calendarDayIndex()}`]: {
-                color: theme.colors.primaryLight,
-              },
+              // [`dayTextAtIndex${calendarDayIndex()}`]: {
+              //   color: theme.colors.primaryLight,
+              // },
             },
           }}
-          current={dayjs().format(DATE_FORMAT)}
+          current={dayjs().format(BASIC_DATE_FORMAT)}
           enableSwipeMonths={true}
           renderArrow={direction => {
             switch (direction) {

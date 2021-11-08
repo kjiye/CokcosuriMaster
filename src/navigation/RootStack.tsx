@@ -34,6 +34,7 @@ function RootStack(): JSX.Element {
         mode={'modal'}
         // headerMode={'none'}
         screenOptions={{
+          headerTitleAlign: 'center',
           // gestureEnabled: true,
           cardStyle: {backgroundColor: 'transparent'},
           // cardOverlayEnabled: true,

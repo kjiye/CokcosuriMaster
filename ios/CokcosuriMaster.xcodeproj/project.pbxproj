@@ -526,7 +526,7 @@
 				CODE_SIGN_ENTITLEMENTS = CokcosuriMaster/CokcosuriMaster.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = S9XNB6CJA9;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = CokcosuriMaster/Info.plist;
@@ -558,7 +558,7 @@
 				CODE_SIGN_ENTITLEMENTS = CokcosuriMaster/CokcosuriMaster.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = S9XNB6CJA9;
 				INFOPLIST_FILE = CokcosuriMaster/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
