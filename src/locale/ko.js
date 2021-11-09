@@ -288,6 +288,14 @@ export default {
   Store: {
     no_data: '등록된 지점이 없습니다',
   },
+  Status: {
+    wait: '작업 요청',
+    reserve: '작업 수락',
+    working: '작업 중',
+    done: '작업 완료',
+    cancel: '작업 취소',
+    cancel_admin: '관리자에 의한 작업 취소',
+  },
   TempTerms: {
     privacy_policy: `개인정보처리방침
 

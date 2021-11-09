@@ -1,3 +1,4 @@
+import {StyleProp, ViewProps, ViewStyle} from 'react-native';
 import React from 'react';
 import RoundedLabel from './RoundedLabel';
 import styled from 'styled-components/native';
@@ -31,6 +32,7 @@ const Message = styled.Text`
 `;
 
 interface Props {
+  style?: StyleProp<ViewStyle>;
   message?: string;
   labelLeftText?: string;
   labelRightText?: string;
@@ -38,13 +40,14 @@ interface Props {
 }
 
 function MessageBarLabel({
+  style,
   message = '',
   labelLeftText = '',
   labelRightText = '',
   allRadius = false,
 }: Props): JSX.Element {
   return (
-    <Wrapper allRadius={allRadius}>
+    <Wrapper allRadius={allRadius} style={style as StyleProp<ViewProps>}>
       <Message numberOfLines={1}>{message}</Message>
       <RoundedLabel leftText={labelLeftText} rightText={labelRightText} />
     </Wrapper>

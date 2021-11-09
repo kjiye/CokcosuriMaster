@@ -27,6 +27,23 @@ export const scheduleStateName = (state: WorkState) => {
   }
 };
 
+export const workStateName = (state: WorkState) => {
+  switch (state) {
+    case WorkState.WAIT:
+      return I18n.t('Status.wait');
+    case WorkState.RESERVE:
+      return I18n.t('Status.reserve');
+    case WorkState.WORKING:
+      return I18n.t('Status.working');
+    case WorkState.DONE:
+      return I18n.t('Status.done');
+    case WorkState.CANCEL:
+      return I18n.t('Status.cancel');
+    case WorkState.CANCEL_ADMIN:
+      return I18n.t('Status.cancel_admin');
+  }
+};
+
 export const paymentText = (payment?: any) => {
   return payment && payment !== null
     ? I18n.t('pay_later')

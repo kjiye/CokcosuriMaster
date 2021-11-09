@@ -7,6 +7,7 @@ import {NoDataView} from '../../components/View';
 import React from 'react';
 import {WorkListItem} from '../../components/Item';
 import {getWorks_getWorks_works} from '../../../__generated__/getWorks';
+import {WorkState} from '../../../__generated__/globalTypes';
 
 const Container = styled(BaseContainer)`
   background-color: ${(props: any) => props.theme.colors.grey_background};
@@ -48,16 +49,18 @@ function MainPresenter({
           }}
           data={works}
           keyExtractor={(_: any, i: number) => i.toString()}
-          renderItem={({item, index}: any) => (
-            <WorkListItem
-              key={index.toString()}
-              style={index > 0 && {marginTop: theme.size.standardPadding}}
-              item={item}
-              itemPress={goDetail}
-              leftBtnPress={leftBtnPress}
-              rightBtnPress={rightBtnPress}
-            />
-          )}
+          renderItem={({item, index}: any) => {
+            return (
+              <WorkListItem
+                key={index.toString()}
+                style={index > 0 && {marginTop: theme.size.standardPadding}}
+                item={item}
+                itemPress={goDetail}
+                leftBtnPress={leftBtnPress}
+                rightBtnPress={rightBtnPress}
+              />
+            );
+          }}
           refreshControl={
             <RefreshControl
               refreshing={isRefreshing}

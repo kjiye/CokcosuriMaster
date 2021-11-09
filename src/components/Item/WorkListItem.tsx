@@ -11,10 +11,26 @@ import {dateFormatting} from '../../utils/commonUtils';
 import {getWorks_getWorks_works} from '../../../__generated__/getWorks';
 import styled from 'styled-components/native';
 import {useTheme} from 'styled-components';
+import {workStateName} from '../../utils/workUtils';
 
 const InfoWrapper = styled.View`
   ${(props: any) => `
   padding: ${props.theme.size.innerMargin}px ${props.theme.size.innerMargin}px 0px ${props.theme.size.innerMargin}px`}
+`;
+
+const StatusView = styled.View`
+  ${(props: any) => `
+  margin: ${props.theme.size.margin}px ${props.theme.size.margin}px 0 ${props.theme.size.margin}px`}
+  padding-bottom: 8px;
+  border-bottom-width: 1px;
+  border-color: ${(props: any) => props.theme.colors.grey[3]};
+`;
+
+const StatusText = styled.Text`
+  text-align: right;
+  font-size: ${(props: any) => props.theme.fonts.large}px;
+  font-weight: bold;
+  color: ${(props: any) => props.theme.colors.black[1]};
 `;
 
 interface Props {
@@ -44,12 +60,20 @@ function WorkListItem({
             if (itemPress) itemPress(item);
           }}>
           <MessageBarLabel
+            style={
+              item.state === WorkState.WORKING && {
+                backgroundColor: theme.colors.secondary,
+              }
+            }
             message={item.title}
             labelLeftText={
               item.payment ? I18n.t('pay_later') : I18n.t('pay_first')
             }
             labelRightText={item.workCategory.name}
           />
+          <StatusView>
+            <StatusText>{workStateName(item.state)}</StatusText>
+          </StatusView>
           <InfoWrapper
             style={
               item.state === WorkState.DONE || item.state === WorkState.CANCEL
