@@ -7,6 +7,7 @@ const ContentView = styled.View`
   padding: ${(props: any) => props.theme.size.innerMargin}px;
   height: ${HEIGHT}px;
   background: ${(props: any) => props.theme.colors.grey[1]};
+  border-radius: ${(props: any) => props.theme.size.borderRadius}px;
 `;
 
 const ContentText = styled.Text`

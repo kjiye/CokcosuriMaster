@@ -10,7 +10,7 @@ import {
   MaskInputPhone,
 } from '../../../models/common';
 import {GestureResponderEvent, ScrollView} from 'react-native';
-import {JoinFormInput, JoinRegex, Stores} from '../../../models/user';
+import {JoinFormInput, JoinRegex} from '../../../models/user';
 import I18n from '../../../utils/i18nHelpers';
 import {Image} from 'react-native-image-crop-picker';
 import {ImageSelector} from '../../../components/Image';

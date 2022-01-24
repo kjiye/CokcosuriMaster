@@ -3,14 +3,13 @@ import {
   PaymentState,
 } from '../../../../__generated__/globalTypes';
 import {GET_PAYMENT_CATEGORIES, SET_PAYMENT} from './payment.queries';
-import React, {useEffect, useLayoutEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useMutation, useQuery} from '@apollo/client';
 import {CategoryType} from '../../../models/common';
 import I18n from '../../../utils/i18nHelpers';
 import PaymentPresenter from './PaymentPresenter';
 import {callBackAlert} from '../../../utils/alert';
 import {useNavigation} from '@react-navigation/native';
-import {updatePaymentVariables} from '../../../../__generated__/updatePayment';
 
 function PaymentContainer({route}: any): JSX.Element {
   const navigation = useNavigation();

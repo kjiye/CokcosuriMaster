@@ -2,6 +2,7 @@ import {AppTheme} from '../../themes/theme';
 import BaseContainer from '../../components/BaseContainer';
 import {ContentTextView} from '../../components/View';
 import CustomerInfoItem from './CustomerInfoItem';
+import CustomerPurchaseProductItem from './CustomerPurchaseProductItem';
 import I18n from '../../utils/i18nHelpers';
 import {ImageSlider} from '../../components/Image';
 import LoadingView from '../../components/View/LoadingView';
@@ -42,6 +43,7 @@ interface Props {
   bottomBtnPress: (item: getWorkDetail_getWorkDetail_work) => void;
   copyAddress: (address: string) => void;
   call: (phone: string) => void;
+  goProductDetail: () => void;
 }
 
 function WorkDetailPresenter({
@@ -50,6 +52,7 @@ function WorkDetailPresenter({
   bottomBtnPress,
   copyAddress,
   call,
+  goProductDetail,
 }: Props): JSX.Element {
   return loading ? (
     <LoadingView />
@@ -82,6 +85,8 @@ function WorkDetailPresenter({
             leftBtnPress={copyAddress}
             rightBtnPress={call}
           />
+          <MidTitleItem mainText={'고객구매 상품'} />
+          <CustomerPurchaseProductItem onPress={goProductDetail} />
           <MidTitleItem mainText={I18n.t('Title.customer_message')} />
           <ContentTextView value={work.content || ''} />
           <MidTitleItem mainText={I18n.t('Title.customer_place')} />

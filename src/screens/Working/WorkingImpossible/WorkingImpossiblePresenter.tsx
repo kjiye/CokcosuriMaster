@@ -1,6 +1,6 @@
 import {GestureResponderEvent, ScrollView} from 'react-native';
-import {AppTheme} from '../../../themes/theme';
-import I18n from 'i18n-js';
+import styled, {useTheme} from 'styled-components/native';
+import I18n from '../../../utils/i18nHelpers';
 import {Image} from 'react-native-image-crop-picker';
 import {ImageSelector} from '../../../components/Image';
 import KeyboardBaseContainer from '../../../components/KeyboardBaseContainer';
@@ -10,12 +10,8 @@ import React from 'react';
 import {TitleItem} from '../../../components/Item';
 import WorkingNoticeView from '../WorkingNoticeView';
 import {getWorkDetail_getWorkDetail_work} from '../../../../__generated__/getWorkDetail';
-import styled from 'styled-components/native';
-
-const {colors}: any = AppTheme;
 
 const IMG_MARGIN_TOP = 12;
-const BOTTOM_PADDING = 100;
 
 const Container = styled(KeyboardBaseContainer)`
   background: ${(props: any) => props.theme.colors.background};
@@ -23,7 +19,7 @@ const Container = styled(KeyboardBaseContainer)`
 
 const ContentContainer = styled.View`
   ${(props: any) => `
-  padding: ${props.theme.size.standardPadding}px ${props.theme.size.standardPadding}px ${BOTTOM_PADDING}px ${props.theme.size.standardPadding}px`}
+  padding: ${props.theme.size.standardPadding}px ${props.theme.size.standardPadding}px ${props.theme.size.bottomPadding}px ${props.theme.size.standardPadding}px`}
 `;
 
 const Title = styled(TitleItem)`
@@ -53,6 +49,7 @@ function WorkingImpossiblePresenter({
   deleteImage,
   okPress,
 }: Props): JSX.Element {
+  const theme: any = useTheme();
   return (
     <Container
       button={
@@ -67,7 +64,7 @@ function WorkingImpossiblePresenter({
           <WorkingNoticeView
             itemInfo={item}
             status={I18n.t('WorkingImpossible.status')}
-            statusColor={colors.errorDark}
+            statusColor={theme.colors.errorDark}
             endingWord={I18n.t('WorkingImpossible.ending_word')}
             message={I18n.t('WorkingImpossible.message')}
             middleTitle={I18n.t('WorkingImpossible.middleTitle')}
@@ -82,7 +79,7 @@ function WorkingImpossiblePresenter({
           />
           <Title
             mainText={I18n.t('WorkingImpossible.image')}
-            desc={'3장 필수'}
+            desc={I18n.t('Title.require_image_quantity')}
           />
           <ImageSelector
             desc={I18n.t('Image.first_upload')}

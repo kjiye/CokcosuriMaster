@@ -1,21 +1,20 @@
-import {BLACK_1, GRAY_1, GRAY_5} from '../../constants/color';
-import {INNER_MARGIN, MEDIUM, MINI, TINY} from '../../constants/size';
+import styled, {useTheme} from 'styled-components/native';
 import React from 'react';
-import styled from 'styled-components/native';
 
 const ContentInput = styled.TextInput`
-  padding: ${INNER_MARGIN}px;
+  padding: ${(props: any) => props.theme.size.innerMargin}px;
   height: 235px;
-  background: ${GRAY_1};
-  font-size: ${MEDIUM}px;
-  color: ${BLACK_1};
+  background: ${(props: any) => props.theme.colors.grey[1]};
+  font-size: ${(props: any) => props.theme.fonts.normal}px;
+  color: ${(props: any) => props.theme.colors.black[1]};
+  border-radius: ${(props: any) => props.theme.size.borderRadius}px;
 `;
 
 const LimitCountText = styled.Text`
-  margin: ${MINI}px 0;
+  margin: ${(props: any) => props.theme.size.margin}px 0;
   text-align: right;
-  font-size: ${TINY}px;
-  color: ${BLACK_1};
+  font-size: ${(props: any) => props.theme.fonts.tiny}px;
+  color: ${(props: any) => props.theme.colors.black[1]};
 `;
 
 interface Props {
@@ -33,12 +32,13 @@ function LimitTextArea({
   value,
   onChange,
 }: Props): JSX.Element {
+  const theme: any = useTheme();
   return (
     <>
       <ContentInput
         value={value}
         placeholder={placeholder}
-        placeholderTextColor={GRAY_5}
+        placeholderTextColor={theme.colors.grey[5]}
         textAlignVertical={'top'}
         multiline={true}
         numberOfLines={10}

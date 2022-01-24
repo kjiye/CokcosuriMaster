@@ -15,9 +15,16 @@ const SliderWrapper = styled(Swiper)`
   background: ${(props: any) => props.theme.colors.grey[2]};
 `;
 
-const Slide = styled.Image`
-  width: ${width}px;
+const Slide = styled.View`
+  flex: 1;
   height: ${IMG_HEIGHT}px;
+  border-radius: ${(props: any) => props.theme.size.borderRadius}px;
+`;
+
+const SlideImage = styled.Image`
+  width: 100%;
+  height: 100%;
+  border-radius: ${(props: any) => props.theme.size.borderRadius}px;
 `;
 
 const EmptyImage = styled.Image`
@@ -41,12 +48,13 @@ function ImageSlider({imageList}: Props): JSX.Element {
       activeDotColor={theme.colors.primaryLight}>
       {imageList.map((v, i) => {
         return (
-          <Slide
-            key={i.toString()}
-            resizeMethod={'resize'}
-            resizeMode={'cover'}
-            source={setImageUrl(v.path)}
-          />
+          <Slide key={i.toString()}>
+            <SlideImage
+              resizeMethod={'resize'}
+              resizeMode={'cover'}
+              source={setImageUrl(v.path)}
+            />
+          </Slide>
         );
       })}
     </SliderWrapper>

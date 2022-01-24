@@ -1,3 +1,8 @@
+/**
+ * 아래 공통 색상 정의파일은 styled-components theme으로 대체 사용
+ * theme.ts 파일 참고
+ */
+
 export const MINI = 10;
 export const TINY = 12;
 export const SMALL = 14;

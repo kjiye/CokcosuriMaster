@@ -1,3 +1,4 @@
+import {CardBottomButton, TwoButtonGroup} from '../Button';
 import {StyleProp, TouchableOpacity, ViewProps, ViewStyle} from 'react-native';
 import {CardView} from '../View';
 import I18n from '../../utils/i18nHelpers';
@@ -5,7 +6,6 @@ import MessageBarLabel from '../Label/MessageBarLabel';
 import PhoneSvg from '../../../assets/svg/ic_phone.svg';
 import React from 'react';
 import TitleInfoItem from './TitleInfoItem';
-import {TwoButtonGroup} from '../Button';
 import {WorkState} from '../../../__generated__/globalTypes';
 import {dateFormatting} from '../../utils/commonUtils';
 import {getWorks_getWorks_works} from '../../../__generated__/getWorks';
@@ -39,6 +39,9 @@ interface Props {
   itemPress?: (item: getWorks_getWorks_works) => void;
   leftBtnPress?: (item: getWorks_getWorks_works) => void;
   rightBtnPress?: (item: getWorks_getWorks_works) => void;
+  writeCaseBtnPress?: (id: number) => void;
+  useWriteCaseBtn?: boolean;
+  cardPressDisabled?: boolean;
 }
 
 function WorkListItem({
@@ -47,6 +50,9 @@ function WorkListItem({
   itemPress,
   leftBtnPress,
   rightBtnPress,
+  writeCaseBtnPress,
+  useWriteCaseBtn = true,
+  cardPressDisabled = false,
 }: Props): JSX.Element {
   const theme: any = useTheme();
   return (
@@ -56,6 +62,7 @@ function WorkListItem({
       hasShadow={false}>
       <>
         <TouchableOpacity
+          disabled={cardPressDisabled}
           onPress={() => {
             if (itemPress) itemPress(item);
           }}>
@@ -125,7 +132,16 @@ function WorkListItem({
               if (rightBtnPress) rightBtnPress(item);
             }}
           />
+        ) : item.state === WorkState.DONE && useWriteCaseBtn ? (
+          // 수리사례 작성, 수정하기 두 개의 버튼 노출
+          <CardBottomButton
+            name={I18n.t('Button.write_work_case')}
+            onPress={() => {
+              if (writeCaseBtnPress) writeCaseBtnPress(item.id);
+            }}
+          />
         ) : (
+          // CANCEL, CANCEL_ADMIN
           <></>
         )}
       </>

@@ -1,12 +1,13 @@
-import {INNER_MARGIN, MEDIUM, STANDARD} from '../../constants/size';
-import {BLACK_1} from '../../constants/color';
+import {AppTheme} from '../../themes/theme';
 import {Dimensions} from 'react-native';
 import React from 'react';
 import TitleItem from './TitleItem';
 import styled from 'styled-components/native';
 
+const {size}: any = AppTheme;
 const {width} = Dimensions.get('screen');
-const INFO_WIDTH: number = (width - (STANDARD * 2 + INNER_MARGIN * 2)) * 0.75;
+const INFO_WIDTH: number =
+  (width - (size.standardPadding * 2 + size.innerMargin * 2)) * 0.75;
 
 const Wrapper = styled.View`
   flex-direction: row;
@@ -26,8 +27,8 @@ const InfoView = styled.View`
 const InfoText = styled.Text`
   width: ${INFO_WIDTH}px;
   text-align: right;
-  font-size: ${MEDIUM}px;
-  color: ${BLACK_1};
+  font-size: ${(props: any) => props.theme.fonts.normal}px;
+  color: ${(props: any) => props.theme.colors.black[1]};
 `;
 
 const InfoSubText = styled(InfoText)`
@@ -47,7 +48,7 @@ function TitleInfoItem({titleText, infoText, infoSubText}: Props): JSX.Element {
         <TitleItem
           style={{paddingBottom: 0}}
           mainText={titleText}
-          mainColor={'gray'}
+          mainColor={'grey'}
         />
       </TitleView>
       <InfoView>

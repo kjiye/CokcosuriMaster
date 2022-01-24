@@ -1,10 +1,8 @@
-import {ACCENT_MAIN, ERROR_DARK} from '../../constants/color';
 import {StyleProp, ViewProps, ViewStyle} from 'react-native';
+import styled, {useTheme} from 'styled-components/native';
 import BasicInput from './BasicInput';
-import React from 'react';
-import {TINY} from '../../constants/size';
-import styled from 'styled-components/native';
 import {KeyboardTypeOptions} from 'react-native';
+import React from 'react';
 
 const DEFAULT_HEIGHT = 67;
 const SHORT_HEIGHT = 57;
@@ -17,8 +15,9 @@ const Wrapper = styled.View<{isShort: boolean}>`
 `;
 
 const Message = styled.Text<{regexResult?: boolean}>`
-  font-size: ${TINY}px;
-  ${({regexResult}) => `color: ${regexResult ? ACCENT_MAIN : ERROR_DARK}`}
+  font-size: ${(props: any) => props.theme.fonts.tiny}px;
+  ${({regexResult, theme}: any) =>
+    `color: ${regexResult ? theme.colors.accent : theme.colors.errorDark}`}
 `;
 
 interface Props {
@@ -46,11 +45,15 @@ function ErrorViewInput({
   mask,
   keyboardType,
 }: Props): JSX.Element {
+  const theme: any = useTheme();
   return (
     <Wrapper style={style as StyleProp<ViewProps>} isShort={isShort}>
       <BasicInput
         style={
-          regexResult === false && {borderWidth: 1, borderColor: ERROR_DARK}
+          regexResult === false && {
+            borderWidth: 1,
+            borderColor: theme.colors.errorDark,
+          }
         }
         placeholder={placeholder}
         secure={secure}

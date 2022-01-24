@@ -13,6 +13,10 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
+/**
+ * 회원 식별 정보 없이 사용하는 페이지 구성
+ * (로그인, 회원가입, 비밀번호 재설정 등)
+ */
 function LoginStack(): JSX.Element {
   return (
     <Stack.Navigator screenOptions={{...commonHeaderOption}}>

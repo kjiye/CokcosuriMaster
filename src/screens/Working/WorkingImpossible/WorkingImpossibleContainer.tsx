@@ -53,7 +53,7 @@ function WorkingImpossibleContainer({route}: any): JSX.Element {
     },
     okPress: () => {
       callBackAlert(
-        '작업불가 처리하시겠습니까?',
+        I18n.t('WorkingImpossible.impossible_ask'),
         () => {
           inventActionModal(navigation, {isShow: true});
           const fileArr = images.map(file => uploadImageFormatting(file));

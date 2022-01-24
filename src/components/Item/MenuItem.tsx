@@ -1,6 +1,4 @@
 import {GestureResponderEvent, ViewProps, ViewStyle} from 'react-native';
-import {BLACK_1} from '../../constants/color';
-import {MEDIUM} from '../../constants/size';
 import React from 'react';
 import {StyleProp} from 'react-native';
 import styled from 'styled-components/native';
@@ -10,9 +8,9 @@ const Wrapper = styled.TouchableOpacity`
 `;
 
 const MenuText = styled.Text`
-  font-size: ${MEDIUM}px;
+  font-size: ${(props: any) => props.theme.fonts.normal}px;
   font-weight: 500;
-  color: ${BLACK_1};
+  color: ${(props: any) => props.theme.colors.black[1]};
 `;
 
 interface Props {

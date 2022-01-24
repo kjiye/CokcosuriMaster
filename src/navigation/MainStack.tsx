@@ -10,7 +10,9 @@ import I18n from '../utils/i18nHelpers';
 import MainTab from './MainTab';
 import PaymentScreen from '../screens/Working/Payment';
 import {Platform} from 'react-native';
+import ProductDetailScreen from '../screens/ProductDetail';
 import {REG_PUSH_TOKEN} from '../screens/Main/main.queries';
+import WorkCaseScreen from '../screens/WorkCase';
 import WorkDetailScreen from '../screens/WorkDetail';
 import WorkingBeforeScreen from '../screens/Working/WorkingBefore';
 import WorkingDoneScreen from '../screens/Working/WorkingDone';
@@ -98,6 +100,20 @@ function MainStack(): JSX.Element {
         component={WorkingDoneScreen}
         options={basicHeader({
           title: I18n.t('Header.working_done'),
+        })}
+      />
+      <Stack.Screen
+        name={'WorkCase'}
+        component={WorkCaseScreen}
+        options={basicHeader({
+          title: I18n.t('Header.write_work_case'),
+        })}
+      />
+      <Stack.Screen
+        name={'ProductDetail'}
+        component={ProductDetailScreen}
+        options={basicHeader({
+          title: I18n.t('Header.product_detail'),
         })}
       />
       <Stack.Screen

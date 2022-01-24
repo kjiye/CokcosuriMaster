@@ -89,6 +89,9 @@ function WorkDetailContainer({route}: any): JSX.Element {
     call: (phone: string) => {
       Linking.openURL(`tel:${phone}`);
     },
+    goProductDetail: () => {
+      navigation.navigate('ProductDetail');
+    },
   };
   return <WorkDetailPresenter {...props} />;
 }

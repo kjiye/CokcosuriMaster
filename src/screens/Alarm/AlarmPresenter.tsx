@@ -14,8 +14,7 @@ const Container = styled(BaseContainer)`
 `;
 
 const ListContainer = styled.View<{isDelete: boolean}>`
-  padding-bottom: ${(props: any) =>
-    props.isDelete ? props.theme.size.bottomPadding : 0}px;
+  flex: 1;
 `;
 
 interface Props {
@@ -55,6 +54,7 @@ function AlarmPresenter({
       ) : alarm && alarm.length > 0 ? (
         <ListContainer isDelete={isDelete}>
           <FlatList
+            contentContainerStyle={{paddingBottom: theme.size.bottomPadding}}
             scrollIndicatorInsets={{right: 0.1}}
             data={alarm}
             keyExtractor={(_: any, i: number) => i.toString()}

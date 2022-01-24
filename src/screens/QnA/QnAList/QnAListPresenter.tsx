@@ -14,7 +14,7 @@ const Container = styled(BaseContainer)`
 `;
 
 const ListContainer = styled.View`
-  padding-bottom: ${(props: any) => props.theme.size.bottomPadding}px;
+  flex: 1;
 `;
 
 interface Props {
@@ -38,6 +38,7 @@ function QnAListPresenter({
       ) : list.length > 0 ? (
         <ListContainer>
           <FlatList
+            contentContainerStyle={{paddingBottom: theme.size.bottomPadding}}
             scrollIndicatorInsets={{right: 0.1}}
             data={list}
             keyExtractor={(_: any, i: number) => i.toString()}

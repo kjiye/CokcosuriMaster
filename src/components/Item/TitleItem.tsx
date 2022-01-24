@@ -1,36 +1,33 @@
-import {INNER_MARGIN, LARGE, MEDIUM} from '../../constants/size';
 import {StyleProp, ViewProps, ViewStyle} from 'react-native';
-import {AppTheme} from '../../themes/theme';
-import {GRAY_5} from '../../constants/color';
 import React from 'react';
 import styled from 'styled-components/native';
 
-const {colors}: any = AppTheme;
-
 const Wrapper = styled.View`
-  padding-bottom: ${INNER_MARGIN}px;
+  padding-bottom: ${(props: any) => props.theme.size.innerMargin}px;
 `;
 
 const MainText = styled.Text<{mainColor?: string}>`
-  font-size: ${LARGE}px;
+  font-size: ${(props: any) => props.theme.fonts.large}px;
   font-weight: bold;
-  ${({mainColor}) => `
+  ${({mainColor, theme}: any) => `
   color : ${
-    !!mainColor && mainColor === 'gray' ? colors.grey[6] : colors.black[1]
+    !!mainColor && mainColor === 'grey'
+      ? theme.colors.grey[6]
+      : theme.colors.black[1]
   }`}
 `;
 
 const FrontText = styled(MainText)``;
 
 const Description = styled.Text`
-  font-size: ${MEDIUM}px;
-  color: ${GRAY_5};
+  font-size: ${(props: any) => props.theme.fonts.normal}px;
+  color: ${(props: any) => props.theme.colors.grey[5]};
 `;
 
 interface Props {
   style?: StyleProp<ViewStyle>;
   mainText?: string;
-  mainColor?: 'gray';
+  mainColor?: 'grey';
   desc?: string;
   frontText?: string;
   frontColor?: string;

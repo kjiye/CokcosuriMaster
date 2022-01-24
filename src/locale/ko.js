@@ -11,6 +11,9 @@ export default {
   next: '다음',
   month: '월',
   hour: '시',
+  ea: '개',
+  work: '작업',
+  image: '사진',
   Header: {
     join: '회원가입',
     update_user_info: '개인정보 변경',
@@ -27,6 +30,8 @@ export default {
     working_done: '작업완료',
     payment: '현장결제',
     select_store: '지점 선택',
+    write_work_case: '수리 후 사례 작성',
+    product_detail: '고객구매 상품 정보',
     button: {
       working_impossible: '작업불가',
       delete_alarm: '알림삭제',
@@ -59,6 +64,10 @@ export default {
     login_failed: '로그인 실패',
     area: '지역',
     store: '지점',
+    require_image_quantity: '3장 필수',
+    case_title: '수리사례 제목',
+    case_content: '수리사례 내용',
+    thumbnail: '대표 사진 선택 (작업 후 사진 중 택1)',
   },
   Placeholder: {
     title: '제목을 입력해주세요',
@@ -74,6 +83,7 @@ export default {
     current_password: '현재 비밀번호를 입력해주세요',
     area: '지역을 선택해주세요',
     store: '지점을 선택해주세요',
+    case_content: '수리내용을 입력해주세요',
   },
   Button: {
     login: '로그인',
@@ -91,6 +101,7 @@ export default {
     camera: '카메라',
     gallery: '갤러리',
     refresh: '새로고침',
+    write_work_case: '수리 사례 작성하기',
     bottom: {
       wait: '작업수락',
       reserve: '작업진행',
@@ -123,6 +134,8 @@ export default {
     update_user_info: '정보 수정이 완료되었습니다',
     area_select_first: '지역을 먼저 선택해주세요',
     no_stores: '해당 지역에 등록된 지점이 없습니다',
+    reg_done: '등록이 완료되었습니다',
+    reg_failed: '등록에 실패했습니다',
   },
   Drawer: {
     menu: {
@@ -215,6 +228,7 @@ export default {
     reason: '작업 불가 사유',
     reason_placeholder: '작업 불가 사유를 등록해주세요',
     image: '작업 불가 사진',
+    impossible_ask: '작업불가 처리하시겠습니까?',
   },
   WorkingDone: {
     status: '작업 완료',
@@ -295,6 +309,14 @@ export default {
     done: '작업 완료',
     cancel: '작업 취소',
     cancel_admin: '관리자에 의한 작업 취소',
+  },
+  Product: {
+    name: '상품명',
+    quantity: '상품수량',
+    code: '상품코드',
+  },
+  WorkCase: {
+    thumbnail_explain: '※ 선택하신 사진이 작업사례의 대표사진으로 보여집니다.',
   },
   TempTerms: {
     privacy_policy: `개인정보처리방침

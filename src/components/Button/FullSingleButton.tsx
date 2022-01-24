@@ -1,5 +1,3 @@
-import {BIG, TINY} from '../../constants/size';
-import {GRAY_4, PRIMARY_MAIN, WHITE} from '../../constants/color';
 import React from 'react';
 import styled from 'styled-components/native';
 
@@ -7,18 +5,18 @@ const Button = styled.TouchableOpacity<{
   btnWidth: number;
   btnDisabled: boolean;
 }>`
-  padding: ${TINY}px 0;
-  border-radius: ${BIG}px;
+  padding: 12px 0;
+  border-radius: 24px;
   width: ${({btnWidth}) => btnWidth}px;
-  ${({btnDisabled}) => `
-  background : ${btnDisabled ? GRAY_4 : PRIMARY_MAIN}
+  ${({btnDisabled, theme}: any) => `
+  background : ${btnDisabled ? theme.colors.grey[4] : theme.colors.primary}
 `}
 `;
 
 const ButtonText = styled.Text`
-  font-size: ${BIG}px;
+  font-size: ${(props: any) => props.theme.fonts.big}px;
   font-weight: bold;
-  color: ${WHITE};
+  color: ${(props: any) => props.theme.colors.white};
   text-align: center;
 `;
 

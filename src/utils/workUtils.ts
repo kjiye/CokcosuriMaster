@@ -1,6 +1,10 @@
 import I18n from '../utils/i18nHelpers';
 import {WorkState} from '../../__generated__/globalTypes';
 
+/**
+ * 작업 상태값에 매칭되는 텍스트 반환 함수 관리 파일
+ */
+
 export const stateBottomButtonName = (state: WorkState) => {
   switch (state) {
     case 'WAIT':

@@ -18,6 +18,10 @@ import {useReactiveVar} from '@apollo/client';
 
 const Stack = createStackNavigator();
 
+/**
+ * 최상단 스택
+ * (각종 모달, 로딩 화면 등)
+ */
 function RootStack(): JSX.Element {
   const netInfo = useNetInfo();
   const isLoggedIn = !!useReactiveVar(tokenVar);

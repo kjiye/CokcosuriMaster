@@ -43,7 +43,7 @@ function LoginContainer(): JSX.Element {
       } = data;
       inventActionModal(navigation, {isShow: false});
       if (success) {
-        await saveToken(token, master.phone);
+        await saveToken(token, master.phone, master.id);
       }
     },
   });

@@ -1,6 +1,4 @@
-import {BLACK_1, GRAY_3, GRAY_5, PRIMARY_LIGHT} from '../../constants/color';
 import {GestureResponderEvent, StyleProp, ViewStyle} from 'react-native';
-import {INNER_MARGIN, MEDIUM, MINI} from '../../constants/size';
 import DownActiveSvg from '../../../assets/svg/ic_down_active.svg';
 import DownInactiveSvg from '../../../assets/svg/ic_down_inactive.svg';
 import React from 'react';
@@ -11,20 +9,22 @@ const Wrapper = styled.TouchableOpacity<{selected: boolean}>`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 3px ${INNER_MARGIN}px;
+  padding: 3px ${(props: any) => props.theme.size.innerMargin}px;
   border-width: 1px;
-  border-radius: ${MINI}px;
-  ${({selected}) => `
-    border-color: ${selected ? PRIMARY_LIGHT : GRAY_3};
+  border-radius: ${(props: any) => props.theme.size.borderRadius}px;
+  ${({selected, theme}: any) => `
+    border-color: ${
+      selected ? theme.colors.primaryLight : theme.colors.grey[3]
+    };
   `}
   background: ${(props: any) => props.theme.colors.background};
 `;
 
 const SelectionText = styled.Text<{selected: boolean}>`
   max-width: 80%;
-  font-size: ${MEDIUM}px;
-  ${({selected}) => `
-    color: ${selected ? BLACK_1 : GRAY_5}; 
+  font-size: ${(props: any) => props.theme.fonts.normal}px;
+  ${({selected, theme}: any) => `
+    color: ${selected ? theme.colors.black[1] : theme.colors.grey[5]}; 
   `}
 `;
 

@@ -1,32 +1,26 @@
-import {
-  GRAY_3,
-  PLACEHOLDER_COLOR,
-  PRIMARY_LIGHT,
-  WHITE,
-} from '../../constants/color';
-import {INNER_MARGIN, MEDIUM, MINI} from '../../constants/size';
 import React, {useState} from 'react';
 import {StyleProp, ViewProps, ViewStyle} from 'react-native';
+import styled, {useTheme} from 'styled-components/native';
 import {KeyboardTypeOptions} from 'react-native';
 import MaskInput from 'react-native-mask-input';
-import styled from 'styled-components/native';
 
 const DEFAULT_HEIGHT = 50;
 const SHORT_HEIGHT = 40;
 
 const Wrapper = styled.View<{focus: boolean; isShort: boolean}>`
   border-width: 1px;
-  border-radius: ${MINI}px;
-  background-color: ${WHITE};
-  ${({focus}) => `border-color: ${focus ? PRIMARY_LIGHT : GRAY_3}`}
+  border-radius: ${(props: any) => props.theme.size.borderRadius}px;
+  background-color: ${(props: any) => props.theme.colors.grey[0]};
+  ${({focus, theme}: any) =>
+    `border-color: ${focus ? theme.colors.primaryLight : theme.colors.grey[3]}`}
   ${({isShort}) => `
     height: ${isShort ? SHORT_HEIGHT : DEFAULT_HEIGHT}px`}
 `;
 
 const Input = styled(MaskInput)`
   height: 100%;
-  padding: 0 ${INNER_MARGIN}px;
-  font-size: ${MEDIUM}px;
+  padding: 0 ${(props: any) => props.theme.size.innerMargin}px;
+  font-size: ${(props: any) => props.theme.fonts.normal}px;
   color: ${(props: any) =>
     props.editable ? props.theme.colors.black[1] : props.theme.colors.grey[5]};
 `;
@@ -46,14 +40,15 @@ interface Props {
 function BasicInput({
   style,
   placeholder = '',
-  value,
+  value = '',
   secure = false,
   isShort = false,
   editable = true,
   onChange,
   mask,
-  keyboardType,
+  keyboardType = 'default',
 }: Props): JSX.Element {
+  const theme: any = useTheme();
   const [focus, setFocus] = useState<boolean>(false);
   return (
     <Wrapper
@@ -64,7 +59,7 @@ function BasicInput({
         keyboardType={keyboardType}
         editable={editable}
         placeholder={placeholder}
-        placeholderTextColor={PLACEHOLDER_COLOR}
+        placeholderTextColor={theme.colors.placeholder}
         secureTextEntry={secure}
         onFocus={() => {
           setFocus(true);

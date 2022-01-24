@@ -6,6 +6,7 @@ declare module 'styled-components/native' {
     colors: {
       backgroud: ColorValue;
       grey_background: ColorValue;
+      placeholder: ColorValue;
       primary: ColorValue;
       primaryDark: ColorValue;
       primaryLight: ColorValue;

@@ -7,7 +7,6 @@ import {NoDataView} from '../../components/View';
 import React from 'react';
 import {WorkListItem} from '../../components/Item';
 import {getWorks_getWorks_works} from '../../../__generated__/getWorks';
-import {WorkState} from '../../../__generated__/globalTypes';
 
 const Container = styled(BaseContainer)`
   background-color: ${(props: any) => props.theme.colors.grey_background};
@@ -25,6 +24,7 @@ interface Props {
   goDetail: (item: getWorks_getWorks_works) => void;
   leftBtnPress: (item: getWorks_getWorks_works) => void;
   rightBtnPress: (item: getWorks_getWorks_works) => void;
+  writeCaseBtnPress: (id: number) => void;
 }
 
 function MainPresenter({
@@ -35,6 +35,7 @@ function MainPresenter({
   goDetail,
   leftBtnPress,
   rightBtnPress,
+  writeCaseBtnPress,
 }: Props): JSX.Element {
   const theme: any = useTheme();
   return (
@@ -58,6 +59,7 @@ function MainPresenter({
                 itemPress={goDetail}
                 leftBtnPress={leftBtnPress}
                 rightBtnPress={rightBtnPress}
+                writeCaseBtnPress={writeCaseBtnPress}
               />
             );
           }}

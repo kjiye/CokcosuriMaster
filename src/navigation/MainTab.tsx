@@ -14,6 +14,10 @@ const TAB_VERTICAL_PADDING = 5;
 
 const Tab = createMaterialTopTabNavigator();
 
+/**
+ * 로그인 후 메인화면 5개의 탭 구성
+ * (대기, 진행, 완료, 취소, 캘린더)
+ */
 function MainTab(): JSX.Element {
   const route: any = useRoute();
   const theme: any = useTheme();

@@ -1,4 +1,3 @@
-import {SMALL, TINY} from '../../../constants/size';
 import {CategoryType} from '../../../models/common';
 import CheckItem from './TypeCheckItem';
 import I18n from '../../../utils/i18nHelpers';
@@ -11,11 +10,11 @@ const Wrapper = styled.View`
 `;
 
 const ItemMargin = {
-  marginTop: TINY,
+  marginTop: 12,
 };
 
 const ItemAdditonalMargin = {
-  marginRight: SMALL,
+  marginRight: 14,
 };
 
 interface Props {
@@ -40,7 +39,7 @@ function TypeCheckGroup({
       {!!hasAllItem && (
         <CheckItem
           numberPerLine={numberPerLine}
-          wrapperStyle={{...ItemMargin, ...ItemAdditonalMargin}}
+          style={{...ItemMargin, ...ItemAdditonalMargin}}
           value={{name: I18n.t('all')}}
           onPress={allPress}
           checked={isAllChecked}
@@ -52,7 +51,7 @@ function TypeCheckGroup({
             <CheckItem
               key={idx}
               numberPerLine={numberPerLine}
-              wrapperStyle={ItemMargin}
+              style={ItemMargin}
               value={val}
               onPress={itemPress}
               checked={!!val.active}
@@ -63,7 +62,7 @@ function TypeCheckGroup({
             <CheckItem
               key={idx}
               numberPerLine={numberPerLine}
-              wrapperStyle={{...ItemMargin, marginRight: SMALL}}
+              style={{...ItemMargin, marginRight: 14}}
               value={val}
               onPress={itemPress}
               checked={!!val.active}

@@ -36,7 +36,7 @@ const TypeText = styled.Text<{checked: boolean}>`
 
 interface Props {
   numberPerLine: number;
-  wrapperStyle?: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
   value: CategoryType;
   checked: boolean;
   onPress?: (item: CategoryType) => void;
@@ -44,7 +44,7 @@ interface Props {
 
 function TypeCheckItem({
   numberPerLine,
-  wrapperStyle,
+  style,
   value,
   checked,
   onPress,
@@ -53,7 +53,7 @@ function TypeCheckItem({
     <CheckView
       style={[
         {width: Math.ceil((width - PADDING_TOTAL) / numberPerLine)},
-        wrapperStyle as StyleProp<ViewProps>,
+        style as StyleProp<ViewProps>,
       ]}
       checked={checked}
       onPress={() => {

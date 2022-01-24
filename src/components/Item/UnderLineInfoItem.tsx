@@ -1,5 +1,3 @@
-import {BLACK_1, PRIMARY_LIGHT} from '../../constants/color';
-import {MEDIUM} from '../../constants/size';
 import React from 'react';
 import styled from 'styled-components/native';
 
@@ -11,14 +9,14 @@ const Wrapper = styled.View`
 const UnderLineView = styled.View`
   width: 135px;
   border-bottom-width: 1px;
-  border-color: ${PRIMARY_LIGHT};
+  border-color: ${(props: any) => props.theme.colors.primaryLight};
 `;
 
 const TextUnit = styled.Text`
   margin-left: 3px;
-  font-size: ${MEDIUM}px;
+  font-size: ${(props: any) => props.theme.fonts.normal}px;
   font-weight: bold;
-  color: ${BLACK_1};
+  color: ${(props: any) => props.theme.colors.black[1]};
 `;
 
 interface Props {

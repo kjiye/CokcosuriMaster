@@ -1,5 +1,9 @@
 import {GestureResponderEvent} from 'react-native';
 
+/**
+ * 별도로 정의해서 사용 중인 타입 - 화면 무관 범용적 사용
+ */
+
 export type ImageSelectorOption = 'picker' | 'camera';
 export type RegexType = 'email' | 'password' | 'phone' | 'licenseNo';
 
@@ -80,7 +84,11 @@ export interface ImageData {
   path: string;
 }
 
-// 임시 사용
+export interface RestResponse {
+  result: boolean;
+}
+
+// TextLineCheckGroup 컴포넌트에서 props 타입 정의 용도로 사용 중
 export interface ItemType {
   name: string;
   content: string;

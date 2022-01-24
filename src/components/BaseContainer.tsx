@@ -23,6 +23,9 @@ interface Props {
   button?: JSX.Element;
 }
 
+/**
+ * presenter에서 container역할의 컴포넌트로 사용
+ */
 function BaseContainer({children, style, button}: Props): JSX.Element {
   const [bottomSpace, setBottomSpace] = useState<number>(0);
   useEffect(() => {

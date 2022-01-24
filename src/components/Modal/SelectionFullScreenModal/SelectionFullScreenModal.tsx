@@ -1,4 +1,5 @@
 import {FlatList, GestureResponderEvent} from 'react-native';
+import styled, {useTheme} from 'styled-components/native';
 import BaseContainer from '../../BaseContainer';
 import {CategoryType} from '../../../models/common';
 import FullScreenModalItem from './FullScreenModalItem';
@@ -6,15 +7,13 @@ import I18n from '../../../utils/i18nHelpers';
 import {NoDataView} from '../../View';
 import {PrimaryButton} from '../../Button';
 import React from 'react';
-import styled from 'styled-components/native';
 
 const Container = styled(BaseContainer)`
   background: ${(props: any) => props.theme.colors.background};
 `;
 
-const FlatListWrapper = styled.View`
+const ListContainer = styled.View`
   flex: 1;
-  padding-bottom: ${(props: any) => props.theme.size.bottomPadding}px;
 `;
 
 interface Props {
@@ -34,6 +33,7 @@ function SelectionFullScreenModal({
   onSelect,
   selected,
 }: Props): JSX.Element {
+  const theme: any = useTheme();
   return (
     <>
       {typeList.length > 0 ? (
@@ -45,8 +45,9 @@ function SelectionFullScreenModal({
               onPress={bottomButtonPress}
             />
           }>
-          <FlatListWrapper>
+          <ListContainer>
             <FlatList
+              contentContainerStyle={{paddingBottom: theme.size.bottomPadding}}
               scrollIndicatorInsets={{right: 0.1}}
               data={typeList}
               keyExtractor={(_: any, i: number) => i.toString()}
@@ -63,7 +64,7 @@ function SelectionFullScreenModal({
                 );
               }}
             />
-          </FlatListWrapper>
+          </ListContainer>
         </Container>
       ) : (
         <Container>

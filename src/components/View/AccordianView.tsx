@@ -1,20 +1,19 @@
-import {GRAY_1, GRAY_3, WHITE} from '../../constants/color';
-import {INNER_MARGIN, STANDARD} from '../../constants/size';
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
 
 const Wrapper = styled.View`
   border-bottom-width: 1px;
-  border-color: ${GRAY_3};
+  border-color: ${(props: any) => props.theme.colors.grey[3]};
 `;
 
 const TitleView = styled.TouchableOpacity`
-  padding: ${INNER_MARGIN}px ${STANDARD}px;
-  background: ${WHITE};
+  ${(props: any) => `
+  padding: ${props.theme.size.innerMargin}px ${props.theme.size.standardPadding}px`};
+  background: ${(props: any) => props.theme.colors.background};
 `;
 
 const ContentView = styled(TitleView)`
-  background: ${GRAY_1};
+  background: ${(props: any) => props.theme.colors.grey[1]};
 `;
 
 interface Props {

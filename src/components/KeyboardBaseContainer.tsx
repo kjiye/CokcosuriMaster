@@ -4,22 +4,19 @@ import {getBottomSpace} from 'react-native-iphone-x-helper';
 import styled from 'styled-components/native';
 import {useHeaderHeight} from '@react-navigation/stack';
 
+const KeyboardAvoidingContainer = styled.KeyboardAvoidingView`
+  flex: 1;
+`;
+
 const Container = styled.SafeAreaView`
   flex: 1;
 `;
 
-const KeyboardAvoidingContainer = styled.KeyboardAvoidingView`
-  flex: 1;
-  background: ${(props: any) => props.theme.colors.background};
-`;
-
 const ButtonContainer = styled.View`
-  flex: 1;
-  width: 100%;
   position: absolute;
+  width: 100%;
   align-items: center;
   justify-content: center;
-  flex-direction: row;
 `;
 
 interface Props {
@@ -28,6 +25,9 @@ interface Props {
   button?: JSX.Element;
 }
 
+/**
+ * 키보드 toggle이 발생하는 presenter에서 container 컴포넌트로 사용
+ */
 function KeyboardBaseContainer({children, style, button}: Props): JSX.Element {
   const headerHeight = useHeaderHeight();
   const [bottomSpace, setBottomSpace] = useState<number>(0);
@@ -40,9 +40,10 @@ function KeyboardBaseContainer({children, style, button}: Props): JSX.Element {
   }, []);
   return Platform.OS === 'ios' ? (
     <KeyboardAvoidingContainer
+      style={style}
       behavior={'padding'}
       keyboardVerticalOffset={headerHeight}>
-      <Container style={style}>{children}</Container>
+      <Container>{children}</Container>
       {button &&
         useMemo(() => {
           return (

@@ -16,6 +16,10 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 
 const Drawer = createDrawerNavigator();
 
+/**
+ * 헤더 좌측 햄버거 아이콘 펼침 메뉴에 귀속된 페이지 구성
+ * (회원정보 수정, 1:1문의, 공지사항 등)
+ */
 function MainDrawer(): JSX.Element {
   return (
     <Drawer.Navigator

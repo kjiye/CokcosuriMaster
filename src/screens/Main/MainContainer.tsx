@@ -109,6 +109,9 @@ function MainContainer({
         Linking.openURL(`tel:${item.customer.phone}`);
       }
     },
+    writeCaseBtnPress: (id: number) => {
+      navigation.navigate('WorkCase', {id: id});
+    },
   };
   return <MainPresenter {...props} />;
 }

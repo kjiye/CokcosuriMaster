@@ -1,3 +1,4 @@
+import I18n from '../../utils/i18nHelpers';
 import React from 'react';
 import styled from 'styled-components/native';
 
@@ -28,8 +29,9 @@ interface Props {
 function EmphasisTitleItem({status, color}: Props): JSX.Element {
   return (
     <TitleText>
-      작업 <EmphasisText color={color}>{status}</EmphasisText> 사진
-      <SubText> (3장 필수)</SubText>
+      {I18n.t('work')} <EmphasisText color={color}>{status}</EmphasisText>{' '}
+      {I18n.t('image')}
+      <SubText> ({I18n.t('Title.require_image_quantity')})</SubText>
     </TitleText>
   );
 }

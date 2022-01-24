@@ -2,6 +2,10 @@ import {CategoryType, ImageData} from './common';
 import {CategoryInput} from '../../__generated__/globalTypes';
 import {Image} from 'react-native-image-crop-picker';
 
+/**
+ * 별도로 정의해서 사용 중인 타입 - 사용자(마스터 기사) 관련
+ */
+
 export type UserSelectionModalType = 'area' | 'store';
 
 export interface User {

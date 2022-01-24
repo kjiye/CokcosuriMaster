@@ -1,9 +1,15 @@
 import {DefaultTheme} from 'styled-components/native';
 
+/**
+ * 공통 사용 스타일 속성값 정의
+ * (페이지 개별 사용 스타일은 presenter 파일 상단 참고)
+ */
+
 export const AppTheme: DefaultTheme = {
   colors: {
     background: 'white',
     grey_background: '#f1f1f1',
+    placeholder: '#b4b4b4',
     primary: '#eb7203',
     primaryDark: '#e25300',
     primaryLight: '#fc9e48',

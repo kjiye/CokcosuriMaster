@@ -1,11 +1,10 @@
 import {GestureResponderEvent, StyleProp, ViewStyle} from 'react-native';
-import {INNER_MARGIN} from '../../constants/size';
 import React from 'react';
 import SingleButton from './SingleButton';
 import styled from 'styled-components/native';
 
 const Wrapper = styled.View`
-  padding: ${INNER_MARGIN}px;
+  padding: ${(props: any) => props.theme.size.innerMargin}px;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
