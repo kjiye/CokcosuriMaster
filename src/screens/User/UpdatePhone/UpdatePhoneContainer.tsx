@@ -118,7 +118,6 @@ function UpdatePhoneContainer(): JSX.Element {
       setPhone(text);
       setVerifyInfo(undefined);
       setVerified(false);
-      // setTimerMs(5 * 60 * 1000);
     },
     onChangeVerificationCode: (text: string) => {
       if (verifyInfo?.sendId && verifyInfo?.target) {

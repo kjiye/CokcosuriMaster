@@ -1,20 +1,20 @@
+import {useReactiveVar} from '@apollo/client';
+import {useNetInfo} from '@react-native-community/netinfo';
+import {createStackNavigator} from '@react-navigation/stack';
+import React from 'react';
+import {StatusBar} from 'react-native';
+import {tokenVar} from '../apollo';
+import {basicHeader} from '../components/Header/HeaderOption';
 import ContentViewModal from '../screens/Modal/ContentViewModal';
-import I18n from '../utils/i18nHelpers';
 import InventActionModal from '../screens/Modal/InventActionModal';
+import SelectionFullScreenModal from '../screens/Modal/SelectionFullScreenModal';
+import SelectionModal from '../screens/Modal/SelectionModal';
+import UploadOptionModal from '../screens/Modal/UploadOptionModal';
+import WarnNetworkScreen from '../screens/WarnNetwork';
+import I18n from '../utils/i18nHelpers';
 import LoginStack from './LoginStack';
 import MainDrawer from './MainDrawer';
 import PermissionModal from '../screens/Permission';
-import React from 'react';
-import SelectionFullScreenModal from '../screens/Modal/SelectionFullScreenModal';
-import SelectionModal from '../screens/Modal/SelectionModal';
-import {StatusBar} from 'react-native';
-import UploadOptionModal from '../screens/Modal/UploadOptionModal';
-import WarnNetworkScreen from '../screens/WarnNetwork';
-import {basicHeader} from '../components/Header/HeaderOption';
-import {createStackNavigator} from '@react-navigation/stack';
-import {tokenVar} from '../apollo';
-import {useNetInfo} from '@react-native-community/netinfo';
-import {useReactiveVar} from '@apollo/client';
 
 const Stack = createStackNavigator();
 
@@ -31,7 +31,7 @@ function RootStack(): JSX.Element {
       <StatusBar
         animated={true}
         barStyle={'dark-content'}
-        translucent={true}
+        translucent={true} // android only
         backgroundColor={'white'}
       />
       <Stack.Navigator

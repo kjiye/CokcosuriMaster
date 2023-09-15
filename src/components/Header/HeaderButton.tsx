@@ -1,8 +1,4 @@
-import {
-  DrawerActions,
-  StackActions,
-  useNavigation,
-} from '@react-navigation/native';
+import {DrawerActions, useNavigation} from '@react-navigation/native';
 import styled, {css} from 'styled-components/native';
 import BackSvg from '../../../assets/svg/ic_back.svg';
 import {GestureResponderEvent} from 'react-native';
@@ -60,7 +56,6 @@ function HeaderButton({
         <BackButton
           onPress={() => {
             navigation.goBack();
-            // navigation.dispatch(StackActions.pop(1));
           }}>
           <BackSvg />
         </BackButton>

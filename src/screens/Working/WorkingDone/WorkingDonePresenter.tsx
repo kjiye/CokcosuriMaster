@@ -40,14 +40,12 @@ const NextImageSelector = styled(ImageSelector)`
 interface Props {
   loading: boolean;
   item: getWorkDoneDetail_getWorkDetail_work;
-  // total: number;
   btnDisabled: boolean;
   images: Image[];
   firstImage?: Image;
   secondImage?: Image;
   thirdImage?: Image;
   goPayment: (event: GestureResponderEvent) => void;
-  // addImage: (image: Image) => void;
   addFirstImage: (image: Image) => void;
   addSecondImage: (image: Image) => void;
   addThirdImage: (image: Image) => void;
@@ -61,14 +59,12 @@ interface Props {
 function WorkingDonePresenter({
   loading,
   item,
-  // total,
   btnDisabled,
   images,
   firstImage,
   secondImage,
   thirdImage,
   goPayment,
-  // addImage,
   addFirstImage,
   addSecondImage,
   addThirdImage,
@@ -84,7 +80,6 @@ function WorkingDonePresenter({
         <PrimaryButton
           title={I18n.t('Button.done')}
           onPress={okPress}
-          // disabled={total < 3}
           disabled={btnDisabled}
         />
       }>
@@ -122,36 +117,21 @@ function WorkingDonePresenter({
               color={colors.secondaryLight}
             />
             <ImageSelector
-              // pendingImage={images[0]}
               pendingImage={firstImage}
               desc={I18n.t('Image.first_upload')}
-              // onAdd={addImage}
               onAdd={addFirstImage}
-              // onDelete={() => {
-              //   deleteImage(0);
-              // }}
               onDelete={deleteFirstImage}
             />
             <NextImageSelector
-              // pendingImage={images[1]}
               pendingImage={secondImage}
               desc={I18n.t('Image.second_upload')}
-              // onAdd={addImage}
               onAdd={addSecondImage}
-              // onDelete={() => {
-              //   deleteImage(1);
-              // }}
               onDelete={deleteSecondImage}
             />
             <NextImageSelector
-              // pendingImage={images[2]}
               pendingImage={thirdImage}
               desc={I18n.t('Image.third_upload')}
-              // onAdd={addImage}
               onAdd={addThirdImage}
-              // onDelete={() => {
-              //   deleteImage(2);
-              // }}
               onDelete={deleteThirdImage}
             />
           </ContentContainer>

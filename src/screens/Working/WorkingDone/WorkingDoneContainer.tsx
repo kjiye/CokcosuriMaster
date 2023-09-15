@@ -52,7 +52,6 @@ function WorkingDoneContainer({route}: any): JSX.Element {
   const props = {
     loading,
     item: data?.getWorkDetail?.work,
-    // total: images.length,
     btnDisabled: !(firstImage && secondImage && thirdImage),
     images,
     firstImage,
@@ -61,9 +60,6 @@ function WorkingDoneContainer({route}: any): JSX.Element {
     goPayment: () => {
       navigation.navigate('Payment', {workItem: data?.getWorkDetail?.work});
     },
-    // addImage: (image: Image) => {
-    //   setImages(s => [...s, image]);
-    // },
     addFirstImage: (image: Image) => {
       setFirstImage(image);
     },

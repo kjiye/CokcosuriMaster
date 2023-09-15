@@ -219,7 +219,6 @@ function JoinContainer({route}: any): JSX.Element {
       setUser({...user, phone: text});
       setVerifyInfo(undefined);
       setVerified(false);
-      // setTimerMs(5 * 60 * 1000);
     },
     reqVerifyBtnDisabled:
       !checkRegex('phone', user?.phone || '') || reqVerifyLoading,
@@ -332,7 +331,6 @@ function JoinContainer({route}: any): JSX.Element {
       if (text.length > 0) {
         setRegexResult({
           ...regexResult,
-          // licenseNo: !checkRegex('licenseNo', text),
           licenseNo: text.length === 12,
         });
       } else {

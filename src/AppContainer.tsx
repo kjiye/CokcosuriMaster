@@ -11,11 +11,10 @@ import {useEffect} from 'react';
 function AppContainer(): JSX.Element {
   const init = useCallback(async () => {
     const token = await getToken();
-    // tokenVar(await getToken());
-
     tokenVar(token);
     SplashScreen.hide();
   }, []);
+
   useEffect(() => {
     init();
   }, []);

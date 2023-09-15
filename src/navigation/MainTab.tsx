@@ -30,7 +30,6 @@ function MainTab(): JSX.Element {
         style: {
           borderBottomLeftRadius: TAB_RADIUS,
           borderBottomRightRadius: TAB_RADIUS,
-          // iOS만 적용 (Android는 그림자 기본 설정)
           shadowColor: theme.colors.black[0],
           shadowOffset: {
             width: 0,

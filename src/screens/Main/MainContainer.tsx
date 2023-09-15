@@ -27,18 +27,6 @@ function MainContainer({
 
   const routes = useNavigationState(state => state);
 
-  // 탭에서 뒤로가기 누를 시 종료 처리 (사용 시 라우팅 분기 작업 필요)
-  // useEffect(() => {
-  //   const backAction: any = () => {
-  //     BackHandler.exitApp();
-  //   };
-  //   const backHandler = BackHandler.addEventListener(
-  //     'hardwareBackPress',
-  //     backAction,
-  //   );
-  //   return () => backHandler.remove();
-  // }, []);
-
   const {loading, data, refetch} = useQuery(GET_WORKS, {
     variables: {
       state,

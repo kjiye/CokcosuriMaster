@@ -6,11 +6,6 @@ import {RegexType} from '../models/common';
 import dayjs from 'dayjs';
 import {getWorkDetail_getWorkDetail_work_customer_address_coordinate} from '../../__generated__/getWorkDetail';
 
-/**
- * 배포 시 운영서버 URL로 선택되어 있는지 주석 확인 요망
- */
-// export const SERVER_URL = 'http://211.110.229.85:4000/graphql';  // 운영서버
-// export const SERVER_URL = 'http://10.80.102.81:4000/graphql';
 export const SERVER_URL = 'http://localhost:4000/graphql';
 
 export const IMG_URL = SERVER_URL.slice(0, SERVER_URL.lastIndexOf('/'));
@@ -95,7 +90,6 @@ export const coordsFormatting = (
 
 export const uploadImageFormatting = (image: Image) => {
   return new ReactNativeFile({
-    // uri: (Platform.OS === 'ios' ? image.sourceURL : image.path) || '',
     uri: image?.sourceURL ? image.sourceURL : image.path,
     name: image?.filename
       ? image.filename

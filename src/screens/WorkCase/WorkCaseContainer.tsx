@@ -32,9 +32,6 @@ function WorkCaseContainer({route}: any): JSX.Element {
     },
   });
 
-  // 수정하기 or 작성하기 판별
-  // 수정일 시 사례데이터 조회 및 초기 데이터 설정 (title, content, thumbImage)
-
   const props = {
     workLoading,
     work: data?.getWorkDetail?.work,
@@ -52,7 +49,7 @@ function WorkCaseContainer({route}: any): JSX.Element {
       setThumbImage(item);
     },
     okPress: async () => {
-      // 수정 or 작성에 대한 구분 필요
+      // 수정하기 / 작성하기 판별
       const {id} = data?.getWorkDetail?.work;
       const masterId = await getUserIdx();
       if (thumbImage) {

@@ -57,7 +57,6 @@ function FindPasswordContainer(): JSX.Element {
       if (text.length > 0) {
         setRegexResult({
           ...regexResult,
-          // licenseNo: checkRegex('licenseNo', text),
           licenseNo: text.length === 12,
         });
       } else {
