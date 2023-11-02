@@ -39,4 +39,14 @@
     ├── screens : page 관리
     ├── themes : styled-components theme 정의 및 관리
     └── utils : 반복 사용 함수 유틸화
-</pre>
+</pre>  
+
+## Screenshot  
+<details>
+  <summary>참고이미지</summary>
+  <img width="300" alt="screenshot1" src="https://github.com/kjiye/CokcosuriMaster/assets/31784160/612e65ea-01ff-4ca9-b162-da84fc64fe09">
+  <img width="300" alt="screenshot2"  src="https://github.com/kjiye/CokcosuriMaster/assets/31784160/36a0f4f2-4047-4267-85cd-9c593735ed66">
+  <img width="300" alt="screenshot3"  src="https://github.com/kjiye/CokcosuriMaster/assets/31784160/efbe5f0f-46ff-4cf4-9b1b-a715ea405672">
+  <img width="300" alt="screenshot4"  src="https://github.com/kjiye/CokcosuriMaster/assets/31784160/549c947e-b67a-4d2b-9d41-1ca0da7520e8">
+  <img width="300" alt="screenshot5"  src="https://github.com/kjiye/CokcosuriMaster/assets/31784160/1deebfca-08c3-41cd-b0ed-3408a6b01e7a">
+</details>
