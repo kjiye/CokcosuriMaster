@@ -61,9 +61,6 @@ const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   cache: new InMemoryCache({
     addTypename: false,
   }),
-  // headers: {
-  //   auth: tokenVar(),
-  // },
   link: authLink.concat(httpLink),
   defaultOptions: {watchQuery: {fetchPolicy: 'cache-and-network'}},
 });
